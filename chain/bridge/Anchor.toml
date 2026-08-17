@@ -1,0 +1,21 @@
+skip_local_validator = true
+
+[toolchain]
+anchor_version = "2.0.0-rc.1"
+package_manager = "pnpm"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+bridge = "H5C6RKWQzUdfS8tVzZb3uVcRw3EHCzghv7kWdMBTD2bS"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "cargo test"
+
+[hooks]
