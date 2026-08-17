@@ -1,0 +1,25 @@
+{
+  "name": "chain",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build-registry": "bun registry/build-registry.ts",
+    "create-gp": "bun runner/create-gp.ts",
+    "create-items": "bun runner/create-items.ts",
+    "verify-pools": "bun runner/verify-pools.ts",
+    "test": "bun test test"
+  },
+  "dependencies": {
+    "@meteora-ag/cp-amm-sdk": "1.4.5",
+    "@solana/spl-token": "^0.4.9",
+    "@solana/spl-token-metadata": "^0.1.6",
+    "@solana/web3.js": "^1.95.0",
+    "@types/bn.js": "^5.2.0",
+    "bn.js": "^5.2.5",
+    "bs58": "^6.0.0",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
