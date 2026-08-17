@@ -13,6 +13,9 @@ export interface RegistryGp {
     treasuryAta: string | null;
     /** Whole GP transferred to the vault at creation. */
     vaultSupply: string;
+    /** Metadata JSON URI (Pinata/IPFS). */
+    uri?: string | null;
+    imageUri?: string | null;
 }
 
 export interface RegistryItem {
@@ -29,7 +32,10 @@ export interface RegistryItem {
     p0GpPerItem: number;
     /** <=10 chars, uppercase alphanumeric, de-duplicated deterministically. */
     symbol: string;
+    /** Metadata JSON URI (Pinata/IPFS) — set by images/upload-metadata.ts, embedded on-chain via Metaplex. */
     uri: string;
+    /** Pinata/IPFS image URL — set by images/upload-metadata.ts. */
+    imageUri?: string | null;
     stackable: boolean;
     members: boolean;
     // Filled by the runner after on-chain confirmation:

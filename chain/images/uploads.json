@@ -1,0 +1,518 @@
+{
+  "gp": {
+    "imageCid": "QmWnbNhFdZCmegGFD91jxaHwpSKEJnv7iBdsPpdvhLYdtU",
+    "imageUri": "https://ipfs.io/ipfs/QmWnbNhFdZCmegGFD91jxaHwpSKEJnv7iBdsPpdvhLYdtU",
+    "metadataCid": "QmQ2gU3VTM2r7RpyYuiwFwSvcDSiq1yzrUzoQKjRhbeBR6",
+    "metadataUri": "https://ipfs.io/ipfs/QmQ2gU3VTM2r7RpyYuiwFwSvcDSiq1yzrUzoQKjRhbeBR6"
+  },
+  "coal": {
+    "imageCid": "QmRMmfDJrkSgKvL7qNVXXu5UBNUWh5ruAYSzt3d2X52E6m",
+    "imageUri": "https://ipfs.io/ipfs/QmRMmfDJrkSgKvL7qNVXXu5UBNUWh5ruAYSzt3d2X52E6m",
+    "metadataCid": "QmZoPTTg1Lzc9x2X5uBLicGp95Rbu8SFAFZa9WztQHX3eq",
+    "metadataUri": "https://ipfs.io/ipfs/QmZoPTTg1Lzc9x2X5uBLicGp95Rbu8SFAFZa9WztQHX3eq"
+  },
+  "lobster": {
+    "imageCid": "QmXLkFmMA5JvuxY8n3cdLNzvj8ho8adYspzT6tDFCEG3xc",
+    "imageUri": "https://ipfs.io/ipfs/QmXLkFmMA5JvuxY8n3cdLNzvj8ho8adYspzT6tDFCEG3xc",
+    "metadataCid": "QmZeMFovXUMoD82qiditsc2JfkNof69ykRzmykDTywKvxg",
+    "metadataUri": "https://ipfs.io/ipfs/QmZeMFovXUMoD82qiditsc2JfkNof69ykRzmykDTywKvxg"
+  },
+  "naturerune": {
+    "imageCid": "QmYcW5GSt7Z9gH5Yqbvi9L7QVWyjX4VWdHWTTL4NCKp8Ad",
+    "imageUri": "https://ipfs.io/ipfs/QmYcW5GSt7Z9gH5Yqbvi9L7QVWyjX4VWdHWTTL4NCKp8Ad",
+    "metadataCid": "QmWJdWixLgM7T9dXpJPhZRAuJkWoqtVw3aNEdV8xmyEhdr",
+    "metadataUri": "https://ipfs.io/ipfs/QmWJdWixLgM7T9dXpJPhZRAuJkWoqtVw3aNEdV8xmyEhdr"
+  },
+  "rune_scimitar": {
+    "imageCid": "QmVokcXTEjPCP9UbMMTigMp2FYNAyhhAMbz9qe73RTQQjy",
+    "imageUri": "https://ipfs.io/ipfs/QmVokcXTEjPCP9UbMMTigMp2FYNAyhhAMbz9qe73RTQQjy",
+    "metadataCid": "Qme92opVUYcsrBhjq8qnJNu4kKZGR3QKoGS8Wkfyj4KNje",
+    "metadataUri": "https://ipfs.io/ipfs/Qme92opVUYcsrBhjq8qnJNu4kKZGR3QKoGS8Wkfyj4KNje"
+  },
+  "adamant_arrow": {
+    "imageCid": "Qmd2uqoJ5GW1B7VgqHDxxXHNtogzjzzWPgN4gtBMoa5xKk",
+    "imageUri": "https://ipfs.io/ipfs/Qmd2uqoJ5GW1B7VgqHDxxXHNtogzjzzWPgN4gtBMoa5xKk",
+    "metadataCid": "QmNMe1WaVuFxYFq9VXk3XeL6p4FyHXitVvVTpmEyKN8JvB",
+    "metadataUri": "https://ipfs.io/ipfs/QmNMe1WaVuFxYFq9VXk3XeL6p4FyHXitVvVTpmEyKN8JvB"
+  },
+  "adamantite_bar": {
+    "imageCid": "QmXQ9JjKzFLD87vUe4rqwZ2Hh3daX8ZS4MCinsANVEeJD8",
+    "imageUri": "https://ipfs.io/ipfs/QmXQ9JjKzFLD87vUe4rqwZ2Hh3daX8ZS4MCinsANVEeJD8",
+    "metadataCid": "QmevCxtqsesBP84H2VnCyR53HdJs9evfSESh5D1ADhDStw",
+    "metadataUri": "https://ipfs.io/ipfs/QmevCxtqsesBP84H2VnCyR53HdJs9evfSESh5D1ADhDStw"
+  },
+  "adamantite_ore": {
+    "imageCid": "QmZVQbgYkvTCwwinSe6Jbr7H3w3FZBa77MpS3n53QLntAd",
+    "imageUri": "https://ipfs.io/ipfs/QmZVQbgYkvTCwwinSe6Jbr7H3w3FZBa77MpS3n53QLntAd",
+    "metadataCid": "QmTdv68N9BzYtRVmXjgbQs9aFymYFBfn7QB1Y4T8sgT5dL",
+    "metadataUri": "https://ipfs.io/ipfs/QmTdv68N9BzYtRVmXjgbQs9aFymYFBfn7QB1Y4T8sgT5dL"
+  },
+  "airrune": {
+    "imageCid": "QmcsYgwBVp6AW61o2PDxW371vZhojbE36bUEgqPsfTJFjH",
+    "imageUri": "https://ipfs.io/ipfs/QmcsYgwBVp6AW61o2PDxW371vZhojbE36bUEgqPsfTJFjH",
+    "metadataCid": "QmR1oi3T7ZCu3kkTTPahPybDEiCgJxLpQyLfPXoVfPHFJT",
+    "metadataUri": "https://ipfs.io/ipfs/QmR1oi3T7ZCu3kkTTPahPybDEiCgJxLpQyLfPXoVfPHFJT"
+  },
+  "anchovies": {
+    "imageCid": "QmVAk611ioCGSP3NStRm28g2XYchohbLcrXvFhde2YahT6",
+    "imageUri": "https://ipfs.io/ipfs/QmVAk611ioCGSP3NStRm28g2XYchohbLcrXvFhde2YahT6",
+    "metadataCid": "QmRvjDN6qUy8ryQLqSgYDE69hZdPA8CBeQpe3ghZ8njWrc",
+    "metadataUri": "https://ipfs.io/ipfs/QmRvjDN6qUy8ryQLqSgYDE69hZdPA8CBeQpe3ghZ8njWrc"
+  },
+  "big_bones": {
+    "imageCid": "QmXtirhvmUuhxpAwARmnn1yJ4xxQThkcv9qGHSNiyemgih",
+    "imageUri": "https://ipfs.io/ipfs/QmXtirhvmUuhxpAwARmnn1yJ4xxQThkcv9qGHSNiyemgih",
+    "metadataCid": "Qme4GygyVhbb2egW2nvStZbPj7EEVP15b1YgDSyAtA52dE",
+    "metadataUri": "https://ipfs.io/ipfs/Qme4GygyVhbb2egW2nvStZbPj7EEVP15b1YgDSyAtA52dE"
+  },
+  "bodyrune": {
+    "imageCid": "QmejAW3so9RHBvw6DHQpoDtdpiGE4RgqjC539mDw9rnXX2",
+    "imageUri": "https://ipfs.io/ipfs/QmejAW3so9RHBvw6DHQpoDtdpiGE4RgqjC539mDw9rnXX2",
+    "metadataCid": "QmX6ekACWSmfNZj1yrKhoKn7kCXZ1dDHhDUL351LV7terk",
+    "metadataUri": "https://ipfs.io/ipfs/QmX6ekACWSmfNZj1yrKhoKn7kCXZ1dDHhDUL351LV7terk"
+  },
+  "bones": {
+    "imageCid": "QmaFSwFmQfYhGhVKwczz5ZguRjbMNZ3wgDnPV8X8GzmXQm",
+    "imageUri": "https://ipfs.io/ipfs/QmaFSwFmQfYhGhVKwczz5ZguRjbMNZ3wgDnPV8X8GzmXQm",
+    "metadataCid": "QmS1QUM2osSjzQ18kr98y9oyz2c6ux7VbKNo5ybJyQkzaK",
+    "metadataUri": "https://ipfs.io/ipfs/QmS1QUM2osSjzQ18kr98y9oyz2c6ux7VbKNo5ybJyQkzaK"
+  },
+  "bronze_arrow": {
+    "imageCid": "QmfXWK6Boyz85mKyk89mqAL7KwMNYfmgUSmkNZX4btVk7r",
+    "imageUri": "https://ipfs.io/ipfs/QmfXWK6Boyz85mKyk89mqAL7KwMNYfmgUSmkNZX4btVk7r",
+    "metadataCid": "QmUx73HDAFrnUjrgNgpwUkP65aj9k4fTdg2r71oyV1T1jt",
+    "metadataUri": "https://ipfs.io/ipfs/QmUx73HDAFrnUjrgNgpwUkP65aj9k4fTdg2r71oyV1T1jt"
+  },
+  "bronze_bar": {
+    "imageCid": "QmPRZUrMVjqw5qkCBGR385EXCS9ByTFYZSzvgYaNqajfBr",
+    "imageUri": "https://ipfs.io/ipfs/QmPRZUrMVjqw5qkCBGR385EXCS9ByTFYZSzvgYaNqajfBr",
+    "metadataCid": "QmTvGYKJTwVpvKBVKszmkQGXdNaTznEJieZpNnGYTJBamU",
+    "metadataUri": "https://ipfs.io/ipfs/QmTvGYKJTwVpvKBVKszmkQGXdNaTznEJieZpNnGYTJBamU"
+  },
+  "chaosrune": {
+    "imageCid": "QmZ4uwCjgkjcs1jXpWjnECBBb1S8Q6QP2Yj3TqahLgBPes",
+    "imageUri": "https://ipfs.io/ipfs/QmZ4uwCjgkjcs1jXpWjnECBBb1S8Q6QP2Yj3TqahLgBPes",
+    "metadataCid": "Qmf23jnAAoauURinYdh5X8FtLrj34wvpJUMVMy4Wog4ThM",
+    "metadataUri": "https://ipfs.io/ipfs/Qmf23jnAAoauURinYdh5X8FtLrj34wvpJUMVMy4Wog4ThM"
+  },
+  "copper_ore": {
+    "imageCid": "QmSSMMUWHUPtyZRsFGkhqwdbiLxno6kctr87HiJp7T45Rn",
+    "imageUri": "https://ipfs.io/ipfs/QmSSMMUWHUPtyZRsFGkhqwdbiLxno6kctr87HiJp7T45Rn",
+    "metadataCid": "QmcqbmowUQs9EG9Tp4pHSqWyGi7q9nv48EDK9nysp8or7E",
+    "metadataUri": "https://ipfs.io/ipfs/QmcqbmowUQs9EG9Tp4pHSqWyGi7q9nv48EDK9nysp8or7E"
+  },
+  "cosmicrune": {
+    "imageCid": "QmYj31YyJq4PhXRch9ytRPPJQwa1LQfRVraS5RY4rLJpm7",
+    "imageUri": "https://ipfs.io/ipfs/QmYj31YyJq4PhXRch9ytRPPJQwa1LQfRVraS5RY4rLJpm7",
+    "metadataCid": "QmW5D4LdnNP8yQ6BvFtzDFL1pRojTz9oAe2S5eVNvoBgtH",
+    "metadataUri": "https://ipfs.io/ipfs/QmW5D4LdnNP8yQ6BvFtzDFL1pRojTz9oAe2S5eVNvoBgtH"
+  },
+  "cow_hide": {
+    "imageCid": "QmRkTJ9mSAVA1V7tMsNxX8rnr9q8SSVyuA24u2o6dfb5QH",
+    "imageUri": "https://ipfs.io/ipfs/QmRkTJ9mSAVA1V7tMsNxX8rnr9q8SSVyuA24u2o6dfb5QH",
+    "metadataCid": "Qmagv5wwjQ645Ruu96F8zWgpVWt1DHmGA3Mk9sAKjAEWzv",
+    "metadataUri": "https://ipfs.io/ipfs/Qmagv5wwjQ645Ruu96F8zWgpVWt1DHmGA3Mk9sAKjAEWzv"
+  },
+  "deathrune": {
+    "imageCid": "Qmd3B6zZxeT7WoL2YSVCmUY3AYY1wAmHnDCY2FLT1tN553",
+    "imageUri": "https://ipfs.io/ipfs/Qmd3B6zZxeT7WoL2YSVCmUY3AYY1wAmHnDCY2FLT1tN553",
+    "metadataCid": "QmTijayu4zYSwf4wPYNDAuzKqUBfmBJ7hdrz8rtTGLNZKQ",
+    "metadataUri": "https://ipfs.io/ipfs/QmTijayu4zYSwf4wPYNDAuzKqUBfmBJ7hdrz8rtTGLNZKQ"
+  },
+  "diamond": {
+    "imageCid": "QmYvV4kdWdX1MdN9Z8r6VpfnqNX91hxJDs6toFknmXiQUi",
+    "imageUri": "https://ipfs.io/ipfs/QmYvV4kdWdX1MdN9Z8r6VpfnqNX91hxJDs6toFknmXiQUi",
+    "metadataCid": "QmdGfoXsYAcUSgcE4a7xLoLmdqyozefQLv7GNSP7SgJeGk",
+    "metadataUri": "https://ipfs.io/ipfs/QmdGfoXsYAcUSgcE4a7xLoLmdqyozefQLv7GNSP7SgJeGk"
+  },
+  "dragon_bones": {
+    "imageCid": "QmV9Lo46YZsR1665CQTqbN6NWQ5pywuhhiaL4obbnRoJAX",
+    "imageUri": "https://ipfs.io/ipfs/QmV9Lo46YZsR1665CQTqbN6NWQ5pywuhhiaL4obbnRoJAX",
+    "metadataCid": "QmUK64s4V8K7nfX9ogPoVEaTSWmPwg3i8DWJsery8bFU7X",
+    "metadataUri": "https://ipfs.io/ipfs/QmUK64s4V8K7nfX9ogPoVEaTSWmPwg3i8DWJsery8bFU7X"
+  },
+  "earthrune": {
+    "imageCid": "QmbNgLYDziNmUuw59re3EAUfrbZjU2xJdkympip8L3ezDx",
+    "imageUri": "https://ipfs.io/ipfs/QmbNgLYDziNmUuw59re3EAUfrbZjU2xJdkympip8L3ezDx",
+    "metadataCid": "QmamHNVXMxYMgDsc3n7F6B9uyxSmhP8nQtBgWdxoCqzzjq",
+    "metadataUri": "https://ipfs.io/ipfs/QmamHNVXMxYMgDsc3n7F6B9uyxSmhP8nQtBgWdxoCqzzjq"
+  },
+  "emerald": {
+    "imageCid": "QmUtvZk1rMkWenGYTKVucbgCyWEiHNQvPP9qfaDFpCeDNy",
+    "imageUri": "https://ipfs.io/ipfs/QmUtvZk1rMkWenGYTKVucbgCyWEiHNQvPP9qfaDFpCeDNy",
+    "metadataCid": "QmQBZo2mTAvawNDTeFpya3jFTU5WxRWa7VqKKmJfA4nszD",
+    "metadataUri": "https://ipfs.io/ipfs/QmQBZo2mTAvawNDTeFpya3jFTU5WxRWa7VqKKmJfA4nszD"
+  },
+  "firerune": {
+    "imageCid": "QmdaZBTULABZArTgx68b8U49pLFVNX174zozoNkvsVPe9A",
+    "imageUri": "https://ipfs.io/ipfs/QmdaZBTULABZArTgx68b8U49pLFVNX174zozoNkvsVPe9A",
+    "metadataCid": "QmUEwD7gJfvQGAwdewxPyemactZUSRFXv8bh63nT2DCg3W",
+    "metadataUri": "https://ipfs.io/ipfs/QmUEwD7gJfvQGAwdewxPyemactZUSRFXv8bh63nT2DCg3W"
+  },
+  "gold_bar": {
+    "imageCid": "QmZ3qX3mgDQWZPL9j8GB9D9Zkq8MEYbaMJ5CfHhGWSbZX1",
+    "imageUri": "https://ipfs.io/ipfs/QmZ3qX3mgDQWZPL9j8GB9D9Zkq8MEYbaMJ5CfHhGWSbZX1",
+    "metadataCid": "QmTfztG4BtcmQYhgbTXuBUc9LNXRQjMrTc6ZD7SWpVPPFH",
+    "metadataUri": "https://ipfs.io/ipfs/QmTfztG4BtcmQYhgbTXuBUc9LNXRQjMrTc6ZD7SWpVPPFH"
+  },
+  "gold_ore": {
+    "imageCid": "Qmasksk7RWFMPqJK4Zcat273MoCcHNswGoyVtjDNzJbwnM",
+    "imageUri": "https://ipfs.io/ipfs/Qmasksk7RWFMPqJK4Zcat273MoCcHNswGoyVtjDNzJbwnM",
+    "metadataCid": "QmQWY1JY8v4zXndzqs4DEJSRM8B7xTS7k9Gb7hCZPW4VdN",
+    "metadataUri": "https://ipfs.io/ipfs/QmQWY1JY8v4zXndzqs4DEJSRM8B7xTS7k9Gb7hCZPW4VdN"
+  },
+  "herring": {
+    "imageCid": "Qmb3BNM5pAQcWWWk3CCc5NNgSCfjvtxyixfDf9cyT59cdk",
+    "imageUri": "https://ipfs.io/ipfs/Qmb3BNM5pAQcWWWk3CCc5NNgSCfjvtxyixfDf9cyT59cdk",
+    "metadataCid": "QmWtF4DQd5yEMZfZ7aS6jESBV95EduZoUyjv1e9BrTFUbu",
+    "metadataUri": "https://ipfs.io/ipfs/QmWtF4DQd5yEMZfZ7aS6jESBV95EduZoUyjv1e9BrTFUbu"
+  },
+  "iron_arrow": {
+    "imageCid": "Qmbb2hhxT5NQ7U6ADRFnJxQafdfNEZPUCxAGSwBagwETG8",
+    "imageUri": "https://ipfs.io/ipfs/Qmbb2hhxT5NQ7U6ADRFnJxQafdfNEZPUCxAGSwBagwETG8",
+    "metadataCid": "QmaFydSM7xMNTZoMwZ3H84C5oXM6NAn3QL9cS5Kz5iHuyS",
+    "metadataUri": "https://ipfs.io/ipfs/QmaFydSM7xMNTZoMwZ3H84C5oXM6NAn3QL9cS5Kz5iHuyS"
+  },
+  "iron_bar": {
+    "imageCid": "QmcM3NTVKDKHqpg4Bwfr6LYKryhMQXeeQq2nUNhBNec6HP",
+    "imageUri": "https://ipfs.io/ipfs/QmcM3NTVKDKHqpg4Bwfr6LYKryhMQXeeQq2nUNhBNec6HP",
+    "metadataCid": "QmRNVoiZ6yPeDSR7NQ7AWUCZDK7bynuMbKwtSSi9qn7AYb",
+    "metadataUri": "https://ipfs.io/ipfs/QmRNVoiZ6yPeDSR7NQ7AWUCZDK7bynuMbKwtSSi9qn7AYb"
+  },
+  "iron_ore": {
+    "imageCid": "QmTfKpVoyEJ5WyBx3cJhUWajW62BDtyZ6BWGXHCUvYtb2T",
+    "imageUri": "https://ipfs.io/ipfs/QmTfKpVoyEJ5WyBx3cJhUWajW62BDtyZ6BWGXHCUvYtb2T",
+    "metadataCid": "QmeL21bC9fSvu4Zre1xX1M7rsY122e6fCHY2xYiqaF3XJ8",
+    "metadataUri": "https://ipfs.io/ipfs/QmeL21bC9fSvu4Zre1xX1M7rsY122e6fCHY2xYiqaF3XJ8"
+  },
+  "lawrune": {
+    "imageCid": "QmUy2C2g7Vvu26puuq3DxiR1xVnEHBxrUEGtP6zCoQsSxA",
+    "imageUri": "https://ipfs.io/ipfs/QmUy2C2g7Vvu26puuq3DxiR1xVnEHBxrUEGtP6zCoQsSxA",
+    "metadataCid": "QmaLTCv2Wtd22BPULixY6AxVZgqBhZKpz8GWES7dFtW2Ku",
+    "metadataUri": "https://ipfs.io/ipfs/QmaLTCv2Wtd22BPULixY6AxVZgqBhZKpz8GWES7dFtW2Ku"
+  },
+  "logs": {
+    "imageCid": "Qmd3fq94LNvyXs1A6jPaFyUZxnbCorKnJJ49kRZNGZkYQC",
+    "imageUri": "https://ipfs.io/ipfs/Qmd3fq94LNvyXs1A6jPaFyUZxnbCorKnJJ49kRZNGZkYQC",
+    "metadataCid": "QmWHBpRtVJ6gBrQmhBmkNtUTiieXLuw6HC2Na3zi9tSVYB",
+    "metadataUri": "https://ipfs.io/ipfs/QmWHBpRtVJ6gBrQmhBmkNtUTiieXLuw6HC2Na3zi9tSVYB"
+  },
+  "magic_logs": {
+    "imageCid": "QmTz6WzGPoRpEXTP2s4KQv4CD9i4tEFS3DfWmVv1MKC8YW",
+    "imageUri": "https://ipfs.io/ipfs/QmTz6WzGPoRpEXTP2s4KQv4CD9i4tEFS3DfWmVv1MKC8YW",
+    "metadataCid": "QmPgymgkKh2j3ipommb5tpywqhE7nfy3gw8xdmSMJZx22Z",
+    "metadataUri": "https://ipfs.io/ipfs/QmPgymgkKh2j3ipommb5tpywqhE7nfy3gw8xdmSMJZx22Z"
+  },
+  "maple_logs": {
+    "imageCid": "QmdArpN9AwnRk2cHeA8xmVoeSxrSpek4mit6QTCXGLWCC1",
+    "imageUri": "https://ipfs.io/ipfs/QmdArpN9AwnRk2cHeA8xmVoeSxrSpek4mit6QTCXGLWCC1",
+    "metadataCid": "QmVsiJnJqspzumzuHcNmirnrQBMc8wh7zaWSjRULbMA3MQ",
+    "metadataUri": "https://ipfs.io/ipfs/QmVsiJnJqspzumzuHcNmirnrQBMc8wh7zaWSjRULbMA3MQ"
+  },
+  "mindrune": {
+    "imageCid": "QmVrCdUdZH6F7nZSqAxMXiZTScfFHQr2amv1JMag579L95",
+    "imageUri": "https://ipfs.io/ipfs/QmVrCdUdZH6F7nZSqAxMXiZTScfFHQr2amv1JMag579L95",
+    "metadataCid": "QmUmFKpUHJ8gmmNeQWbVfY2Nfch96jrBTt88qG1gSRazck",
+    "metadataUri": "https://ipfs.io/ipfs/QmUmFKpUHJ8gmmNeQWbVfY2Nfch96jrBTt88qG1gSRazck"
+  },
+  "mithril_arrow": {
+    "imageCid": "QmS9ECax7wusMs7shFQejN8fPe4wSkGvssmnWGH2Gndsdz",
+    "imageUri": "https://ipfs.io/ipfs/QmS9ECax7wusMs7shFQejN8fPe4wSkGvssmnWGH2Gndsdz",
+    "metadataCid": "QmSdkCwprrJ9FM2jTZsiA2L9yUt5ewnMn2oPdkhCoUMr69",
+    "metadataUri": "https://ipfs.io/ipfs/QmSdkCwprrJ9FM2jTZsiA2L9yUt5ewnMn2oPdkhCoUMr69"
+  },
+  "mithril_bar": {
+    "imageCid": "QmVAS9VS7cdjqwqA3iG5EhEbqTLsY45DWSdePsWWJeRpWK",
+    "imageUri": "https://ipfs.io/ipfs/QmVAS9VS7cdjqwqA3iG5EhEbqTLsY45DWSdePsWWJeRpWK",
+    "metadataCid": "QmX5GQJwBN2A72ZRRqsVSpt3vYmUBFGBSkDriBXkWCmcG4",
+    "metadataUri": "https://ipfs.io/ipfs/QmX5GQJwBN2A72ZRRqsVSpt3vYmUBFGBSkDriBXkWCmcG4"
+  },
+  "mithril_ore": {
+    "imageCid": "QmT2NcqeFL2HMEykAweZdzneff3Y3jQ4j7EStvA4oPyt5B",
+    "imageUri": "https://ipfs.io/ipfs/QmT2NcqeFL2HMEykAweZdzneff3Y3jQ4j7EStvA4oPyt5B",
+    "metadataCid": "QmV3p4QtdWXm7RL6GBS4efZd3M3rT6Ja6HfCrfYP6GcHhq",
+    "metadataUri": "https://ipfs.io/ipfs/QmV3p4QtdWXm7RL6GBS4efZd3M3rT6Ja6HfCrfYP6GcHhq"
+  },
+  "oak_logs": {
+    "imageCid": "QmdXjBFWA1rYuCNAYimHfqBKQVET3iQ66MDw56ktjTvGLj",
+    "imageUri": "https://ipfs.io/ipfs/QmdXjBFWA1rYuCNAYimHfqBKQVET3iQ66MDw56ktjTvGLj",
+    "metadataCid": "QmSjRPxiFAT3W1MVJZqVe1WGk5Qi9zuShFJ1uPHmWUjgKp",
+    "metadataUri": "https://ipfs.io/ipfs/QmSjRPxiFAT3W1MVJZqVe1WGk5Qi9zuShFJ1uPHmWUjgKp"
+  },
+  "raw_anchovies": {
+    "imageCid": "QmSUvKPuVVdWc2YFJsp7K7QEcHPyxCDAME1pvvGcGmoAny",
+    "imageUri": "https://ipfs.io/ipfs/QmSUvKPuVVdWc2YFJsp7K7QEcHPyxCDAME1pvvGcGmoAny",
+    "metadataCid": "QmNbSv5b4h3ShWQNJ6reTTzGd7c5K4g3ubnVdwg5CDKD2Z",
+    "metadataUri": "https://ipfs.io/ipfs/QmNbSv5b4h3ShWQNJ6reTTzGd7c5K4g3ubnVdwg5CDKD2Z"
+  },
+  "raw_herring": {
+    "imageCid": "QmS8GLYazZCpfGrSvggGz7ucEUFvaFv5MttjKwKnCQ4K6L",
+    "imageUri": "https://ipfs.io/ipfs/QmS8GLYazZCpfGrSvggGz7ucEUFvaFv5MttjKwKnCQ4K6L",
+    "metadataCid": "QmZU5wxk92fktjjjnSTUCU6Tu38V4uYJD154tGs2PhFou8",
+    "metadataUri": "https://ipfs.io/ipfs/QmZU5wxk92fktjjjnSTUCU6Tu38V4uYJD154tGs2PhFou8"
+  },
+  "raw_lobster": {
+    "imageCid": "QmP94yVo3YrPZWWnPrW2ea4DkHidTU6HU3dEhoZYtvHjJg",
+    "imageUri": "https://ipfs.io/ipfs/QmP94yVo3YrPZWWnPrW2ea4DkHidTU6HU3dEhoZYtvHjJg",
+    "metadataCid": "QmVVhhaL6cd4ijPEv3f5pD896rdXtGUNhj941QWD9vtnKq",
+    "metadataUri": "https://ipfs.io/ipfs/QmVVhhaL6cd4ijPEv3f5pD896rdXtGUNhj941QWD9vtnKq"
+  },
+  "raw_salmon": {
+    "imageCid": "QmUX36j8ZnE6Sj6NZRseQ5Y7dJDZJdvsskwPtyVyzRVsVt",
+    "imageUri": "https://ipfs.io/ipfs/QmUX36j8ZnE6Sj6NZRseQ5Y7dJDZJdvsskwPtyVyzRVsVt",
+    "metadataCid": "QmRNZFgqprdEgibuHJYrnXMy3tTSXFt8TefHs8YnuRnMEG",
+    "metadataUri": "https://ipfs.io/ipfs/QmRNZFgqprdEgibuHJYrnXMy3tTSXFt8TefHs8YnuRnMEG"
+  },
+  "raw_sardine": {
+    "imageCid": "Qmdy8JJhs3zURXb5cmeNuKYTB79mtAgRrCis9L391eFUxe",
+    "imageUri": "https://ipfs.io/ipfs/Qmdy8JJhs3zURXb5cmeNuKYTB79mtAgRrCis9L391eFUxe",
+    "metadataCid": "QmezxmnA8bsFVCQ1SfjZGBiDZ4bvowZb9wHmBmJy5YZb7z",
+    "metadataUri": "https://ipfs.io/ipfs/QmezxmnA8bsFVCQ1SfjZGBiDZ4bvowZb9wHmBmJy5YZb7z"
+  },
+  "raw_shark": {
+    "imageCid": "QmbaW3tHp8VeLxnoQ1VwSjvVMno1BkwCdYKt5CRg5YB9gv",
+    "imageUri": "https://ipfs.io/ipfs/QmbaW3tHp8VeLxnoQ1VwSjvVMno1BkwCdYKt5CRg5YB9gv",
+    "metadataCid": "QmXttpPCAidFtYGseJKQ3RkwYo3jWnK6XLucCwVFCy1vN4",
+    "metadataUri": "https://ipfs.io/ipfs/QmXttpPCAidFtYGseJKQ3RkwYo3jWnK6XLucCwVFCy1vN4"
+  },
+  "raw_swordfish": {
+    "imageCid": "QmYKDJoRPxW5U6b2rfhMo94FJK99bhG3LgwALptgVz1tB4",
+    "imageUri": "https://ipfs.io/ipfs/QmYKDJoRPxW5U6b2rfhMo94FJK99bhG3LgwALptgVz1tB4",
+    "metadataCid": "QmPPTcx8bEfW7xaAMjb2CQZy8gZJjjCyuFDnY3792C9f8o",
+    "metadataUri": "https://ipfs.io/ipfs/QmPPTcx8bEfW7xaAMjb2CQZy8gZJjjCyuFDnY3792C9f8o"
+  },
+  "raw_trout": {
+    "imageCid": "Qmb93LZ9jyHhtfnJzZndvFShawPz35Lfq6RQ4fmQ6L6NmQ",
+    "imageUri": "https://ipfs.io/ipfs/Qmb93LZ9jyHhtfnJzZndvFShawPz35Lfq6RQ4fmQ6L6NmQ",
+    "metadataCid": "QmVTYmKma6Utk98BnVQxKmAmYK7PEtQ8YY7dryvCPQFopT",
+    "metadataUri": "https://ipfs.io/ipfs/QmVTYmKma6Utk98BnVQxKmAmYK7PEtQ8YY7dryvCPQFopT"
+  },
+  "raw_tuna": {
+    "imageCid": "QmV6mFyUsu8nuGD5QKsQmpd53ZBTSFs9ZKSJMWc19sYJWA",
+    "imageUri": "https://ipfs.io/ipfs/QmV6mFyUsu8nuGD5QKsQmpd53ZBTSFs9ZKSJMWc19sYJWA",
+    "metadataCid": "QmYy5ZBA4YwLAwgeRq9JAUZos41EHRaxnyAhPShdGFwas9",
+    "metadataUri": "https://ipfs.io/ipfs/QmYy5ZBA4YwLAwgeRq9JAUZos41EHRaxnyAhPShdGFwas9"
+  },
+  "ruby": {
+    "imageCid": "QmTpQ9bWAV8rsbtVQmpVKJzUC3bGCcz9M6FzBztm5tCYJj",
+    "imageUri": "https://ipfs.io/ipfs/QmTpQ9bWAV8rsbtVQmpVKJzUC3bGCcz9M6FzBztm5tCYJj",
+    "metadataCid": "QmTCoBB2ikXLigvWq4sMQJBfLYcoS5FJbhBxNgykqRTnsk",
+    "metadataUri": "https://ipfs.io/ipfs/QmTCoBB2ikXLigvWq4sMQJBfLYcoS5FJbhBxNgykqRTnsk"
+  },
+  "rune_2h_sword": {
+    "imageCid": "QmR9pjD45cwRFPf86avNWET1RhTXGjQktF37qThTUANSiM",
+    "imageUri": "https://ipfs.io/ipfs/QmR9pjD45cwRFPf86avNWET1RhTXGjQktF37qThTUANSiM",
+    "metadataCid": "QmY3kFEL8imyn12ADWoU38nnoXedDtLdTMQ5skSMx3Wuyu",
+    "metadataUri": "https://ipfs.io/ipfs/QmY3kFEL8imyn12ADWoU38nnoXedDtLdTMQ5skSMx3Wuyu"
+  },
+  "rune_arrow": {
+    "imageCid": "QmYr5d7Z1a7kopvZoAfzfowcRg5oar5gRB2Lk2bJ4fx1ZU",
+    "imageUri": "https://ipfs.io/ipfs/QmYr5d7Z1a7kopvZoAfzfowcRg5oar5gRB2Lk2bJ4fx1ZU",
+    "metadataCid": "QmYgBm1QR1FzfK4qH24d9KGhBdiAiwo7WFrafu3xTfrfZj",
+    "metadataUri": "https://ipfs.io/ipfs/QmYgBm1QR1FzfK4qH24d9KGhBdiAiwo7WFrafu3xTfrfZj"
+  },
+  "rune_axe": {
+    "imageCid": "QmNxXBZJ5rAiWd4nx7orVx17eDTxdUPgkC2rkp8SfC4fgL",
+    "imageUri": "https://ipfs.io/ipfs/QmNxXBZJ5rAiWd4nx7orVx17eDTxdUPgkC2rkp8SfC4fgL",
+    "metadataCid": "Qma9ha5bdZxuU4VFAWXdAfK1HotuqiNYMb6QAscfY2rmJu",
+    "metadataUri": "https://ipfs.io/ipfs/Qma9ha5bdZxuU4VFAWXdAfK1HotuqiNYMb6QAscfY2rmJu"
+  },
+  "rune_battleaxe": {
+    "imageCid": "Qmc1wp6hstPhaegeAAJ1pinVje2xgcg88XLtVWCzrRqMV6",
+    "imageUri": "https://ipfs.io/ipfs/Qmc1wp6hstPhaegeAAJ1pinVje2xgcg88XLtVWCzrRqMV6",
+    "metadataCid": "QmdYVPjWjrYWPHMaYRLExyCC8VNqjx4hjgHTqasEnTwkQJ",
+    "metadataUri": "https://ipfs.io/ipfs/QmdYVPjWjrYWPHMaYRLExyCC8VNqjx4hjgHTqasEnTwkQJ"
+  },
+  "rune_chainbody": {
+    "imageCid": "QmT5L5LDtnng7fKrAu1DYCe6dgx2e9D6CdP9KokmcqFodg",
+    "imageUri": "https://ipfs.io/ipfs/QmT5L5LDtnng7fKrAu1DYCe6dgx2e9D6CdP9KokmcqFodg",
+    "metadataCid": "QmY8ihXA9m6cC9GBktkni3TengGLgucUif9ViUX3gE7d96",
+    "metadataUri": "https://ipfs.io/ipfs/QmY8ihXA9m6cC9GBktkni3TengGLgucUif9ViUX3gE7d96"
+  },
+  "rune_dagger": {
+    "imageCid": "QmUPuG5ocjcPing7z3wacrEpSL7ybXUDhoSvALAGAbsd6w",
+    "imageUri": "https://ipfs.io/ipfs/QmUPuG5ocjcPing7z3wacrEpSL7ybXUDhoSvALAGAbsd6w",
+    "metadataCid": "QmXeurxhhJTJwi62qQBeGXWDagtTkhCVwwLotrBxSAUA81",
+    "metadataUri": "https://ipfs.io/ipfs/QmXeurxhhJTJwi62qQBeGXWDagtTkhCVwwLotrBxSAUA81"
+  },
+  "rune_full_helm": {
+    "imageCid": "QmXSyvRoqV4ydXM6tUC17TEUvcVuw3GKPRHPnyQCUaYuPV",
+    "imageUri": "https://ipfs.io/ipfs/QmXSyvRoqV4ydXM6tUC17TEUvcVuw3GKPRHPnyQCUaYuPV",
+    "metadataCid": "QmRSzV5Vsr1Fm79D3MRMubQaFRorfFcASEtYHikzdzo3rB",
+    "metadataUri": "https://ipfs.io/ipfs/QmRSzV5Vsr1Fm79D3MRMubQaFRorfFcASEtYHikzdzo3rB"
+  },
+  "rune_kiteshield": {
+    "imageCid": "Qme4BxdCBMtMroAME6zdehxmbE4CRVWwyY7bQ4RtMXzGmy",
+    "imageUri": "https://ipfs.io/ipfs/Qme4BxdCBMtMroAME6zdehxmbE4CRVWwyY7bQ4RtMXzGmy",
+    "metadataCid": "QmWauVVkbX3z7ZeKdTYvHzTZD7v5RssdhB8Af6W4FXajnf",
+    "metadataUri": "https://ipfs.io/ipfs/QmWauVVkbX3z7ZeKdTYvHzTZD7v5RssdhB8Af6W4FXajnf"
+  },
+  "rune_longsword": {
+    "imageCid": "QmeRSAbJ3sDKU77ZBu5jWHs5sd1JviP15tztz2qEb1NbuJ",
+    "imageUri": "https://ipfs.io/ipfs/QmeRSAbJ3sDKU77ZBu5jWHs5sd1JviP15tztz2qEb1NbuJ",
+    "metadataCid": "QmbRYMGRGyuGk7a6vNT73P9DgHVcrTrHnpdQCYsMawMfw2",
+    "metadataUri": "https://ipfs.io/ipfs/QmbRYMGRGyuGk7a6vNT73P9DgHVcrTrHnpdQCYsMawMfw2"
+  },
+  "rune_mace": {
+    "imageCid": "QmPUV3PaxHGqZ7cniNei2B9JKy4K5QuGJTDtryUW46cpCq",
+    "imageUri": "https://ipfs.io/ipfs/QmPUV3PaxHGqZ7cniNei2B9JKy4K5QuGJTDtryUW46cpCq",
+    "metadataCid": "QmWFMV4Dj8TmViwEJP4WaRZEcUuhPuxaagFWerLh8SeEkZ",
+    "metadataUri": "https://ipfs.io/ipfs/QmWFMV4Dj8TmViwEJP4WaRZEcUuhPuxaagFWerLh8SeEkZ"
+  },
+  "rune_med_helm": {
+    "imageCid": "Qmdh5eRC5R7VL9GezEMkgqGR4c8GHuHaKyqUPUYAxTFMfw",
+    "imageUri": "https://ipfs.io/ipfs/Qmdh5eRC5R7VL9GezEMkgqGR4c8GHuHaKyqUPUYAxTFMfw",
+    "metadataCid": "QmeCVAXqrLmG2D9GMP3z2sV6cpH3sSrvwexx7515bQyWtL",
+    "metadataUri": "https://ipfs.io/ipfs/QmeCVAXqrLmG2D9GMP3z2sV6cpH3sSrvwexx7515bQyWtL"
+  },
+  "rune_pickaxe": {
+    "imageCid": "QmYqStbcc7T4U1oZETyrpViyUSENnWKLmDEa2g9c73eqWt",
+    "imageUri": "https://ipfs.io/ipfs/QmYqStbcc7T4U1oZETyrpViyUSENnWKLmDEa2g9c73eqWt",
+    "metadataCid": "QmabCwc4UQEeBiz4KJ2ambps8xoxYccXKqe29v1WDkjWXN",
+    "metadataUri": "https://ipfs.io/ipfs/QmabCwc4UQEeBiz4KJ2ambps8xoxYccXKqe29v1WDkjWXN"
+  },
+  "rune_platebody": {
+    "imageCid": "QmdzJN7Pf45LXCgjF9GYoHtNMxzdfnMTh6arHu3pz5mYMx",
+    "imageUri": "https://ipfs.io/ipfs/QmdzJN7Pf45LXCgjF9GYoHtNMxzdfnMTh6arHu3pz5mYMx",
+    "metadataCid": "Qmc1fEKrHdbKxjB5j14Rqa7NJ8zPqvVKc7sZDejdrpM1vy",
+    "metadataUri": "https://ipfs.io/ipfs/Qmc1fEKrHdbKxjB5j14Rqa7NJ8zPqvVKc7sZDejdrpM1vy"
+  },
+  "rune_platelegs": {
+    "imageCid": "Qmewt5KRAGKmb8iiX5sGpfZMndaT3JCBZPYcp1fiauFTQj",
+    "imageUri": "https://ipfs.io/ipfs/Qmewt5KRAGKmb8iiX5sGpfZMndaT3JCBZPYcp1fiauFTQj",
+    "metadataCid": "Qmaw952ygSakeFQ5UkpVpfhJ3jyfcVPeURHwhR7n6QiLnB",
+    "metadataUri": "https://ipfs.io/ipfs/Qmaw952ygSakeFQ5UkpVpfhJ3jyfcVPeURHwhR7n6QiLnB"
+  },
+  "rune_sword": {
+    "imageCid": "QmfWo1tXyQBYZSed5tavPRZ1V8tzrCWBy4vxbKyxDRfQNU",
+    "imageUri": "https://ipfs.io/ipfs/QmfWo1tXyQBYZSed5tavPRZ1V8tzrCWBy4vxbKyxDRfQNU",
+    "metadataCid": "QmchowPyPCyR6GBAevqXNJAhXxw2JkLiinhG7svoTR3fp7",
+    "metadataUri": "https://ipfs.io/ipfs/QmchowPyPCyR6GBAevqXNJAhXxw2JkLiinhG7svoTR3fp7"
+  },
+  "runite_bar": {
+    "imageCid": "QmPHb12y1nT4g1JJaXcfJH6WRtUcGj41W2VHNYtGxu7C8U",
+    "imageUri": "https://ipfs.io/ipfs/QmPHb12y1nT4g1JJaXcfJH6WRtUcGj41W2VHNYtGxu7C8U",
+    "metadataCid": "QmV8cBUTcD3t93jJP4jPmmpBKDDWjfsRQwkuFrwgfPiJor",
+    "metadataUri": "https://ipfs.io/ipfs/QmV8cBUTcD3t93jJP4jPmmpBKDDWjfsRQwkuFrwgfPiJor"
+  },
+  "runite_ore": {
+    "imageCid": "QmcVmFD8zr51ucvXQMb7QroztZpceuHskyqc8eBzDyUtFu",
+    "imageUri": "https://ipfs.io/ipfs/QmcVmFD8zr51ucvXQMb7QroztZpceuHskyqc8eBzDyUtFu",
+    "metadataCid": "QmevX55Lc5MQx6XvDREGmeL1uNKrBgMQdQomeMjvALeF1Y",
+    "metadataUri": "https://ipfs.io/ipfs/QmevX55Lc5MQx6XvDREGmeL1uNKrBgMQdQomeMjvALeF1Y"
+  },
+  "salmon": {
+    "imageCid": "QmUiqMxSfJgQqnNq24Y9ZmcuM2kkyMgY8AksLxVCL6NF4o",
+    "imageUri": "https://ipfs.io/ipfs/QmUiqMxSfJgQqnNq24Y9ZmcuM2kkyMgY8AksLxVCL6NF4o",
+    "metadataCid": "QmYBhowNEtX6usy1SVTDnQSDwbaBqN2hXN5jp2JYWYf4u8",
+    "metadataUri": "https://ipfs.io/ipfs/QmYBhowNEtX6usy1SVTDnQSDwbaBqN2hXN5jp2JYWYf4u8"
+  },
+  "sapphire": {
+    "imageCid": "QmeygUEaqCyBqsWnM5dAjaQxaLGDdess6JBqjwJoabgtCd",
+    "imageUri": "https://ipfs.io/ipfs/QmeygUEaqCyBqsWnM5dAjaQxaLGDdess6JBqjwJoabgtCd",
+    "metadataCid": "QmWntrrjcXuJRVXnnkW7gSXomVmXTwdc1d9Lxq4yeRKanG",
+    "metadataUri": "https://ipfs.io/ipfs/QmWntrrjcXuJRVXnnkW7gSXomVmXTwdc1d9Lxq4yeRKanG"
+  },
+  "sardine": {
+    "imageCid": "QmczA4gdePPMMf79X5gxafBMnSfXJmKMGFC9Zz1Hj1o7pp",
+    "imageUri": "https://ipfs.io/ipfs/QmczA4gdePPMMf79X5gxafBMnSfXJmKMGFC9Zz1Hj1o7pp",
+    "metadataCid": "QmabyCUgKzcV5LuRPhDzwULBosaUJHqVXq741Uy3vNckSD",
+    "metadataUri": "https://ipfs.io/ipfs/QmabyCUgKzcV5LuRPhDzwULBosaUJHqVXq741Uy3vNckSD"
+  },
+  "shark": {
+    "imageCid": "QmbqPt622kdBAUKaLLnLgN8421MCfqPL12yN5H8MsLYn4h",
+    "imageUri": "https://ipfs.io/ipfs/QmbqPt622kdBAUKaLLnLgN8421MCfqPL12yN5H8MsLYn4h",
+    "metadataCid": "QmaJ8x2RphACyXYMAnbzEDwExLLanJPtJtnWxcSCRaDRDM",
+    "metadataUri": "https://ipfs.io/ipfs/QmaJ8x2RphACyXYMAnbzEDwExLLanJPtJtnWxcSCRaDRDM"
+  },
+  "silver_bar": {
+    "imageCid": "Qma4NNXwBPgFDddXE3g2vVYvL2oyL61SL7SKVxrJtJZW5s",
+    "imageUri": "https://ipfs.io/ipfs/Qma4NNXwBPgFDddXE3g2vVYvL2oyL61SL7SKVxrJtJZW5s",
+    "metadataCid": "QmfNBhg4gSDPKvUo9WqfhvHJKmSz5My8SK6AofDWYkKh2z",
+    "metadataUri": "https://ipfs.io/ipfs/QmfNBhg4gSDPKvUo9WqfhvHJKmSz5My8SK6AofDWYkKh2z"
+  },
+  "silver_ore": {
+    "imageCid": "QmcDQ9zYitdeEJ1zzP3QM8voTm7grUTzPUqHpwtgCaKfGR",
+    "imageUri": "https://ipfs.io/ipfs/QmcDQ9zYitdeEJ1zzP3QM8voTm7grUTzPUqHpwtgCaKfGR",
+    "metadataCid": "QmcYfVuVHTVUhTknubvkareenMEjYDEWorcZTnAGHnPYba",
+    "metadataUri": "https://ipfs.io/ipfs/QmcYfVuVHTVUhTknubvkareenMEjYDEWorcZTnAGHnPYba"
+  },
+  "steel_arrow": {
+    "imageCid": "QmeQD6VrhqHn8CTfdHwHHDPCwnmdyDqHEnjbKrbLgm9gt4",
+    "imageUri": "https://ipfs.io/ipfs/QmeQD6VrhqHn8CTfdHwHHDPCwnmdyDqHEnjbKrbLgm9gt4",
+    "metadataCid": "QmZQrxbCuUZqzZtF5QzgGhmbuie4hua2DCtFhGbVaiQAQH",
+    "metadataUri": "https://ipfs.io/ipfs/QmZQrxbCuUZqzZtF5QzgGhmbuie4hua2DCtFhGbVaiQAQH"
+  },
+  "steel_bar": {
+    "imageCid": "QmRQqUKTfNMsvxZYMbDerYygPeJbASBSB3G767wAsCm5AE",
+    "imageUri": "https://ipfs.io/ipfs/QmRQqUKTfNMsvxZYMbDerYygPeJbASBSB3G767wAsCm5AE",
+    "metadataCid": "QmQZ1jXyRR1mgqNxN1EdLZbMHznTbUL4KY1nUWz41wm3wY",
+    "metadataUri": "https://ipfs.io/ipfs/QmQZ1jXyRR1mgqNxN1EdLZbMHznTbUL4KY1nUWz41wm3wY"
+  },
+  "swordfish": {
+    "imageCid": "QmQRQ5Eiubbk6imKov18eQ3t49fVcVx1xBGDpq7ADWhVqv",
+    "imageUri": "https://ipfs.io/ipfs/QmQRQ5Eiubbk6imKov18eQ3t49fVcVx1xBGDpq7ADWhVqv",
+    "metadataCid": "QmVvNPGsMbmJaJuUsCTNcKdxfqMRKc7i2egXWrMGoZdJwy",
+    "metadataUri": "https://ipfs.io/ipfs/QmVvNPGsMbmJaJuUsCTNcKdxfqMRKc7i2egXWrMGoZdJwy"
+  },
+  "tin_ore": {
+    "imageCid": "QmQYRDMdWFZBzZBFQtDqs29NbnqD3v2piFfdbFr1EJgzJG",
+    "imageUri": "https://ipfs.io/ipfs/QmQYRDMdWFZBzZBFQtDqs29NbnqD3v2piFfdbFr1EJgzJG",
+    "metadataCid": "QmXu8KWCXUuWpwxv3Z1WxwQgf49CwfoFahd5Ji1KGWUjo4",
+    "metadataUri": "https://ipfs.io/ipfs/QmXu8KWCXUuWpwxv3Z1WxwQgf49CwfoFahd5Ji1KGWUjo4"
+  },
+  "trout": {
+    "imageCid": "QmTXBdEEY6hKKGRg8PqarEwQCrK8TmG6gqww9tXd3Ynruk",
+    "imageUri": "https://ipfs.io/ipfs/QmTXBdEEY6hKKGRg8PqarEwQCrK8TmG6gqww9tXd3Ynruk",
+    "metadataCid": "QmTBxwYwJvMvHxiVbnmBhjqxuUcNqbmDCunSo6mFDPdFk3",
+    "metadataUri": "https://ipfs.io/ipfs/QmTBxwYwJvMvHxiVbnmBhjqxuUcNqbmDCunSo6mFDPdFk3"
+  },
+  "tuna": {
+    "imageCid": "QmWMWqjArE9VPiT99PLsQoxYG8yRPvbsV9mXqt6L5JfhMe",
+    "imageUri": "https://ipfs.io/ipfs/QmWMWqjArE9VPiT99PLsQoxYG8yRPvbsV9mXqt6L5JfhMe",
+    "metadataCid": "QmcjALL5B5vZfT3v9vAFGKE7cdDpTKqdMnRFAYTLcAg7VV",
+    "metadataUri": "https://ipfs.io/ipfs/QmcjALL5B5vZfT3v9vAFGKE7cdDpTKqdMnRFAYTLcAg7VV"
+  },
+  "uncut_diamond": {
+    "imageCid": "QmTUPTNcwWyB3RaeFkVHEVUk9HEYSgYnbYuo2Ad7kH7ZyH",
+    "imageUri": "https://ipfs.io/ipfs/QmTUPTNcwWyB3RaeFkVHEVUk9HEYSgYnbYuo2Ad7kH7ZyH",
+    "metadataCid": "QmWBAXvJdUVfFNwd45ikoaEHpPDJBQimdjQ9V3Rdc7qmED",
+    "metadataUri": "https://ipfs.io/ipfs/QmWBAXvJdUVfFNwd45ikoaEHpPDJBQimdjQ9V3Rdc7qmED"
+  },
+  "uncut_emerald": {
+    "imageCid": "QmXr8xVfQNZHsjgB4yKW3bCYyX6qpx2q7v93Mp4Y6A8m4w",
+    "imageUri": "https://ipfs.io/ipfs/QmXr8xVfQNZHsjgB4yKW3bCYyX6qpx2q7v93Mp4Y6A8m4w",
+    "metadataCid": "QmNwQHVbEXm8bcHCAz78PemuWno1pgeJ87y1jGZpSWNe6A",
+    "metadataUri": "https://ipfs.io/ipfs/QmNwQHVbEXm8bcHCAz78PemuWno1pgeJ87y1jGZpSWNe6A"
+  },
+  "uncut_ruby": {
+    "imageCid": "QmcmTVyR2TENYYHSNWvSSv3ZKBmXi5Mvwf1MkEqzYaQU2F",
+    "imageUri": "https://ipfs.io/ipfs/QmcmTVyR2TENYYHSNWvSSv3ZKBmXi5Mvwf1MkEqzYaQU2F",
+    "metadataCid": "QmdKP6NvwgR2E4fH2D4dB22CFiPA3n2bSothxY19etbK2f",
+    "metadataUri": "https://ipfs.io/ipfs/QmdKP6NvwgR2E4fH2D4dB22CFiPA3n2bSothxY19etbK2f"
+  },
+  "uncut_sapphire": {
+    "imageCid": "QmWmcKPLDsj4NyZQUHL3ei3YPXHYjaXwm1pFtcw57ZeMN1",
+    "imageUri": "https://ipfs.io/ipfs/QmWmcKPLDsj4NyZQUHL3ei3YPXHYjaXwm1pFtcw57ZeMN1",
+    "metadataCid": "QmUUNfF5pqZDNqu3zjaMofU55Nyt69KYdKKcjsMh4VCXG8",
+    "metadataUri": "https://ipfs.io/ipfs/QmUUNfF5pqZDNqu3zjaMofU55Nyt69KYdKKcjsMh4VCXG8"
+  },
+  "waterrune": {
+    "imageCid": "QmexHbsrjdym5pMb44pjBETZzdP7LPHxk992FUrwf6XF2H",
+    "imageUri": "https://ipfs.io/ipfs/QmexHbsrjdym5pMb44pjBETZzdP7LPHxk992FUrwf6XF2H",
+    "metadataCid": "QmNquL1UN71FrKeAwoSV3r5VkJyYceiQpjSEdtEHpMnUjf",
+    "metadataUri": "https://ipfs.io/ipfs/QmNquL1UN71FrKeAwoSV3r5VkJyYceiQpjSEdtEHpMnUjf"
+  },
+  "willow_logs": {
+    "imageCid": "QmboWaynT7QtXyTvFFfgCnfLS2HASLMmSVKn4FePvwKTYt",
+    "imageUri": "https://ipfs.io/ipfs/QmboWaynT7QtXyTvFFfgCnfLS2HASLMmSVKn4FePvwKTYt",
+    "metadataCid": "Qmdjn6w2yzrbyBJt6fg21n2VoNi4BvRDQFkrTRp2Fuhd2d",
+    "metadataUri": "https://ipfs.io/ipfs/Qmdjn6w2yzrbyBJt6fg21n2VoNi4BvRDQFkrTRp2Fuhd2d"
+  },
+  "yew_logs": {
+    "imageCid": "QmYXcU5KiBp4t8FyMAMKS8CobsvCgrr7CDvbS9DMZegFR4",
+    "imageUri": "https://ipfs.io/ipfs/QmYXcU5KiBp4t8FyMAMKS8CobsvCgrr7CDvbS9DMZegFR4",
+    "metadataCid": "QmaoJ7PQRMoHaLH2oJqjd6mu9o9yTwd5BjrrZExBcBWAma",
+    "metadataUri": "https://ipfs.io/ipfs/QmaoJ7PQRMoHaLH2oJqjd6mu9o9yTwd5BjrrZExBcBWAma"
+  }
+}
