@@ -5,6 +5,7 @@
 //
 // Usage: bun runner/create-items.ts [--limit N] [--dry-run]
 
+import { readFileSync } from 'node:fs';
 import { Keypair, PublicKey } from '@solana/web3.js';
 import { CpAmm } from '@meteora-ag/cp-amm-sdk';
 import { connection, bridgeKeypair, loadRegistry, saveRegistry, SEED_PER_ITEM, ITEM_DECIMALS } from './lib/common';
@@ -16,6 +17,16 @@ import { appendJournal, pendingAttempts } from './lib/journal';
 const limitArg = process.argv.indexOf('--limit');
 const limit = limitArg !== -1 ? parseInt(process.argv[limitArg + 1], 10) : Infinity;
 const dryRun = process.argv.includes('--dry-run');
+
+// --only a,b,c or --only-file path: restrict to a curated set of debugnames.
+const onlyArg = process.argv.indexOf('--only');
+const onlyFileArg = process.argv.indexOf('--only-file');
+let only: Set<string> | null = null;
+if (onlyArg !== -1) {
+    only = new Set(process.argv[onlyArg + 1].split(',').map(s => s.trim()).filter(Boolean));
+} else if (onlyFileArg !== -1) {
+    only = new Set(readFileSync(process.argv[onlyFileArg + 1], 'utf8').split(/\s+/).map(s => s.trim()).filter(Boolean));
+}
 
 const conn = connection();
 const payer = bridgeKeypair();
@@ -46,8 +57,15 @@ let processed = 0;
 let created = 0;
 let skipped = 0;
 
+if (only) {
+    const missing = [...only].filter(n => !reg.items[n]);
+    if (missing.length) console.warn(`[create-items] --only names not in registry (skipped): ${missing.join(', ')}`);
+    console.log(`[create-items] restricted to ${only.size} curated items`);
+}
+
 for (const [debugname, item] of Object.entries(reg.items)) {
     if (processed >= limit) break;
+    if (only && !only.has(debugname)) continue;
 
     const poolDone = item.pool !== null;
     if (item.mint && poolDone) { skipped++; continue; }

@@ -1367,9 +1367,9 @@
       "uri": "http://localhost:8888/bridge/token/adamant_arrow.json",
       "stackable": true,
       "members": true,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "HYNv5srrJUKYkvLbB7QjtztdvzpGBxarnxC3fWUX8Dz9",
+      "pool": "CiT2ECPYBdendc6mjQEbtaPSBdR5AdPE49of62whzgoi",
+      "position": "5Fyaoi2ZGinJ4BPD78DuYMUpssC3CFXkNURye8AA3Yof",
       "flags": []
     },
     "adamant_arrow_p": {
@@ -2100,9 +2100,9 @@
       "uri": "http://localhost:8888/bridge/token/adamantite_bar.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "CzRuG6M8tJ61caaFbKGTSsuvEQyB36SDZ1kKEPC7qf9k",
+      "pool": "Ev1FKXRAPzAfQWdRJ3Gboat5hKUv8e3ENepv1gSpRmW4",
+      "position": "8EViWJWEeVhpvVB8yRvrjVUdZTcaPRaaTkXGhUmGBMSW",
       "flags": []
     },
     "adamantite_ore": {
@@ -2117,9 +2117,9 @@
       "uri": "http://localhost:8888/bridge/token/adamantite_ore.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "HhoWTARXTP3j5a8Lu7ixUTkjqzKG6Zr8cpGHhYFSfokp",
+      "pool": "BRDrsZtUsXQQhwuq6Ti5VSBhuTQ1oVKAFcqqKRyuhDCu",
+      "position": "9Qq2gF4eJPZhaTSwjD6Qyq8HCLkbC35huvz4jvEXyNJb",
       "flags": []
     },
     "adamnt_thrownaxe": {
@@ -2221,9 +2221,9 @@
       "uri": "http://localhost:8888/bridge/token/airrune.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "BCchEysneCqftB8Jz6s63gxhCfKB2GnNt8VfWaawQkLv",
+      "pool": "NQH6gEqmNis4GWeLLWQAiQUHMuwS8X1RumqaEcTFKLb",
+      "position": "AyuqwL8tfE46ahxjLBeAjypWAXFc5MsvdNrr6ZumBERn",
       "flags": [
         "lowalch1"
       ]
@@ -2444,9 +2444,9 @@
       "uri": "http://localhost:8888/bridge/token/anchovies.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "DRzpcLyuWBpFgS3RinBFDZhEYMWe7HYsqanyVyAopdzp",
+      "pool": "G6EMFgTu62KUeYgGBV6v2kxRVBkgkkgzsHvKde8eps7E",
+      "position": "8E5Av9G7dSGWEPwMHbJ8jnSQCXW9id6T8ibaSZNz4Xy5",
       "flags": []
     },
     "antidragonbreathshield": {
@@ -2935,9 +2935,9 @@
       "uri": "http://localhost:8888/bridge/token/big_bones.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "AUTf1YRD5s8LymGw7oHXyLakPreRxcm94eQaKPLUQ25v",
+      "pool": "934eAkzhR4gfdfWe4PZwPu5PSZtTFqeZECgQb9E2bzYA",
+      "position": "AgZqhdrnDZx9Am5Fr56au9VeNi4xJsPCrUtHTadNVLxr",
       "flags": [
         "lowalch1",
         "defaultcost"
@@ -4011,9 +4011,9 @@
       "uri": "http://localhost:8888/bridge/token/bodyrune.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "ACQk3Kv9gQ2WyANZYNfkx7xWAwzhy2JtWCHgzpa61UCZ",
+      "pool": "6TucByHF1ADZayacRZZDQRE6qam82WvBNSTankyQCcop",
+      "position": "ECU8qYg3U6uMSZAoe2i7kBGK6a4CC3Ag1jYVQX8WzQaB",
       "flags": [
         "lowalch1"
       ]
@@ -4049,9 +4049,9 @@
       "uri": "http://localhost:8888/bridge/token/bones.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "3MgQ9rYHmsAz7AVce6WEL6Y2TebviS8XpKjvWYuq67ae",
+      "pool": "CBG4GQFo47XA2GcRcoKAGp4bYdyzax6CTJRszvKUKmWH",
+      "position": "DMh5qRQKC4tEyQQNw8qi97yNozuP1zoBjxcAmpg1f85D",
       "flags": [
         "lowalch1",
         "defaultcost"
@@ -4426,9 +4426,9 @@
       "uri": "http://localhost:8888/bridge/token/bronze_arrow.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "3SSNMBPRZhy9gyDA3SaLYsEaUt7LDijbqkBPAL8G5oQ1",
+      "pool": "CfXK5SoCnmLS9Twn5t9ehGVFsSL2TUc8B5X5HJVUxHiB",
+      "position": "9f7iEtnhBws4gczRv2Vn1axkWM4Q3pFUZ8o1Kc2dnUWW",
       "flags": [
         "lowalch1"
       ]
@@ -4500,9 +4500,9 @@
       "uri": "http://localhost:8888/bridge/token/bronze_bar.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "E4XBeUFXtVjEp3v5NSifSx5x3cQPBxxsXZ85RQ2ZhTE1",
+      "pool": "9FUHKSrFFPk7UfVHFpsQXyfup4A3nzqGCUaiyGMU8kcp",
+      "position": "Bf5ph8Rdcc4NC7QuHZHmdYb6rxp3CnYtGfbmRg8vmSgj",
       "flags": []
     },
     "bronze_battleaxe": {
@@ -5912,9 +5912,9 @@
       "uri": "http://localhost:8888/bridge/token/chaosrune.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "39xoNeRFaCcdKmSD7Zr7d3EG1Dsvpy2xq1sWnPU3NPN9",
+      "pool": "5gMbNNsMgRgkiihpnbgtcYcSdEfMMyh9kWvaNAU8BNia",
+      "position": "6KvrJHgGt1ewY9WpzWynTHoSSnVD9yNAxzv6BfjXeDd6",
       "flags": []
     },
     "charcoal": {
@@ -6444,9 +6444,9 @@
       "uri": "http://localhost:8888/bridge/token/copper_ore.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "ADswMoLqbD7wAwcTS81pnPn6PQTuqZthKo3V2asfgoJX",
+      "pool": "2BtPsLqsL5h8DtvRbBzkT8KkRETBME1aFvQPaMiKmRGg",
+      "position": "DDLs7FfT3SQZBiDUwL25D75ugLXP45RkMQcxC1QfKV6e",
       "flags": [
         "lowalch1"
       ]
@@ -6482,9 +6482,9 @@
       "uri": "http://localhost:8888/bridge/token/cosmicrune.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "DRhmMQejC5HujgN9bxceAJtom2r2nNaeG2vs98myV2CD",
+      "pool": "AS72nQfVojczbCYYTNSLUtLQ6wb1mfgSLo3SLngJQ1gn",
+      "position": "9Z9pPCQ39jktYq1w379BbRmLUerbWKVgFFiAQBJTCos",
       "flags": []
     },
     "cow_hide": {
@@ -6499,9 +6499,9 @@
       "uri": "http://localhost:8888/bridge/token/cow_hide.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "GSxLDm7kEJpMX6NeBSJ2zwKep3jjiK4ABeen35fXvZfj",
+      "pool": "2hwG82en7RQotoPWVa8dZjpQh2Kdifc55sXKpVRjohWY",
+      "position": "3BadKAAPnG1J25aSXQZRmodJfVmCoa3Wu49JTF755XfN",
       "flags": [
         "lowalch1",
         "defaultcost"
@@ -6681,9 +6681,9 @@
       "uri": "http://localhost:8888/bridge/token/deathrune.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "pTB765gnkmGnDDnhrz6qStaXWqFmidXWcgiMJkcqDyt",
+      "pool": "5xopGgPsumw8g4JA2szuYvHFkB7XntUKG5NRFCR24MnU",
+      "position": "A88ryRAYgJv11dVAKgMdYTj84Y1JFteS2RZ7Z9unNU1p",
       "flags": []
     },
     "desert_boots": {
@@ -6749,9 +6749,9 @@
       "uri": "http://localhost:8888/bridge/token/diamond.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "9gEUpjmZhw8kYno6wwKaF3k3wQnRQg1hSdq9C7KtXk15",
+      "pool": "893YStRwCtPyvzVWJ5v1G77HoX6HLbMXTW8tihdLM9VW",
+      "position": "49tsEBipKp6pvctpkXz1vwKHJUETjSTWSJZAsivxxetQ",
       "flags": []
     },
     "diamond_necklace": {
@@ -6872,9 +6872,9 @@
       "uri": "http://localhost:8888/bridge/token/dragon_bones.json",
       "stackable": false,
       "members": true,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "DXRAceSzTzTdpHfgGiBNMBkJMpGnxPhiPorVYkzmqHwD",
+      "pool": "DM8WPEkBPTaDLLFKf8B7Qe7syFtEUafY5gg7nmsDGmtu",
+      "position": "4X2bpHg5KvgzqcRkE3WmH59QGQU5JorB69AW7DXCgSSo",
       "flags": [
         "lowalch1",
         "defaultcost"
@@ -7527,9 +7527,9 @@
       "uri": "http://localhost:8888/bridge/token/earthrune.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "FL9gE1kxa5DqNkryc8eo5gtAEsG1ApXwNH9tMS3iqAie",
+      "pool": "Aev7WYXL4pwdrZEsH1G3YSEYbPxQKhLb7TUPtwD96Gan",
+      "position": "2auy93GKPXiKeDWFtms1YYWMvKfHZHwdgupy8X6xAYFx",
       "flags": [
         "lowalch1"
       ]
@@ -7638,9 +7638,9 @@
       "uri": "http://localhost:8888/bridge/token/emerald.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "2jkiFztZDqHQofYTR7AUNhXvVF9TzkuXC57LXmR5hefn",
+      "pool": "8tBqevo3LvfLgj4PDSW4Rt35qcAsSM2CkeSNRU1jSqsU",
+      "position": "HQkvVnn2aUJNbzXxeR4dNLf5JirX2jT7EtUVtfu2gqLU",
       "flags": []
     },
     "emerald_necklace": {
@@ -8885,9 +8885,9 @@
       "uri": "http://localhost:8888/bridge/token/gold_bar.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "3JgtWpkk2xsKFSoevaR1WFsyz2NZsGfzXKLLtBaiUejY",
+      "pool": "JAq5i3oXeQ5iK41HgoJocqLUGKRi5oosxrvchdkQZYRW",
+      "position": "HwUrPLAZu5bH83wzsGztkjK77DDMv2PuM4ziMB2BJQgB",
       "flags": []
     },
     "gold_necklace": {
@@ -9559,9 +9559,9 @@
       "uri": "http://localhost:8888/bridge/token/herring.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "CR4AbpzPpFa1gKdGDzpZFQQ8MbsQff6nR7jBJ7qYtPcX",
+      "pool": "GduZp7eyyG8vRwudPm1B8oDMBPJzvvvCb3FTVYVM36fr",
+      "position": "8FgaRt6dFrCQhxGTKz7MxfeqEHVMQszTJgCR2iT6Bghd",
       "flags": []
     },
     "highwayman_mask": {
@@ -10026,9 +10026,9 @@
       "uri": "http://localhost:8888/bridge/token/iron_arrow.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "39yGBwNGaLT7Pp1wK9ZZXUpLCWYmxM8U6nJxwQyGweWw",
+      "pool": "4BQNopp9rFM1Jp8mvo7o8UWv6PszPzkkBJxhN8eppzY1",
+      "position": "ANd1mgxMy9ZUZesJVT9oqcB9t6rpNFUW7YyFJduvZfZo",
       "flags": [
         "lowalch1"
       ]
@@ -12329,9 +12329,9 @@
       "uri": "http://localhost:8888/bridge/token/magic_logs.json",
       "stackable": false,
       "members": true,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "BcYsZifDxtWNHS5DESWLhixpqKgkk15yp1BMRBurJb1m",
+      "pool": "3Qiq4cbkUpJhffQWRQFC9Nky4j7cJLJY82VdtdnWPg8b",
+      "position": "4PQHYxFuXLjLAVjd7wFqfHRUVKVT5vAwqudqfrkCQThK",
       "flags": []
     },
     "magic_logs_pyre": {
@@ -12431,9 +12431,9 @@
       "uri": "http://localhost:8888/bridge/token/maple_logs.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "522cTeCCoL1K8qiSkBDBq1T1AHZsLvTdKdHVY2Rf2bXN",
+      "pool": "8SkQ4C83wA1CLsS53Qvj4j8P4C3MbrL9g765g8w1eXc4",
+      "position": "9xwAFTMnNJauer5nKuaZtG8UinLJsaPTrUjNjZtxcKbM",
       "flags": []
     },
     "maple_logs_pyre": {
@@ -12603,9 +12603,9 @@
       "uri": "http://localhost:8888/bridge/token/mindrune.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "BrXwFdf1RbPSwTL2AoBjGNikY7oXj9sq1LFmbTT4nmum",
+      "pool": "3jJzEc6AzR2xTjHeJEKZBBGT42Ekz8n7rMETM9YJDSyp",
+      "position": "EtG3nai6YzLMgrPejt3T2vhaWhsxSBwaAXs8P471wxjG",
       "flags": [
         "lowalch1"
       ]
@@ -12659,9 +12659,9 @@
       "uri": "http://localhost:8888/bridge/token/mithril_arrow.json",
       "stackable": true,
       "members": true,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "37GMvLv4i9Ct19R9FwYYQLPH7ZM3KDygkXGuVMosY4Qg",
+      "pool": "FWJZxbKvHp4hTUFvP5u4pMDB3k31HvyX6Aepufz1aWto",
+      "position": "43xVFLLkYzdvN5i7iaUaXcQaqxjtmPNAvYqKt1eDj7gn",
       "flags": []
     },
     "mithril_arrow_p": {
@@ -12727,9 +12727,9 @@
       "uri": "http://localhost:8888/bridge/token/mithril_bar.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "Gq5fjVd8xtKoiSvRkzU3VuB9jMSsVET3dxMVfDJ71rDM",
+      "pool": "EkAGTYKF1t6L61Yuu5ciZN6DaKTcqBLRLaggX1MLwVar",
+      "position": "PgPCDZbVYNyhKxQVU8Y2gomeyZURoX92AhdXdeCnQJ7",
       "flags": []
     },
     "mithril_battleaxe": {
@@ -13067,9 +13067,9 @@
       "uri": "http://localhost:8888/bridge/token/mithril_ore.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "777Pf9spdU7Yb5wjxuSsEsZvo1gQ4XMUpRhiZ6qWYy5G",
+      "pool": "E1i7pUnDefQkGvFGtrxmfEMboXmF4NznbFToJRziCqNw",
+      "position": "CHCW75pGZ5NtsBFWGxqHYafx4Y1Kb95v2jEyunL3AKA4",
       "flags": []
     },
     "mithril_pickaxe": {
@@ -15574,9 +15574,9 @@
       "uri": "http://localhost:8888/bridge/token/raw_anchovies.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "EbUPeDGniKnUYDByWvoubvh31EJf3QJPmwFSE4XBLCcM",
+      "pool": "AnQijk8jckf881mNd69K868ozX5jrX4YuKGWxCY28L9u",
+      "position": "4Tc4qMCPd3ofpSHzf6q4LLbJJXvDyW94xnpqxNHfZ5NX",
       "flags": []
     },
     "raw_bass": {
@@ -15699,9 +15699,9 @@
       "uri": "http://localhost:8888/bridge/token/raw_herring.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "BUSsedCpF2bZ99LdKvpPFggU1hDoqWbwEzSwto7L2aim",
+      "pool": "Ds8hpAGtZ3RVVRqabnBrDN6bvQXKRouMrZg2Pj2Q96y8",
+      "position": "7AP2XhugagWrnvPwVeLgvJsWppkHTzZ8Rwm6hUwvWZUJ",
       "flags": []
     },
     "raw_lobster": {
@@ -15839,9 +15839,9 @@
       "uri": "http://localhost:8888/bridge/token/raw_salmon.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "FYbqGwCaUxKsCm3SMMQ1Gwknjmj9J4H2XXsUAgfrmn6B",
+      "pool": "JQk9F1cFyiMxMEVAumiMJZ8KMSDH1JDuEMBoDDiAfwG",
+      "position": "FspUvCCNHCoxusXQcLR9nVXrbhhbnGMr7hhh5BLX3ETf",
       "flags": []
     },
     "raw_sardine": {
@@ -15856,9 +15856,9 @@
       "uri": "http://localhost:8888/bridge/token/raw_sardine.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "2MM3PSe8F5NB6aZJ5S8f3VNVUCxceNrrKGEckAaRvX7b",
+      "pool": "7MHa6FVBozfQ71f9SZXRbCLc2tf6uoau9q4B2LSSfB5F",
+      "position": "CBwRKEu3L4jXCHNQh9369MU2v4YxwEdicSN8WsUFHnsc",
       "flags": []
     },
     "raw_seaturtle": {
@@ -15890,9 +15890,9 @@
       "uri": "http://localhost:8888/bridge/token/raw_shark.json",
       "stackable": false,
       "members": true,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "Doh4f5GrCzKqoxVxQbKQ7ZKJsd29YgKixVb51bNDaEGK",
+      "pool": "6oGRW9mmuniFiBsUiCyqZgnsGBM76tykuUJP14TmghxY",
+      "position": "9Bwu6SheDfe1pfRNwzzCcWHSwceSh6S2emgbV7KPiPxW",
       "flags": []
     },
     "raw_shrimp": {
@@ -15924,9 +15924,9 @@
       "uri": "http://localhost:8888/bridge/token/raw_swordfish.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "BahEn7s2pbkG65kWeUW3LVmEC1iQz7UrKZHbKn3w22Ns",
+      "pool": "8nnoJ2wQADsxKVgWiJ9Gqqqh9WdjMsM4anNyNBUpcCHG",
+      "position": "Cd3FVkkmregT7SLv2Stu6oFviKrCw5MWwqueMfvVSaX8",
       "flags": []
     },
     "raw_trout": {
@@ -15941,9 +15941,9 @@
       "uri": "http://localhost:8888/bridge/token/raw_trout.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "Cjpt1cUkcn54xs3BM6dY4ndX4s1gaeng3qRZfGMEB9ft",
+      "pool": "5cDWzg4dnShwYKEf1SjbQzAqxPV668qYauBAY2HPmjE5",
+      "position": "GgxZBWGCJeHMArhdPC7AwETKQVcvCs5utqv7nfKY4eWi",
       "flags": []
     },
     "raw_tuna": {
@@ -15958,9 +15958,9 @@
       "uri": "http://localhost:8888/bridge/token/raw_tuna.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "89cQYzjNKzVkzJbGfLd5bvPLbq4fuUVwMPDkJmvhPDk",
+      "pool": "2C1GVDzjZGKr29Yk1Q9ji5vPEpi4UXgKb2ZxbPoyiyRX",
+      "position": "7xk2GoyLmcCF8PjiZ6auggQsE9Au59FdJZwDNHzEsGDg",
       "flags": []
     },
     "raw_ugthanki_meat": {
@@ -16561,9 +16561,9 @@
       "uri": "http://localhost:8888/bridge/token/ruby.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "6xqGbZjfK6NZX546jaVEpkY7MvNvjYKGZnA9RMQsCVas",
+      "pool": "2D7dY6d7e5WrAPe1daTkAG2UCTgKM2k75EvkhT4dK7kW",
+      "position": "3rMSoPk2TnMan1AQACVNPQR9oJT4XsdzekNVHM5G1Swa",
       "flags": []
     },
     "ruby_necklace": {
@@ -16632,9 +16632,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_2h_sword.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "9GSfgEef8sncANKAf4QpuYXqatMB9QuCP6YTsa1L2Gku",
+      "pool": "i5cZNhsWPJVwtBtDYwb8V8X3JeBFYsj5tJPNKDQER3n",
+      "position": "FpGcXPfmVNc3Jv6ExP8wn5fAgECpeabMRzDxdUHcYcKx",
       "flags": []
     },
     "rune_arrow": {
@@ -16649,9 +16649,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_arrow.json",
       "stackable": true,
       "members": true,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "GHFXoeCTST1bSmLKzqiZ5GSgta5veCrrBTPhwVGGhE5k",
+      "pool": "Bxguh12saqBBY3ZfYmpwDwPEhNfbaS31S5zhmhZhyAu1",
+      "position": "E7nHH4E828gfvF7CtDnwLcMUYoTU7EJByEF4U2qKrREW",
       "flags": []
     },
     "rune_arrow_p": {
@@ -16700,9 +16700,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_axe.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "9BYWFyHmvV4XdULXVt6qLqFqqkFmUH8PAqnBvNdyxx3P",
+      "pool": "9cPkuTaD6u8neNbBU4No1VaLxgHvm9yYYtwgmVhXKto5",
+      "position": "6hqBGVpiyZXTqt4sgJEXnz3vDkFqbUkN6jEEv1EaMd3k",
       "flags": []
     },
     "rune_battleaxe": {
@@ -16717,9 +16717,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_battleaxe.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "Bmh6BA37x4HRoxGAhiQcpRiNJbAi9LA5LgFLmodM7AkJ",
+      "pool": "5o8ZcaxaNd2WZmdR63MhVF3PZWy3whFNr8jkvQeLe63U",
+      "position": "EZMDhYkW2vVTpAzifWd93Tnw1wmotoRMtLm5s2qNTeyS",
       "flags": []
     },
     "rune_chainbody": {
@@ -16734,9 +16734,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_chainbody.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "Eutb8omRTmqFe6XErMDX75MYuAMknRp7iU9WFNrQ5F73",
+      "pool": "HMCRZsE9hyZM6GNB9izzdX5TH3orD4hwob51ChKdrxyz",
+      "position": "AGE1UH8EXU5cDPSBUBdPdQHSziwDVdHgb8uyw413nQue",
       "flags": []
     },
     "rune_claws": {
@@ -16768,9 +16768,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_dagger.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "3tB1DhS2bu5DzfzWgdsV2J5HHxKCaxcGGqg8Z7vqvkAX",
+      "pool": "HqacfvPfPYGxtgpyFp43nsJt8kQq861NAJHLohxKhFAb",
+      "position": "2pp3A5o329Cd3zdV7HApVGSzeLuJUEAthoQvTBCP6QiX",
       "flags": []
     },
     "rune_dagger_p": {
@@ -16853,9 +16853,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_full_helm.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "14j2ZFRu35G4qcboeMcA7UctNSUe8m34TyRVSH7gc6Ce",
+      "pool": "9iB2sUuSw2dCCouibTD1d28Jy6nFvSy8GAjoPREVQbti",
+      "position": "FntyeMVoT1xvG2z4Z1uKVLxix7cuFUQmFppH1HrWkDMj",
       "flags": []
     },
     "rune_full_helm_gold": {
@@ -17023,9 +17023,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_kiteshield.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "9pVKDzZ3Z8hkskKyjgg1wiYwFyRBXBoVwcTBAnMzWAE9",
+      "pool": "BHHuoXzq2vGSfn6szXKt3gi9J4iRU7YjRaDa2WgKTPUu",
+      "position": "FygWnaCVEtt1TFDtK9cmDowcfc6w95z66dhKvpjvSzRW",
       "flags": []
     },
     "rune_kiteshield_gold": {
@@ -17193,9 +17193,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_longsword.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "DuBnnrLtrv1rCXigNHgy5tqZupQ8wVG4uqqruB3Mk7dp",
+      "pool": "2T3RwniRnndtTRnf8Ah4ZHCWB25K3vBJcNA4qgRubsLc",
+      "position": "EixZb9NhoLcyv6jQfvBLJX1BNSRdXTgv5HN5GtenUQGo",
       "flags": []
     },
     "rune_mace": {
@@ -17210,9 +17210,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_mace.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "3sFuFiPrEzrcU172sghFiMv4rxjzt63qFagx8jeS95HV",
+      "pool": "HXam4mAjJum4Ux6WELZUYE6NvLhrGa5Noj62whU23AFr",
+      "position": "6WVMM7aY7fxuqZrP82iDETXCpFGMuBjF29YgdKVdMKJy",
       "flags": []
     },
     "rune_med_helm": {
@@ -17227,9 +17227,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_med_helm.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "HWKLDwS3ggN8YcNUrFMkj7BczWaWXHFshEZa8cd4aDz",
+      "pool": "9JyfUeU7Zasofn43Ds8z3EoQy7oH5BnpaeDgmm4crJiF",
+      "position": "HjofcsQgyJDyxiTcH9K34py9FThE1qCPj6LC3vpMkWRf",
       "flags": []
     },
     "rune_pickaxe": {
@@ -17244,9 +17244,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_pickaxe.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "9p6RSr3M8HzK1yxosb1KRvTwhQfRuFuuxj3DcZGyZEaa",
+      "pool": "H3EXAot8hVzX8hbSq9EZfJnd8LdfsEMCpQG7HqYJtAgT",
+      "position": "65uZiNMYChzcb5xd6vmDbDB8b2BZzcGoTbUfRBFWuYpQ",
       "flags": []
     },
     "rune_platebody": {
@@ -17380,9 +17380,9 @@
       "uri": "http://localhost:8888/bridge/token/rune_platelegs.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "6YvMbYa3kr8B9WBCETsMhTf3E5x2edwtRdEGQBJLLrir",
+      "pool": "3poC7FKb4QhHdgvzsULFJVkGcco8cgx2DprXdE7ZGWLX",
+      "position": "29RQcCwivjhKZyKeTrBgc87ewnBGzckEzuqTqroGiM9n",
       "flags": []
     },
     "rune_platelegs_gold": {
@@ -17756,9 +17756,9 @@
       "uri": "http://localhost:8888/bridge/token/runite_bar.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "H95zLKYA38tMaXSxh3BeWp1PEuq87DDiLh85KAZ9mbZG",
+      "pool": "Ds2fu7qH3nkzWLXQoia2LY6muKY5LiZvLurmGagSa1Xk",
+      "position": "GC47gFEU7Xsq3RdEqc5MZWd3G44wqwLxyn5xNJwxTnYd",
       "flags": []
     },
     "runite_ore": {
@@ -17773,9 +17773,9 @@
       "uri": "http://localhost:8888/bridge/token/runite_ore.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "8WseSVSsPFvTXg1kECdgXixRY8AHRZmMQo6tZ4A4ixzf",
+      "pool": "6uDDjtB9wMn1FvKRjVAmBz7Kdr75LR78BX4WYaEhFp4H",
+      "position": "HagaZWtbNewkC3Y5WwwNW8pUmMdv51Z7aCXTvhLm89D1",
       "flags": []
     },
     "sacred_oil1": {
@@ -17858,9 +17858,9 @@
       "uri": "http://localhost:8888/bridge/token/salmon.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "HQ8BUVkknyPRkLw9e8bRdGHVXM7H7Kv55NS271invQc",
+      "pool": "5ppk5Lpjog9VACBS9aRkkcW5NZ42nyw4toQMPSAZy6ou",
+      "position": "Gk4wU4zyj4bvWiPiHzKsbqzvYcG5AbmVw8XafRZuWQGH",
       "flags": []
     },
     "santa_hat": {
@@ -17892,9 +17892,9 @@
       "uri": "http://localhost:8888/bridge/token/sapphire.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "8ibAxxvRUd9bT8uw8tH4C64biyrphVJapPMMgz5SVh2K",
+      "pool": "CzW8nu8Yvr3VDQkVNhPpudf7CTvXgArWSnKn8u7ZbDoU",
+      "position": "HNU1yH9mdFyfq285FLezRsJo7Z5eXjGqzw6XqtoQtrng",
       "flags": []
     },
     "sapphire_necklace": {
@@ -17943,9 +17943,9 @@
       "uri": "http://localhost:8888/bridge/token/sardine.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "5MGzqzuiSs3b7TLt5TSbk9aHpt7aVkPVYyh2aySazLsa",
+      "pool": "CSpJTAwJRAq5t1cPdqVqUV9RtdsHLMJhQkiGuM8jW1uE",
+      "position": "JAfbSJ8DQ3zXLG4E1aiNocRBKNSud8AtTvQ9SkZXwRy6",
       "flags": []
     },
     "seasoned_sardine": {
@@ -18166,9 +18166,9 @@
       "uri": "http://localhost:8888/bridge/token/shark.json",
       "stackable": false,
       "members": true,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "EV52bQYUf81wXNBgn3ncCpMeF5usYgZ9FadbrSaVMDqB",
+      "pool": "Ay7Arq6d8FWwjQ3SXWMGTahTawCisWuArMTMmsceHrg9",
+      "position": "5Tf4jDbUf1T3tb6PMQTCjwK9B4teRmqGEjmH86zTLrkN",
       "flags": []
     },
     "shears": {
@@ -18441,9 +18441,9 @@
       "uri": "http://localhost:8888/bridge/token/silver_bar.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "mFtEyk5cH9LnAMJkkD4daA8Y9jDwv3AgtwMMcH2vU1v",
+      "pool": "D44fAhMMxJKmhr67SE86X6ZJ37k4AoqNEGMSNJ6xpLo4",
+      "position": "2RWAoksc11KwXrE7DRP8H5LJrFhTPUeJbHGSAxLmAuSz",
       "flags": []
     },
     "silver_ore": {
@@ -18458,9 +18458,9 @@
       "uri": "http://localhost:8888/bridge/token/silver_ore.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "CjJH79JrHL11K3HXCwqZznFrJ5Vmv6YMDa1zXGWmZ9bE",
+      "pool": "DAMakSRoVjTsnrdpAHvupSVtjMLaeHkLpKmFops13HZq",
+      "position": "BJvKuth5xoTc8ocqRwaDTcF342vyo7YxCTGqRiAmBVvu",
       "flags": []
     },
     "silver_sickle": {
@@ -19380,9 +19380,9 @@
       "uri": "http://localhost:8888/bridge/token/steel_arrow.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "73rwjbLUiPQmNsnt9AKgrNeteAV5C4SmoH9qsvzm1VN",
+      "pool": "DLLHgACrNrDGUKv8ncPG4KEudb9kC2C4h6no6qoFk7n8",
+      "position": "DfuVkg2UyuLZZzL2iBrWht42gPPmeiTXZQmwyypwZYhv",
       "flags": []
     },
     "steel_arrow_p": {
@@ -20559,9 +20559,9 @@
       "uri": "http://localhost:8888/bridge/token/tin_ore.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "3FXrLJYw7SqP9Akfi5ZbuWcH2ykRjkWJsco47RPwsFN3",
+      "pool": "6wcLY8QMT96TvrAYVM78WxguLb9DQyt7SAPEaQCJudFQ",
+      "position": "GVE3Ck9GWGwfJTUauy8U2YTWAWXcpQgpQB8MAW13rsdc",
       "flags": [
         "lowalch1"
       ]
@@ -20780,9 +20780,9 @@
       "uri": "http://localhost:8888/bridge/token/trout.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "Qr8zKJ5iSs9yc5ET1eXiK8pasu22WkQqzL2NsHUeKYx",
+      "pool": "3vtbb9TATM4spnasMCHmN8VXZNhoRcJW2UT1rXuxSupT",
+      "position": "CfbSB6WnQWdgiSYouUGfNbokzVdBpGYmZT8Kyn8zTu5N",
       "flags": []
     },
     "tuna": {
@@ -20797,9 +20797,9 @@
       "uri": "http://localhost:8888/bridge/token/tuna.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "349eD8uv3N8Y4pAapY8aq26KMCnEtMiEwSQPQDaaUzJZ",
+      "pool": "BY1zxg2wroXid59pnWyTFbmhM3dn9Aohj4Ez5GJELYkN",
+      "position": "CsEKfrQoFqKY21oDfLHCFqFvjzNRi2SViJLsRTPh1nKD",
       "flags": []
     },
     "twpart1": {
@@ -21054,9 +21054,9 @@
       "uri": "http://localhost:8888/bridge/token/uncut_diamond.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "BRtDaLwHfyU79rjyz3pYjAmKP6dBJ9NP3ee4YNUmWYDo",
+      "pool": "5tKwDXd6XM2V22yFhqyhg6fHT9a23Ky716Ghb8mMsZt5",
+      "position": "GdBimU48uDy4M9r55yXLdEC28diii94B72XtYbVLpM8M",
       "flags": []
     },
     "uncut_dragonstone": {
@@ -21088,9 +21088,9 @@
       "uri": "http://localhost:8888/bridge/token/uncut_emerald.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "GDFXkhk8t31RWELUR4WJLydZ3S9YiGDP1rq1grxzpZVo",
+      "pool": "4ZriyZbKm8FHuLeZdP5yfdRjVAwSJHg3FPfwa3URW4jc",
+      "position": "hv17oHpYUYSEGydrciVxspDzsnrn1QfGZh3GgJohRUN",
       "flags": []
     },
     "uncut_jade": {
@@ -21156,9 +21156,9 @@
       "uri": "http://localhost:8888/bridge/token/uncut_ruby.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "AmWXyvdLNDiakz6LXUniqVp8gKM45R947qgQn93f3dFm",
+      "pool": "2fSYFNXWzEMJ2Hr72y4apMZ1tucNyH5c6EZzqrzEW1c4",
+      "position": "DuDuR11eEZBn9bKWtszaPrvLwXajNYnaF1Cw7NP3YL1K",
       "flags": []
     },
     "uncut_sapphire": {
@@ -21173,9 +21173,9 @@
       "uri": "http://localhost:8888/bridge/token/uncut_sapphire.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "7J6q4Etfhr8kytztNZKwQeC8ML42AnriTBk7GuHdKNXS",
+      "pool": "7CyfK8gKp2MrZ5gKaZ453ozyqz1kTMwqaZ9nNdzyvUe7",
+      "position": "3SehAZmsfesLRu5cZBUACDquF52kycK16rkC85wWEvLR",
       "flags": []
     },
     "unfinished_blurberry_special1": {
@@ -23199,9 +23199,9 @@
       "uri": "http://localhost:8888/bridge/token/waterrune.json",
       "stackable": true,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "2mrqAn5uUEVEaNwgQ3ADz2cR6j9s3zqbmHBKZxjgVmyC",
+      "pool": "8t4YtDAPgyDjPSgVduAoWtJJS9K3WEsUckehar1y1dqg",
+      "position": "7Cb3ZvXntFt4nxZ7eoJnB9mLehpBdZgyGUXys4xqnVHX",
       "flags": [
         "lowalch1"
       ]
@@ -23344,9 +23344,9 @@
       "uri": "http://localhost:8888/bridge/token/willow_logs.json",
       "stackable": false,
       "members": false,
-      "mint": null,
-      "pool": null,
-      "position": null,
+      "mint": "F2aEr4KQoExqySnHZT5y1dtAu2aJ5D3BvFyTxzZPG6T",
+      "pool": "6ifa1dKE5qc9dRt4U5kP228ajLMYJmcTmkMhy8RqDBwX",
+      "position": "5kFq2Fp2EPymFUSEgQ5xaQQPSbXU5XsqhKFo5AqzcdiQ",
       "flags": []
     },
     "willow_logs_pyre": {
