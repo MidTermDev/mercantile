@@ -27,6 +27,7 @@ import { PlayerStat, PlayerStatEnabled, PlayerStatMap } from '#/engine/entity/Pl
 import ScriptProvider from '#/engine/script/ScriptProvider.js';
 import ScriptRunner from '#/engine/script/ScriptRunner.js';
 
+import { BridgeService } from '#/engine/bridge/BridgeService.js';
 import ClientGameMessageHandler from '#/network/game/client/ClientGameMessageHandler.js';
 import ClientCheat from '#/network/game/client/model/ClientCheat.js';
 
@@ -52,6 +53,24 @@ export default class ClientCheatHandler extends ClientGameMessageHandler<ClientC
 
         if (player.staffModLevel >= 2) {
             player.addSessionLog(LoggerEventType.MODERATOR, 'Ran cheat', cheat);
+        }
+
+        // rs-sdk bridge: ungated player command (any staff level, prod or dev).
+        // Args are re-split from the raw input — the lowercased `args` above would
+        // corrupt a case-sensitive base58 wallet address.
+        if (cmd === 'linkwallet') {
+            const rawArgs: string[] = cheat.split(' ').slice(1);
+            const boundAddress = rawArgs[0]?.trim() || undefined;
+            if (boundAddress && !/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(boundAddress)) {
+                player.messageGame('That does not look like a Solana address.');
+                return true;
+            }
+
+            const code = BridgeService.issueLinkCode(player, boundAddress);
+            player.messageGame(`Wallet link code: @gre@${code}@bla@ (valid 10 minutes)`);
+            player.messageGame('Visit /bridge/link on the server website, or run:');
+            player.messageGame(`bun chain/cli/link-wallet.ts ${player.username} ${code}`);
+            return true;
         }
 
         if (!Environment.node.production && player.staffModLevel >= 4) {

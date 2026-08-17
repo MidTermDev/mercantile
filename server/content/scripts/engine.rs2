@@ -1061,3 +1061,20 @@
 
 // info: Return true if the world has random events enabled
 [command,map_random_events]()(boolean)
+
+// rs-sdk bridge ops (see server/PATCHES.md)
+// info: queue a withdraw of the active player's items/gp to their linked wallet.
+// returns: 0=queued, 1=no wallet linked, 2=not bridgeable, 3=request in flight, 4=bad count, 5=exchange closed
+[command,bridge_withdraw](obj $obj, int $count)(int)
+// info: internal - called by [queue,bridge_debit] after inv_del + watermark varp
+[command,bridge_debit_ack](int $id, boolean $ok)
+// info: begin claiming the oldest pending deposit. returns total claimable (0 = none)
+[command,bridge_claim]()(int)
+// info: internal - called by [queue,bridge_credit] after inv_add + watermark varp
+[command,bridge_credit_ack](int $id, boolean $ok)
+// info: count of deposits waiting to be claimed
+[command,bridge_pending]()(int)
+// info: whether the active player has a verified wallet link
+[command,bridge_wallet_linked]()(boolean)
+// info: issue a one-time wallet-link code (10 min TTL)
+[command,bridge_link_code]()(string)

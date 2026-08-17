@@ -71,8 +71,11 @@ export class FriendServer {
     private socketByWorld: Record<number, WebSocket> = {};
 
     constructor() {
-        this.server = new WebSocketServer({ port: Environment.friend.port, host: '0.0.0.0' }, () => {
-            printInfo(`Friend server listening on port ${Environment.friend.port}`);
+        // rs-sdk: bind loopback by default — the RELAY_* channel is unauthenticated
+        // remote control (see server/PATCHES.md). Set FRIEND_HOST=0.0.0.0 only if
+        // worlds connect from other hosts.
+        this.server = new WebSocketServer({ port: Environment.friend.port, host: Environment.FRIEND_HOST }, () => {
+            printInfo(`Friend server listening on ${Environment.FRIEND_HOST}:${Environment.friend.port}`);
         });
 
         this.server.on('connection', (socket: WebSocket) => {

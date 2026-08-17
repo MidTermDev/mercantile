@@ -136,6 +136,36 @@ async function handleRequests(parentPort: ParentPort, msg: any) {
             }
             break;
         }
+        // rs-sdk bridge: like player_autosave but acked, so the caller can prove
+        // the save reached disk (see server/PATCHES.md)
+        case 'player_save_sync': {
+            const { username, save, requestId } = msg;
+
+            let success = false;
+            if (Environment.login.enabled) {
+                success = await client.playerSaveSync(username, save);
+            } else {
+                try {
+                    const profile = Environment.node.profile;
+                    if (!fs.existsSync(`data/players/${profile}`)) {
+                        fs.mkdirSync(`data/players/${profile}`, { recursive: true });
+                    }
+
+                    fs.writeFileSync(`data/players/${profile}/${username}.sav`, save);
+                    success = true;
+                } catch (_err) {
+                    success = false;
+                }
+            }
+
+            parentPort.postMessage({
+                type: 'player_save_ack',
+                username,
+                requestId,
+                success
+            });
+            break;
+        }
         case 'player_force_logout': {
             if (Environment.login.enabled) {
                 const { username } = msg;

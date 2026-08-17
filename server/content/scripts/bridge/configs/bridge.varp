@@ -1,0 +1,10 @@
+// rs-sdk bridge watermark varps (see server/PATCHES.md).
+// Each stores the highest bridge_tx id this player has completed, per direction.
+// scope=perm: persisted in the .sav atomically with inventory — the exactly-once
+// protocol depends on that atomicity. Engine-side only, never transmitted.
+
+[bridge_debit_ack]
+scope=perm
+
+[bridge_credit_ack]
+scope=perm

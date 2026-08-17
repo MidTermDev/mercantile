@@ -254,3 +254,33 @@ model input_report {
 
     data Bytes
 }
+
+model account_wallet {
+    account_id Int      @id
+    address    String   @unique
+    linked_at  DateTime @default(now())
+    link_ip    String?
+}
+
+model bridge_tx {
+    id Int @id @default(autoincrement())
+
+    direction     String
+    account_id    Int
+    username      String
+    wallet        String
+    obj_debugname String
+    obj_id        Int
+    count         Int
+    state         String
+
+    sig               String? @unique
+    last_valid_height Int?
+    error             String?
+
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
+    @@index([state, direction])
+    @@index([account_id, state])
+}

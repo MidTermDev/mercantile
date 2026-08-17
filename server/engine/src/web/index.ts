@@ -6,6 +6,7 @@ import { handleHiscoresPage, handleHiscoresPlayerPage, handleHiscoresOutfitPage,
 import { handleViewerAssets } from './hiscoresServer.js';
 import { handleScreenshotsListPage, handleScreenshotFilePage } from './pages/screenshots.js';
 import { handleScreenshotUpload, handleExportCollisionApi } from './pages/api.js';
+import { handleBridge } from './pages/bridge.js';
 import { handleBugReport } from './pages/bug-report.js';
 import { handleDisclaimerPage, handleMapviewPage, handlePublicFiles } from './pages/static.js';
 import { WebSocketData, handleWebSocketUpgrade, handleGatewayEndpointGet, websocketHandlers } from './websocket.js';
@@ -35,6 +36,10 @@ export async function startWeb() {
             // SDK bug report index (GET) / submission (POST), no auth
             const bugReportResponse = await handleBugReport(req, url);
             if (bugReportResponse) return bugReportResponse;
+
+            // rs-sdk bridge: wallet linking, token metadata, deposit notify proxy
+            const bridgeResponse = await handleBridge(req, url);
+            if (bridgeResponse) return bridgeResponse;
 
             // Engine status endpoint
             if (url.pathname === '/engine-status' || url.pathname === '/engine-status/') {

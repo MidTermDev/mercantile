@@ -51,5 +51,17 @@ export default {
     NODE_TICKRATE: tryParseInt(process.env.NODE_TICKRATE, 400),
     HISCORES_WEB_PORT: tryParseInt(process.env.HISCORES_WEB_PORT, 8889),
     HISCORES_HIDDEN_NAMES: (process.env.HISCORES_HIDDEN_NAMES || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean),
-    BANNED_USERNAME_WORDS: (process.env.BANNED_USERNAME_WORDS || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean)
+    BANNED_USERNAME_WORDS: (process.env.BANNED_USERNAME_WORDS || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean),
+
+    // rs-sdk bridge (on-chain exchange, see server/PATCHES.md and chain/README.md)
+    // Path to chain/registry/registry.json; empty/missing = exchange closed.
+    BRIDGE_REGISTRY_PATH: process.env.BRIDGE_REGISTRY_PATH || '',
+    // Shared secret for /bridge/status admin endpoint; empty = endpoint disabled.
+    BRIDGE_ADMIN_TOKEN: process.env.BRIDGE_ADMIN_TOKEN || '',
+    // Local port of the bridge daemon's deposit listener (loopback only).
+    BRIDGE_DAEMON_PORT: tryParseInt(process.env.BRIDGE_DAEMON_PORT, 7781),
+    // Friend server bind host. The friend server's RELAY_* channel is an
+    // unauthenticated remote-control surface — keep it loopback unless worlds
+    // connect from other hosts.
+    FRIEND_HOST: process.env.FRIEND_HOST || '127.0.0.1'
 };

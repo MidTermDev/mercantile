@@ -607,6 +607,30 @@ export default class LoginServer {
                         );
 
                         await updateHiscores(account, PlayerLoading.load(username, new Packet(raw), null), profile);
+                    } else if (type === 'player_save') {
+                        // rs-sdk bridge: player_autosave with a reply and no logout side
+                        // effects (see server/PATCHES.md). response 0 = written, 1 = rejected.
+                        const { replyTo, username, save } = msg;
+
+                        let response = 1;
+                        const raw = Buffer.from(save, 'base64');
+                        if (PlayerLoading.verify(new Packet(raw)) && !(await this.wouldResetSaveFile(raw, profile, username))) {
+                            if (!fs.existsSync(`data/players/${profile}`)) {
+                                await fsp.mkdir(`data/players/${profile}`, { recursive: true });
+                            }
+
+                            await fsp.writeFile(`data/players/${profile}/${username}.sav`, raw);
+                            response = 0;
+                        } else {
+                            console.error(username, 'Invalid save file (player_save)');
+                        }
+
+                        s.send(
+                            JSON.stringify({
+                                replyTo,
+                                response
+                            })
+                        );
                     } else if (type === 'player_autosave') {
                         const { username, save } = msg;
 

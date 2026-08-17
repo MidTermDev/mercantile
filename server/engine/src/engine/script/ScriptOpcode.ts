@@ -447,7 +447,16 @@ export const enum ScriptOpcode {
     ERROR,
     MAP_RANDOM_EVENTS,
     GETTIMESPENT, // custom: used to profile script execution (current duration)
-    TIMESPENT // custom: used to profile script execution (record start time)
+    TIMESPENT, // custom: used to profile script execution (record start time)
+
+    // rs-sdk bridge ops (10100-10199, see server/PATCHES.md)
+    BRIDGE_WITHDRAW = 10100,
+    BRIDGE_DEBIT_ACK,
+    BRIDGE_CLAIM,
+    BRIDGE_CREDIT_ACK,
+    BRIDGE_PENDING,
+    BRIDGE_WALLET_LINKED,
+    BRIDGE_LINK_CODE
 }
 
 export const ScriptOpcodeMap: Map<string, number> = new Map([
@@ -869,7 +878,15 @@ export const ScriptOpcodeMap: Map<string, number> = new Map([
     ['ERROR', ScriptOpcode.ERROR],
     ['MAP_RANDOM_EVENTS', ScriptOpcode.MAP_RANDOM_EVENTS],
     ['GETTIMESPENT', ScriptOpcode.GETTIMESPENT],
-    ['TIMESPENT', ScriptOpcode.TIMESPENT]
+    ['TIMESPENT', ScriptOpcode.TIMESPENT],
+
+    ['BRIDGE_WITHDRAW', ScriptOpcode.BRIDGE_WITHDRAW],
+    ['BRIDGE_DEBIT_ACK', ScriptOpcode.BRIDGE_DEBIT_ACK],
+    ['BRIDGE_CLAIM', ScriptOpcode.BRIDGE_CLAIM],
+    ['BRIDGE_CREDIT_ACK', ScriptOpcode.BRIDGE_CREDIT_ACK],
+    ['BRIDGE_PENDING', ScriptOpcode.BRIDGE_PENDING],
+    ['BRIDGE_WALLET_LINKED', ScriptOpcode.BRIDGE_WALLET_LINKED],
+    ['BRIDGE_LINK_CODE', ScriptOpcode.BRIDGE_LINK_CODE]
 ]);
 
 export const ScriptOpcodeNameMap: Map<number, string> = new Map(Array.from(ScriptOpcodeMap.entries()).map(([key, value]) => [value, key]));

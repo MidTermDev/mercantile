@@ -20,7 +20,15 @@ interface LogoutResponse {
     success: boolean;
 }
 
-export type GenericLoginThreadResponse = LoginResponse | LogoutResponse;
+// rs-sdk bridge: ack for player_save_sync (see server/PATCHES.md)
+interface SaveAckResponse {
+    type: string;
+    username: string;
+    requestId: number;
+    success: boolean;
+}
+
+export type GenericLoginThreadResponse = LoginResponse | LogoutResponse | SaveAckResponse;
 
 export function isPlayerLoginResponse(response: LoginResponse | LogoutResponse): response is LoginResponse {
     return response.type === 'player_login';

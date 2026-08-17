@@ -1,0 +1,106 @@
+// rs-sdk bridge: the Exchange Clerk moves items/GP between the game and their
+// on-chain tokens (see server/PATCHES.md, chain/README.md).
+//
+// Withdrawals never delete items here — bridge_withdraw() only queues a request;
+// the actual inv_del happens in [queue,bridge_debit] (bridge_queues.rs2) so the
+// engine can order it against a confirmed save.
+
+[opnpc1,exchange_clerk]
+~chatnpc("<p,happy>Welcome to the Gielinor Exchange. I can send your|goods to the blockchain, or hand over anything|you've deposited from it.");
+@bridge_menu;
+
+[opnpc3,exchange_clerk]
+@bridge_menu;
+
+[label,bridge_menu]
+def_int $pending = bridge_pending;
+switch_int(~p_choice4("Withdraw GP to my wallet.", 1, "Claim my deposits. (<tostring($pending)> waiting)", 2, "Link my Solana wallet.", 3, "Nothing right now, thanks.", 4)) {
+    case 1 : @bridge_withdraw_gp;
+    case 2 : @bridge_do_claim;
+    case 3 : @bridge_link;
+    case 4 :
+        ~chatplayer("<p,neutral>Nothing right now, thanks.");
+        ~chatnpc("<p,happy>Come back any time.");
+}
+
+[label,bridge_link]
+if (bridge_wallet_linked = true) {
+    ~chatnpc("<p,neutral>You already have a wallet linked. Linking a new one|will replace it.");
+}
+def_string $code = bridge_link_code;
+~mesbox("Your one-time wallet link code is: @gre@<$code>@bla@|It expires in 10 minutes.| |Visit @dbl@/bridge/link@bla@ on the server website and sign|with your wallet - or from the repo:|@dbl@bun chain/cli/link-wallet.ts <$code>@bla@");
+
+[label,bridge_withdraw_gp]
+if (bridge_wallet_linked = false) {
+    ~chatnpc("<p,neutral>You'll need to link a Solana wallet first.");
+    @bridge_link;
+}
+def_int $held = inv_total(inv, coins);
+if ($held = 0) {
+    ~chatnpc("<p,neutral>You don't seem to have any coins on you.");
+    return;
+}
+~chatnpc("<p,quiz>How many coins shall I send to your wallet?");
+p_countdialog;
+if (last_int <= 0) {
+    return;
+}
+def_int $amount = min(last_int, $held);
+switch_int(~p_choice2("Send <tostring($amount)> gp to my wallet.", 1, "Actually, nevermind.", 2)) {
+    case 2 : return;
+}
+@bridge_withdraw_result(bridge_withdraw(coins, $amount));
+
+[opnpcu,exchange_clerk]
+def_obj $base = oc_uncert(last_useitem);
+if (oc_tradeable($base) = false) {
+    ~chatnpc("<p,confused>I can only exchange tradeable goods, I'm afraid.");
+    return;
+}
+if (bridge_wallet_linked = false) {
+    ~chatnpc("<p,neutral>You'll need to link a Solana wallet first.");
+    @bridge_link;
+}
+def_obj $cert = oc_cert($base);
+def_int $held = inv_total(inv, $base);
+if ($cert ! $base) {
+    $held = calc($held + inv_total(inv, $cert));
+}
+~chatnpc("<p,quiz>How many shall I send to your wallet?");
+p_countdialog;
+if (last_int <= 0) {
+    return;
+}
+def_int $amount = min(last_int, $held);
+switch_int(~p_choice2("Send <tostring($amount)> x <oc_name($base)> to my wallet.", 1, "Actually, nevermind.", 2)) {
+    case 2 : return;
+}
+@bridge_withdraw_result(bridge_withdraw($base, $amount));
+
+[label,bridge_withdraw_result](int $result)
+if ($result = 0) {
+    ~chatnpc("<p,happy>Right away. You'll see it land in your wallet shortly.");
+} else if ($result = 1) {
+    ~chatnpc("<p,neutral>You'll need to link a Solana wallet first.");
+    @bridge_link;
+} else if ($result = 2) {
+    ~chatnpc("<p,confused>That's not something I can send on-chain, I'm afraid.");
+} else if ($result = 3) {
+    ~chatnpc("<p,neutral>I'm still working on your last request - give me a|moment.");
+} else if ($result = 5) {
+    ~chatnpc("<p,sad>The exchange is closed right now. Try again later.");
+} else {
+    ~chatnpc("<p,confused>Something's not right with that amount.");
+}
+
+[label,bridge_do_claim]
+def_int $pending = bridge_claim;
+if ($pending = 0) {
+    ~chatnpc("<p,neutral>There's nothing waiting for you at the moment.");
+    return;
+}
+if ($pending = 1) {
+    ~chatnpc("<p,happy>One delivery for you - here it comes.");
+} else {
+    ~chatnpc("<p,happy>You have <tostring($pending)> deliveries waiting. Here's the|first - come back for the rest.");
+}

@@ -109,6 +109,35 @@ survival) is described in the project memory; this file is the human-readable ch
       `handler/IfButtonHandler.ts` clears `resumeButtons` when a registered option resumes
       the script. Verify: `HEADLESS=true bun sdk/test/alkharid-gate-choice-resume.ts`.
 
+### Bridge (on-chain exchange — chain/README.md is the system doc)
+- [ ] **`src/engine/bridge/BridgeService.ts`** (wholly added) — game-side half of the
+      bridge_tx state machine: registry/wallet caches, link codes, per-player in-flight
+      serialization, save-before-release durability rule, crash/relog recovery from
+      disk-loaded watermark varps. Wired in `World.ts` (`BridgeService.start(this)` in
+      `start()`, `player_save_ack` routing at the top of `onLoginMessage`, public
+      `requestPlayerSave()` next to `savePlayers()`).
+- [ ] **Bridge script ops** — `ScriptOpcode.ts` `BRIDGE_*` = 10100-10106 (+ map entries),
+      `handlers/BridgeOps.ts` (wholly added), spread in `ScriptRunner.ts`,
+      `data/symbols/commands.sym` ids 10100-10106. Pairs with `engine.rs2` declarations
+      (content section) — both sides or scripts fail to compile.
+- [ ] **`player_save_sync`/`player_save` save-with-ack** — `LoginThread.ts` new case posts
+      `player_save_ack {requestId, success}`; `LoginClient.ts` `playerSaveSync()` (fetchSync);
+      `LoginServer.ts` `player_save` handler (verify + wouldResetSaveFile + write + reply,
+      NO account_login mutation); `login/index.d.ts` `SaveAckResponse` in the union.
+- [ ] **`ClientCheatHandler.ts` `::linkwallet`** — ungated player command placed BEFORE the
+      staff gates; re-splits raw input (the lowercased args would corrupt base58).
+- [ ] **`FriendServer.ts` bind host** — `Environment.FRIEND_HOST`, default `127.0.0.1`
+      (RELAY_* is unauthenticated remote control; loopback unless multi-host).
+- [ ] **`Environment.ts` bridge keys** — `BRIDGE_REGISTRY_PATH`, `BRIDGE_ADMIN_TOKEN`,
+      `BRIDGE_DAEMON_PORT`, `FRIEND_HOST` in the rs-sdk-only block.
+- [ ] **`web/pages/bridge.ts`** (wholly added, wired in `web/index.ts`) — /bridge/link
+      (page + ed25519-verified POST), /bridge/linked/:address, /bridge/token/:name.json,
+      /bridge/deposit/notify (loopback proxy to the daemon), /bridge/status/:username
+      (Bearer BRIDGE_ADMIN_TOKEN). Deps added to engine package.json: `tweetnacl`, `bs58`.
+- [ ] **Prisma `account_wallet` + `bridge_tx`** — both schemas + `migrations/20260817000000_bridge`
+      (sqlite + mysql), kysely regen of `src/db/types.ts`. The daemon (chain/daemon) opens the
+      same sqlite with its own connection and owns the chain-side transitions.
+
 ### Assets
 - [ ] `public/img/skill/*` (19 files), `public/img/*`, favicons, hiscores images —
       restored after upstream website migrations deleted them. Verify pages render with images.
@@ -232,6 +261,21 @@ survival) is described in the project memory; this file is the human-readable ch
       hiscores.svg, task_length.svg); nothing in `content/title/` is locally modified anymore.
 - [ ] Smithing arrowheads + telegrab + nails fixes live in content history; they're additive
       and survive rebases, but re-run a smoke test if smithing/magic behaves oddly.
+
+### Bridge (on-chain exchange — chain/README.md is the system doc)
+- [ ] **`scripts/bridge/`** (wholly added) — `configs/exchange_clerk.npc`, `configs/bridge.varp`
+      (2 × `scope=perm` watermark varps — the exactly-once protocol depends on varp+inv
+      persisting atomically in the same `.sav`), `configs/bridge.constant`
+      (`^wealth_bridge_withdraw = 11`, `^wealth_bridge_deposit = 12`),
+      `scripts/exchange_clerk.rs2`, `scripts/bridge_queues.rs2`.
+- [ ] **`scripts/engine.rs2`** — 7 `[command,bridge_*]` declarations (pairs with engine
+      `BRIDGE_*` opcodes 10100-10106 — both sides or scripts fail to compile).
+- [ ] **`pack/npc.pack`** — `1359=exchange_clerk`; **`pack/varp.pack`** — `359=bridge_debit_ack`,
+      `360=bridge_credit_ack`. Committed ids; must not drift between environments.
+- [ ] **`maps/m49_53.jm2`** — NPC spawn line `0 53 49: 1359` (Exchange Clerk, Varrock west
+      bank public floor, world 3189,3441,0). Map edits need a restart, not `::reload`.
+- [ ] **Custom content breaks cache-authenticity checksums** — any build of this tree needs
+      `BUILD_VERIFY=false` (set in `server/Dockerfile`; required locally too).
 
 ---
 

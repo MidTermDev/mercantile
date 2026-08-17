@@ -92,6 +92,30 @@ export class LoginClient extends InternalClient {
     }
 
     // we don't care about acknowledgement, send the save and continue on
+    // rs-sdk bridge: verified save with a reply, no logout side effects
+    public async playerSaveSync(username: string, save: Uint8Array): Promise<boolean> {
+        await this.connect();
+
+        if (!this.ws || !this.wsr || !this.wsr.checkIfWsLive()) {
+            return false;
+        }
+
+        const reply = await this.wsr.fetchSync({
+            type: 'player_save',
+            nodeId: this.nodeId,
+            nodeTime: Date.now(),
+            profile: Environment.node.profile,
+            username,
+            save: Buffer.from(save).toString('base64')
+        });
+
+        if (reply.error) {
+            return false;
+        }
+
+        return reply.result.response === 0;
+    }
+
     public async playerAutosave(username: string, save: Uint8Array) {
         await this.connect();
 

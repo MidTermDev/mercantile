@@ -45,6 +45,7 @@ import Npc from '#/engine/entity/Npc.js';
 import { NpcEventRequest, NpcEventType } from '#/engine/entity/NpcEventRequest.js';
 import { NpcStat } from '#/engine/entity/NpcStat.js';
 import Obj from '#/engine/entity/Obj.js';
+import { BridgeService } from '#/engine/bridge/BridgeService.js';
 import Player from '#/engine/entity/Player.js';
 import { PlayerLoading } from '#/engine/entity/PlayerLoading.js';
 import { EntityQueueState, PlayerQueueType } from '#/engine/entity/PlayerQueueRequest.js';
@@ -352,6 +353,9 @@ class World {
         } else {
             printInfo(kleur.green().bold('World ready') + kleur.white().bold(': Visit http://localhost:' + Environment.web.port + '/rs2.cgi'));
         }
+
+        // rs-sdk bridge: on-chain exchange service (see server/PATCHES.md)
+        BridgeService.start(this);
 
         if (startCycle) {
             OnDemand.cycle();
@@ -1362,6 +1366,23 @@ class World {
         }
     }
 
+    // rs-sdk bridge: synchronous single-player save with an ack, so the bridge can
+    // prove a debit/credit reached disk before releasing chain-side action.
+    requestPlayerSave(username: string, requestId: number): boolean {
+        const player = this.getPlayerByUsername(username);
+        if (!player) {
+            return false;
+        }
+
+        this.loginThread.postMessage({
+            type: 'player_save_sync',
+            username: player.username,
+            save: player.save(),
+            requestId
+        });
+        return true;
+    }
+
     private savePlayers(): void {
         // skip in web worker contexts (but not bun/node where self === globalThis)
         if (typeof self !== 'undefined' && typeof process === 'undefined') {
@@ -2030,6 +2051,13 @@ class World {
     }
 
     onLoginMessage(msg: GenericLoginThreadResponse) {
+        // rs-sdk bridge: save-sync acks route to the bridge service
+        if ((msg as unknown as { type: string }).type === 'player_save_ack') {
+            const ack = msg as unknown as { requestId: number; success: boolean };
+            BridgeService.onSaveAck(ack.requestId, ack.success);
+            return;
+        }
+
         if (isPlayerLoginResponse(msg)) {
             const { socket } = msg;
             if (!this.loginRequests.has(socket)) {

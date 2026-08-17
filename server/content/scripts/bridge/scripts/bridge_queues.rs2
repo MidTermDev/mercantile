@@ -1,0 +1,43 @@
+// rs-sdk bridge queue scripts (see server/PATCHES.md). Enqueued by the engine's
+// BridgeService with args, never invoked from other content.
+//
+// The watermark varp write and the inventory mutation happen in the same script
+// so they persist atomically in the same .sav — the exactly-once protocol
+// depends on this. Do not split them.
+
+[queue,bridge_debit](int $id, obj $obj, int $count)
+def_obj $cert = oc_cert($obj);
+def_int $held_base = inv_total(inv, $obj);
+def_int $held_cert = 0;
+if ($cert ! $obj) {
+    $held_cert = inv_total(inv, $cert);
+}
+if (calc($held_base + $held_cert) < $count) {
+    bridge_debit_ack($id, false);
+    mes("The exchange couldn't find the goods for your withdrawal - request cancelled.");
+    return;
+}
+def_int $from_base = min($count, $held_base);
+if ($from_base > 0) {
+    inv_del(inv, $obj, $from_base);
+}
+if ($count > $from_base) {
+    inv_del(inv, $cert, calc($count - $from_base));
+}
+%bridge_debit_ack = $id;
+bridge_debit_ack($id, true);
+wealth_event(^wealth_bridge_withdraw, oc_debugname($obj), $count, calc($count * oc_cost($obj)));
+mes("Sent to the exchange: <tostring($count)> x <oc_name($obj)>.");
+
+// $grant is resolved by the engine: noted form for non-stackables with a cert.
+[queue,bridge_credit](int $id, namedobj $grant, int $count)
+if (inv_itemspace(inv, $grant, $count, inv_size(inv)) = false) {
+    bridge_credit_ack($id, false);
+    mes("Your deposit couldn't be delivered - free up inventory space and claim again.");
+    return;
+}
+inv_add(inv, $grant, $count);
+%bridge_credit_ack = $id;
+bridge_credit_ack($id, true);
+wealth_event(^wealth_bridge_deposit, oc_debugname(oc_uncert($grant)), $count, calc($count * oc_cost($grant)));
+mes("Delivered from the exchange: <tostring($count)> x <oc_name($grant)>.");

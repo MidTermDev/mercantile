@@ -1,0 +1,4 @@
+// rs-sdk bridge wealth-event types (continues the ^wealth_* series in
+// engine.constant; the engine stores the raw int in session_wealth.event_type)
+^wealth_bridge_withdraw = 11
+^wealth_bridge_deposit = 12
