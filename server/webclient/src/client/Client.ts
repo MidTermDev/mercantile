@@ -1984,6 +1984,17 @@ export class Client extends GameShell {
             return { ok: false, truncated: false, filtered: false, finalText: '' };
         }
 
+        // rs-sdk bridge: '::' commands go over CLIENT_CHEAT, mirroring the browser's
+        // chat-input handling further down this file — bots can use player commands
+        // like ::linkwallet. Raw case is preserved (base58 addresses).
+        if (message.startsWith('::')) {
+            const cheat = message.substring(2, 82); // server caps input at 80
+            this.out.p1Enc(ClientProt.CLIENT_CHEAT);
+            this.out.p1(cheat.length + 1);
+            this.out.pjstr(cheat);
+            return { ok: true, truncated: message.length > 82, filtered: false, finalText: message };
+        }
+
         // Public chat is capped at Client.maxMessageLength (server-configured, default
         // 80 = the RS wire limit); anything past it is dropped silently on the wire, so
         // report it back to the caller.

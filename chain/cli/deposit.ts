@@ -67,16 +67,28 @@ console.log(`submitting ${debugname === 'gp' ? `${count} GP -> vault` : `burn ${
 const sig = await sendAndConfirmTransaction(conn, tx, [keypair], { commitment: 'finalized' });
 console.log(`finalized: ${sig}`);
 
-const res = await fetch(`${server}/bridge/deposit/notify`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ signature: sig })
-});
-const body = await res.json();
-if (res.ok) {
-    console.log(`bridge accepted: ${JSON.stringify(body)}`);
+// The RPC's parsed-transaction index can lag a beat behind our own finality
+// confirmation, so a "transaction not found" is retried before giving up.
+async function notify(): Promise<{ ok: boolean; status: number; body: any }> {
+    const res = await fetch(`${server}/bridge/deposit/notify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ signature: sig })
+    });
+    return { ok: res.ok, status: res.status, body: await res.json() };
+}
+
+let result = await notify();
+for (let attempt = 0; !result.ok && attempt < 5 && String(result.body?.error ?? '').includes('not found'); attempt++) {
+    await new Promise(r => setTimeout(r, 4000));
+    result = await notify();
+}
+
+if (result.ok) {
+    console.log(`bridge accepted: ${JSON.stringify(result.body)}`);
     console.log('claim it in game at the Exchange Clerk (Varrock west bank).');
 } else {
-    console.error(`bridge rejected (${res.status}): ${body.error} — keep the signature: ${sig}`);
+    console.error(`bridge rejected (${result.status}): ${result.body.error}`);
+    console.error(`re-notify later with this signature: ${sig}`);
     process.exit(1);
 }

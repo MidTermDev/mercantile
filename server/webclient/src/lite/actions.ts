@@ -759,6 +759,17 @@ export function say(c: LiteClient, message: string): SayOutcome {
         return { ok: false, truncated: false, filtered: false, finalText: '' };
     }
 
+    // rs-sdk bridge: '::' commands go over CLIENT_CHEAT (mirrors Client.say and
+    // the browser chat input) — bots can use player commands like ::linkwallet.
+    // Raw case preserved (base58 addresses); no sentence-casing, no self-echo.
+    if (message.startsWith('::')) {
+        const cheat = message.substring(2, 82); // server caps input at 80
+        c.writeOpcode(ClientProt.CLIENT_CHEAT);
+        c.out.p1(cheat.length + 1);
+        c.out.pjstr(cheat);
+        return { ok: true, truncated: message.length > 82, filtered: false, finalText: message };
+    }
+
     const cap = c.getMaxMessageLength();
     const truncated = message.length > cap;
     const text = truncated ? message.substring(0, cap) : message;
