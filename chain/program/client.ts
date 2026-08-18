@@ -125,7 +125,8 @@ export function ixWithdrawItem(operator: PublicKey, mint: PublicKey, recipientAt
         data: data(DISC.withdraw_item, u64(amount)),
     });
 }
-export function ixWithdrawGp(operator: PublicKey, mint: PublicKey, vault: PublicKey, recipientAta: PublicKey, amount: bigint): TransactionInstruction {
+// GP now bridges like items: withdraw_gp MINTS (no vault).
+export function ixWithdrawGp(operator: PublicKey, mint: PublicKey, recipientAta: PublicKey, amount: bigint): TransactionInstruction {
     return new TransactionInstruction({
         programId: BRIDGE_PROGRAM_ID,
         keys: [
@@ -133,7 +134,6 @@ export function ixWithdrawGp(operator: PublicKey, mint: PublicKey, vault: Public
             meta(operator, true, false),
             meta(mint, false, true),
             meta(mintAuthorityPda(), false, false),
-            meta(vault, false, true),
             meta(recipientAta, false, true),
             meta(TOKEN_PROGRAM_ID, false, false),
             meta(eventAuthorityPda(), false, false),
@@ -156,12 +156,14 @@ export function ixDepositItem(owner: PublicKey, mint: PublicKey, ownerAta: Publi
         data: data(DISC.deposit_item, u64(amount)),
     });
 }
-export function ixDepositGp(owner: PublicKey, ownerAta: PublicKey, vault: PublicKey, amount: bigint): TransactionInstruction {
+// GP now bridges like items: deposit_gp BURNS (no vault), gated to the GP mint.
+export function ixDepositGp(owner: PublicKey, mint: PublicKey, ownerAta: PublicKey, amount: bigint): TransactionInstruction {
     return new TransactionInstruction({
         programId: BRIDGE_PROGRAM_ID,
         keys: [
+            meta(configPda(), false, false),
+            meta(mint, false, true),
             meta(ownerAta, false, true),
-            meta(vault, false, true),
             meta(owner, true, false),
             meta(TOKEN_PROGRAM_ID, false, false),
             meta(eventAuthorityPda(), false, false),

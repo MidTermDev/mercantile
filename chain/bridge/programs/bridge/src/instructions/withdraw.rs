@@ -3,7 +3,7 @@ use anchor_spl::token::{Mint, Token, TokenAccount, TokenCpiExt};
 
 use crate::constants::{CONFIG_SEED, MINT_AUTHORITY_SEED};
 use crate::error::BridgeError;
-use crate::events::{Inflation, WithdrawFilled};
+use crate::events::WithdrawFilled;
 use crate::state::BridgeConfig;
 
 // ---- withdraw_item: mint item tokens to a user (operator-gated) -------------
@@ -60,7 +60,10 @@ pub fn withdraw_item(ctx: &mut Context<WithdrawItem>, amount: u64) -> Result<()>
     Ok(())
 }
 
-// ---- withdraw_gp: vault transfer, mint the shortfall (operator-gated) -------
+// ---- withdraw_gp: MINT GP to a user (operator-gated) ------------------------
+// GP bridges like items: minted on withdraw (game->chain), burned on deposit.
+// The 10B genesis is a separate reserve; the bridge mints/burns around it, so
+// on-chain circulating GP = reserve + (withdrawn - deposited).
 
 #[event_cpi]
 #[derive(Accounts)]
@@ -76,12 +79,9 @@ pub struct WithdrawGp {
     #[account(mut)]
     pub mint: Account<Mint>,
 
-    /// CHECK: program PDA mint authority (also owns the vault).
+    /// CHECK: program PDA mint authority.
     #[account(seeds = [MINT_AUTHORITY_SEED], bump)]
     pub mint_authority: UncheckedAccount,
-
-    #[account(mut)]
-    pub vault: Account<TokenAccount>,
 
     #[account(mut)]
     pub recipient_ata: Account<TokenAccount>,
@@ -99,33 +99,18 @@ pub fn withdraw_gp(ctx: &mut Context<WithdrawGp>, amount: u64) -> Result<()> {
 
     let recipient = *ctx.accounts.recipient_ata.owner();
     let mint_addr = *ctx.accounts.mint.address();
-    let vault_balance = ctx.accounts.vault.amount();
-    let from_vault = core::cmp::min(vault_balance, amount);
-    let shortfall = amount - from_vault;
 
     let bump = [ctx.bumps.mint_authority];
     let seeds: &[&[u8]] = &[MINT_AUTHORITY_SEED, &bump];
     let signer_seeds: &[&[&[u8]]] = &[seeds];
 
-    if from_vault > 0 {
-        ctx.accounts.token_program.transfer(
-            &mut ctx.accounts.vault,
-            &mut ctx.accounts.recipient_ata,
-            &ctx.accounts.mint_authority,
-            signer_seeds,
-            from_vault,
-        )?;
-    }
-    if shortfall > 0 {
-        ctx.accounts.token_program.mint_to(
-            &mut ctx.accounts.mint,
-            &mut ctx.accounts.recipient_ata,
-            &ctx.accounts.mint_authority,
-            signer_seeds,
-            shortfall,
-        )?;
-        emit_cpi!(Inflation { amount: shortfall });
-    }
+    ctx.accounts.token_program.mint_to(
+        &mut ctx.accounts.mint,
+        &mut ctx.accounts.recipient_ata,
+        &ctx.accounts.mint_authority,
+        signer_seeds,
+        amount,
+    )?;
 
     emit_cpi!(WithdrawFilled {
         mint: mint_addr,

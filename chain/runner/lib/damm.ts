@@ -42,6 +42,7 @@ export async function buildOneSidedPoolTx(
     gpMint: PublicKey,
     itemLowalch: number,
     itemAmount: bigint,
+    tokenProgram: PublicKey = TOKEN_2022_PROGRAM_ID,
 ): Promise<OneSidedPoolPlan> {
     const initSqrtPrice = p0SqrtPrice(itemLowalch);
     const tokenAAmount = new BN(itemAmount.toString());
@@ -90,8 +91,8 @@ export async function buildOneSidedPoolTx(
         activationType: ActivationType.Timestamp,
         collectFeeMode: CollectFeeMode.OnlyB,
         activationPoint: null,
-        tokenAProgram: TOKEN_2022_PROGRAM_ID,
-        tokenBProgram: TOKEN_2022_PROGRAM_ID,
+        tokenAProgram: tokenProgram,
+        tokenBProgram: tokenProgram,
     });
 
     return { pool, positionNft, tx, position, initSqrtPrice };

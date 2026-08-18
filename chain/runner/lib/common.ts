@@ -41,6 +41,11 @@ export function saveRegistry(reg: RegistryFile): void {
 }
 
 export const GP_DECIMALS = 6;
-export const ITEM_DECIMALS = 0;
+// 1 decimal (not 0): a 0-decimal supply-capped token trips the "this is an NFT"
+// heuristic in many wallets/explorers, hiding it from the fungible view.
+export const ITEM_DECIMALS = 1;
+/** Whole items seeded into each pool. */
 export const SEED_PER_ITEM = 100n;
+/** Seed in base units (SEED_PER_ITEM * 10^ITEM_DECIMALS). */
+export const SEED_BASE_UNITS = SEED_PER_ITEM * 10n ** BigInt(ITEM_DECIMALS);
 export const POOL_FEE_BPS = 100; // flat 1%, collected in GP (collectFeeMode OnlyB)
