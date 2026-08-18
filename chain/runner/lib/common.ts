@@ -8,7 +8,7 @@ export const REGISTRY_PATH = join(CHAIN_ROOT, 'registry', 'registry.json');
 export const JOURNAL_PATH = join(CHAIN_ROOT, 'registry', 'journal.jsonl');
 
 export function loadEnv(): { rpcUrl: string; keypairPath: string } {
-    // .env is optional; fall back to public devnet.
+    // .env is optional; process env wins.
     const envPath = join(CHAIN_ROOT, '.env');
     if (existsSync(envPath)) {
         for (const line of readFileSync(envPath, 'utf8').split('\n')) {
@@ -17,7 +17,10 @@ export function loadEnv(): { rpcUrl: string; keypairPath: string } {
         }
     }
     return {
-        rpcUrl: process.env.RPC_URL ?? 'https://api.devnet.solana.com',
+        // The economy is on MAINNET — default there so a CLI without RPC_URL doesn't
+        // silently talk to devnet (the site + daemon are mainnet). Set RPC_URL to a
+        // paid endpoint (Helius etc.) for reliability; public mainnet is rate-limited.
+        rpcUrl: process.env.RPC_URL ?? 'https://api.mainnet-beta.solana.com',
         keypairPath: process.env.BRIDGE_KEYPAIR_PATH ?? join(CHAIN_ROOT, '.keys', 'bridge.json'),
     };
 }

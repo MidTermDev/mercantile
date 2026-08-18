@@ -7,11 +7,16 @@
 import { Keypair, PublicKey } from '@solana/web3.js';
 import BN from 'bn.js';
 import { CpAmm, SwapMode } from '@meteora-ag/cp-amm-sdk';
-import { getMint, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { getMint, getAssociatedTokenAddressSync, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { readFileSync } from 'node:fs';
 import { connection, bridgeKeypair, loadRegistry, GP_DECIMALS, ITEM_DECIMALS } from '../runner/lib/common';
-import { ata } from '../runner/lib/token22';
 import { pacedSendAndConfirm } from '../runner/lib/pace';
+
+// Items + GP are standard SPL now, so the balance-check ATA MUST use TOKEN_PROGRAM_ID.
+// (The old token22 `ata()` helper derived a Token-2022 address, so getTokenAccountBalance
+// hit a nonexistent account and threw *after* an otherwise-successful swap.)
+const ata = (mint: PublicKey, owner: PublicKey) =>
+    getAssociatedTokenAddressSync(mint, owner, false, TOKEN_PROGRAM_ID);
 
 const [debugname, side, countStr] = process.argv.slice(2).filter(a => !a.startsWith('--'));
 const json = process.argv.includes('--json');

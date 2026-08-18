@@ -15,7 +15,6 @@ import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
 import bs58 from 'bs58';
 import {
     TOKEN_PROGRAM_ID,
-    createAssociatedTokenAccountIdempotentInstruction,
     getAssociatedTokenAddressSync,
 } from '@solana/spl-token';
 import { db, toDbDate } from './db';
@@ -43,7 +42,11 @@ interface WithdrawRow {
 
 export class WithdrawWorker {
     private conn: Connection;
-    private operator: Keypair; // hot key: signs program withdraws + pays fees/ATA rent
+    // Hot key: signs program mints + pays ONLY the ~5000-lamport network fee. It must
+    // NEVER pay a user's token-account rent: the user owns that account and could close
+    // it to reclaim the rent, then re-withdraw — draining the operator ~0.002 SOL/cycle.
+    // So the user creates (and funds) their own token account; we only mint into it.
+    private operator: Keypair;
     private registry: RegistryMaps;
     private running = false;
 
@@ -82,10 +85,12 @@ export class WithdrawWorker {
     }
 
     private async tick(): Promise<void> {
+        // 'debited' = freshly released by the engine; 'awaiting_account' = we've seen it
+        // but the user hadn't created their token account yet — re-check it each tick.
         const rows = (await db
             .selectFrom('bridge_tx')
             .where('direction', '=', 'withdraw')
-            .where('state', '=', 'debited')
+            .where('state', 'in', ['debited', 'awaiting_account'])
             .selectAll()
             .orderBy('id', 'asc')
             .limit(10)
@@ -97,7 +102,9 @@ export class WithdrawWorker {
 
     // Mint via the on-chain program (operator-signed). Items: 1 in-game item ->
     // 10 base units (1 decimal). GP: 1 -> 10^6. deposit is the burn half.
-    private async buildTx(row: WithdrawRow): Promise<{ tx: Transaction; lastValidBlockHeight: number } | { error: string }> {
+    // The user's token account MUST already exist — we never create/fund it (see the
+    // operator field comment). If it's missing we return {awaiting} and defer the row.
+    private async buildTx(row: WithdrawRow): Promise<{ tx: Transaction; lastValidBlockHeight: number } | { error: string } | { awaiting: string }> {
         const user = new PublicKey(row.wallet);
         const tx = new Transaction();
         const op = this.operator.publicKey;
@@ -115,7 +122,11 @@ export class WithdrawWorker {
         }
 
         const userAta = getAssociatedTokenAddressSync(mint, user, false, TOKEN_PROGRAM_ID);
-        tx.add(createAssociatedTokenAccountIdempotentInstruction(op, userAta, user, mint, TOKEN_PROGRAM_ID));
+        // Gate on the user having their own (self-funded) token account. 'confirmed' so
+        // a just-created account is visible; if absent, the user must create it first.
+        const info = await this.conn.getAccountInfo(userAta, 'confirmed');
+        if (!info) return { awaiting: userAta.toBase58() };
+
         tx.add(row.obj_debugname === 'gp'
             ? ixWithdrawGp(op, mint, userAta, baseAmount)
             : ixWithdrawItem(op, mint, userAta, baseAmount));
@@ -134,6 +145,10 @@ export class WithdrawWorker {
                 await this.fail(row, built.error);
                 return;
             }
+            if ('awaiting' in built) {
+                await this.awaitAccount(row, built.awaiting);
+                return;
+            }
             const sig = built.tx.signatures[0].signature ? bs58.encode(built.tx.signatures[0].signature) : null;
             if (!sig) {
                 await this.fail(row, 'failed to sign transaction');
@@ -145,7 +160,7 @@ export class WithdrawWorker {
                 .updateTable('bridge_tx')
                 .set({ state: 'submitted', sig, last_valid_height: built.lastValidBlockHeight, updated_at: toDbDate(new Date()) })
                 .where('id', '=', row.id)
-                .where('state', 'in', ['debited', 'submitted'])
+                .where('state', 'in', ['debited', 'submitted', 'awaiting_account'])
                 .execute();
             row.sig = sig;
             row.last_valid_height = built.lastValidBlockHeight;
@@ -199,6 +214,25 @@ export class WithdrawWorker {
     }
 
     /**
+     * The user's token account doesn't exist yet. Park the row in 'awaiting_account'
+     * (idempotent — from 'debited' or a prior 'awaiting_account') and leave it for the
+     * next tick, which re-checks. The user creates + funds the account themselves (web
+     * wallet UI / CLI); we never spend operator SOL on their rent. No refund, no failure.
+     */
+    private async awaitAccount(row: WithdrawRow, ata: string): Promise<void> {
+        if (row.state !== 'awaiting_account') {
+            console.log(`[withdraw-worker] row ${row.id} awaiting user token account ${ata.slice(0, 8)}… (${row.count} x ${row.obj_debugname})`);
+        }
+        await db
+            .updateTable('bridge_tx')
+            .set({ state: 'awaiting_account', updated_at: toDbDate(new Date()) })
+            .where('id', '=', row.id)
+            .where('state', 'in', ['debited', 'awaiting_account'])
+            .execute();
+        row.state = 'awaiting_account';
+    }
+
+    /**
      * Permanent failure: refund via a synthetic deposit row with a FRESH id
      * (never by reusing the withdraw row — per-player watermark varps require
      * ascending ids per direction). UNIQUE sig 'refund:<id>' makes the refund
@@ -229,7 +263,7 @@ export class WithdrawWorker {
             .updateTable('bridge_tx')
             .set({ state: 'refunded', error, updated_at: toDbDate(new Date()) })
             .where('id', '=', row.id)
-            .where('state', 'in', ['debited', 'submitted'])
+            .where('state', 'in', ['debited', 'submitted', 'awaiting_account'])
             .execute();
     }
 }
