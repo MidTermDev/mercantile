@@ -53,13 +53,14 @@ export default function GrandExchange() {
       <hr className="rule my-5" />
 
       <div className="card overflow-hidden">
-        <div className="grid grid-cols-[1fr_auto_auto] md:grid-cols-[2.2fr_1fr_1fr_auto] gap-3 px-5 py-3 text-[11px] uppercase tracking-widest text-mute border-b border-line bg-panel/60 sticky top-16 z-10 backdrop-blur">
+        <div className="max-h-[72vh] overflow-y-auto">
+        <div className="grid grid-cols-[1fr_auto_auto] md:grid-cols-[2.2fr_1fr_1fr_auto] gap-3 px-5 py-3 text-[11px] uppercase tracking-widest text-mute border-b border-line bg-panel sticky top-0 z-10">
           <button className="text-left hover:text-gold transition" onClick={() => toggle("name")}>Item {sort === "name" ? (asc ? "▲" : "▼") : ""}</button>
           <span className="hidden md:block">Mint</span>
           <button className="text-right hover:text-gold transition" onClick={() => toggle("price")}>Price · GP {sort === "price" ? (asc ? "▲" : "▼") : ""}</button>
           <span className="text-right pr-1">Trade</span>
         </div>
-        <div className="divide-y divide-line/40 max-h-[72vh] overflow-y-auto">
+        <div className="divide-y divide-line/40">
           {rows.map((i) => {
             const p = prices[i.mint]?.price;
             return (
@@ -85,6 +86,7 @@ export default function GrandExchange() {
           })}
           {data && rows.length === 0 && <div className="px-4 py-12 text-center text-mute">No items match “{q}”.</div>}
           {!data && <div className="px-4 py-12 text-center text-mute">Loading markets…</div>}
+        </div>
         </div>
       </div>
     </main>

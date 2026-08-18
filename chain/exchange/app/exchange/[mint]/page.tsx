@@ -6,6 +6,7 @@ import { ItemImage } from "@/components/ItemImage";
 import { CopyAddress } from "@/components/CopyAddress";
 import { PriceChart } from "@/components/PriceChart";
 import { BuyWidget } from "@/components/BuyWidget";
+import { DepositWidget } from "@/components/DepositWidget";
 import { fmtGp } from "@/lib/format";
 import type { ItemsFile, ExchangeItem, PricesFile } from "@/lib/types";
 
@@ -74,9 +75,7 @@ export default function ItemDetail() {
 
         <div className="lg:sticky lg:top-20 h-fit">
           <BuyWidget item={item} />
-          <div className="card p-4 mt-4 text-xs text-mute">
-            Buying mints GP into the pool and sends you the item token. To use it in-game, deposit it at the Exchange Clerk — it’s burned on-chain and credited to your character.
-          </div>
+          <DepositWidget item={item} />
         </div>
       </div>
     </main>
