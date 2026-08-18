@@ -2,3 +2,4 @@
 .env
 node_modules/
 images/out/
+runner/seed-liquidity.jsonl
