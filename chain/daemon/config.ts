@@ -2,6 +2,7 @@ import { join } from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
 import { Keypair } from '@solana/web3.js';
 import { Connection } from '@solana/web3.js';
+import bs58 from 'bs58';
 
 export const CHAIN_ROOT = join(import.meta.dir, '..');
 
@@ -32,6 +33,20 @@ export const config = {
 
 export function loadKeypair(path: string): Keypair {
     return Keypair.fromSecretKey(Uint8Array.from(JSON.parse(readFileSync(path, 'utf8'))));
+}
+
+// The hot operator key, preferring an env-provided secret (a fly.io / container
+// secret arrives as an env var, not a file). Accepts either a JSON byte array
+// (`[1,2,...]`) or a base58 string. Falls back to the keypair file otherwise.
+export function loadOperatorKeypair(): Keypair {
+    const secret = process.env.OPERATOR_SECRET_KEY?.trim();
+    if (secret) {
+        if (secret.startsWith('[')) {
+            return Keypair.fromSecretKey(Uint8Array.from(JSON.parse(secret)));
+        }
+        return Keypair.fromSecretKey(bs58.decode(secret));
+    }
+    return loadKeypair(config.operatorKeypairPath);
 }
 
 export function makeConnection(): Connection {

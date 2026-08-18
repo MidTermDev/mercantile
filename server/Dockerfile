@@ -31,6 +31,12 @@ WORKDIR /opt/server/webclient
 RUN --mount=type=cache,target=/root/.bun/install/cache \
     bun install
 
+# Install chain (bridge daemon) deps
+COPY chain/package.json chain/bun.lock /opt/chain/
+WORKDIR /opt/chain
+RUN --mount=type=cache,target=/root/.bun/install/cache \
+    bun install
+
 # === SOURCE LAYER (rebuilds on code changes, but deps cached) ===
 
 WORKDIR /opt/server
@@ -61,6 +67,11 @@ RUN sed -i 's/port: Environment.WEB_PORT,/port: Environment.WEB_PORT, hostname: 
 # Patch gateway
 WORKDIR /opt/server/gateway
 RUN sed -i 's/port: GATEWAY_PORT,/port: GATEWAY_PORT, hostname: "0.0.0.0",/' gateway.ts
+
+# chain/ (bridge daemon) at /opt/chain so the daemon's ../../server/engine/src imports
+# resolve. Copied AFTER the engine/webclient builds so a chain-only change doesn't bust
+# their cache. Keys/.env/Anchor-crate/Next-app/icons excluded by the ignorefile.
+COPY chain /opt/chain
 
 WORKDIR /opt/server
 
@@ -115,6 +126,30 @@ echo "Starting gateway service on port 7780..."
         sleep 2
     done
 ) &
+
+# === START BRIDGE DAEMON (optional) ===
+# On a value-bearing world the daemon mints/burns on-chain in lock-step with the
+# game's bridge_tx ledger. Gated on RUN_BRIDGE_DAEMON so a plain game world can run
+# without chain plumbing. Needs RPC_URL + OPERATOR_SECRET_KEY as secrets.
+if [ "$RUN_BRIDGE_DAEMON" = "true" ]; then
+    # Seed the registry onto the volume from the baked-in copy if it's not there yet,
+    # so the daemon and engine read the same source of truth (BRIDGE_REGISTRY_PATH).
+    REG_DEST="${BRIDGE_REGISTRY_PATH:-/opt/server/data/registry.json}"
+    if [ ! -f "$REG_DEST" ] && [ -f /opt/chain/registry/registry.json ]; then
+        echo "[entrypoint] Seeding registry -> $REG_DEST"
+        mkdir -p "$(dirname "$REG_DEST")"
+        cp /opt/chain/registry/registry.json "$REG_DEST"
+    fi
+    echo "Starting bridge daemon on port ${BRIDGE_DAEMON_PORT:-7781}..."
+    (
+        cd /opt/chain
+        while true; do
+            bun daemon/index.ts
+            echo "[entrypoint] Bridge daemon exited (code $?), restarting in 5s..." >&2
+            sleep 5
+        done
+    ) &
+fi
 
 # === START GAME SERVER ===
 cd /opt/server/engine

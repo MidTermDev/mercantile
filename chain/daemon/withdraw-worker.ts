@@ -19,7 +19,7 @@ import {
     getAssociatedTokenAddressSync,
 } from '@solana/spl-token';
 import { db, toDbDate } from './db';
-import { config, loadKeypair, makeConnection } from './config';
+import { config, loadOperatorKeypair, makeConnection } from './config';
 import { loadRegistryMaps, type RegistryMaps } from './verifier';
 import { ixWithdrawItem, ixWithdrawGp } from '../program/client';
 
@@ -49,7 +49,7 @@ export class WithdrawWorker {
 
     constructor() {
         this.conn = makeConnection();
-        this.operator = loadKeypair(config.operatorKeypairPath);
+        this.operator = loadOperatorKeypair();
         this.registry = loadRegistryMaps();
     }
 

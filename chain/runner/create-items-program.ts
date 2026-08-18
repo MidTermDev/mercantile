@@ -60,9 +60,11 @@ async function balance(ata: PublicKey): Promise<bigint> {
 // Poll until the ATA reads >= want at 'finalized' (Helius nodes lag across a
 // mint->pool tx pair; the pool tx simulates on a node that must see the seed).
 async function waitBalance(ata: PublicKey, want: bigint): Promise<void> {
-    for (let i = 0; i < 20; i++) {
-        try { if ((await getAccount(conn, ata, 'finalized')).amount >= want) return; } catch { /* not yet */ }
-        await new Promise(r => setTimeout(r, 1500));
+    // 'confirmed' (not finalized) for speed; the per-item try/catch + idempotent
+    // resume backstop the rare stale-read that slips a pool tx onto a lagging node.
+    for (let i = 0; i < 8; i++) {
+        try { if ((await getAccount(conn, ata, 'confirmed')).amount >= want) return; } catch { /* not yet */ }
+        await new Promise(r => setTimeout(r, 1000));
     }
     throw new Error(`ATA ${ata.toBase58()} never reached ${want} tokens`);
 }

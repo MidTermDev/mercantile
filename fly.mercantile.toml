@@ -1,0 +1,57 @@
+# Mercantile game server — authentic 2004 rates + live on-chain bridge.
+# Deploy: see DEPLOY-MERCANTILE.md (needs your fly.io account; set the operator key
+# + RPC as fly secrets, and place chain/registry/registry.json on the volume).
+app = "mercantile-game"
+primary_region = "iad"
+
+[build]
+dockerfile = "server/Dockerfile"
+ignorefile = "server/Dockerfile.dockerignore"
+
+[env]
+BUG_REPORTS_FILE = "/opt/server/data/bug-reports.jsonl"
+NODE_DEBUG = "false"
+BUILD_STARTUP = "false"
+BUILD_STARTUP_UPDATE = "false"
+DB_BACKEND = "sqlite"
+EASY_STARTUP = "true"
+FRIEND_SERVER = "true"
+LOGIN_SERVER = "true"
+NODE_MEMBERS = "true"
+NODE_PORT = "43594"
+# --- authentic 2004 rates: the way it was meant ---
+NODE_TICKRATE = "600"        # 0.6s game tick (classic), not the 300ms bot-demo rate
+NODE_XPRATE = "1"            # 1:1 XP, not fast-track
+NODE_RANDOM_EVENTS = "false"
+# --- value-bearing world: disable in-game item/GP spawning cheats ---
+NODE_PRODUCTION = "true"     # turns off ::give/::setstat/debugprocs (::linkwallet stays, it's ungated)
+WEBSITE_REGISTRATION = "false"  # accounts auto-create on first login
+WEB_PORT = "8080"
+# --- on-chain bridge (Exchange Clerk) ---
+BRIDGE_REGISTRY_PATH = "/opt/server/data/registry.json"
+BRIDGE_DAEMON_PORT = "7781"
+FRIEND_HOST = "127.0.0.1"
+# Bridge daemon config (RPC_URL + OPERATOR set as fly SECRETS, not here):
+DB_PATH = "/opt/server/engine/db.sqlite"
+RUN_BRIDGE_DAEMON = "true"
+
+[http_service]
+auto_start_machines = true
+force_https = true
+internal_port = 8080
+min_machines_running = 1     # keep the world always up
+
+[[mounts]]
+destination = "/opt/server/data"
+source = "mercantile_data"
+
+[[services]]
+internal_port = 43594
+protocol = "tcp"
+
+  [[services.ports]]
+  port = 43594
+
+[[vm]]
+memory = "4gb"
+size = "performance-2x"

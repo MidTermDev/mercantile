@@ -16,8 +16,11 @@ export default function Landing() {
           between the game and the chain — and the market decides what everything is worth.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mt-8">
-          <Link href="/exchange" className="px-6 py-3 rounded-lg bg-gold text-bg font-bold hover:bg-gold2 transition">
-            Open the Grand Exchange →
+          <Link href="/play" className="px-6 py-3 rounded-lg bg-gold text-bg font-bold hover:bg-gold2 transition">
+            Play now →
+          </Link>
+          <Link href="/exchange" className="px-6 py-3 rounded-lg border border-line hover:border-gold transition">
+            Open the Grand Exchange
           </Link>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-lg border border-line hover:border-gold transition">GitHub</a>
           <a href={X_URL} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-lg border border-line hover:border-gold transition">@MercantileRS</a>

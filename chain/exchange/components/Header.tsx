@@ -15,6 +15,7 @@ export function Header() {
           <span className="display text-lg font-bold gold-text tracking-wide">MERCANTILE</span>
         </Link>
         <nav className="ml-4 flex items-center gap-5 text-sm text-mute">
+          <Link href="/play" className="hover:text-ink">Play</Link>
           <Link href="/exchange" className="hover:text-ink">Grand Exchange</Link>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-ink">GitHub</a>
           <a href={X_URL} target="_blank" rel="noreferrer" className="hover:text-ink">X</a>

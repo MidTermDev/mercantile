@@ -5,6 +5,18 @@ server/gateway/node_modules/
 server/webclient/node_modules/
 sdk/node_modules/
 
+# chain/: only the bridge daemon (+ its program client + registry) ships. NEVER ship
+# keys or the local .env, and skip the heavy dirs the daemon doesn't need: the Anchor
+# workspace (chain/bridge, ~3.5GB with Rust target/), the Next app, rendered item
+# icons, node_modules (reinstalled in-image). The daemon uses chain/program/client.ts
+# raw instruction builders, not the Anchor crate.
+chain/.keys/
+chain/.env
+chain/node_modules/
+chain/bridge/
+chain/exchange/
+chain/images/
+
 # Webclient bundle is built inside the image (see Dockerfile); never ship the local
 # build artifacts, or a deploy could silently serve a stale client.
 server/webclient/out/

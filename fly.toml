@@ -3,7 +3,7 @@ primary_region = "iad"
 
 [build]
 dockerfile = "server/Dockerfile"
-ignorefile = "server/.dockerignore"
+ignorefile = "server/Dockerfile.dockerignore"
 
 [env]
 # SDK bug reports land on the mounted volume so they survive deploys/restarts.
