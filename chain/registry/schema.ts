@@ -45,10 +45,22 @@ export interface RegistryItem {
     flags: string[];
 }
 
+export interface RegistryBridge {
+    programId: string;
+    configPda: string;
+    mintAuthorityPda: string;
+    operator: string;
+    /** admin pubkey (upgrade authority / mint creator). */
+    admin: string;
+    deployedAt: string;
+}
+
 export interface RegistryFile {
     version: 1;
     network: 'devnet' | 'mainnet-beta';
     programId: string;
+    /** On-chain bridge program (architecture revision 2). */
+    bridge?: RegistryBridge;
     generatedAt: string;
     stats: {
         totalObjIds: number;

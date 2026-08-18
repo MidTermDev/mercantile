@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "network": "devnet",
+  "network": "mainnet-beta",
   "programId": "cpamdpZCGKUy5JxQXB4dcpGPiikHawvSWAd6mEn1sGG",
   "generatedAt": "2026-08-17T20:09:25.997Z",
   "stats": {
@@ -19,8 +19,8 @@
     "symbol": "GP",
     "name": "Gielinor GP",
     "totalSupply": "10000000000",
-    "vaultAta": null,
-    "treasuryAta": null,
+    "vaultAta": "ARvUYWb1NVKaoeJ51s2BQSyod9fb2L6qcmGReuwx8RDn",
+    "treasuryAta": "4MGVLjUa39pLM8MEF9Rbi8pWXGfCNRoVWE3pWobTwAv9",
     "vaultSupply": "1000000000",
     "imageUri": "https://ipfs.io/ipfs/QmWnbNhFdZCmegGFD91jxaHwpSKEJnv7iBdsPpdvhLYdtU",
     "uri": "https://ipfs.io/ipfs/QmQ2gU3VTM2r7RpyYuiwFwSvcDSiq1yzrUzoQKjRhbeBR6"
@@ -24368,5 +24368,13 @@
       "position": null,
       "flags": []
     }
+  },
+  "bridge": {
+    "programId": "H5C6RKWQzUdfS8tVzZb3uVcRw3EHCzghv7kWdMBTD2bS",
+    "configPda": "35M99wCeVKefazYKw1oQ45rF4MjVULXxp9onLkpkE9RY",
+    "mintAuthorityPda": "7idpyqXCKEtwXhxXkRrF2aqtASSqtRFmxi2nGkKddyKd",
+    "operator": "9YYZqNwWmkVP41x1ZHqE5QPVEerj2tGAPsou5ZFNJ4dz",
+    "admin": "7vTTppFME6DprVw4ZnSjZfXkEWrJtCdirCMtWq1Z9QmZ",
+    "deployedAt": "2026-08-18T00:02:55.765Z"
   }
 }
