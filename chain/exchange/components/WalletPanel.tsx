@@ -11,6 +11,7 @@ import {
   buildCreateAccountTx, buildDepositTx, notifyDeposit, walletHoldings,
 } from "@/lib/bridge";
 import { LinkModal } from "@/components/LinkModal";
+import { buildSellTx } from "@/lib/swap";
 
 const WalletMultiButton = dynamic(
   () => import("@solana/wallet-adapter-react-ui").then((m) => m.WalletMultiButton),
@@ -110,6 +111,22 @@ export function WalletPanel() {
     });
   }
 
+  // ── sell an item holding into its pool for GP ─────────────────────────────
+  function sell(mint: string, pool: string, maxWhole: number) {
+    return run(`sell:${mint}`, async () => {
+      if (!publicKey) return;
+      const whole = Number(amts[mint] ?? "0");
+      if (!whole || whole <= 0) throw new Error("enter an amount");
+      if (whole > maxWhole) throw new Error(`you only hold ${maxWhole}`);
+      const tx = await buildSellTx(connection, pool, mint, publicKey, whole, 1);
+      const sig = await sendTransaction(tx, connection);
+      await connection.confirmTransaction(sig, "confirmed");
+      setMsg(`Sold ${whole} ${byMint.get(mint)?.name ?? "item"} for GP — ${sig.slice(0, 8)}…`);
+      setAmts((a) => ({ ...a, [mint]: "" }));
+      setTimeout(refresh, 3000);
+    });
+  }
+
   if (!connected) {
     return (
       <div className="card p-8 text-center">
@@ -200,17 +217,17 @@ export function WalletPanel() {
       {/* Holdings / deposit */}
       <section className="card p-5">
         <div className="flex items-center justify-between">
-          <h2 className="display text-lg font-bold gold-text">3 · Your tokens — deposit back in-game</h2>
+          <h2 className="display text-lg font-bold gold-text">3 · Your tokens — sell for GP or deposit in-game</h2>
           <button onClick={refresh} className="text-mute text-xs hover:text-ink">refresh</button>
         </div>
-        <p className="text-mute text-sm mt-2">Depositing burns the tokens and credits the items/GP to your character. Claim at the Exchange Clerk. You pay the network fee (~0.000005 SOL).</p>
+        <p className="text-mute text-sm mt-2"><b className="text-ink">Sell</b> swaps items into their GP pool. <b className="text-ink">Deposit</b> burns tokens and credits the items/GP back to your character (claim at the Exchange Clerk). You pay only the network fee (~0.000005 SOL).</p>
         <div className="mt-3 space-y-2">
           {gpHolding && (() => {
             const whole = Number(gpHolding.base) / 10 ** GP_DECIMALS;
             return (
               <DepositRow key="gp" img={gp?.imageUri ?? null} name="GP" have={fmtGp(whole)}
                 value={amts[GP_MINT] ?? ""} onChange={(v) => setAmts((a) => ({ ...a, [GP_MINT]: v }))}
-                onDeposit={() => deposit(GP_MINT, true, whole)} busy={busy === `deposit:${GP_MINT}`} />
+                onDeposit={() => deposit(GP_MINT, true, whole)} depositBusy={busy === `deposit:${GP_MINT}`} />
             );
           })()}
           {itemHoldings.map((h) => {
@@ -219,7 +236,8 @@ export function WalletPanel() {
             return (
               <DepositRow key={h.mint} img={it.imageUri} name={it.name} have={String(whole)}
                 value={amts[h.mint] ?? ""} onChange={(v) => setAmts((a) => ({ ...a, [h.mint]: v }))}
-                onDeposit={() => deposit(h.mint, false, whole)} busy={busy === `deposit:${h.mint}`} />
+                onDeposit={() => deposit(h.mint, false, whole)} depositBusy={busy === `deposit:${h.mint}`}
+                onSell={it.pool ? () => sell(h.mint, it.pool, whole) : undefined} sellBusy={busy === `sell:${h.mint}`} />
             );
           })}
           {!gpHolding && itemHoldings.length === 0 && (
@@ -231,22 +249,29 @@ export function WalletPanel() {
   );
 }
 
-function DepositRow({ img, name, have, value, onChange, onDeposit, busy }: {
+function DepositRow({ img, name, have, value, onChange, onDeposit, depositBusy, onSell, sellBusy }: {
   img: string | null; name: string; have: string; value: string;
-  onChange: (v: string) => void; onDeposit: () => void; busy: boolean;
+  onChange: (v: string) => void; onDeposit: () => void; depositBusy: boolean;
+  onSell?: () => void; sellBusy?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-3 rounded-lg border border-line bg-panel px-3 py-2">
+    <div className="flex items-center gap-2 rounded-lg border border-line bg-panel px-3 py-2">
       <ItemImage src={img} alt={name} size={32} />
       <div className="text-sm min-w-0">
         <div className="text-ink truncate">{name}</div>
         <div className="text-mute text-xs">have {have}</div>
       </div>
       <input value={value} onChange={(e) => onChange(e.target.value)} placeholder="amount" inputMode="numeric"
-        className="ml-auto w-24 bg-panel2 border border-line rounded-lg px-2 py-1.5 text-ink text-sm text-right font-mono focus:outline-none focus:border-gold" />
-      <button onClick={onDeposit} disabled={busy}
+        className="ml-auto w-20 bg-panel2 border border-line rounded-lg px-2 py-1.5 text-ink text-sm text-right font-mono focus:outline-none focus:border-gold" />
+      {onSell && (
+        <button onClick={onSell} disabled={sellBusy}
+          className="px-3 py-1.5 rounded-lg border border-gold text-gold font-bold text-xs hover:bg-gold hover:text-bg transition disabled:opacity-50">
+          {sellBusy ? "…" : "Sell"}
+        </button>
+      )}
+      <button onClick={onDeposit} disabled={depositBusy}
         className="px-3 py-1.5 rounded-lg bg-gold text-bg font-bold text-xs hover:bg-gold2 disabled:opacity-50">
-        {busy ? "…" : "Deposit"}
+        {depositBusy ? "…" : "Deposit"}
       </button>
     </div>
   );
