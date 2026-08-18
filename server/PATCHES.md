@@ -330,3 +330,9 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
 - [ ] `server/engine/view/client.ejs` + `view/bot.ejs`: footer social links changed from
       Discord/`MaxBittker/rs-sdk` GitHub to X (`x.com/MercantileRS`) + `MidTermDev/mercantile`
       GitHub. ejs renders per-request, so no rebuild needed.
+
+### Exchange Clerk at every bank
+- [ ] `server/content/place-clerks.ts` clusters banker spawns into banks and places a
+      reachable Exchange Clerk (npc 1359) on the walkable lobby tile of each (21 banks),
+      using sdk/pathfinding collision data (openness≥14/25 so it's never behind the
+      counter). Edits `maps/*.jm2` NPC sections. Re-run `--apply` + repack after vendor sync.
