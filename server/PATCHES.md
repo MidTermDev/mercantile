@@ -325,3 +325,8 @@ curl -so /dev/null -w "%{http_code}\n" https://rs-sdk-demo.fly.dev/{playercount,
 
 If content map files changed: regenerate `sdk/collision-data.json` from the MEMBERS prod server:
 `curl https://rs-sdk-demo.fly.dev/api/exportCollision > sdk/collision-data.json`
+
+### Mercantile client branding
+- [ ] `server/engine/view/client.ejs` + `view/bot.ejs`: footer social links changed from
+      Discord/`MaxBittker/rs-sdk` GitHub to X (`x.com/MercantileRS`) + `MidTermDev/mercantile`
+      GitHub. ejs renders per-request, so no rebuild needed.

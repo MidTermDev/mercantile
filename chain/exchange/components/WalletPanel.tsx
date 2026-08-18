@@ -7,27 +7,21 @@ import { fmtGp } from "@/lib/format";
 import { GP_DECIMALS, ITEM_DECIMALS, GP_MINT } from "@/lib/constants";
 import type { ItemsFile, ExchangeItem } from "@/lib/types";
 import {
-  isLinked, linkWallet, linkMessage, linkPageUrl,
-  pendingWithdrawals, type PendingRow,
+  isLinked, pendingWithdrawals, type PendingRow,
   buildCreateAccountTx, buildDepositTx, notifyDeposit, walletHoldings,
 } from "@/lib/bridge";
+import { LinkModal } from "@/components/LinkModal";
 
 const WalletMultiButton = dynamic(
   () => import("@solana/wallet-adapter-react-ui").then((m) => m.WalletMultiButton),
   { ssr: false },
 );
 
-function b64(bytes: Uint8Array): string {
-  let s = "";
-  for (const b of bytes) s += String.fromCharCode(b);
-  return btoa(s);
-}
-
 type GpInfo = ItemsFile["gp"];
 
 export function WalletPanel() {
   const { connection } = useConnection();
-  const { publicKey, connected, signMessage, sendTransaction } = useWallet();
+  const { publicKey, connected, sendTransaction } = useWallet();
 
   const [items, setItems] = useState<ExchangeItem[]>([]);
   const [gp, setGp] = useState<GpInfo | null>(null);
@@ -76,20 +70,7 @@ export function WalletPanel() {
     try { await fn(); } catch (e: any) { setErr(e?.message?.slice(0, 200) ?? "failed"); } finally { setBusy(null); }
   }
 
-  // ── link ────────────────────────────────────────────────────────────────
-  const [username, setUsername] = useState("");
-  const [code, setCode] = useState("");
-  function doLink() {
-    return run("link", async () => {
-      if (!publicKey || !signMessage) throw new Error("connect a wallet that can sign messages");
-      if (!username.trim() || !code.trim()) throw new Error("enter your in-game username and link code");
-      const sig = await signMessage(new TextEncoder().encode(linkMessage(username.trim(), code.trim())));
-      const res = await linkWallet(username.trim(), code.trim(), publicKey.toBase58(), b64(sig));
-      if (!res.ok) throw new Error(res.error);
-      setMsg(`Linked ${username.trim()} ↔ this wallet.`);
-      await refresh();
-    });
-  }
+  const [showLink, setShowLink] = useState(false);
 
   // ── create token account (user pays their own rent) ───────────────────────
   function mintFor(debugname: string): string | null {
@@ -165,22 +146,17 @@ export function WalletPanel() {
         ) : (
           <>
             <p className="text-mute text-sm mt-2">
-              In game, talk to the Exchange Clerk or type <span className="font-mono text-ink">::linkwallet {publicKey?.toBase58().slice(0, 6)}…</span> to get a code, then sign here.
-              {" "}<a href={linkPageUrl()} target="_blank" rel="noreferrer" className="gold-text underline">classic link page ↗</a>
+              Bind this wallet to your character in three quick steps — get a code from the in-game Exchange Clerk,
+              then sign here. No address typing in-game.
             </p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="in-game username"
-                className="bg-panel border border-line rounded-lg px-3 py-2 text-ink text-sm focus:outline-none focus:border-gold" />
-              <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="link code"
-                className="bg-panel border border-line rounded-lg px-3 py-2 text-ink text-sm font-mono focus:outline-none focus:border-gold" />
-              <button onClick={doLink} disabled={busy === "link"}
-                className="px-4 py-2 rounded-lg bg-gold text-bg font-bold text-sm hover:bg-gold2 disabled:opacity-50">
-                {busy === "link" ? "signing…" : "Sign & link"}
-              </button>
-            </div>
+            <button onClick={() => setShowLink(true)}
+              className="mt-3 px-5 py-2.5 rounded-lg bg-gold text-bg font-bold text-sm hover:bg-gold2">
+              Link wallet →
+            </button>
           </>
         )}
       </section>
+      {showLink && <LinkModal onClose={() => setShowLink(false)} onLinked={() => { setMsg("Wallet linked!"); refresh(); }} />}
 
       {/* Pending withdrawals */}
       <section className="card p-5">
