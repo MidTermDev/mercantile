@@ -11,6 +11,7 @@ import { readFileSync } from 'node:fs';
 import { config } from './config';
 
 const GP_DECIMALS = 6;
+const ITEM_DECIMALS = 1;
 const STACK_LIMIT = 0x7fffffff;
 // authentic, stable id from server/content/pack/obj.pack
 export const COINS_OBJ_ID = 995;
@@ -50,35 +51,40 @@ export async function verifyDepositTx(conn: Connection, registry: RegistryMaps, 
     if (!tx) return { ok: false, reason: 'transaction not found at finalized commitment' };
     if (tx.meta?.err) return { ok: false, reason: 'transaction failed' };
 
+    // Both items and GP bridge back by BURNING (program deposit_item/deposit_gp burn
+    // via a token-program CPI). The burn appears as an INNER instruction, so scan
+    // top-level + inner. A direct (non-program) burn of a registry/GP mint is also
+    // honored — the tokens are destroyed either way. Amounts are whole items/GP.
     const deposits: VerifiedDeposit[] = [];
-    const instructions = tx.transaction.message.instructions.filter((ix): ix is ParsedInstruction => 'parsed' in ix);
-    for (const ix of instructions) {
+    const topLevel = tx.transaction.message.instructions;
+    const inner = (tx.meta?.innerInstructions ?? []).flatMap(g => g.instructions);
+    const all = [...topLevel, ...inner].filter((ix): ix is ParsedInstruction => 'parsed' in ix);
+    for (const ix of all) {
         if (ix.program !== 'spl-token') continue;
         const { type, info } = ix.parsed as { type: string; info: Record<string, unknown> };
+        if (type !== 'burnChecked' && type !== 'burn') continue;
 
-        if (type === 'burnChecked' || type === 'burn') {
-            const mint = String(info.mint);
-            const item = registry.itemsByMint.get(mint);
-            if (!item) continue;
-            const rawAmount = type === 'burnChecked'
-                ? BigInt((info.tokenAmount as { amount: string }).amount)
-                : BigInt(String(info.amount));
-            if (rawAmount < 1n || rawAmount > BigInt(STACK_LIMIT)) return { ok: false, reason: `burn amount out of range: ${rawAmount}` };
-            deposits.push({ wallet: String(info.authority), obj_debugname: item.debugname, obj_id: item.objId, count: Number(rawAmount) });
-        } else if (type === 'transferChecked' || type === 'transfer') {
-            if (String(info.destination) !== registry.vaultAta) continue;
-            if (type === 'transferChecked' && String(info.mint) !== registry.gpMint) return { ok: false, reason: 'vault transfer of a non-GP mint' };
-            const rawAmount = type === 'transferChecked'
-                ? BigInt((info.tokenAmount as { amount: string }).amount)
-                : BigInt(String(info.amount));
+        const mint = String(info.mint);
+        const rawAmount = type === 'burnChecked'
+            ? BigInt((info.tokenAmount as { amount: string }).amount)
+            : BigInt(String(info.amount));
+
+        if (mint === registry.gpMint) {
             if (rawAmount % 10n ** BigInt(GP_DECIMALS) !== 0n) return { ok: false, reason: 'GP deposit must be a whole number of GP' };
             const gp = rawAmount / 10n ** BigInt(GP_DECIMALS);
             if (gp < 1n || gp > BigInt(STACK_LIMIT)) return { ok: false, reason: `GP amount out of range: ${gp}` };
             deposits.push({ wallet: String(info.authority), obj_debugname: 'gp', obj_id: COINS_OBJ_ID, count: Number(gp) });
+        } else {
+            const item = registry.itemsByMint.get(mint);
+            if (!item) continue;
+            if (rawAmount % 10n ** BigInt(ITEM_DECIMALS) !== 0n) return { ok: false, reason: 'item deposit must be a whole number of items' };
+            const items = rawAmount / 10n ** BigInt(ITEM_DECIMALS);
+            if (items < 1n || items > BigInt(STACK_LIMIT)) return { ok: false, reason: `item amount out of range: ${items}` };
+            deposits.push({ wallet: String(info.authority), obj_debugname: item.debugname, obj_id: item.objId, count: Number(items) });
         }
     }
 
-    if (deposits.length === 0) return { ok: false, reason: 'no recognized deposit instruction' };
+    if (deposits.length === 0) return { ok: false, reason: 'no recognized burn (deposit) of a registry/GP mint' };
     if (deposits.length > 1) return { ok: false, reason: 'more than one deposit instruction (v1 accepts exactly one)' };
     if (!deposits[0].wallet || deposits[0].wallet === 'undefined') return { ok: false, reason: 'could not determine authority' };
     return { ok: true, deposit: deposits[0] };

@@ -7,15 +7,11 @@
 //   bun cli/deposit.ts gp <wholeGp>  [--keypair path] [--server url]
 
 import { Keypair, PublicKey, Transaction, sendAndConfirmTransaction } from '@solana/web3.js';
-import {
-    TOKEN_2022_PROGRAM_ID,
-    createBurnCheckedInstruction,
-    createTransferCheckedInstruction,
-    getAssociatedTokenAddressSync,
-} from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { connection, loadRegistry, GP_DECIMALS } from '../runner/lib/common';
+import { connection, loadRegistry, GP_DECIMALS, ITEM_DECIMALS } from '../runner/lib/common';
+import { ixDepositItem, ixDepositGp } from '../program/client';
 
 const positional = process.argv.slice(2).filter(a => !a.startsWith('--'));
 const [debugname, countStr] = positional;
@@ -46,24 +42,25 @@ if (!linked?.linked) {
     process.exit(1);
 }
 
+// Burn through the program (deposit_item / deposit_gp). Standard SPL, decimal-scaled.
 const tx = new Transaction();
+let mint: PublicKey;
+let baseAmount: bigint;
 if (debugname === 'gp') {
-    const gpMint = new PublicKey(reg.gp.mint!);
-    const from = getAssociatedTokenAddressSync(gpMint, keypair.publicKey, false, TOKEN_2022_PROGRAM_ID);
-    const amount = count * 10n ** BigInt(GP_DECIMALS);
-    tx.add(createTransferCheckedInstruction(from, gpMint, new PublicKey(reg.gp.vaultAta!), keypair.publicKey, amount, GP_DECIMALS, [], TOKEN_2022_PROGRAM_ID));
+    mint = new PublicKey(reg.gp.mint!);
+    baseAmount = count * 10n ** BigInt(GP_DECIMALS);
 } else {
     const item = reg.items[debugname];
-    if (!item?.mint) {
-        console.error(`${debugname} has no mint in the registry`);
-        process.exit(1);
-    }
-    const mint = new PublicKey(item.mint);
-    const from = getAssociatedTokenAddressSync(mint, keypair.publicKey, false, TOKEN_2022_PROGRAM_ID);
-    tx.add(createBurnCheckedInstruction(from, mint, keypair.publicKey, count, 0, [], TOKEN_2022_PROGRAM_ID));
+    if (!item?.mint) { console.error(`${debugname} has no mint in the registry`); process.exit(1); }
+    mint = new PublicKey(item.mint);
+    baseAmount = count * 10n ** BigInt(ITEM_DECIMALS);
 }
+const from = getAssociatedTokenAddressSync(mint, keypair.publicKey, false, TOKEN_PROGRAM_ID);
+tx.add(debugname === 'gp'
+    ? ixDepositGp(keypair.publicKey, mint, from, baseAmount)
+    : ixDepositItem(keypair.publicKey, mint, from, baseAmount));
 
-console.log(`submitting ${debugname === 'gp' ? `${count} GP -> vault` : `burn ${count} x ${debugname}`}…`);
+console.log(`submitting deposit: burn ${count} ${debugname === 'gp' ? 'GP' : 'x ' + debugname} (${baseAmount} base)…`);
 const sig = await sendAndConfirmTransaction(conn, tx, [keypair], { commitment: 'finalized' });
 console.log(`finalized: ${sig}`);
 

@@ -25,6 +25,8 @@ export const config = {
     registryPath: resolvePath(process.env.BRIDGE_REGISTRY_PATH ?? 'registry/registry.json'),
     keypairPath: resolvePath(process.env.BRIDGE_KEYPAIR_PATH ?? '.keys/bridge.json'),
     vaultKeypairPath: resolvePath(process.env.VAULT_KEYPAIR_PATH ?? '.keys/vault.json'),
+    // Hot operator key: signs program withdraws (mints) + pays fees/ATA rent.
+    operatorKeypairPath: resolvePath(process.env.OPERATOR ?? '.keys/mainnet-operator.json'),
     paused: process.env.BRIDGE_PAUSED === '1'
 };
 

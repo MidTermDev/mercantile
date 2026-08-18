@@ -14,17 +14,17 @@
 import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
 import bs58 from 'bs58';
 import {
-    TOKEN_2022_PROGRAM_ID,
+    TOKEN_PROGRAM_ID,
     createAssociatedTokenAccountIdempotentInstruction,
-    createMintToInstruction,
-    createTransferCheckedInstruction,
     getAssociatedTokenAddressSync,
 } from '@solana/spl-token';
 import { db, toDbDate } from './db';
 import { config, loadKeypair, makeConnection } from './config';
 import { loadRegistryMaps, type RegistryMaps } from './verifier';
+import { ixWithdrawItem, ixWithdrawGp } from '../program/client';
 
 const GP_DECIMALS = 6;
+const ITEM_DECIMALS = 1; // items are 1-decimal fungible tokens (1 in-game item = 10 base units)
 const POLL_MS = 2000;
 const MAX_BUILD_ATTEMPTS = 5;
 
@@ -43,15 +43,13 @@ interface WithdrawRow {
 
 export class WithdrawWorker {
     private conn: Connection;
-    private payer: Keypair;
-    private vaultOwner: Keypair;
+    private operator: Keypair; // hot key: signs program withdraws + pays fees/ATA rent
     private registry: RegistryMaps;
     private running = false;
 
     constructor() {
         this.conn = makeConnection();
-        this.payer = loadKeypair(config.keypairPath);
-        this.vaultOwner = loadKeypair(config.vaultKeypairPath);
+        this.operator = loadKeypair(config.operatorKeypairPath);
         this.registry = loadRegistryMaps();
     }
 
@@ -97,46 +95,35 @@ export class WithdrawWorker {
         }
     }
 
+    // Mint via the on-chain program (operator-signed). Items: 1 in-game item ->
+    // 10 base units (1 decimal). GP: 1 -> 10^6. deposit is the burn half.
     private async buildTx(row: WithdrawRow): Promise<{ tx: Transaction; lastValidBlockHeight: number } | { error: string }> {
         const user = new PublicKey(row.wallet);
         const tx = new Transaction();
+        const op = this.operator.publicKey;
 
+        let mint: PublicKey;
+        let baseAmount: bigint;
         if (row.obj_debugname === 'gp') {
-            const gpMint = new PublicKey(this.registry.gpMint);
-            const userAta = getAssociatedTokenAddressSync(gpMint, user, false, TOKEN_2022_PROGRAM_ID);
-            const vaultAta = new PublicKey(this.registry.vaultAta);
-            const amount = BigInt(row.count) * 10n ** BigInt(GP_DECIMALS);
-
-            const vaultBalance = BigInt((await this.conn.getTokenAccountBalance(vaultAta)).value.amount);
-            tx.add(createAssociatedTokenAccountIdempotentInstruction(this.payer.publicKey, userAta, user, gpMint, TOKEN_2022_PROGRAM_ID));
-            if (vaultBalance >= amount) {
-                tx.add(createTransferCheckedInstruction(vaultAta, gpMint, userAta, this.vaultOwner.publicKey, amount, GP_DECIMALS, [], TOKEN_2022_PROGRAM_ID));
-            } else {
-                // vault dry (or short): drain what's there, mint the shortfall —
-                // the explicit in-game-inflation signal from the spec.
-                if (vaultBalance > 0n) {
-                    tx.add(createTransferCheckedInstruction(vaultAta, gpMint, userAta, this.vaultOwner.publicKey, vaultBalance, GP_DECIMALS, [], TOKEN_2022_PROGRAM_ID));
-                }
-                const shortfall = amount - vaultBalance;
-                tx.add(createMintToInstruction(gpMint, userAta, this.payer.publicKey, shortfall, [], TOKEN_2022_PROGRAM_ID));
-                console.warn(`[withdraw-worker] INFLATION: vault short by ${Number(shortfall) / 10 ** GP_DECIMALS} GP for row ${row.id} — minting`);
-            }
+            mint = new PublicKey(this.registry.gpMint);
+            baseAmount = BigInt(row.count) * 10n ** BigInt(GP_DECIMALS);
         } else {
             const item = this.registry.itemsByDebugname.get(row.obj_debugname);
             if (!item) return { error: `no mint for ${row.obj_debugname}` };
-            const mint = new PublicKey(item.mint);
-            const userAta = getAssociatedTokenAddressSync(mint, user, false, TOKEN_2022_PROGRAM_ID);
-            tx.add(
-                createAssociatedTokenAccountIdempotentInstruction(this.payer.publicKey, userAta, user, mint, TOKEN_2022_PROGRAM_ID),
-                createMintToInstruction(mint, userAta, this.payer.publicKey, BigInt(row.count), [], TOKEN_2022_PROGRAM_ID)
-            );
+            mint = new PublicKey(item.mint);
+            baseAmount = BigInt(row.count) * 10n ** BigInt(ITEM_DECIMALS);
         }
+
+        const userAta = getAssociatedTokenAddressSync(mint, user, false, TOKEN_PROGRAM_ID);
+        tx.add(createAssociatedTokenAccountIdempotentInstruction(op, userAta, user, mint, TOKEN_PROGRAM_ID));
+        tx.add(row.obj_debugname === 'gp'
+            ? ixWithdrawGp(op, mint, userAta, baseAmount)
+            : ixWithdrawItem(op, mint, userAta, baseAmount));
 
         const { blockhash, lastValidBlockHeight } = await this.conn.getLatestBlockhash('finalized');
         tx.recentBlockhash = blockhash;
-        tx.feePayer = this.payer.publicKey;
-        const signers = row.obj_debugname === 'gp' ? [this.payer, this.vaultOwner] : [this.payer];
-        tx.sign(...signers);
+        tx.feePayer = op;
+        tx.sign(this.operator);
         return { tx, lastValidBlockHeight };
     }
 
