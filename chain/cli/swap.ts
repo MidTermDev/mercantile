@@ -7,9 +7,9 @@
 import { Keypair, PublicKey } from '@solana/web3.js';
 import BN from 'bn.js';
 import { CpAmm, SwapMode } from '@meteora-ag/cp-amm-sdk';
-import { getMint, TOKEN_2022_PROGRAM_ID } from '@solana/spl-token';
+import { getMint, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { readFileSync } from 'node:fs';
-import { connection, bridgeKeypair, loadRegistry, GP_DECIMALS } from '../runner/lib/common';
+import { connection, bridgeKeypair, loadRegistry, GP_DECIMALS, ITEM_DECIMALS } from '../runner/lib/common';
 import { ata } from '../runner/lib/token22';
 import { pacedSendAndConfirm } from '../runner/lib/pace';
 
@@ -47,8 +47,8 @@ const inputMint = isBuy ? gpMint : itemMint;
 const outputMint = isBuy ? itemMint : gpMint;
 
 const [inputInfo, outputInfo] = await Promise.all([
-    getMint(conn, inputMint, 'confirmed', TOKEN_2022_PROGRAM_ID),
-    getMint(conn, outputMint, 'confirmed', TOKEN_2022_PROGRAM_ID),
+    getMint(conn, inputMint, 'confirmed', TOKEN_PROGRAM_ID),
+    getMint(conn, outputMint, 'confirmed', TOKEN_PROGRAM_ID),
 ]);
 const epochInfo = await conn.getEpochInfo();
 const slot = await conn.getSlot();
@@ -61,7 +61,7 @@ const common = {
     poolState,
     inputTokenInfo: { mint: inputInfo, currentEpoch: epochInfo.epoch },
     outputTokenInfo: { mint: outputInfo, currentEpoch: epochInfo.epoch },
-    tokenADecimal: 0,
+    tokenADecimal: ITEM_DECIMALS,
     tokenBDecimal: GP_DECIMALS,
     hasReferral: false,
 } as const;
@@ -75,8 +75,8 @@ const swapCommon = {
     tokenBMint: poolState.tokenBMint,
     tokenAVault: poolState.tokenAVault,
     tokenBVault: poolState.tokenBVault,
-    tokenAProgram: TOKEN_2022_PROGRAM_ID,
-    tokenBProgram: TOKEN_2022_PROGRAM_ID,
+    tokenAProgram: TOKEN_PROGRAM_ID,
+    tokenBProgram: TOKEN_PROGRAM_ID,
     referralTokenAccount: null,
     poolState,
 } as const;

@@ -2,8 +2,8 @@
 // Usage: bun cli/balances.ts [address] [--json]   (default: bridge keypair)
 
 import { PublicKey } from '@solana/web3.js';
-import { TOKEN_2022_PROGRAM_ID } from '@solana/spl-token';
-import { connection, bridgeKeypair, loadRegistry, GP_DECIMALS } from '../runner/lib/common';
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { connection, bridgeKeypair, loadRegistry, GP_DECIMALS, ITEM_DECIMALS } from '../runner/lib/common';
 
 const json = process.argv.includes('--json');
 const addrArg = process.argv.slice(2).find(a => !a.startsWith('--'));
@@ -14,7 +14,7 @@ const reg = loadRegistry();
 const byMint = new Map<string, string>();
 for (const [d, item] of Object.entries(reg.items)) if (item.mint) byMint.set(item.mint, d);
 
-const resp = await conn.getParsedTokenAccountsByOwner(owner, { programId: TOKEN_2022_PROGRAM_ID });
+const resp = await conn.getParsedTokenAccountsByOwner(owner, { programId: TOKEN_PROGRAM_ID });
 const rows: { name: string; amount: string }[] = [];
 for (const { account } of resp.value) {
     const info = account.data.parsed.info;
@@ -24,7 +24,8 @@ for (const { account } of resp.value) {
         rows.push({ name: 'GP', amount: (Number(amount) / 10 ** GP_DECIMALS).toFixed(6) });
     } else {
         const name = byMint.get(info.mint);
-        if (name) rows.push({ name, amount: amount.toString() });
+        // items are 1-decimal fungible tokens; show whole items
+        if (name) rows.push({ name, amount: (Number(amount) / 10 ** ITEM_DECIMALS).toString() });
     }
 }
 rows.sort((a, b) => a.name.localeCompare(b.name));
