@@ -67,7 +67,7 @@ export function LinkModal({ onClose, onLinked }: { onClose: () => void; onLinked
             {/* Step 2 */}
             <Step n={2} title="Get your code in-game">
               <p className="text-mute text-sm">
-                Log in and talk to the <b className="text-ink">Exchange Clerk</b> at the Varrock west bank. Choose
+                Log in and talk to the <b className="text-ink">Exchange Clerk</b> at any bank. Choose
                 {" "}<b className="text-ink">“Link my Solana wallet”</b> — you&apos;ll get an 8-character code (valid 10 minutes).
                 No need to type your address anywhere.
               </p>

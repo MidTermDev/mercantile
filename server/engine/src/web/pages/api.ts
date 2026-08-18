@@ -14,12 +14,27 @@ export async function handleScreenshotUpload(req: Request, url: URL): Promise<Re
         return null;
     }
 
+    // Hardening (rs-sdk #58): this runs on the engine tick thread, so cap size, validate the format,
+    // and use a collision-resistant filename. Reject oversized bodies before decoding/writing so a
+    // large upload can't stall the world or exhaust the filesystem.
+    const MAX_BYTES = 2 * 1024 * 1024; // a game screenshot is well under 2 MiB
     try {
+        const declared = Number(req.headers.get('content-length') || 0);
+        if (declared > MAX_BYTES) {
+            return new Response(JSON.stringify({ success: false, error: 'too large' }), { status: 413, headers: { 'Content-Type': 'application/json' } });
+        }
         const data = await req.text();
-        const base64Data = data.replace(/^data:image\/png;base64,/, '');
-        const filename = `screenshot-${Date.now()}.png`;
-        const filepath = `screenshots/${filename}`;
-        fs.writeFileSync(filepath, Buffer.from(base64Data, 'base64'));
+        const prefix = 'data:image/png;base64,';
+        if (!data.startsWith(prefix) || data.length > MAX_BYTES) {
+            return new Response(JSON.stringify({ success: false, error: 'expected a data:image/png;base64 body under 2 MiB' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+        }
+        const buf = Buffer.from(data.slice(prefix.length), 'base64');
+        // PNG signature (89 50 4E 47) + size recheck on the decoded bytes
+        if (buf.length > MAX_BYTES || buf.length < 8 || buf[0] !== 0x89 || buf[1] !== 0x50 || buf[2] !== 0x4e || buf[3] !== 0x47) {
+            return new Response(JSON.stringify({ success: false, error: 'not a valid PNG' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+        }
+        const filename = `screenshot-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.png`;
+        fs.writeFileSync(`screenshots/${filename}`, buf);
         return new Response(JSON.stringify({ success: true, filename }), {
             headers: { 'Content-Type': 'application/json' }
         });

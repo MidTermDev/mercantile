@@ -91,8 +91,12 @@ model3=model_260_npc
 model4=model_202_obj_wear
 head1=model_44_obj_wear
 category=shop_keeper
+// SECURITY: was shop_sell_multiplier,500 — a ruby_ring (cost 2025) sold for 1012gp, below its
+// high-alch value (1215) AND Grum's goldshop buy price (1417), so buy->alch / buy->sell minted
+// net GP that the on-chain bridge turns into real tokens. Raised to 1000 (authentic 100%) so the
+// buy price (2025) exceeds both exits, closing the faucet.
 param=owned_shop,cheapringshop
-param=shop_sell_multiplier,500
+param=shop_sell_multiplier,1000
 param=shop_buy_multiplier,300
 param=shop_delta,10
 param=shop_title,irksol

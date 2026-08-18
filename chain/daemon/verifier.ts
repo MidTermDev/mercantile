@@ -16,6 +16,12 @@ const STACK_LIMIT = 0x7fffffff;
 // authentic, stable id from server/content/pack/obj.pack
 export const COINS_OBJ_ID = 995;
 
+// GP sink: a 1% deflationary tax on GP crossing the bridge in EITHER direction (GP-only, to fight
+// in-game inflation). The taxed GP is destroyed — not minted on withdraw, not credited on deposit.
+// Items are never taxed. Rounded down, so amounts < 100 GP are effectively untaxed.
+export const GP_SINK_BPS = 100; // 1.00%
+export function gpAfterSink(gp: number): number { return gp - Math.floor((gp * GP_SINK_BPS) / 10000); }
+
 export interface RegistryMaps {
     gpMint: string;
     vaultAta: string;
@@ -73,7 +79,10 @@ export async function verifyDepositTx(conn: Connection, registry: RegistryMaps, 
             if (rawAmount % 10n ** BigInt(GP_DECIMALS) !== 0n) return { ok: false, reason: 'GP deposit must be a whole number of GP' };
             const gp = rawAmount / 10n ** BigInt(GP_DECIMALS);
             if (gp < 1n || gp > BigInt(STACK_LIMIT)) return { ok: false, reason: `GP amount out of range: ${gp}` };
-            deposits.push({ wallet: String(info.authority), obj_debugname: 'gp', obj_id: COINS_OBJ_ID, count: Number(gp) });
+            // 1% GP sink: the wallet burned `gp`, but only the post-tax amount is credited in-game.
+            const net = gpAfterSink(Number(gp));
+            if (net < Number(gp)) console.log(`[verifier] GP sink: deposit of ${gp} GP credits ${net} in-game (${Number(gp) - net} burned, 1% tax)`);
+            deposits.push({ wallet: String(info.authority), obj_debugname: 'gp', obj_id: COINS_OBJ_ID, count: net });
         } else {
             const item = registry.itemsByMint.get(mint);
             if (!item) continue;

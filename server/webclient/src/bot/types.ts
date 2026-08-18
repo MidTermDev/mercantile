@@ -372,7 +372,7 @@ export interface DialogState {
 export interface InterfaceState {
     isOpen: boolean;
     interfaceId: number;
-    options: Array<{ index: number; text: string }>;
+    options: Array<{ index: number; text: string; componentId?: number }>;
 }
 
 export interface PrayerState {

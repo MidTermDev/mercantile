@@ -34,8 +34,12 @@ export const linkPageUrl = () => `${gameOrigin()}/bridge/link`;
 
 // ── agent self-serve API keys ────────────────────────────────────────────────
 export interface AgentKey { username: string; apiKey: string; server: string; }
-export async function registerAgent(): Promise<AgentKey> {
-  const r = await fetch(`${gameOrigin()}/agent/register`, { method: "POST" });
+export async function registerAgent(name?: string): Promise<AgentKey> {
+  const r = await fetch(`${gameOrigin()}/agent/register`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(name?.trim() ? { username: name.trim() } : {}),
+  });
   if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error ?? `HTTP ${r.status}`);
   return r.json();
 }
@@ -76,6 +80,21 @@ export async function linkWallet(
 // Canonical link message — MUST match server/engine/src/web/pages/bridge.ts linkMessage()
 export function linkMessage(username: string, code: string): string {
   return `rs-bridge-link|v1|${username.toLowerCase()}|${code.toUpperCase()}`;
+}
+
+// Canonical unlink message — MUST match server/engine/src/web/pages/bridge.ts unlinkMessage()
+export function unlinkMessage(address: string): string {
+  return `rs-bridge-unlink|v1|${address}`;
+}
+
+export async function unlinkWallet(address: string, signature: string): Promise<{ ok: boolean; error?: string }> {
+  const r = await fetch(`${gameOrigin()}/bridge/unlink`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ address, signature }),
+  });
+  const body = await r.json().catch(() => ({}));
+  return r.ok ? { ok: true } : { ok: false, error: body.error ?? `HTTP ${r.status}` };
 }
 
 export async function notifyDeposit(signature: string): Promise<{ ok: boolean; error?: string }> {

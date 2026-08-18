@@ -285,18 +285,17 @@
             }
         }
 
-        // Update URL with password without page reload (makes refresh auto-login work)
+        // SECURITY (rs-sdk #59): passwords must NEVER be written to the URL — they persist in browser
+        // history, reverse-proxy/access logs, and shared links. Kept as a no-op for backward compat.
         function updateUrlWithPassword(password) {
-            const url = new URL(window.location);
-            url.searchParams.set('password', password);
-            window.history.replaceState({}, '', url);
+            // intentionally does nothing
         }
 
-        // Sync password field changes to URL
-        function syncPasswordToUrl() {
+        // Persist the password to localStorage only (convenience across reloads), never the URL.
+        function syncPasswordToLocal() {
             const password = document.getElementById('bot-password').value;
             if (password) {
-                updateUrlWithPassword(password);
+                try { localStorage.setItem('bot_password', password); } catch (e) {}
             }
         }
 
@@ -398,7 +397,7 @@
                 <span id="login-controls">
                     <input type="text" id="bot-username" placeholder="username" value="" onblur="syncUsernameToUrl();" onchange="syncUsernameToUrl();">
                     <button onclick="randomUsername();" title="Generate random name" style="background:#333;color:#04A800;padding:4px 8px;">🎲</button>
-                    <input type="password" id="bot-password" placeholder="password" value="test" onblur="syncPasswordToUrl();" onchange="syncPasswordToUrl();">
+                    <input type="password" id="bot-password" placeholder="password" onchange="syncPasswordToLocal();">
                     <button onclick="quickLogin();" style="background:#04A800;">Login</button>
                 </span>
                 <span id="tutorial-controls" style="display: none;">
@@ -468,8 +467,13 @@
             }
             // Always sync username to URL
             updateUrlWithBot(username);
-            const password = document.getElementById('bot-password').value || 'test';
-            updateUrlWithPassword(password);
+            // SECURITY (rs-sdk #57): no default "test" password — require one, and never write it to the URL.
+            const password = document.getElementById('bot-password').value;
+            if (!password) {
+                document.getElementById('bot-status').textContent = 'Enter a password — it creates or logs into this account. Do not reuse a real-world password.';
+                return;
+            }
+            try { localStorage.setItem('bot_password', password); } catch (e) {}
 
             document.getElementById('bot-status').textContent = 'Logging in as ' + username + '...';
 

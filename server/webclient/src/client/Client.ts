@@ -82,6 +82,7 @@ const ENABLE_BOT_SDK = process.env.ENABLE_BOT_SDK === 'true';
 // Conditional Bot SDK import - will be tree-shaken in standard build
 import * as BotSDKModule from '#/bot/index.js';
 const BotOverlay = ENABLE_BOT_SDK ? BotSDKModule.BotOverlay : null;
+const AiBrain = ENABLE_BOT_SDK ? BotSDKModule.AiBrain : null;
 
 const CLIENT_VERSION = 274;
 
@@ -648,6 +649,8 @@ export class Client extends GameShell {
 
     // rs-sdk: Bot SDK overlay for bot development (dynamically loaded when enabled)
     private botOverlay: InstanceType<typeof import('#/bot/index.js').BotOverlay> | null = null;
+    // rs-sdk: browser AI brain (LLM plays in-browser; attached when ?ai=1)
+    private aiBrain: InstanceType<typeof import('#/bot/index.js').AiBrain> | null = null;
     private botAutoLoginAttempted: boolean = false;
     private loginInProgress: boolean = false;
 
@@ -4283,6 +4286,16 @@ export class Client extends GameShell {
                 // Initialize Bot SDK overlay (only if enabled)
                 if (ENABLE_BOT_SDK && BotOverlay && !this.botOverlay) {
                     this.botOverlay = new BotOverlay(this);
+                    // Browser AI player: attach the local LLM brain on the bot client. Passive until the
+                    // user picks a model and presses Start, so it never fights an external controller.
+                    // Never let a brain/UI failure break the game client.
+                    if (AiBrain && !this.aiBrain) {
+                        try {
+                            this.aiBrain = new AiBrain(this.botOverlay);
+                        } catch (e) {
+                            console.error('[Client] Failed to start AI brain:', e);
+                        }
+                    }
                 }
 
                 for (let i = 0; i < 5; i++) {

@@ -9,6 +9,7 @@ import type { ItemsFile, ExchangeItem } from "@/lib/types";
 import {
   isLinked, pendingWithdrawals, type PendingRow,
   buildRedeemTx, claimBalanceBase, buildDepositTx, notifyDeposit, walletHoldings,
+  unlinkMessage, unlinkWallet,
 } from "@/lib/bridge";
 import { LinkModal } from "@/components/LinkModal";
 import { buildSellTx } from "@/lib/swap";
@@ -22,7 +23,7 @@ type GpInfo = ItemsFile["gp"];
 
 export function WalletPanel() {
   const { connection } = useConnection();
-  const { publicKey, connected, sendTransaction } = useWallet();
+  const { publicKey, connected, sendTransaction, signMessage } = useWallet();
 
   const [items, setItems] = useState<ExchangeItem[]>([]);
   const [gp, setGp] = useState<GpInfo | null>(null);
@@ -143,6 +144,20 @@ export function WalletPanel() {
     });
   }
 
+  // ── unlink this wallet from its character (sign to prove wallet ownership) ──
+  function unlink() {
+    return run("unlink", async () => {
+      if (!publicKey || !signMessage) throw new Error("connect a wallet that can sign messages");
+      const addr = publicKey.toBase58();
+      const signed = await signMessage(new TextEncoder().encode(unlinkMessage(addr)));
+      let s = ""; for (const b of signed) s += String.fromCharCode(b);
+      const res = await unlinkWallet(addr, btoa(s));
+      if (!res.ok) throw new Error(res.error);
+      setMsg("Wallet unlinked from your character.");
+      refresh();
+    });
+  }
+
   if (!connected) {
     return (
       <div className="card p-8 text-center">
@@ -182,7 +197,13 @@ export function WalletPanel() {
           {linked === true && <span className="text-emerald text-sm">✓ linked</span>}
         </div>
         {linked === true ? (
-          <p className="text-mute text-sm mt-2">This wallet is linked to a game account. You can bridge below.</p>
+          <div className="mt-2">
+            <p className="text-mute text-sm">This wallet is linked to a game account. You can bridge below.</p>
+            <button onClick={unlink} disabled={busy === "unlink"}
+              className="mt-3 px-4 py-2 rounded-lg border border-line text-mute text-sm hover:text-ink hover:border-gold transition disabled:opacity-50 disabled:cursor-not-allowed">
+              {busy === "unlink" ? "Unlinking…" : "Unlink wallet"}
+            </button>
+          </div>
         ) : (
           <>
             <p className="text-mute text-sm mt-2">

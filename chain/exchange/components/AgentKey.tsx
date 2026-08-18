@@ -5,12 +5,16 @@ import { GITHUB_URL } from "@/lib/constants";
 
 export function AgentKey() {
   const [key, setKey] = useState<Key | null>(null);
+  const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
+  const validName = name === "" || /^[a-zA-Z0-9_ ]{1,12}$/.test(name);
+
   async function gen() {
+    if (!validName) { setErr("name must be 1–12 chars: letters, digits, spaces or underscores"); return; }
     setBusy(true); setErr(null);
-    try { setKey(await registerAgent()); }
+    try { setKey(await registerAgent(name)); }
     catch (e: any) { setErr(e?.message?.slice(0, 160) ?? "failed"); }
     finally { setBusy(false); }
   }
@@ -19,19 +23,25 @@ export function AgentKey() {
     return (
       <div className="card p-6 text-center">
         <p className="text-mute text-sm mb-4 max-w-md mx-auto">
-          One click issues a fresh character + API key. No signup, no email. You get a ready-to-use
-          <span className="font-mono text-ink"> bot.env</span> for the rs-sdk.
+          Issue a fresh character + API key. No signup, no email. Pick a name or leave it blank for a random one —
+          you get a ready-to-use <span className="font-mono text-ink">bot.env</span> for the rs-sdk.
         </p>
-        <button onClick={gen} disabled={busy}
-          className="px-6 py-3 rounded-lg bg-gold text-bg font-bold hover:bg-gold2 transition disabled:opacity-50">
-          {busy ? "Issuing…" : "Generate my agent key →"}
-        </button>
+        <div className="flex flex-col sm:flex-row gap-2 justify-center items-center max-w-md mx-auto">
+          <input value={name} onChange={(e) => setName(e.target.value)} maxLength={12}
+            onKeyDown={(e) => { if (e.key === "Enter" && !busy) gen(); }}
+            placeholder="agent name (optional, max 12)"
+            className={`flex-1 min-w-0 w-full bg-panel border rounded-lg px-3 py-3 text-ink text-sm focus:outline-none ${validName ? "border-line focus:border-gold" : "border-err"}`} />
+          <button onClick={gen} disabled={busy || !validName}
+            className="shrink-0 px-6 py-3 rounded-lg bg-gold text-bg font-bold hover:bg-gold2 transition disabled:opacity-50 disabled:cursor-not-allowed">
+            {busy ? "Issuing…" : "Get my agent key →"}
+          </button>
+        </div>
         {err && <p className="text-err text-xs mt-3">{err}</p>}
       </div>
     );
   }
 
-  const botEnv = `BOT_USERNAME=${key.username}\nPASSWORD=${key.apiKey}\nSERVER=${key.server}`;
+  const botEnv = `BOT_USERNAME=${key.username}\nPASSWORD=${key.apiKey}\nSERVER=${key.server}\n# optional — lets an LLM play; get one at platform.deepseek.com\nDEEPSEEK_API_KEY=`;
   return (
     <div className="card p-6 space-y-4">
       <div className="rounded-lg border border-gold/50 bg-panel p-4">
@@ -49,10 +59,12 @@ export function AgentKey() {
       </div>
 
       <div className="text-sm text-mute space-y-1">
-        <p className="text-ink font-semibold">2 · Run a bot</p>
-        <p>Clone the SDK (<a href={GITHUB_URL} target="_blank" rel="noreferrer" className="gold-text underline">{GITHUB_URL.replace("https://github.com/", "")}</a>), then:</p>
+        <p className="text-ink font-semibold">2 · Let an LLM play it — one command</p>
+        <p>Clone the SDK (<a href={GITHUB_URL} target="_blank" rel="noreferrer" className="gold-text underline">{GITHUB_URL.replace("https://github.com/", "")}</a>), drop your <span className="font-mono">DeepSeek</span> key in the <span className="font-mono">bot.env</span> above, then:</p>
         <pre className="rounded-lg border border-line bg-black/30 p-3 font-mono text-xs text-ink overflow-x-auto">bun install
-bun bots/{key.username}/script.ts   # drives your bot via the gateway</pre>
+DEEPSEEK_API_KEY=sk-… bun agent/agent.ts {key.username}</pre>
+        <p>This starts the game client, connects the agent, skips the tutorial, and opens a <b className="text-ink">watch &amp; prompt console</b> at <span className="font-mono">localhost:8799</span> — steer it live (&ldquo;chop yews and bank them&rdquo;) and watch every action. No key? It still runs in a demo mode so you can see the loop.</p>
+        <p className="text-mute/70 text-xs">Prefer to write your own logic? Start the client with <span className="font-mono">bun server/webclient/src/lite/runner.ts {key.username}</span>, then run any <span className="font-mono">bun bots/{key.username}/script.ts</span> against the gateway.</p>
         <p className="text-ink font-semibold mt-3">3 · Go on-chain (optional)</p>
         <p>Link a Solana wallet to this character on the <a href="/wallet" className="gold-text underline">Wallet</a> page, then withdraw items/GP and trade on the <a href="/exchange" className="gold-text underline">Grand Exchange</a> — same bridge as human players.</p>
       </div>

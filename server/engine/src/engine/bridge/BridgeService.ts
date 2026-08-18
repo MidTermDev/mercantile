@@ -194,6 +194,13 @@ class BridgeServiceImpl {
         player?.messageGame(`Wallet linked: ${address.slice(0, 4)}...${address.slice(-4)}`);
     }
 
+    /** Web-side: called after account_wallet row is deleted. */
+    onWalletUnlinked(username: string, address: string): void {
+        this.walletCache.delete(username.toLowerCase());
+        const player = this.world?.getPlayerByUsername(username);
+        player?.messageGame(`Wallet unlinked: ${address.slice(0, 4)}...${address.slice(-4)}`);
+    }
+
     requestWithdraw(player: Player, objId: number, count: number): BridgeWithdrawResult {
         if (!this.registryLoaded) return BridgeWithdrawResult.CLOSED;
         const usernameLower = player.username.toLowerCase();
@@ -489,9 +496,14 @@ class BridgeServiceImpl {
                     }
                     continue; // same session still working on it
                 }
-                // session that owned the queue script is gone: current varps came from disk
+                // session that owned the queue script is gone: current varps came from disk.
+                // SECURITY: match the watermark EXACTLY, not `>=`. %bridge_debit_ack is a single
+                // running max set to $id atomically with the inv_del in one .sav — so `== id` proves
+                // THIS row's coins were removed. A `>=` test could be satisfied by a *later* withdraw
+                // that bumped the watermark past a crash-orphaned lower-id row (whose coins were never
+                // removed), marking that orphan 'debited' and minting on-chain tokens for nothing.
                 const watermark = player.getVar(this.varpDebitAck) as number;
-                if (watermark >= row.id) {
+                if (watermark === row.id) {
                     await db.updateTable('bridge_tx').set({ state: 'debited', updated_at: toDbDate(new Date()) }).where('id', '=', row.id).where('state', '=', 'requested').execute();
                 } else {
                     await db.updateTable('bridge_tx').set({ state: 'cancelled', error: 'recovered: debit never persisted', updated_at: toDbDate(new Date()) }).where('id', '=', row.id).where('state', '=', 'requested').execute();
@@ -505,8 +517,12 @@ class BridgeServiceImpl {
                     }
                     continue;
                 }
+                // SECURITY: exact match (see debit side). `>=` here would mark a crash-orphaned lower-id
+                // claim 'credited' after a later claim bumped the watermark — the player never received
+                // those items but the deposit is consumed (player loss). `== id` reverts it to 'verified'
+                // so it stays re-claimable.
                 const watermark = player.getVar(this.varpCreditAck) as number;
-                if (watermark >= row.id) {
+                if (watermark === row.id) {
                     await db.updateTable('bridge_tx').set({ state: 'credited', updated_at: toDbDate(new Date()) }).where('id', '=', row.id).where('state', '=', 'claiming').execute();
                 } else {
                     await db.updateTable('bridge_tx').set({ state: 'verified', updated_at: toDbDate(new Date()) }).where('id', '=', row.id).where('state', '=', 'claiming').execute();

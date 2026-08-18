@@ -8,7 +8,11 @@ p_delay(3);
 %death = ^false;
 
 [queue,player_death]
-if (.finduid(%duel2accept) = true & ~.in_duel_arena(.coord) = true) {
+// SECURITY (issue #55): gate the duel-death branch on the DYING player's OWN duel state, mirroring
+// [label,player_death_duel]'s guard. The old check tested the challenged OPPONENT's position plus a
+// sticky %duel2accept varp, so a stale challenge + an accomplice standing in a fight-pit let a player
+// die anywhere and skip ~player_death entirely (no item loss, no respawn) — a full death-penalty bypass.
+if (~in_duel_arena(coord) = true & %duelstatus < ^duelstatus_lost) {
     @player_death_duel;
 }
 ~player_death;

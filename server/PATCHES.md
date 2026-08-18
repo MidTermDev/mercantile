@@ -340,7 +340,69 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
 ### Agent self-serve API keys
 - [ ] `web/pages/agent.ts` (+ wired in `web/index.ts`): `POST /agent/register` (rate-limited)
       issues a fresh game account whose password is the apiKey; logs to data/agent-keys.jsonl.
-      `Environment.AGENT_KEYS_ENABLED` (default true).
+      Optional body `{username}` (1–12 chars `[a-zA-Z0-9_ ]`, 409 if taken); omitted → random.
+      `Environment.AGENT_KEYS_ENABLED` (default true). Also `GET /agent/stats` → `{online,registered}`
+      for the site's live player count.
 - [ ] `LoginServer.ts` `sdk_auth` honors a `strict` flag → no auto-create (reject unknown accounts).
 - [ ] `gateway.ts` `AGENT_KEY_MODE=true` → passes `strict:true` so only issued keys can drive bots
       (humans via the browser game-login path are unaffected). Site: /agents page.
+- [ ] Public deploy must proxy the gateway WebSocket to it (e.g. nginx `/gateway` → :7780);
+      both the lite runner and the SDK controller derive `wss://<host>/gateway`.
+- [ ] `agent/agent.ts` (repo root): turnkey LLM harness — spawns the lite game client, connects the
+      SDK, skips the tutorial, and serves a local watch/prompt console (DeepSeek by default; BYO key).
+
+### Browser AI player (webclient) — `?ai=1`
+- [ ] `webclient/src/bot/AiBrain.ts` (new): in-browser LLM agent. Reads BotOverlay's collected world
+      state, calls the player's chosen provider (Anthropic `/v1/messages` w/ `anthropic-dangerous-direct-browser-access`,
+      or OpenAI/DeepSeek/custom `/chat/completions`) with a key held in localStorage (never sent to us),
+      resolves the decision (name → nearby npc/loc/item) into a BotAction, and feeds the SAME ActionExecutor
+      the gateway uses. Self-contained floating panel (provider/model dropdown, key, prompt, start/stop, log).
+- [ ] `webclient/src/bot/BotOverlay.ts`: added `getWorldStateForAi()`, `enqueueAiAction()`, `isIdle()`.
+- [ ] `webclient/src/bot/index.ts`: export `AiBrain`.
+- [ ] `webclient/src/client/Client.ts`: `AI_MODE = ENABLE_BOT_SDK && ?ai=1`; after `new BotOverlay(this)`,
+      `new AiBrain(this.botOverlay)` in a try/catch (bot bundle only; standard build tree-shakes it out).
+- [ ] Requires the bot bundle: served at `/bot` (out/bot). Public deploy must proxy `/bot/*` assets to the
+      engine (nginx `bot/` in the asset regex). AI page: `/bot?ai=1`. Site framing at `/ai`.
+
+### Security fixes
+- [ ] `content/scripts/player/scripts/death.rs2` `[queue,player_death]` (issue #55): the duel-death branch was
+      gated on the challenged OPPONENT's coord + a sticky `%duel2accept` varp, letting a player die anywhere and
+      skip `~player_death` (no item loss, no respawn) if an accomplice stood in a fight-pit. Now gated on the
+      DYING player's OWN state — `~in_duel_arena(coord) = true & %duelstatus < ^duelstatus_lost` — matching
+      `[label,player_death_duel]`'s own guard. Needs a content repack (BUILD_STARTUP=true).
+- [ ] `engine/src/engine/bridge/BridgeService.ts` recoveryScan (MONEY-PRINTING; found in the GP-integrity audit):
+      the withdraw/claim recovery used `watermark >= row.id` to declare a debit/credit durable. `%bridge_debit_ack`
+      is a single running max set to `$id` atomically with the inv_del, so a crash-orphaned lower-id `requested`
+      row (coins never removed) could be marked `debited` after a LATER legit withdraw bumped the watermark past it
+      → the daemon minted real SPL tokens for nothing. Fixed to `watermark === row.id` on BOTH the debit and credit
+      sides (exact match proves THIS row's op persisted; a later op sets the watermark to a different id). Engine
+      code — a normal restart picks it up.
+- [ ] `content/scripts/areas/area_lostcity/configs/lostcity.npc` cheapringshop (upstream issue #56): Irksol's ring
+      shop sold `ruby_ring` at 50% (1012gp) — below its high-alch value (1215) and Grum's goldshop buy (1417),
+      a net-GP alch/arbitrage faucet. Raised `shop_sell_multiplier` 500 → 1000 (authentic). Content repack.
+- [ ] `engine/view/bot.ejs` (upstream #57 + #59): the `/bot` login form defaulted the password to `test`,
+      fell back to `test` in quickLogin, and wrote the password into the URL (`updateUrlWithPassword` via
+      replaceState). On a value-bearing server that meant takeover-able accounts + credential leakage into
+      history/logs. Fixed: removed the `test` default/fallback (require a password), neutralized
+      `updateUrlWithPassword` to a no-op, and persist the password to localStorage only. bot.ejs is
+      server-rendered (ejs.renderFile) so this is live with no restart/rebuild.
+- [ ] `engine/src/web/pages/api.ts` `handleScreenshotUpload` (upstream #58, defense-in-depth): added a 2 MiB
+      cap (checked before decode + on decoded bytes), `data:image/png;base64` + PNG-signature validation, and a
+      collision-resistant filename. NOTE: `/api/*` is NOT exposed through our nginx (routes to the site → 404)
+      and 8888 isn't public, so this endpoint is not externally reachable on our deploy — this is hardening for
+      if that ever changes; deploys on the next engine restart.
+### Bridge features (2026-08-18)
+- [ ] `engine/src/web/pages/bridge.ts` + `BridgeService.ts`: **wallet unlink**. `POST /bridge/unlink`
+      {address, signature} — self-authenticating ed25519 sig over `unlinkMessage(address)` by the linked
+      wallet; deletes the `account_wallet` row and calls `BridgeService.onWalletUnlinked` (clears walletCache,
+      messages the player). Idempotent. Site: Unlink button on /wallet (WalletPanel), `unlinkWallet` in lib/bridge.
+- [ ] **GP sink tax (1%, GP-only, both directions)** — chain-side (chain/daemon): `verifier.gpAfterSink` =
+      `gp - floor(gp*100/10000)`. Withdraw (game→chain) mints only the post-tax amount (withdraw-worker.ts);
+      deposit (chain→game) credits only the post-tax amount (verifier.ts). Taxed GP is destroyed (a deflationary
+      sink). Items untaxed; rounded down (<100 GP untaxed). Announced in the site changelog (/changelog).
+
+- [ ] NOT PATCHED (assessed): #60 `/api/exportCollision` (recomputes on the tick thread, ~seconds) — also NOT
+      exposed through our nginx (internal build tool used to regen sdk/collision-data.json). Caching it risks the
+      dev regen workflow, so left for upstream. #59 deeper items (unthrottled `sdk_auth`, NODE_PRODUCTION=false
+      disabling login attempt-counters) — mitigated for us by AGENT_KEY_MODE (unknown accounts rejected) + 20-char
+      keys; NODE_PRODUCTION=true recommended before wide launch (enables the game-login throttle).

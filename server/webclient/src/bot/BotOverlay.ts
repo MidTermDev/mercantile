@@ -354,6 +354,23 @@ export class BotOverlay implements GatewayMessageHandler {
         return this.collector.collectState(this.serverTick);
     }
 
+    // ============ Browser AI brain hooks (AiBrain.ts) ============
+
+    /** Full world state for the in-browser LLM brain (same shape the gateway sends). */
+    getWorldStateForAi(): BotWorldState | null {
+        return this.collectWorldState();
+    }
+
+    /** Enqueue an action from the local AI brain (no gateway actionId → no remote result). */
+    enqueueAiAction(action: BotAction): void {
+        this.onAction(action, null);
+    }
+
+    /** True when no action is executing or pending — the brain may pick the next one. */
+    isIdle(): boolean {
+        return this.actionQueue.active === null && this.waitTicks === 0 && this.actionQueue.pendingCount === 0;
+    }
+
     toggle(): void {
         this.ui.toggle();
     }

@@ -15,7 +15,7 @@ import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
 import bs58 from 'bs58';
 import { db, toDbDate } from './db';
 import { config, loadOperatorKeypair, makeConnection } from './config';
-import { loadRegistryMaps, type RegistryMaps } from './verifier';
+import { loadRegistryMaps, gpAfterSink, type RegistryMaps } from './verifier';
 import { ixOpenClaim, ixCreditClaim, claimPda } from '../program/client';
 
 const GP_DECIMALS = 6;
@@ -112,7 +112,10 @@ export class WithdrawWorker {
         const gp = row.obj_debugname === 'gp';
         if (gp) {
             mint = new PublicKey(this.registry.gpMint);
-            baseAmount = BigInt(row.count) * 10n ** BigInt(GP_DECIMALS);
+            // 1% GP sink: mint only the post-tax amount on-chain; the difference stays burned in-game.
+            const net = gpAfterSink(row.count);
+            if (net < row.count) console.log(`[withdraw] GP sink row ${row.id}: ${row.count} -> ${net} on-chain (${row.count - net} GP burned, 1% tax)`);
+            baseAmount = BigInt(net) * 10n ** BigInt(GP_DECIMALS);
         } else {
             const item = this.registry.itemsByDebugname.get(row.obj_debugname);
             if (!item) return { error: `no mint for ${row.obj_debugname}` };

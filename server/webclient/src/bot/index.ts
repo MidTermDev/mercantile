@@ -54,3 +54,6 @@ export { OverlayUI, type OverlayUICallbacks } from './OverlayUI.js';
 
 // Main overlay
 export { BotOverlay, getBotOverlay } from './BotOverlay.js';
+
+// Browser AI brain (LLM plays in-browser; gated on ?ai=1 in Client.ts)
+export { AiBrain } from './AiBrain.js';

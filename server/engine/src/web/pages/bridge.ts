@@ -52,6 +52,25 @@ export function linkMessage(username: string, code: string): string {
     return `rs-bridge-link|${LINK_MESSAGE_VERSION}|${username.toLowerCase()}|${code.toUpperCase()}`;
 }
 
+// Unlinking needs only proof of the wallet (it's the caller's own wallet being removed) — a
+// signature over this canonical message by the linked address.
+export function unlinkMessage(address: string): string {
+    return `rs-bridge-unlink|${LINK_MESSAGE_VERSION}|${address}`;
+}
+
+// Decode a base64- or base58-encoded 64-byte ed25519 signature.
+function decodeSig(signature: string): Uint8Array | null {
+    try {
+        let sig = /^[A-Za-z0-9+/=]+$/.test(signature) && signature.includes('=')
+            ? Uint8Array.from(Buffer.from(signature, 'base64'))
+            : bs58.decode(signature);
+        if (sig.length !== 64) sig = Uint8Array.from(Buffer.from(signature, 'base64'));
+        return sig.length === 64 ? sig : null;
+    } catch {
+        return null;
+    }
+}
+
 let registryCache: { items: Record<string, { name: string; desc?: string; symbol: string }>; gp: { name: string; symbol: string } } | null = null;
 
 function loadRegistryJson() {
@@ -171,6 +190,38 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
 
         BridgeService.onWalletLinked(username, account.id, address);
         return json(200, { linked: true, username: username.toLowerCase(), address });
+    }
+
+    // POST /bridge/unlink — {address, signature}. Removes the wallet↔account link. Self-authenticating:
+    // an ed25519 signature over unlinkMessage(address) by the wallet being unlinked. Idempotent.
+    if (url.pathname === '/bridge/unlink' && req.method === 'POST') {
+        if (rateLimited(ip)) return json(429, { error: 'rate limited' });
+        let body: { address?: string; signature?: string };
+        try {
+            const raw = await req.text();
+            if (raw.length > MAX_BODY_BYTES) return json(413, { error: 'too large' });
+            body = JSON.parse(raw);
+        } catch {
+            return json(400, { error: 'bad json' });
+        }
+        const { address, signature } = body;
+        if (!address || !signature) return json(400, { error: 'missing fields' });
+        if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) return json(400, { error: 'bad address' });
+        const sigBytes = decodeSig(signature);
+        if (!sigBytes) return json(400, { error: 'bad signature' });
+        let pubkey: Uint8Array;
+        try { pubkey = bs58.decode(address); } catch { return json(400, { error: 'bad address' }); }
+        const message = new TextEncoder().encode(unlinkMessage(address));
+        if (!nacl.sign.detached.verify(message, sigBytes, pubkey)) {
+            return json(401, { error: 'signature verification failed' });
+        }
+        const row = await db.selectFrom('account_wallet').where('address', '=', address).select(['account_id']).executeTakeFirst();
+        if (row) {
+            await db.deleteFrom('account_wallet').where('address', '=', address).execute();
+            const acct = await db.selectFrom('account').where('id', '=', row.account_id).select(['username']).executeTakeFirst();
+            if (acct) BridgeService.onWalletUnlinked(acct.username, address);
+        }
+        return json(200, { unlinked: true, address });
     }
 
     // GET /bridge/linked/:address
