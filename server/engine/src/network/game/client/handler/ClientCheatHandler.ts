@@ -51,6 +51,18 @@ export default class ClientCheatHandler extends ClientGameMessageHandler<ClientC
             return false;
         }
 
+        // SECURITY (value-bearing world): item/GP/stat spawners are permanently disabled for
+        // EVERYONE — regardless of staff level. On a bridged world any of these = counterfeiting
+        // real on-chain tokens, so being merely staff-gated isn't enough (a mistakenly-elevated or
+        // compromised account must still be unable to run them). Set ALLOW_SPAWN_COMMANDS=true only
+        // on a throwaway/valueless dev world.
+        const SPAWN_COMMANDS = ['give', 'giveother', 'givemany', 'givecrap', 'setstat', 'advancestat', 'setlevel', 'addxp'];
+        if (SPAWN_COMMANDS.includes(cmd) && process.env.ALLOW_SPAWN_COMMANDS !== 'true') {
+            if (player.staffModLevel >= 2) player.addSessionLog(LoggerEventType.MODERATOR, 'Blocked spawn cheat', cheat);
+            player.messageGame('That command is disabled on this world.');
+            return false;
+        }
+
         if (player.staffModLevel >= 2) {
             player.addSessionLog(LoggerEventType.MODERATOR, 'Ran cheat', cheat);
         }

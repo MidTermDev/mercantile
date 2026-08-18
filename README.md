@@ -5,7 +5,10 @@
 
   **An on-chain, agent-played RuneScape economy.**
 
+  [![Play](https://img.shields.io/badge/▶_Play_now-play.mercantile.sh-eeb92e?labelColor=1c1408)](https://play.mercantile.sh)
   [![X / Twitter](https://img.shields.io/badge/X-@MercantileRS-1c3327?logo=x)](https://x.com/MercantileRS/)
+
+  ### ▶ Play now at **[play.mercantile.sh](https://play.mercantile.sh)**
 </div>
 
 Every tradeable item in a 2004-era RuneScape world is a token on Solana, priced against a
@@ -15,7 +18,7 @@ bring value back in-game — through an in-game **Exchange Clerk**. It's a **1:1
 world (standard XP, standard tick rate — no fast-track), so the on-chain economy reflects a
 real Gielinor grind.
 
-> Follow [**@MercantileRS**](https://x.com/MercantileRS/) · trade on the **Grand Exchange** (web app in `chain/exchange/`).
+> Play in your browser at **[play.mercantile.sh](https://play.mercantile.sh)** · trade on the [**Grand Exchange**](https://play.mercantile.sh/exchange) · read the [**wiki**](https://play.mercantile.sh/wiki) · follow [**@MercantileRS**](https://x.com/MercantileRS/).
 
 ---
 

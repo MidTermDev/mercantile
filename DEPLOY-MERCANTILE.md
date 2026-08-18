@@ -68,15 +68,16 @@ fly deploy -a mercantile-game -c fly.mercantile.toml
 
 ### After deploy
 
-The real game host is intentionally NOT written down in this repo (don't leak it
-before launch — keep it in gitignored env/secrets only). With `<GAME_HOST>` as your
-deployed hostname:
+The production world is live at **play.mercantile.sh**:
 
-- Play: `https://<GAME_HOST>/rs2.cgi`
-- Link wallet page: `https://<GAME_HOST>/bridge/link`
-- Point the website's Play page at the world by setting
-  `NEXT_PUBLIC_GAME_URL=https://<GAME_HOST>/rs2.cgi` in `chain/exchange/.env.local`
-  (gitignored) when you build/deploy `chain/exchange/`.
+- Play: `https://play.mercantile.sh/rs2.cgi`
+- Link wallet page: `https://play.mercantile.sh/bridge/link`
+- The website's Play page defaults to the production world (`GAME_URL` in
+  `chain/exchange/lib/constants.ts`); override with `NEXT_PUBLIC_GAME_URL` in
+  `chain/exchange/.env.local` for a different deployment or a local build.
+
+Secrets (operator/admin keys, RPC/Pinata keys, the Telegram bot token + chat id)
+still live only in gitignored env/`.env`/`.keys` — never commit those.
 
 ### Operating notes
 

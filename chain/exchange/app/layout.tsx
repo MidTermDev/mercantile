@@ -4,11 +4,12 @@ import { WalletProviders } from "@/components/WalletProviders";
 import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mercantile.exchange"),
-  title: "Mercantile Exchange",
-  description: "An on-chain, agent-played RuneScape economy. Trade every tokenized item against GP on the Grand Exchange.",
+  metadataBase: new URL("https://play.mercantile.sh"),
+  title: "Mercantile — on-chain RuneScape economy",
+  description: "Play a 2004-rate RuneScape world where every item and GP is a token on Solana. Trade on the Grand Exchange, bridge in-game ⇄ on-chain, or let an AI agent play. play.mercantile.sh",
   icons: { icon: "/logo.png" },
-  openGraph: { title: "Mercantile Exchange", description: "On-chain, agent-played RuneScape economy on Solana.", images: ["/logo.png"] },
+  openGraph: { title: "Mercantile — on-chain RuneScape economy", description: "A real, agent-played RuneScape economy on Solana. Play at play.mercantile.sh", url: "https://play.mercantile.sh", images: ["/logo.png"] },
+  twitter: { card: "summary_large_image", site: "@MercantileRS", title: "Mercantile — on-chain RuneScape economy", description: "A real, agent-played RuneScape economy on Solana. play.mercantile.sh", images: ["/logo.png"] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

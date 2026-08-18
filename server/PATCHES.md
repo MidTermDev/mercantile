@@ -391,6 +391,16 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
       collision-resistant filename. NOTE: `/api/*` is NOT exposed through our nginx (routes to the site → 404)
       and 8888 isn't public, so this endpoint is not externally reachable on our deploy — this is hardening for
       if that ever changes; deploys on the next engine restart.
+### Cheat/spawn lockdown (2026-08-18, value-bearing world)
+- [ ] `network/game/client/handler/ClientCheatHandler.ts`: item/GP/stat spawn commands
+      (`give`, `giveother`, `givemany`, `givecrap`, `setstat`, `advancestat`, `setlevel`, `addxp`)
+      are now hard-disabled for EVERYONE regardless of staffModLevel — on a bridged world any of
+      these = counterfeiting real tokens. Refused at the handler entry with "That command is
+      disabled on this world." Override with `ALLOW_SPAWN_COMMANDS=true` (throwaway dev worlds only).
+- [ ] Also demoted the one elevated account (`bridgetest`, was level 4) to 0 (DB), and set
+      `NODE_PRODUCTION=true` (disables the `>=4` debug procs + enables login attempt throttling).
+      Result: 0 accounts with staffmodlevel > 0; no reachable spawner.
+
 ### Bridge features (2026-08-18)
 - [ ] `engine/src/web/pages/bridge.ts` + `BridgeService.ts`: **wallet unlink**. `POST /bridge/unlink`
       {address, signature} — self-authenticating ed25519 sig over `unlinkMessage(address)` by the linked
