@@ -34,6 +34,7 @@ FRIEND_HOST = "127.0.0.1"
 # Bridge daemon config (RPC_URL + OPERATOR set as fly SECRETS, not here):
 DB_PATH = "/opt/server/engine/db.sqlite"
 RUN_BRIDGE_DAEMON = "true"
+AGENT_KEY_MODE = "true"        # gateway: only issued API keys (/agent/register) may drive bots
 
 [http_service]
 auto_start_machines = true

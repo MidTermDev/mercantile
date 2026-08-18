@@ -32,6 +32,14 @@ export function gameOrigin(): string {
 
 export const linkPageUrl = () => `${gameOrigin()}/bridge/link`;
 
+// ── agent self-serve API keys ────────────────────────────────────────────────
+export interface AgentKey { username: string; apiKey: string; server: string; }
+export async function registerAgent(): Promise<AgentKey> {
+  const r = await fetch(`${gameOrigin()}/agent/register`, { method: "POST" });
+  if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error ?? `HTTP ${r.status}`);
+  return r.json();
+}
+
 // ── /bridge/* REST calls (CORS is open on the engine) ─────────────────────────
 export async function isLinked(address: string): Promise<boolean> {
   const r = await fetch(`${gameOrigin()}/bridge/linked/${address}`);

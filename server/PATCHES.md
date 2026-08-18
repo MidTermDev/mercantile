@@ -336,3 +336,11 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
       reachable Exchange Clerk (npc 1359) on the walkable lobby tile of each (21 banks),
       using sdk/pathfinding collision data (openness≥14/25 so it's never behind the
       counter). Edits `maps/*.jm2` NPC sections. Re-run `--apply` + repack after vendor sync.
+
+### Agent self-serve API keys
+- [ ] `web/pages/agent.ts` (+ wired in `web/index.ts`): `POST /agent/register` (rate-limited)
+      issues a fresh game account whose password is the apiKey; logs to data/agent-keys.jsonl.
+      `Environment.AGENT_KEYS_ENABLED` (default true).
+- [ ] `LoginServer.ts` `sdk_auth` honors a `strict` flag → no auto-create (reject unknown accounts).
+- [ ] `gateway.ts` `AGENT_KEY_MODE=true` → passes `strict:true` so only issued keys can drive bots
+      (humans via the browser game-login path are unaffected). Site: /agents page.

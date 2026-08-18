@@ -702,6 +702,14 @@ export default class LoginServer {
                             .select(['id', 'password', 'banned_until'])
                             .executeTakeFirst();
 
+                        // Strict mode (gateway AGENT_KEY_MODE): reject unknown accounts
+                        // instead of auto-creating — only issued API keys (/agent/register)
+                        // can connect. Humans still auto-create via the game login path.
+                        if (msg.strict && !account) {
+                            s.send(JSON.stringify({ replyTo, success: false, error: 'invalid API key' }));
+                            return;
+                        }
+
                         // Auto-register if account doesn't exist (same as player_login)
                         let registrationFailed = false;
                         if (!Environment.WEBSITE_REGISTRATION && !account) {

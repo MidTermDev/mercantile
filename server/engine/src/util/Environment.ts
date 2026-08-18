@@ -63,5 +63,8 @@ export default {
     // Friend server bind host. The friend server's RELAY_* channel is an
     // unauthenticated remote-control surface — keep it loopback unless worlds
     // connect from other hosts.
-    FRIEND_HOST: process.env.FRIEND_HOST || '127.0.0.1'
+    FRIEND_HOST: process.env.FRIEND_HOST || '127.0.0.1',
+    // Agent self-serve API keys: POST /agent/register issues a key (game account).
+    // Set AGENT_KEYS_ENABLED=false to disable issuance.
+    AGENT_KEYS_ENABLED: process.env.AGENT_KEYS_ENABLED !== 'false'
 };

@@ -68,6 +68,11 @@ function connectToLoginServer() {
     };
 }
 
+// When true, bot/SDK connections must present a pre-issued account (from
+// /agent/register) — the login server authenticates strictly (no auto-create).
+// Humans playing in the browser use the game login path and are unaffected.
+const AGENT_KEY_MODE = process.env.AGENT_KEY_MODE === 'true';
+
 async function authenticateSDK(username: string, password: string): Promise<{ success: boolean; error?: string }> {
     if (!LOGIN_SERVER_ENABLED) {
         // No login server - allow all connections (development mode)
@@ -94,7 +99,8 @@ async function authenticateSDK(username: string, password: string): Promise<{ su
             type: 'sdk_auth',
             replyTo,
             username,
-            password
+            password,
+            strict: AGENT_KEY_MODE
         }));
     });
 }
