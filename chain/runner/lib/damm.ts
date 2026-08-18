@@ -43,8 +43,11 @@ export async function buildOneSidedPoolTx(
     itemLowalch: number,
     itemAmount: bigint,
     tokenProgram: PublicKey = TOKEN_2022_PROGRAM_ID,
+    p0PriceOverride?: string,   // exact GP-per-item floor (e.g. rares); else 0.9×lowalch
 ): Promise<OneSidedPoolPlan> {
-    const initSqrtPrice = p0SqrtPrice(itemLowalch);
+    const initSqrtPrice = p0PriceOverride
+        ? getSqrtPriceFromPrice(p0PriceOverride, ITEM_DECIMALS, GP_DECIMALS)
+        : p0SqrtPrice(itemLowalch);
     const tokenAAmount = new BN(itemAmount.toString());
     const liquidityDelta = cpAmm.preparePoolCreationSingleSide({
         tokenAAmount,

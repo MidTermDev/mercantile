@@ -3,3 +3,4 @@
 node_modules/
 images/out/
 runner/seed-liquidity.jsonl
+runner/reprice-rares.jsonl
