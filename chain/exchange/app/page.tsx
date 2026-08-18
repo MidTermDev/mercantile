@@ -1,98 +1,123 @@
 import Link from "next/link";
 import { CopyAddress } from "@/components/CopyAddress";
+import { PriceTicker } from "@/components/PriceTicker";
 import { PROGRAM_ID, GP_MINT, X_URL, GITHUB_URL } from "@/lib/constants";
 
 export default function Landing() {
   return (
-    <main className="max-w-6xl mx-auto px-4">
-      {/* Hero */}
-      <section className="pt-16 pb-14 text-center flex flex-col items-center">
-        <img src="/logo.png" alt="Mercantile" width={140} height={140} className="drop-shadow-[0_6px_24px_rgba(0,0,0,0.5)]" />
-        <h1 className="display text-5xl md:text-6xl font-bold gold-text mt-6 tracking-wide">Mercantile</h1>
-        <p className="text-xl text-ink/90 mt-3 max-w-2xl">The on-chain, agent-played RuneScape economy.</p>
-        <p className="text-mute mt-4 max-w-2xl">
-          Every tradeable item in a 2004-era Gielinor is a token on Solana, priced against tokenized
-          <span className="gold-text"> GP</span> in automated market-maker pools. Players and AI agents move value
-          between the game and the chain — and the market decides what everything is worth.
-        </p>
-        <div className="flex flex-wrap gap-3 justify-center mt-8">
-          <Link href="/play" className="px-6 py-3 rounded-lg bg-gold text-bg font-bold hover:bg-gold2 transition">
-            Play now →
-          </Link>
-          <Link href="/exchange" className="px-6 py-3 rounded-lg border border-line hover:border-gold transition">
-            Open the Grand Exchange
-          </Link>
-          <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-lg border border-line hover:border-gold transition">GitHub</a>
-          <a href={X_URL} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-lg border border-line hover:border-gold transition">@MercantileRS</a>
-        </div>
-      </section>
-
-      {/* Normal-rates banner */}
-      <section className="card p-6 md:p-7 mb-12 border-gold/40">
-        <div className="flex items-start gap-4">
-          <div className="text-3xl">⚖️</div>
+    <main>
+      {/* ── Hero ── */}
+      <section className="max-w-6xl mx-auto px-4 pt-16 pb-10">
+        <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 items-center">
           <div>
-            <h2 className="display text-xl font-bold gold-text">A real economy — 1:1, normal rates</h2>
-            <p className="text-mute mt-2">
-              Mercantile runs on <b className="text-ink">standard XP rates and standard game tick rates</b> — the authentic
-              2004 grind. This is <b className="text-ink">not</b> a fast-track / high-XP private server. Scarcity is real, effort is real,
-              so the on-chain price of a rune platebody or a lobster reflects genuine in-game labor rather than an inflated shortcut.
+            <span className="chip">◆ Live on Solana mainnet</span>
+            <h1 className="display text-5xl md:text-6xl font-extrabold gold-text mt-5 leading-[1.05]">
+              A real economy,<br />on-chain.
+            </h1>
+            <p className="text-lg text-ink/85 mt-5 max-w-xl leading-relaxed">
+              Every tradeable item in a 2004-era Gielinor is a token on Solana — priced by an open market,
+              backed by real in-game labor, and traded by humans and AI agents alike.
             </p>
+            <div className="flex flex-wrap gap-3 mt-8">
+              <Link href="/play" className="btn-gold px-6 py-3">Play now →</Link>
+              <Link href="/exchange" className="btn-ghost px-6 py-3 text-ink">Open the Grand Exchange</Link>
+              <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="btn-ghost px-6 py-3 text-mute hover:text-ink">GitHub</a>
+            </div>
+            <div className="flex gap-8 mt-9">
+              {[["1,374", "item markets"], ["1:1", "authentic XP · 0.6s ticks"], ["∞", "agent-playable"]].map(([n, l]) => (
+                <div key={l}>
+                  <div className="display text-3xl font-bold text-ink tnum">{n}</div>
+                  <div className="text-mute text-xs mt-1 max-w-[9rem] leading-tight">{l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative hidden lg:flex justify-center">
+            <div className="absolute inset-0 blur-3xl opacity-30" style={{ background: "radial-gradient(circle at 50% 40%, #e8b923, transparent 60%)" }} />
+            <img src="/logo.png" alt="Mercantile" width={320} height={320} className="relative drop-shadow-[0_12px_40px_rgba(0,0,0,0.6)]" />
           </div>
         </div>
       </section>
 
-      {/* Vision */}
-      <section className="grid md:grid-cols-3 gap-4 mb-12">
-        {[
-          { t: "An open economy", d: "Anyone — human or agent — can play, earn, and trade. Item and GP markets are permissionless AMM pools; price is discovered by participants, not set by an operator." },
-          { t: "Built for agents", d: "The world is a reverse-engineered RuneScape (Lost City) driven by the rs-sdk bot framework. AI agents grind, bank, and arbitrage between the game and the chain as first-class players." },
-          { t: "Game ⇄ chain, both ways", d: "Withdraw items or GP from the game and they’re minted on Solana. Deposit tokens back and they’re burned, returning the goods in-world. The game stays the source of truth." },
-        ].map((c) => (
-          <div key={c.t} className="card p-5">
-            <h3 className="display font-bold text-lg text-ink">{c.t}</h3>
-            <p className="text-mute text-sm mt-2 leading-relaxed">{c.d}</p>
-          </div>
-        ))}
-      </section>
+      <PriceTicker />
 
-      {/* How the bridge works */}
-      <section className="card p-6 md:p-8 mb-12">
-        <h2 className="display text-2xl font-bold gold-text mb-6">How the bridge works</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3 className="font-semibold text-ink flex items-center gap-2"><span className="text-emerald">▲</span> Withdraw — game → chain (mint)</h3>
-            <p className="text-mute text-sm mt-2">Visit the in-game <b className="text-ink">Exchange Clerk</b>, link your Solana wallet, and withdraw items or GP.
-              The game debits your inventory and the on-chain program <b className="text-ink">mints</b> the matching tokens to your wallet — ready to trade on the Grand Exchange.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-ink flex items-center gap-2"><span className="text-gold">▼</span> Deposit — chain → game (burn)</h3>
-            <p className="text-mute text-sm mt-2">Bring tokens back by depositing them. The program <b className="text-ink">burns</b> them on-chain, and the Clerk credits the
-              items or GP back into your character in-world. Supply on Solana always mirrors what has left the game.</p>
-          </div>
+      {/* ── The pitch: what makes it different ── */}
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <div className="flex items-baseline gap-4 mb-8">
+          <h2 className="display text-2xl font-bold text-ink">Not another game token</h2>
+          <hr className="rule flex-1" />
         </div>
-        <p className="text-mute text-sm mt-6">
-          Every token’s mint address ends in <span className="gold-text font-mono">RSGP</span>, is a standard SPL token with Metaplex
-          metadata and the item’s real in-game sprite, and is paired single-sided to GP in a Meteora DAMM v2 pool.
-        </p>
+        <div className="grid md:grid-cols-3 gap-5">
+          {[
+            { k: "01", t: "No faucet", d: "There is no printer. A token exists only because someone — a player or an agent — actually mined the ore, caught the fish, or killed the dragon. Withdraw mints it; deposit burns it. Supply mirrors the game." },
+            { k: "02", t: "Real rates", d: "1:1 XP and 0.6-second ticks — the authentic 2004 grind, not a fast-track server. Scarcity is real because effort is real, so on-chain prices reflect genuine in-game labor." },
+            { k: "03", t: "It plays itself", d: "Mercantile is agent-native. AI agents grab a key, grind, bank, and arbitrage the game's economy against the on-chain market around the clock. The labor force is autonomous." },
+          ].map((c) => (
+            <div key={c.k} className="card card-hover p-6">
+              <div className="font-mono text-gold/70 text-sm">{c.k}</div>
+              <h3 className="display text-xl font-bold text-ink mt-2">{c.t}</h3>
+              <p className="text-mute text-sm mt-3 leading-relaxed">{c.d}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Live on mainnet */}
-      <section className="card p-6 md:p-8 mb-16">
-        <h2 className="display text-2xl font-bold gold-text mb-4">Live on Solana mainnet</h2>
-        <div className="grid sm:grid-cols-2 gap-4 text-sm">
-          <div className="flex flex-col gap-1">
-            <span className="text-mute">Bridge program</span>
+      {/* ── The bridge ── */}
+      <section className="max-w-6xl mx-auto px-4 py-6">
+        <div className="card p-8 md:p-10">
+          <div className="flex items-baseline gap-4 mb-8">
+            <h2 className="display text-2xl font-bold gold-text">How the bridge works</h2>
+            <hr className="rule flex-1" />
+          </div>
+          <div className="grid md:grid-cols-2 gap-10">
+            <div>
+              <div className="flex items-center gap-2 text-emerald font-semibold"><span className="text-lg">▲</span> Withdraw · game → chain</div>
+              <p className="text-mute text-sm mt-3 leading-relaxed">
+                At the in-game <span className="text-ink">Exchange Clerk</span>, send an item or GP to your linked wallet.
+                The game debits your inventory and the on-chain program records a claimable balance — you mint it to your
+                own wallet with a click, ready to trade.
+              </p>
+            </div>
+            <div>
+              <div className="flex items-center gap-2 text-gold font-semibold"><span className="text-lg">▼</span> Deposit · chain → game</div>
+              <p className="text-mute text-sm mt-3 leading-relaxed">
+                Bring tokens back and the program <span className="text-ink">burns</span> them; the Clerk credits the items or
+                GP into your character in-world. On-chain supply always equals what has left the game — nothing more.
+              </p>
+            </div>
+          </div>
+          <hr className="rule my-8" />
+          <p className="text-mute text-sm">
+            Every mint ends in <span className="font-mono gold-text">RSGP</span>, is a standard SPL token carrying the item's
+            real in-game sprite, and is paired single-sided to GP in a Meteora market.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Live on mainnet ── */}
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <div className="flex items-baseline gap-4 mb-6">
+          <h2 className="display text-2xl font-bold text-ink">Live on Solana mainnet</h2>
+          <hr className="rule flex-1" />
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="card p-5 flex flex-col gap-1.5">
+            <span className="text-mute text-xs uppercase tracking-wider">Bridge program</span>
             <CopyAddress address={PROGRAM_ID} chars={6} />
           </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-mute">Gielinor GP token</span>
+          <div className="card p-5 flex flex-col gap-1.5">
+            <span className="text-mute text-xs uppercase tracking-wider">Gielinor GP</span>
             <CopyAddress address={GP_MINT} chars={6} />
           </div>
         </div>
-        <Link href="/exchange" className="inline-block mt-6 px-5 py-2.5 rounded-lg bg-gold text-bg font-bold hover:bg-gold2 transition">
-          Browse all item markets →
-        </Link>
+        <div className="card p-8 mt-8 text-center">
+          <h3 className="display text-2xl font-bold gold-text">Come watch the economy wake up.</h3>
+          <div className="flex flex-wrap gap-3 justify-center mt-6">
+            <Link href="/play" className="btn-gold px-6 py-3">Play now →</Link>
+            <Link href="/agents" className="btn-ghost px-6 py-3 text-ink">Bring an agent</Link>
+            <a href={X_URL} target="_blank" rel="noreferrer" className="btn-ghost px-6 py-3 text-mute hover:text-ink">@MercantileRS</a>
+          </div>
+        </div>
       </section>
     </main>
   );

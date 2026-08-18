@@ -7,6 +7,7 @@ import {
   quoteSell, buildSellTx, tokenBalance, type SellQuote,
 } from "@/lib/swap";
 import { fmtGp } from "@/lib/format";
+import { solscanTx } from "@/lib/constants";
 import type { ExchangeItem } from "@/lib/types";
 const WalletMultiButton = dynamic(
   () => import("@solana/wallet-adapter-react-ui").then((m) => m.WalletMultiButton),
@@ -26,6 +27,7 @@ export function BuyWidget({ item }: { item: ExchangeItem }) {
   const [held, setHeld] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
+  const [sig, setSig] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
@@ -50,16 +52,17 @@ export function BuyWidget({ item }: { item: ExchangeItem }) {
 
   async function trade() {
     if (!publicKey) return;
-    setBusy(true); setErr(null); setMsg(null);
+    setBusy(true); setErr(null); setMsg(null); setSig(null);
     try {
       const tx = mode === "buy"
         ? await buildBuyTx(connection, item.pool, item.mint, publicKey, qty, 1)
         : await buildSellTx(connection, item.pool, item.mint, publicKey, qty, 1);
-      const sig = await sendTransaction(tx, connection);
-      await connection.confirmTransaction(sig, "confirmed");
+      const s = await sendTransaction(tx, connection);
+      await connection.confirmTransaction(s, "confirmed");
+      setSig(s);
       setMsg(mode === "buy"
-        ? `Bought ${qty} ${item.name} — ${sig.slice(0, 8)}…`
-        : `Sold ${qty} ${item.name} for ~${fmtGp(sellQuote?.gpOut ?? 0)} GP — ${sig.slice(0, 8)}…`);
+        ? `Bought ${qty} ${item.name}`
+        : `Sold ${qty} ${item.name} for ~${fmtGp(sellQuote?.gpOut ?? 0)} GP`);
     } catch (e: any) {
       setErr(e?.message?.slice(0, 160) ?? "swap failed");
     } finally { setBusy(false); }
@@ -127,7 +130,12 @@ export function BuyWidget({ item }: { item: ExchangeItem }) {
           You don&apos;t hold enough {item.name}. Withdraw some at the in-game Exchange Clerk, or buy them here first.
         </p>
       )}
-      {msg && <p className="text-emerald text-xs mt-3 break-all">{msg}</p>}
+      {msg && (
+        <p className="text-xs mt-3">
+          <span className="text-emerald">{msg}</span>
+          {sig && <> · <a href={solscanTx(sig)} target="_blank" rel="noreferrer" className="text-gold linkline font-mono">View on Solscan ↗</a></>}
+        </p>
+      )}
       {err && <p className="text-err text-xs mt-3 break-all">{err}</p>}
     </div>
   );

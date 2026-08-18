@@ -4,7 +4,7 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
 import { ItemImage } from "@/components/ItemImage";
 import { fmtGp } from "@/lib/format";
-import { GP_DECIMALS, ITEM_DECIMALS, GP_MINT } from "@/lib/constants";
+import { GP_DECIMALS, ITEM_DECIMALS, GP_MINT, solscanTx } from "@/lib/constants";
 import type { ItemsFile, ExchangeItem } from "@/lib/types";
 import {
   isLinked, pendingWithdrawals, type PendingRow,
@@ -43,6 +43,7 @@ export function WalletPanel() {
   const [holdings, setHoldings] = useState<{ mint: string; base: bigint }[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  const [lastSig, setLastSig] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export function WalletPanel() {
   useEffect(() => { if (connected && publicKey) refresh(); else { setLinked(null); setPending([]); setHoldings([]); } }, [connected, publicKey, refresh]);
 
   async function run(label: string, fn: () => Promise<void>) {
-    setBusy(label); setErr(null); setMsg(null);
+    setBusy(label); setErr(null); setMsg(null); setLastSig(null);
     try { await fn(); } catch (e: any) { setErr(e?.message?.slice(0, 200) ?? "failed"); } finally { setBusy(null); }
   }
 
@@ -95,6 +96,7 @@ export function WalletPanel() {
       const tx = buildRedeemTx(publicKey, mint);   // creates your account (you pay rent) + mints
       const sig = await sendTransaction(tx, connection);
       await connection.confirmTransaction(sig, "confirmed");
+      setLastSig(sig);
       setMsg(`Claimed your ${debugname === "gp" ? "GP" : (byName.get(debugname)?.name ?? debugname)} — it's in your wallet.`);
       setTimeout(refresh, 3000);
     });
@@ -115,6 +117,7 @@ export function WalletPanel() {
       const sig = await sendTransaction(tx, connection);
       setMsg("Deposit sent — finalizing on-chain…");
       await connection.confirmTransaction(sig, "finalized");
+      setLastSig(sig);
       const n = await notifyDeposit(sig);
       if (!n.ok) throw new Error(`burned, but notify failed: ${n.error} (retry from the CLI with the sig)`);
       setMsg(`Deposited ${whole} ${isGp ? "GP" : byMint.get(mint)?.name ?? "item"} — claim it at the Exchange Clerk in-game.`);
@@ -133,6 +136,7 @@ export function WalletPanel() {
       const tx = await buildSellTx(connection, pool, mint, publicKey, whole, 1);
       const sig = await sendTransaction(tx, connection);
       await connection.confirmTransaction(sig, "confirmed");
+      setLastSig(sig);
       setMsg(`Sold ${whole} ${byMint.get(mint)?.name ?? "item"} for GP — ${sig.slice(0, 8)}…`);
       setAmts((a) => ({ ...a, [mint]: "" }));
       setTimeout(refresh, 3000);
@@ -162,8 +166,12 @@ export function WalletPanel() {
   return (
     <div className="space-y-6">
       {(msg || err) && (
-        <div className={`card p-3 text-sm ${err ? "border-red-500/50 text-red-300" : "border-emerald/50 text-emerald"}`}>
-          {err ?? msg}
+        <div className={`card p-3 text-sm ${err ? "border-err/50" : "border-emerald/40"}`}>
+          {err ? <span className="text-err">{err}</span> : (
+            <span><span className="text-emerald">{msg}</span>
+              {lastSig && <> · <a href={solscanTx(lastSig)} target="_blank" rel="noreferrer" className="text-gold linkline font-mono text-xs">View on Solscan ↗</a></>}
+            </span>
+          )}
         </div>
       )}
 

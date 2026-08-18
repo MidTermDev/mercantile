@@ -15,3 +15,4 @@ export const GAME_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
 export const LOCAL_GAME_URL = "http://localhost:8888/rs2.cgi";
 export const solscan = (a: string) => `https://solscan.io/token/${a}`;
 export const solscanAcct = (a: string) => `https://solscan.io/account/${a}`;
+export const solscanTx = (sig: string) => `https://solscan.io/tx/${sig}`;
