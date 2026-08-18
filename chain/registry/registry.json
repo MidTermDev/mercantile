@@ -22391,7 +22391,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHED",
-      "uri": "http://localhost:8888/bridge/token/unfinished_blurberry_special1.json",
+      "uri": "https://ipfs.io/ipfs/QmYHUtB7rV7UnUkHznMFPs7UBMcZ7ncdNpz6UDL4gaiHNT",
       "stackable": false,
       "members": true,
       "mint": "GMb53A1uYLmWmUZRj6Eh6KXKNGqtSjNN6Pf1vTA6RSGP",
@@ -22399,7 +22399,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmWRXqiH354gbxGMAbogS1BbxHjk96boQ5uyW3wR9Ax9vN"
     },
     "unfinished_blurberry_special2": {
       "objId": 2058,
@@ -22410,7 +22411,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHE2",
-      "uri": "http://localhost:8888/bridge/token/unfinished_blurberry_special2.json",
+      "uri": "https://ipfs.io/ipfs/Qmbnfp8scVYEtKJTvBtavH8XMFjrvcEFo73fezkFKxvoRL",
       "stackable": false,
       "members": true,
       "mint": "GMisiywDuUDHjEWVytkqfZj1WsUUo4gD8PHw1kDLRSGP",
@@ -22418,7 +22419,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/Qma14jn38see7YT9i3hR8gzTA1fYjoycbuR1quVG1HbVm3"
     },
     "unfinished_blurberry_special3": {
       "objId": 2060,
@@ -22429,7 +22431,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHE3",
-      "uri": "http://localhost:8888/bridge/token/unfinished_blurberry_special3.json",
+      "uri": "https://ipfs.io/ipfs/QmVqaTTSYDFAPSq4pjQ3jSDUtLtpc9fMgZ8nevxknV61Lk",
       "stackable": false,
       "members": true,
       "mint": "GNW4fAzEXspn5juR7QYdbmefKarwCZPmbzdnoraoRSGP",
@@ -22437,7 +22439,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/Qma14jn38see7YT9i3hR8gzTA1fYjoycbuR1quVG1HbVm3"
     },
     "unfinished_blurberry_special4": {
       "objId": 2062,
@@ -22448,7 +22451,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHE4",
-      "uri": "http://localhost:8888/bridge/token/unfinished_blurberry_special4.json",
+      "uri": "https://ipfs.io/ipfs/QmeNExgYHVZWkmqGDqZaD9WovYfyABjAcTzZJ4WewwVvgW",
       "stackable": false,
       "members": true,
       "mint": "GPPdyio9LfP1eZ55yRSaHJA5WJU5eBzDj8wZ9NLyRSGP",
@@ -22456,7 +22459,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmP8ETXJQwPEJpRtahvHKZz56QG6SbsijiLhk4wnjK1oXK"
     },
     "unfinished_cheese+tom_batta": {
       "objId": 2257,
@@ -22467,7 +22471,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHE5",
-      "uri": "http://localhost:8888/bridge/token/unfinished_cheese+tom_batta.json",
+      "uri": "https://ipfs.io/ipfs/QmfJod81sS8TnYzhTvT3oNSC1CpxBFeAqxS5BWpsgr1P7E",
       "stackable": false,
       "members": true,
       "mint": "GQWwcazSHFB71NMozn4vcJQxp1LX3y8qouzCJBiRRSGP",
@@ -22476,7 +22480,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmSsVj2MJLUhZA8VoNZ1GaozwPzevRXQ1DekHdGWAY45Sy"
     },
     "unfinished_chocchip_crunchies": {
       "objId": 2207,
@@ -22487,7 +22492,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHE6",
-      "uri": "http://localhost:8888/bridge/token/unfinished_chocchip_crunchies.json",
+      "uri": "https://ipfs.io/ipfs/QmVHgVvPZDb9igu33UCLLHK4AUjB1ZAsb8chrTr78cA9g6",
       "stackable": false,
       "members": true,
       "mint": "GQvDHwz6yug8fumizuKo16hUfGcfVx1gD14iehQvRSGP",
@@ -22496,7 +22501,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmR4CC31Bc3MmrpDmYp814kdcrnoTek2bSAEg1aW1FGj7u"
     },
     "unfinished_chocolate_bomb1": {
       "objId": 2179,
@@ -22507,7 +22513,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHE7",
-      "uri": "http://localhost:8888/bridge/token/unfinished_chocolate_bomb1.json",
+      "uri": "https://ipfs.io/ipfs/QmZL3vFUr1dvXLCtSMXFSLjfrgJnkdshLRh33fNVpiF4ZX",
       "stackable": false,
       "members": true,
       "mint": "GQvZwd7P1cejWDT4jFx7StjZuNSKeL4Es7dUfBXfRSGP",
@@ -22516,7 +22522,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmXVCeDZueiuJoabLUc1RVr3uCCKBMTzLqiDUJX8J8WJqP"
     },
     "unfinished_chocolate_bomb2": {
       "objId": 2181,
@@ -22527,7 +22534,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHE8",
-      "uri": "http://localhost:8888/bridge/token/unfinished_chocolate_bomb2.json",
+      "uri": "https://ipfs.io/ipfs/QmcE1Drz6Q6As5rfeNUUKQDyAECgSLMruEwy3276ySYYnc",
       "stackable": false,
       "members": true,
       "mint": "GRMvDUtrUeS1XDSMZE86uKGUEibBTqUP8U831oADRSGP",
@@ -22536,7 +22543,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmXCxv1QSj8FiciB4a9jr9Xx2CHX6sBqjNJDXKKdFFGLpc"
     },
     "unfinished_chocolate_bomb3": {
       "objId": 2183,
@@ -22547,7 +22555,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISHE9",
-      "uri": "http://localhost:8888/bridge/token/unfinished_chocolate_bomb3.json",
+      "uri": "https://ipfs.io/ipfs/QmQ8eDXayMT3xEeB6hQ6H3ngEc6q2YnPUd6oVYKFjbbSWd",
       "stackable": false,
       "members": true,
       "mint": "GS6HL3RWvwrZR3MitQYTXX8JhCtcQsc2bAmzL227RSGP",
@@ -22556,7 +22564,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmXCxv1QSj8FiciB4a9jr9Xx2CHX6sBqjNJDXKKdFFGLpc"
     },
     "unfinished_chocolate_saturday1": {
       "objId": 2066,
@@ -22567,7 +22576,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH10",
-      "uri": "http://localhost:8888/bridge/token/unfinished_chocolate_saturday1.json",
+      "uri": "https://ipfs.io/ipfs/QmcN3vKEpBPSexLzELLbK5f8nggP8LSPBpf3qsqJSC6Bm7",
       "stackable": false,
       "members": true,
       "mint": "GTTUhGBKDHhf5QBap8zUA5YuGtCJ96nDKkZ8281DRSGP",
@@ -22575,7 +22584,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmXRRCo1ZdFs7JKo2u4QPM8rjzyjCPTjsuENxMCVnkbopz"
     },
     "unfinished_chocolate_saturday2": {
       "objId": 2068,
@@ -22586,7 +22596,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH11",
-      "uri": "http://localhost:8888/bridge/token/unfinished_chocolate_saturday2.json",
+      "uri": "https://ipfs.io/ipfs/QmUzfuG3hG6CJR7oMC4sbWaTTdyKEKVjYQuQRJHtU4Cq4T",
       "stackable": false,
       "members": true,
       "mint": "GWHTwJR4Er5Y2o7cywQgqo7vfnRo9HCFvVpEvKo3RSGP",
@@ -22594,7 +22604,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmUkM7HuwWEvE2nBJS67FxPGtLEoGtvaqeFhUkMyetsmgT"
     },
     "unfinished_chocolate_saturday3": {
       "objId": 2070,
@@ -22605,7 +22616,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH12",
-      "uri": "http://localhost:8888/bridge/token/unfinished_chocolate_saturday3.json",
+      "uri": "https://ipfs.io/ipfs/QmNgSsGkKZ1iPHg2zyPg19Jb1mYfjomYd72aLiYnKUG91z",
       "stackable": false,
       "members": true,
       "mint": "GWNmtS1i4FzVzjCicnyKqLxpQZeH9C6sNq3tEmZDRSGP",
@@ -22613,7 +22624,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmUkM7HuwWEvE2nBJS67FxPGtLEoGtvaqeFhUkMyetsmgT"
     },
     "unfinished_chocolate_saturday4": {
       "objId": 2072,
@@ -22624,7 +22636,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH13",
-      "uri": "http://localhost:8888/bridge/token/unfinished_chocolate_saturday4.json",
+      "uri": "https://ipfs.io/ipfs/QmNpLt6tQRrZbdd2zevejj6Yoiax38VRVQ1TnuuimgcBmA",
       "stackable": false,
       "members": true,
       "mint": "GWspZboyMjHTkPA6YoEjqLBzgqVPVAbb4jVxpZpMRSGP",
@@ -22632,7 +22644,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmQ1MoqEGQ8yJsAESURQmC6npzikLkq2CknYk1yrs7KRNu"
     },
     "unfinished_drunk_dragon1": {
       "objId": 2086,
@@ -22643,7 +22656,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH14",
-      "uri": "http://localhost:8888/bridge/token/unfinished_drunk_dragon1.json",
+      "uri": "https://ipfs.io/ipfs/QmeBPeXCLVYA2xfbA2fidCQNpx4fRdhrXoU26csqixGak9",
       "stackable": false,
       "members": true,
       "mint": "GWthJMhxpKZat2GZ4jbgkAhDDkhF7ebq3Hd8BUNKRSGP",
@@ -22651,7 +22664,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmVPtYjfx5JD4EMWoVJJfHv1QTZVC3bvjtBPvnf1C6mXE1"
     },
     "unfinished_drunk_dragon2": {
       "objId": 2088,
@@ -22662,7 +22676,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH15",
-      "uri": "http://localhost:8888/bridge/token/unfinished_drunk_dragon2.json",
+      "uri": "https://ipfs.io/ipfs/QmQ1DZ8Ryq7hHyYTbVGLZeXWLezae582hfC5JmiNRZfmCE",
       "stackable": false,
       "members": true,
       "mint": "GY5YxqE3ongFKXQ82Ypoq69C4q1jA92DohwV61gdRSGP",
@@ -22670,7 +22684,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmeJ36czWWT3xcLLQiyYEk5aoNqmQf8LMgw7FiGHm3UVwA"
     },
     "unfinished_drunk_dragon3": {
       "objId": 2090,
@@ -22681,7 +22696,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH16",
-      "uri": "http://localhost:8888/bridge/token/unfinished_drunk_dragon3.json",
+      "uri": "https://ipfs.io/ipfs/QmUPKzVUQvmqhF9teu84cY5BqUdpLcjuf4BBJn44EKiwX1",
       "stackable": false,
       "members": true,
       "mint": "GZFM2bpmx4FdKdCXAxma3yAYcXpvPCt1cGTKoFmzRSGP",
@@ -22689,7 +22704,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmdEmacGV1e46TZebFN2EQXMFvMd3MQN7g6AugGe8zNzfo"
     },
     "unfinished_fruit_batta": {
       "objId": 2275,
@@ -22700,7 +22716,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH17",
-      "uri": "http://localhost:8888/bridge/token/unfinished_fruit_batta.json",
+      "uri": "https://ipfs.io/ipfs/QmYsswaAVp4nZCTMZxWChp3qjeGpEyVjVnzGhpjXzZSUfJ",
       "stackable": false,
       "members": true,
       "mint": "GZgj9YZ61PXhbeCJ8mHzUT1Gy1SKZedM68DqMx9BRSGP",
@@ -22709,7 +22725,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmYFNpJomBrgAWugMDsxyeF5hQAAVryrqtkwV5AaMa3Jrp"
     },
     "unfinished_fruit_blast1": {
       "objId": 2082,
@@ -22720,7 +22737,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH18",
-      "uri": "http://localhost:8888/bridge/token/unfinished_fruit_blast1.json",
+      "uri": "https://ipfs.io/ipfs/QmbN7Q3BNz3NbYFLDPb4VmJVQkBJv7nJjnUFds3iMpwQNm",
       "stackable": false,
       "members": true,
       "mint": "GbY7RQ6SpGMhTsL7gvnD7Y8zvsr32mbFLeGdzC7nRSGP",
@@ -22728,7 +22745,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmbNcbzRWLQxPpCNsRL2sjUSPBHsKPkt3XGMZcBfXbrMAK"
     },
     "unfinished_pineapple_punch1": {
       "objId": 2042,
@@ -22739,7 +22757,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH19",
-      "uri": "http://localhost:8888/bridge/token/unfinished_pineapple_punch1.json",
+      "uri": "https://ipfs.io/ipfs/QmYR8su1yuigjUszdKXDeLgJJ1tKVm85fZsQeXdA5usa3f",
       "stackable": false,
       "members": true,
       "mint": "GdqToLKQyEtz2iTTFCkfwj3B3X2ibXLofA2vhyynRSGP",
@@ -22747,7 +22765,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRD1MxSKgjqpP928rev7tD5o6CUzrnTncunvPLgmxq6wt"
     },
     "unfinished_pineapple_punch2": {
       "objId": 2044,
@@ -22758,7 +22777,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH20",
-      "uri": "http://localhost:8888/bridge/token/unfinished_pineapple_punch2.json",
+      "uri": "https://ipfs.io/ipfs/QmZaPksEMm4ftutkbUbn4C3cLu6QW5HLYpQ9Ubyrzix1Bm",
       "stackable": false,
       "members": true,
       "mint": "GeMCvRq65GvvDD8fnvYibS2y6DXuUDgVU4o2trzCRSGP",
@@ -22766,7 +22785,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmV3XbcgTqY7UG8aCT8Q6yJJLQQjqt8JgaaZB382HK37PT"
     },
     "unfinished_pineapple_punch3": {
       "objId": 2046,
@@ -22777,7 +22797,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH21",
-      "uri": "http://localhost:8888/bridge/token/unfinished_pineapple_punch3.json",
+      "uri": "https://ipfs.io/ipfs/Qmdbp3dDL9kDchFPJwwWLUSx4ZHGaoXrR4Qtno2PNN6xWZ",
       "stackable": false,
       "members": true,
       "mint": "GfFigV5DnQGVL6WGKGp4dfVXeCyod8hjP6kvzA7BRSGP",
@@ -22785,7 +22805,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmV3XbcgTqY7UG8aCT8Q6yJJLQQjqt8JgaaZB382HK37PT"
     },
     "unfinished_sgg1": {
       "objId": 2076,
@@ -22796,7 +22817,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH22",
-      "uri": "http://localhost:8888/bridge/token/unfinished_sgg1.json",
+      "uri": "https://ipfs.io/ipfs/QmbhuUYr8XXBdn423yuqqX14ijkYt4oMnhqWzrWkNmJ9E7",
       "stackable": false,
       "members": true,
       "mint": "GfW5LoaHr3UKUmftS9UETqxX45rrSKb4R9eLEMwjRSGP",
@@ -22804,7 +22825,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmYkn2JcWkTchPhbdtyxr3odCX3RWefEgvDQ4ArWGRpS9F"
     },
     "unfinished_sgg2": {
       "objId": 2078,
@@ -22815,7 +22837,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH23",
-      "uri": "http://localhost:8888/bridge/token/unfinished_sgg2.json",
+      "uri": "https://ipfs.io/ipfs/QmWfJmmAiwaNZFviqsEAEtUxcocvd9ewjns4LhLZdG6dE4",
       "stackable": false,
       "members": true,
       "mint": "GfotiUYYzQm8YWSwJDc4fErqiLCAzGYHfLz2cnDiRSGP",
@@ -22823,7 +22845,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmYkn2JcWkTchPhbdtyxr3odCX3RWefEgvDQ4ArWGRpS9F"
     },
     "unfinished_spicy_crunchies": {
       "objId": 2211,
@@ -22834,7 +22857,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH24",
-      "uri": "http://localhost:8888/bridge/token/unfinished_spicy_crunchies.json",
+      "uri": "https://ipfs.io/ipfs/QmQ5kHUX3xxutk55DgrfnB3bBhSo5SkiF9UmcLRVysmAGz",
       "stackable": false,
       "members": true,
       "mint": "GfwG2Rd3fdGhwSWGG3jwmV4eeUqEQs6C7RHnYNT4RSGP",
@@ -22843,7 +22866,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRUfMqeQDEUiib7SoSfMgJdn1AQZrQiVJdHjSBwrituon"
     },
     "unfinished_toad_crunchies": {
       "objId": 2215,
@@ -22854,7 +22878,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH25",
-      "uri": "http://localhost:8888/bridge/token/unfinished_toad_crunchies.json",
+      "uri": "https://ipfs.io/ipfs/QmVGocKAz7W2nMwa9a3TF9xhWPKhtH92GAgZtkdWzBVBQu",
       "stackable": false,
       "members": true,
       "mint": "GgPNWFiGrAXwdGBEU5SyWDmSLCNeRXvdPfNYZyVzRSGP",
@@ -22863,7 +22887,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmZDTargNwhKScQZ4xxqehpaeQyvAGhJmeT2rSaXa2BhUP"
     },
     "unfinished_veg_ball": {
       "objId": 2193,
@@ -22874,7 +22899,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH26",
-      "uri": "http://localhost:8888/bridge/token/unfinished_veg_ball.json",
+      "uri": "https://ipfs.io/ipfs/QmQS9dD82949cuZkMvXrgkF7g823kHSfJTuSEZna9SGuYJ",
       "stackable": false,
       "members": true,
       "mint": "GgTJxwfiiMoZ3n7u3SbqTYCdzwuyDTvLnAuybJyfRSGP",
@@ -22883,7 +22908,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmS9Cpn1xtMdWVVZvafKVPPEfQUEPxK9uWT5YnjeXFNszd"
     },
     "unfinished_vegetable_batta": {
       "objId": 2279,
@@ -22894,7 +22920,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH27",
-      "uri": "http://localhost:8888/bridge/token/unfinished_vegetable_batta.json",
+      "uri": "https://ipfs.io/ipfs/QmUxnjvb4gtJYNLGC9owiGMcMhSr4jdo97UkG1RSG4ZmHe",
       "stackable": false,
       "members": true,
       "mint": "GgZFvdQVbavT5MbTc7hqCMVpBFRbaUEzfd28aat7RSGP",
@@ -22903,7 +22929,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/Qmdyw3VHkPwu3orHkf6wj16uwFCrKprMPRY7T1LLnL4Aye"
     },
     "unfinished_wizard_blizzard1": {
       "objId": 2050,
@@ -22914,7 +22941,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH28",
-      "uri": "http://localhost:8888/bridge/token/unfinished_wizard_blizzard1.json",
+      "uri": "https://ipfs.io/ipfs/QmZriQeWb7jWkw47cgWjdEgsPuAyUHs5MHA5zPYX4zmCuh",
       "stackable": false,
       "members": true,
       "mint": "Ggwey1mDRXqj2GcsTPwArScY4mWqJkzEeoiAMk7zRSGP",
@@ -22922,7 +22949,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmY8NssUKJmxqueSDjoqvVhA6DEuz13GSZnr7WYwspwfrT"
     },
     "unfinished_wizard_blizzard2": {
       "objId": 2052,
@@ -22933,7 +22961,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH29",
-      "uri": "http://localhost:8888/bridge/token/unfinished_wizard_blizzard2.json",
+      "uri": "https://ipfs.io/ipfs/QmV1v41wG42GmYbTnYD4Anh8S9Wg6G7tGqWPvuLReuM3oR",
       "stackable": false,
       "members": true,
       "mint": "Gh8oqMDpUdaBRcmyPb8UV4Pqrg6CWWyv2yJgW9gqRSGP",
@@ -22941,7 +22969,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmcMP8hytZPqMWnivHLHwTG1NjoicW31UP7WvVHRSdkFzG"
     },
     "unfinished_worm_batta": {
       "objId": 2251,
@@ -22952,7 +22981,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH30",
-      "uri": "http://localhost:8888/bridge/token/unfinished_worm_batta.json",
+      "uri": "https://ipfs.io/ipfs/QmXHpbB4NxY683DE1WnsK4Qn8Zp3NBQCsy9iX5GVvr6sHk",
       "stackable": false,
       "members": true,
       "mint": "GhJ2Rsf6RdyKViUqxeyg5Gu7W6wU3y97MAon7dwoRSGP",
@@ -22961,7 +22990,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmPLXFR9u5aEvYCYHkYwXEopz1Mzd4Ar1tkper9Xwve2jr"
     },
     "unfinished_worm_crunchies": {
       "objId": 2203,
@@ -22972,7 +23002,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH31",
-      "uri": "http://localhost:8888/bridge/token/unfinished_worm_crunchies.json",
+      "uri": "https://ipfs.io/ipfs/QmPCwGo2n1Bk4DUpxsWSRqqH1yj9frBLAZVeVMuqSo29y8",
       "stackable": false,
       "members": true,
       "mint": "GhMUraCLB5iN6izMRLc7wPbvLXT5kc8NoAipu7SvRSGP",
@@ -22981,7 +23011,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmWRumQdRen3vCNnaU3MBEFY3AvhFNRLM7iYPNDYyYnxHd"
     },
     "unfinished_worm_hole": {
       "objId": 2189,
@@ -22992,7 +23023,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNFINISH32",
-      "uri": "http://localhost:8888/bridge/token/unfinished_worm_hole.json",
+      "uri": "https://ipfs.io/ipfs/QmQfxvGKxjXbcMFD7mA2qW3phEc535NXUPa8Y3qt5pHABz",
       "stackable": false,
       "members": true,
       "mint": "GhPGQHVbZMhrRtS2Q4ir9BEeKmkRg7suAZwwn8YGRSGP",
@@ -23001,7 +23032,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRBnoFtf7sqhNyJR6R8MNGbjYpqZdABjBPTNmyEKj7Xry"
     },
     "unicorn_horn": {
       "objId": 237,
@@ -23012,13 +23044,14 @@
       "lowalch": 8,
       "p0GpPerItem": 7.2,
       "symbol": "UNICORNHOR",
-      "uri": "http://localhost:8888/bridge/token/unicorn_horn.json",
+      "uri": "https://ipfs.io/ipfs/QmNaQtdQVXVCymSEbd9UBk4R7vbvwX1vGxGp5Madn9V7w8",
       "stackable": false,
       "members": true,
       "mint": "GhjPmg8KSD7Fkq8vChKEtk6Cb84DihJJc7joeoxhRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQYWpwzusBmS8h5aUJs8d3Raja77vjrZtv8bj8xkCadpn"
     },
     "unicorn_horn_dust": {
       "objId": 235,
@@ -23029,13 +23062,14 @@
       "lowalch": 8,
       "p0GpPerItem": 7.2,
       "symbol": "UNICORNHO2",
-      "uri": "http://localhost:8888/bridge/token/unicorn_horn_dust.json",
+      "uri": "https://ipfs.io/ipfs/QmRFSLSZgUXyqkeyDg3A6Dpbhy9fGcFprbbbveE75AN4DE",
       "stackable": false,
       "members": true,
       "mint": "GinjVfedMF1CGnruR7RUxeJMjUrYrYUKUse8LGbQRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmUaDAyGp1Dtd2pADDzhdEM7zyXpRt3EvRCyfFQ28TpmRj"
     },
     "unidentified_avantoe": {
       "objId": 211,
@@ -23046,7 +23080,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIFI",
-      "uri": "http://localhost:8888/bridge/token/unidentified_avantoe.json",
+      "uri": "https://ipfs.io/ipfs/QmPfXYV9Nu7mqqwMBafBFLLqE8A6eAhnVfCv9USZ2qfs8D",
       "stackable": false,
       "members": true,
       "mint": "Gjz9pscGbFCruTvED1phGH612mvKLinV8bmZde1MRSGP",
@@ -23055,7 +23089,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_cadantine": {
       "objId": 215,
@@ -23066,7 +23101,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIF2",
-      "uri": "http://localhost:8888/bridge/token/unidentified_cadantine.json",
+      "uri": "https://ipfs.io/ipfs/QmcEvcZdQUFsm7o7UEQe2wWyfk9MSPaB9iNEkUrba1Toaq",
       "stackable": false,
       "members": true,
       "mint": "GmydLtD4d5xPQ6WcFqoghVh7ePcMoScVNaqwkvzQRSGP",
@@ -23075,7 +23110,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_dwarf_weed": {
       "objId": 217,
@@ -23086,7 +23122,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIF3",
-      "uri": "http://localhost:8888/bridge/token/unidentified_dwarf_weed.json",
+      "uri": "https://ipfs.io/ipfs/QmSg8o1eVrXwfUy7Zq1WmvqDxwMKTmD8sV8fBm22KV7SfN",
       "stackable": false,
       "members": true,
       "mint": "GnWJqwqBcdCsGq7mmfRDH7D3HJUDQLxf3kZokDjARSGP",
@@ -23095,7 +23131,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_guam": {
       "objId": 199,
@@ -23106,7 +23143,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIF4",
-      "uri": "http://localhost:8888/bridge/token/unidentified_guam.json",
+      "uri": "https://ipfs.io/ipfs/QmbMjrm6nMNDn68ugE8z1bJt8vVqiA88tgoUGZGL6k622j",
       "stackable": false,
       "members": true,
       "mint": "GngvKfE9iuxPuosL7cLSLV1TdTGuVKJekUHT8NsWRSGP",
@@ -23115,7 +23152,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_harralander": {
       "objId": 205,
@@ -23126,7 +23164,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIF5",
-      "uri": "http://localhost:8888/bridge/token/unidentified_harralander.json",
+      "uri": "https://ipfs.io/ipfs/QmWYhP4vB6xJ7yS4f6YfNAjCppwUCzNJnKVHmHNBVzavTj",
       "stackable": false,
       "members": true,
       "mint": "GnhpwTNvAStZGyExKhuartT26AniKfMkYim9R5WpRSGP",
@@ -23135,7 +23173,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_irit": {
       "objId": 209,
@@ -23146,7 +23185,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIF6",
-      "uri": "http://localhost:8888/bridge/token/unidentified_irit.json",
+      "uri": "https://ipfs.io/ipfs/QmSezt9jw5aN5Lcw67V4R7yCaxC6Y7V6QgUcHo3h8MyidA",
       "stackable": false,
       "members": true,
       "mint": "GnyurSVqbeubTtydJtWDYe4hHYVMnU1UEwWyJ39ZRSGP",
@@ -23155,7 +23194,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_kwuarm": {
       "objId": 213,
@@ -23166,7 +23206,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIF7",
-      "uri": "http://localhost:8888/bridge/token/unidentified_kwuarm.json",
+      "uri": "https://ipfs.io/ipfs/QmQ6aNX9feKVhaJFABAM6D2tYYcbZWqidQZgeUo2pXidsg",
       "stackable": false,
       "members": true,
       "mint": "God7JPdXodS3ihjTM8rbmJLrfWaYCvpc9zcQjhePRSGP",
@@ -23175,7 +23215,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_lantadyme": {
       "objId": 2485,
@@ -23186,7 +23227,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIF8",
-      "uri": "http://localhost:8888/bridge/token/unidentified_lantadyme.json",
+      "uri": "https://ipfs.io/ipfs/QmTH61gfq9ezw2gmo9QpxzvgC8wMkMj65hWmVUnmPiJMv7",
       "stackable": false,
       "members": true,
       "mint": "GpYXUCd9njUfa3nRdPYCpa2QY6zZS6B9fuAJxYeqRSGP",
@@ -23195,7 +23236,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_marentill": {
       "objId": 201,
@@ -23206,7 +23248,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTIF9",
-      "uri": "http://localhost:8888/bridge/token/unidentified_marentill.json",
+      "uri": "https://ipfs.io/ipfs/QmX9QwJtD1e8h7QfvUjyBbXSoTP5Nu43KxxPt7xxQsBRD1",
       "stackable": false,
       "members": true,
       "mint": "GpeJZF9cf3DH1C9Bn5JngZuH6P5WjDzty83qCC7WRSGP",
@@ -23215,7 +23257,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_ranarr": {
       "objId": 207,
@@ -23226,7 +23269,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTI10",
-      "uri": "http://localhost:8888/bridge/token/unidentified_ranarr.json",
+      "uri": "https://ipfs.io/ipfs/QmcsTa6tRXYGfwhKskJvHcnyevck7Yo3wZXoQ4J2atseYo",
       "stackable": false,
       "members": true,
       "mint": "GpkzzRb2ugt34fPJNY2yBq9EmW3SiTXmEnYtAeZSRSGP",
@@ -23235,7 +23278,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_snapdragon": {
       "objId": 3051,
@@ -23246,7 +23290,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTI11",
-      "uri": "http://localhost:8888/bridge/token/unidentified_snapdragon.json",
+      "uri": "https://ipfs.io/ipfs/QmcMDv5R8qmos8gMBXXde1WXL3JoXJ6VpNvD4LLzhYtWSt",
       "stackable": false,
       "members": true,
       "mint": "Gpomv4y53TrmxEELVwgJpZ3xDGnZtUxQdnQyjn7PRSGP",
@@ -23255,7 +23299,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_tarromin": {
       "objId": 203,
@@ -23266,7 +23311,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTI12",
-      "uri": "http://localhost:8888/bridge/token/unidentified_tarromin.json",
+      "uri": "https://ipfs.io/ipfs/QmcbtjfxMzoUEQiY1mP569aYL5Yy8Hs4k2Jxi1Eqf6t5Hi",
       "stackable": false,
       "members": true,
       "mint": "GqLYmsfutqLTaLduXfpWGVY66vAHC4qz8yDZUwgLRSGP",
@@ -23275,7 +23320,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_toadflax": {
       "objId": 3049,
@@ -23286,7 +23332,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTI13",
-      "uri": "http://localhost:8888/bridge/token/unidentified_toadflax.json",
+      "uri": "https://ipfs.io/ipfs/QmbMEnTWNzrAHtA8M7iLWNPdmaiBQky3awAjpAvYFTuPSj",
       "stackable": false,
       "members": true,
       "mint": "GqWs8nPeNb8WNPRdnMDK4NoeVv9Dw2dMD6iL4zUfRSGP",
@@ -23295,7 +23341,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unidentified_torstol": {
       "objId": 219,
@@ -23306,7 +23353,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNIDENTI14",
-      "uri": "http://localhost:8888/bridge/token/unidentified_torstol.json",
+      "uri": "https://ipfs.io/ipfs/QmZt4MvAv8dEwe5imESpx5g4Spao8UkMqLLtAg92PmF7BL",
       "stackable": false,
       "members": true,
       "mint": "Gsco8RzyR6SLKZA6tge6jyHh673HdyFBTskyxWFTRSGP",
@@ -23315,7 +23362,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRwgMKbV8gwT97UsCNw7EufnUmPB9Hka87LP5xuiSurdi"
     },
     "unlit_candle": {
       "objId": 36,
@@ -23326,7 +23374,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "UNLITCANDL",
-      "uri": "http://localhost:8888/bridge/token/unlit_candle.json",
+      "uri": "https://ipfs.io/ipfs/QmRiPJEW5iqtoLeERQzCKnw5afYtDvsyCXhgT9gkQnhPnx",
       "stackable": false,
       "members": true,
       "mint": "GsrdrK9FdFh2LSoWmknQXYEWtrgDTM8Bw8vvbbYqRSGP",
@@ -23334,7 +23382,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/Qmcne1pvZ94HxXHSatH9dEgDhgC7pQYLwk9tYGcJv83BL3"
     },
     "unstrung_diamond_amulet": {
       "objId": 1681,
@@ -23345,13 +23394,14 @@
       "lowalch": 1410,
       "p0GpPerItem": 1269,
       "symbol": "UNSTRUNGDI",
-      "uri": "http://localhost:8888/bridge/token/unstrung_diamond_amulet.json",
+      "uri": "https://ipfs.io/ipfs/QmRDSYj8qXsqDBtQqQEmBtwRZf7GNsTknKz4Pm2DybXR87",
       "stackable": false,
       "members": false,
       "mint": "GtQBGu6wVCrzP8iLz3VLPFPU9fkXnmauowJxggp9RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmcfCNvV2vLPRJU2mk8aH8KVJ1pHVw2qmyA9Xp48omuMrJ"
     },
     "unstrung_dragonstone_amulet": {
       "objId": 1683,
@@ -23362,13 +23412,14 @@
       "lowalch": 7050,
       "p0GpPerItem": 6345,
       "symbol": "UNSTRUNGDR",
-      "uri": "http://localhost:8888/bridge/token/unstrung_dragonstone_amulet.json",
+      "uri": "https://ipfs.io/ipfs/QmbuBMN1FTiBS9yvmJ3sVFSqb3hKbT4zSwqGqqkNi4yBDH",
       "stackable": false,
       "members": true,
       "mint": "GtfFfWE8EC8YGbaZBc4pTbQyHRcF94n9eJX9b6NvRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmWAKAfYdWabBcGoTkDMnNpsbvZWDoWxLmBMc9VEiomojF"
     },
     "unstrung_emerald_amulet": {
       "objId": 1677,
@@ -23379,13 +23430,14 @@
       "lowalch": 510,
       "p0GpPerItem": 459,
       "symbol": "UNSTRUNGEM",
-      "uri": "http://localhost:8888/bridge/token/unstrung_emerald_amulet.json",
+      "uri": "https://ipfs.io/ipfs/QmVnZVN5zZgyfn78gVtbREBeMyZGzUQVb7hUSEUpvT9MHQ",
       "stackable": false,
       "members": false,
       "mint": "GtzBFKq9p5fR46LZXgiuKNaqjHhfA5VX89AofSbbRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmbZnMCrdtLmSJyQtfGMfdeYMVw7XGtMmHpZHtBRF3RnFn"
     },
     "unstrung_gold_amulet": {
       "objId": 1673,
@@ -23396,13 +23448,14 @@
       "lowalch": 140,
       "p0GpPerItem": 126,
       "symbol": "UNSTRUNGGO",
-      "uri": "http://localhost:8888/bridge/token/unstrung_gold_amulet.json",
+      "uri": "https://ipfs.io/ipfs/Qmb4MFQPkNK1hhiFDd2ZKgccS6SFeXC3nGxpMuUoDbnb6m",
       "stackable": false,
       "members": false,
       "mint": "GwpeG5ioy7B5qTsDSkAv3esrbVMR6jf4MiX3ErSxRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmUubtMxMqHprRE9qqrPFriYKwXWZqw2DD6RM1tDYzm1BU"
     },
     "unstrung_longbow": {
       "objId": 48,
@@ -23413,13 +23466,14 @@
       "lowalch": 24,
       "p0GpPerItem": 21.6,
       "symbol": "UNSTRUNGLO",
-      "uri": "http://localhost:8888/bridge/token/unstrung_longbow.json",
+      "uri": "https://ipfs.io/ipfs/QmQTMfhSLBBwwq1UHUfxYNq7NhR1ir5J2FKpKQHXxsxjnA",
       "stackable": false,
       "members": true,
       "mint": "GyXexbcRnBxZsxj6n5Qvry8wqoCz4jXabAb4Rh3YRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQMxo2PSS3z4NkdrB6fXBhN3uPwPVbbmTCLJ8fxnQ2vYK"
     },
     "unstrung_magic_longbow": {
       "objId": 70,
@@ -23430,13 +23484,14 @@
       "lowalch": 512,
       "p0GpPerItem": 460.8,
       "symbol": "UNSTRUNGMA",
-      "uri": "http://localhost:8888/bridge/token/unstrung_magic_longbow.json",
+      "uri": "https://ipfs.io/ipfs/QmRu8o1juyWjamUkio3645v9pAEZuE9CKNpv6SoZ3LoEXJ",
       "stackable": false,
       "members": true,
       "mint": "GybJGQ4VDSmEkYfkQZAqQz83CoMrVMUpaLrCdCmtRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmVstHGVWnZ5pEqj4uJmaN6yRRPR9YYjdRmZGjQCXwR65k"
     },
     "unstrung_magic_shortbow": {
       "objId": 72,
@@ -23447,13 +23502,14 @@
       "lowalch": 320,
       "p0GpPerItem": 288,
       "symbol": "UNSTRUNGM2",
-      "uri": "http://localhost:8888/bridge/token/unstrung_magic_shortbow.json",
+      "uri": "https://ipfs.io/ipfs/QmXg1p1qzcKs5xyiQZWSamMFeoWgtjhnag9EAJhc4mgyTT",
       "stackable": false,
       "members": true,
       "mint": "GzQdPdz4sAXyMXSm36fJy9UmGbuqQhPhiBfdS28WRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmSA357UiNJ5qQ9JQd6ufsMYsyeg67jza1FHsXeGjCPgCG"
     },
     "unstrung_maple_longbow": {
       "objId": 62,
@@ -23464,13 +23520,14 @@
       "lowalch": 128,
       "p0GpPerItem": 115.2,
       "symbol": "UNSTRUNGM3",
-      "uri": "http://localhost:8888/bridge/token/unstrung_maple_longbow.json",
+      "uri": "https://ipfs.io/ipfs/QmcKcmMheFZ6cDZnLuMrBCU3ZyFEz1ALUA1yThwY1xWMxV",
       "stackable": false,
       "members": true,
       "mint": "GzVzjnW7WjY1qREb5a81E9P2sCHSeYKfUuYoPMR6RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmatwKoMaKdVSn12Nnr1112ydvuGY3h9UyDihjNAzt9c6Z"
     },
     "unstrung_maple_shortbow": {
       "objId": 64,
@@ -23481,13 +23538,14 @@
       "lowalch": 80,
       "p0GpPerItem": 72,
       "symbol": "UNSTRUNGM4",
-      "uri": "http://localhost:8888/bridge/token/unstrung_maple_shortbow.json",
+      "uri": "https://ipfs.io/ipfs/QmaPJ5SvBYpoGfP9LVehNDikbcmQoQ1hNHTg11eQjK4ztA",
       "stackable": false,
       "members": true,
       "mint": "H2vXqHPZaLvcCZ6c34NrCVGc66Ap1JgxLrrJgDHTRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmXRLLhhfQL8YJXcXZWkuczg33fLi8kALJzaxQKMRsnMuu"
     },
     "unstrung_oak_longbow": {
       "objId": 56,
@@ -23498,13 +23556,14 @@
       "lowalch": 32,
       "p0GpPerItem": 28.8,
       "symbol": "UNSTRUNGOA",
-      "uri": "http://localhost:8888/bridge/token/unstrung_oak_longbow.json",
+      "uri": "https://ipfs.io/ipfs/QmRmcDH4uj4jEa4jaHaD4867wVxS3VisgYebornU2HL1tL",
       "stackable": false,
       "members": true,
       "mint": "H42RqvJLfHpoxSNJQnpZqUQs2oSpc1jukbg8gi18RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qme5yyhMYcDL2LVXDZS5V6adJsgtNA6ESHQw3XYZXuq6TK"
     },
     "unstrung_oak_shortbow": {
       "objId": 54,
@@ -23515,13 +23574,14 @@
       "lowalch": 20,
       "p0GpPerItem": 18,
       "symbol": "UNSTRUNGO2",
-      "uri": "http://localhost:8888/bridge/token/unstrung_oak_shortbow.json",
+      "uri": "https://ipfs.io/ipfs/QmbNbg8EavJZKjgXVfKeHG3jzdNwmhQBGaeaBZJ1kMacPe",
       "stackable": false,
       "members": true,
       "mint": "H59XLjEU4XzPCHXNJNLijDN9uoiZxaX4tRuHpsdTRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQ7hENXqaNp2sJHgGfo3RwmV58ZinXpP7LvKCJGiFSJxH"
     },
     "unstrung_ruby_amulet": {
       "objId": 1679,
@@ -23532,13 +23592,14 @@
       "lowalch": 810,
       "p0GpPerItem": 729,
       "symbol": "UNSTRUNGRU",
-      "uri": "http://localhost:8888/bridge/token/unstrung_ruby_amulet.json",
+      "uri": "https://ipfs.io/ipfs/QmbnhEPiwT4TFktiugAf7nkfo5PzMmDkdRGgAnWhmfE3rF",
       "stackable": false,
       "members": false,
       "mint": "H5qHrWXi5EHbFCyHTEu6TMBSapLYQa1uFFz11KsqRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmcUhhaH3vHpehuoCr2WbFHQqsX53LL5es6zJkMi7HBovX"
     },
     "unstrung_sapphire_amulet": {
       "objId": 1675,
@@ -23549,13 +23610,14 @@
       "lowalch": 360,
       "p0GpPerItem": 324,
       "symbol": "UNSTRUNGSA",
-      "uri": "http://localhost:8888/bridge/token/unstrung_sapphire_amulet.json",
+      "uri": "https://ipfs.io/ipfs/QmXRyVhL57XBabVjAkQN7Da9fMq3E34R49337UcGKVRfFp",
       "stackable": false,
       "members": false,
       "mint": "H5s1EqaeKsnt3R7aJhpis8VobWFqXDKdwjfJcfHiRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmWo8eV5VVrxiEmAuYsS9FFgfSg1D4eVoPByEdaaF4tRr2"
     },
     "unstrung_shortbow": {
       "objId": 50,
@@ -23566,13 +23628,14 @@
       "lowalch": 9,
       "p0GpPerItem": 8.1,
       "symbol": "UNSTRUNGSH",
-      "uri": "http://localhost:8888/bridge/token/unstrung_shortbow.json",
+      "uri": "https://ipfs.io/ipfs/QmcJQnmZRygaAsPJKRUhYMreS5Y3KCVWG887aVFSX5rjdv",
       "stackable": false,
       "members": true,
       "mint": "H6WdnzoaCaNyMWLADRgi9dGefeaSovJM1QJJPz4SRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmZyZ2uXbwg6grUAXoRDaQ11Uku5Mcs6JNYLqr2gJSN8TX"
     },
     "unstrung_willow_longbow": {
       "objId": 58,
@@ -23583,13 +23646,14 @@
       "lowalch": 64,
       "p0GpPerItem": 57.6,
       "symbol": "UNSTRUNGWI",
-      "uri": "http://localhost:8888/bridge/token/unstrung_willow_longbow.json",
+      "uri": "https://ipfs.io/ipfs/QmbBHaTXWotQL4uosucFjUQmWqsWMBkX9VRkXTin37Ljz5",
       "stackable": false,
       "members": true,
       "mint": "H7hZKbWxhBZDaemn4RgM7j37VKjgE5JLSFczLwRjRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmatADFBYgSVU4ikiinUAaDiJTrmg2CiwEpqMuk43Lo7aw"
     },
     "unstrung_willow_shortbow": {
       "objId": 60,
@@ -23600,13 +23664,14 @@
       "lowalch": 40,
       "p0GpPerItem": 36,
       "symbol": "UNSTRUNGW2",
-      "uri": "http://localhost:8888/bridge/token/unstrung_willow_shortbow.json",
+      "uri": "https://ipfs.io/ipfs/QmVjJQu65zyT1bNdPxZ9iGSCP1sQs63Ez4pGVM5nhJ8w72",
       "stackable": false,
       "members": true,
       "mint": "H86BuNHQ1MHdXcAW9NRzLFBRzW2iDX3eAPEAs8x5RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQUuvT4qeZDq4mRtBbQn58Bq7Bff2T8btSycH2f8bApj4"
     },
     "unstrung_yew_longbow": {
       "objId": 66,
@@ -23617,13 +23682,14 @@
       "lowalch": 256,
       "p0GpPerItem": 230.4,
       "symbol": "UNSTRUNGYE",
-      "uri": "http://localhost:8888/bridge/token/unstrung_yew_longbow.json",
+      "uri": "https://ipfs.io/ipfs/QmVxujM2cfhkCN1CPmrH1X9FEqHM42DtYicA4zvDMW7PE2",
       "stackable": false,
       "members": true,
       "mint": "H8N4NhyGpfzcwhtMFg9qjRVuo7DzGD2DtWhYF6PqRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmZmogEehWrfNfyzPavhXaoXVCBdyTvuXTzfyNBhQDMfgW"
     },
     "unstrung_yew_shortbow": {
       "objId": 68,
@@ -23634,13 +23700,14 @@
       "lowalch": 160,
       "p0GpPerItem": 144,
       "symbol": "UNSTRUNGY2",
-      "uri": "http://localhost:8888/bridge/token/unstrung_yew_shortbow.json",
+      "uri": "https://ipfs.io/ipfs/QmaKWq7iggwWos48hrTwMjdv8hZRmZ11u6dxUZAwRpeLzA",
       "stackable": false,
       "members": true,
       "mint": "H8Yo18tMoSuEGpQrXidMZAqCRCfaQBSKdox6BJu2RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmNiVjMsvtGFPzvFqZDwRZE6jCkFYENG2S1Z8XPWZs4f1Y"
     },
     "vampire_dust": {
       "objId": 3325,
@@ -23651,7 +23718,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "VAMPIREDUS",
-      "uri": "http://localhost:8888/bridge/token/vampire_dust.json",
+      "uri": "https://ipfs.io/ipfs/QmaZhvGvFUxc7Leq8E2fwJBNUDCXadg4f64Wgxue5dBgcL",
       "stackable": false,
       "members": true,
       "mint": "H97uUdbt6PybCbEiHtf3EYLzNfaUrjoVAWbKjbbiRSGP",
@@ -23659,7 +23726,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmedhFSQKqFM7s6K9c8yCu1kwzF2rYQAyiTeUAraFohAJz"
     },
     "veg_ball": {
       "objId": 2195,
@@ -23670,7 +23738,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "VEGBALL",
-      "uri": "http://localhost:8888/bridge/token/veg_ball.json",
+      "uri": "https://ipfs.io/ipfs/QmZcUbfu9UL6LD1weP38NpHoA1MbY3Kr4JhKP8F5VMCDnm",
       "stackable": false,
       "members": true,
       "mint": "H9BVmKtFSNTiB12EQEdDqDMv3EjEF9gmSAR5JaNRSGP",
@@ -23678,7 +23746,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/Qmef9Ga2JnScwhBs2QtzNmrQF2ZDfdx6pYvxndkfJ4eMEA"
     },
     "vegetable_batta": {
       "objId": 2281,
@@ -23689,7 +23758,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "VEGETABLEB",
-      "uri": "http://localhost:8888/bridge/token/vegetable_batta.json",
+      "uri": "https://ipfs.io/ipfs/QmRcmqAvRmnHV49Ju8zSa4uMM9ekFy8YDq63w4PjEvvrk4",
       "stackable": false,
       "members": true,
       "mint": "H9JkLNJgqBsHJM6tLFVYw8DdQzHaMqcgDf8gKetWRSGP",
@@ -23697,7 +23766,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/Qmdyw3VHkPwu3orHkf6wj16uwFCrKprMPRY7T1LLnL4Aye"
     },
     "vial_empty": {
       "objId": 229,
@@ -23708,7 +23778,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "VIALEMPTY",
-      "uri": "http://localhost:8888/bridge/token/vial_empty.json",
+      "uri": "https://ipfs.io/ipfs/QmQ3frr8oCEYDWYxWV27F3Cs68WdeY4RdYEUw5RWiZtG9B",
       "stackable": false,
       "members": false,
       "mint": "HAD8ZQkiXbbGKTz43BK6XdX2nq5yw7kdiDjLPBSBRSGP",
@@ -23716,7 +23786,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmbDwJ8dKpygEUbJrKddmXw5a6kbDh9P8P1f9fJ9a6i4x8"
     },
     "vial_water": {
       "objId": 227,
@@ -23727,7 +23798,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "VIALWATER",
-      "uri": "http://localhost:8888/bridge/token/vial_water.json",
+      "uri": "https://ipfs.io/ipfs/QmREZwPonu89SsUBsa3pae8H1Mxet3Bj5K1rfDdyjRqm17",
       "stackable": false,
       "members": false,
       "mint": "HAPS15BXyhez28EJkjgMbwtLa24ywp3QfNcw8eoiRSGP",
@@ -23735,7 +23806,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmZsMA1N9HBUMkKaZFu7so29wu2HnkXNxZHCmMnrLAmTUZ"
     },
     "viking_cloak_black": {
       "objId": 3789,
@@ -23746,13 +23818,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLOA",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_black.json",
+      "uri": "https://ipfs.io/ipfs/Qmch72qBfwM98fmNM7sDpWYsba3QpT6uGcVVNn5ms9P9Yq",
       "stackable": false,
       "members": true,
       "mint": "HBC6evFZzrDDCAqPWAwys6szXpsiYD2KWngvxzQzRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmaewqxKHHtWwaTvxi83sNFiYJFvMboQG3RcbeRY2WzdUi"
     },
     "viking_cloak_brown": {
       "objId": 3765,
@@ -23763,13 +23836,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLO2",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_brown.json",
+      "uri": "https://ipfs.io/ipfs/QmTSPUDaQWkU293xDBhnJMBf5ubFxscHmz4cQKrKGaASAL",
       "stackable": false,
       "members": true,
       "mint": "HBz4aV3cvqs7M2AYBQpYvBhfHsWepG3egm5tEWhsRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmWVUoLZCMfqBTtvY3WN21eHVhSZ6iUFuvCtnovDxm3Lvn"
     },
     "viking_cloak_darkbrown": {
       "objId": 3761,
@@ -23780,13 +23854,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLO3",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_darkbrown.json",
+      "uri": "https://ipfs.io/ipfs/QmZN12HwjLDWZ7Bhr5vAJhnYA6roA5h4LDAHYzCcC3C1Yu",
       "stackable": false,
       "members": true,
       "mint": "HC21G24UXXitSU6sdLu4vsUx7YNaJJaywPHcymqnRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmSjMUnc1fy3Dv38MQyJ3qy29HcMMeXDuM9fKGUrVT2QWi"
     },
     "viking_cloak_green": {
       "objId": 3759,
@@ -23797,13 +23872,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLO4",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_green.json",
+      "uri": "https://ipfs.io/ipfs/QmV2qqvQYV2ELQQ6LcxUd9sdDQbbTfcSV1az8AvUVBm5HT",
       "stackable": false,
       "members": true,
       "mint": "HCx8UStxomVK1yu4Do7sw8kFfhhPjT33CJCZzFHhRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmdwCyWNLn6Cid9QnbGBAi93kjAK9sRVFfgLaYEkP52MqX"
     },
     "viking_cloak_grey": {
       "objId": 3779,
@@ -23814,13 +23890,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLO5",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_grey.json",
+      "uri": "https://ipfs.io/ipfs/QmUvdNF55z54jN14mFVwUFHjcBttmaCVFvuA7q3t6gCqyR",
       "stackable": false,
       "members": true,
       "mint": "HF8tfnXL7zv3VVqYVhXuQyLuPcgsM1zunxFpisYgRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmahXaXZ7SnzuqrFNaJyx1hn3Q6SPLi9v6aAzSHCr1sDFv"
     },
     "viking_cloak_lightbrown": {
       "objId": 3763,
@@ -23831,13 +23908,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLO6",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_lightbrown.json",
+      "uri": "https://ipfs.io/ipfs/QmTtZxoXPJgw3EY4gbBgdd29LVhi4wK1RMPcgjRqa74khU",
       "stackable": false,
       "members": true,
       "mint": "HFAWmD8BXsobP7ntQLHYLU4pvCGDLvQnhbsJUiASRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmP5xGet9zK26m4wmGsntwPZWH9HgHAWYWC1aa2oWs1dcB"
     },
     "viking_cloak_ocean": {
       "objId": 3783,
@@ -23848,13 +23926,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLO7",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_ocean.json",
+      "uri": "https://ipfs.io/ipfs/QmWWUDg4n9xZxfAuQ4EtrNjLgfxEX6vQZJPyyJpSfhRjQ9",
       "stackable": false,
       "members": true,
       "mint": "HHnCqEDJNPA655MtPNrRxcaT38LGEcuZb12Ei6qKRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmRWFdbF82ANJrJPw5Z1oqihgLxQRsPPysAXWRVcYQtAuC"
     },
     "viking_cloak_pink": {
       "objId": 3787,
@@ -23865,13 +23944,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLO8",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_pink.json",
+      "uri": "https://ipfs.io/ipfs/QmQk69UGoZmcL44VRo3qN3kMynbEKGyLGQp459oKAN8HhE",
       "stackable": false,
       "members": true,
       "mint": "HHxEN5WGBZ93iePVmz9ti8LUpTNwQHYCaUGm33UYRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmSArgKJi7KJAa6y4DEZWe8wM1iZeMKky9VfzKuDCRNx4z"
     },
     "viking_cloak_purple": {
       "objId": 3785,
@@ -23882,13 +23962,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCLO9",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_purple.json",
+      "uri": "https://ipfs.io/ipfs/QmR4qwZ3FEb1pD8BLRmsS5PDwigxc25LmBeRsTnqfAGZMJ",
       "stackable": false,
       "members": true,
       "mint": "HJECbFqdBjQfohKuTkQXbGnKhAUCh1kw9mkxcKaGRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmUvuKFYz57jdveaneBPKjr3jBj7X72yx2r8cspKD27uZq"
     },
     "viking_cloak_red": {
       "objId": 3777,
@@ -23899,13 +23980,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCL10",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_red.json",
+      "uri": "https://ipfs.io/ipfs/QmcrfTKgVEPi9FMKudyLG65kPWNCF14js6pMdhb4wUQ5F7",
       "stackable": false,
       "members": true,
       "mint": "HJrUvov8hcHbNpqut1ZH9JfodF8FRfpMocdSiXbJRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmVKAhvBehoMtoipZvgucmiNK9joFPA5jWLBTY1887Azh7"
     },
     "viking_cloak_tangerine": {
       "objId": 3781,
@@ -23916,13 +23998,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGCL11",
-      "uri": "http://localhost:8888/bridge/token/viking_cloak_tangerine.json",
+      "uri": "https://ipfs.io/ipfs/QmU11vorcWXkaZraMWaZGxFnesf8uYLspTrpmnA1gTZ8Wy",
       "stackable": false,
       "members": true,
       "mint": "HJsviHbnHtTkT2L8k6d7wPTtnjKaZ2CBV6zTwLj9RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmTFbAynBdqzxfofYys1CowFfpic6opdzPWckyJpadBzvs"
     },
     "viking_helmet_crush": {
       "objId": 3751,
@@ -23933,13 +24016,14 @@
       "lowalch": 24000,
       "p0GpPerItem": 21600,
       "symbol": "VIKINGHELM",
-      "uri": "http://localhost:8888/bridge/token/viking_helmet_crush.json",
+      "uri": "https://ipfs.io/ipfs/QmVjWeKZoCngu676hpnZVbwfCAZiYYB3VouFWs1R7vV6Hd",
       "stackable": false,
       "members": true,
       "mint": "HL54jeymryzKNF59E5HqjsrF4CQ9KdGUAkcCDQMHRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmY4eCYbFXCtWL3w5R8EVTpN6drj2cmoVir8vsg75fhvad"
     },
     "viking_helmet_magic": {
       "objId": 3755,
@@ -23950,13 +24034,14 @@
       "lowalch": 24000,
       "p0GpPerItem": 21600,
       "symbol": "VIKINGHEL2",
-      "uri": "http://localhost:8888/bridge/token/viking_helmet_magic.json",
+      "uri": "https://ipfs.io/ipfs/QmTyrPuKQTU3ZaQEZ1CogYjuaQKe4Hrbtzs5f3oQ2wfa7z",
       "stackable": false,
       "members": true,
       "mint": "HM6kCCi7jwcV4bAJ7wRBZDCdq3wtPzfuQT322V7TRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmaP146Fg9gK4aPBik1EHrf4yaFCpX7MhCNEDDBmFSKGHU"
     },
     "viking_helmet_range": {
       "objId": 3749,
@@ -23967,13 +24052,14 @@
       "lowalch": 24000,
       "p0GpPerItem": 21600,
       "symbol": "VIKINGHEL3",
-      "uri": "http://localhost:8888/bridge/token/viking_helmet_range.json",
+      "uri": "https://ipfs.io/ipfs/QmUDEKCKiSp85d51sarr5V72KsZbVm2LA7kDMZg3wQZpaW",
       "stackable": false,
       "members": true,
       "mint": "HMNXUmKByGRQpjAW8czCL4EAnwVD2jweHipvz82FRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmbSVV4J522TNPohtoUbAcHwu96MsZEd9KRUjvcv7xco7c"
     },
     "viking_helmet_slash": {
       "objId": 3753,
@@ -23984,13 +24070,14 @@
       "lowalch": 24000,
       "p0GpPerItem": 21600,
       "symbol": "VIKINGHEL4",
-      "uri": "http://localhost:8888/bridge/token/viking_helmet_slash.json",
+      "uri": "https://ipfs.io/ipfs/Qmf2Joxr1e4c3ZatxJm6WCV4u7LDXMSmSWhReKexNPQLLV",
       "stackable": false,
       "members": true,
       "mint": "HMTrRSL76BEjpZye3gcxfhDHQHxc4RKSyT3ygh1RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQH7M3H1oD8Nnsy4NE7zrdE7a9EMNap5sbQgxQHauASAT"
     },
     "viking_tankard_empty": {
       "objId": 3805,
@@ -24001,13 +24088,14 @@
       "lowalch": 2,
       "p0GpPerItem": 1.8,
       "symbol": "VIKINGTANK",
-      "uri": "http://localhost:8888/bridge/token/viking_tankard_empty.json",
+      "uri": "https://ipfs.io/ipfs/QmPZEXDy1HU2qgi23bZidmV6zyLrQ4sCabBYG3bPfn9iLg",
       "stackable": false,
       "members": true,
       "mint": "HNBuvwCECnos1tQA2FGsq68yACgP87vef6SAC1CHRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qmai1697hrWng66BQwXRtSAjxtap3u6yEjDDVctE7fFc5c"
     },
     "viking_tankard_full": {
       "objId": 3803,
@@ -24018,13 +24106,14 @@
       "lowalch": 8,
       "p0GpPerItem": 7.2,
       "symbol": "VIKINGTAN2",
-      "uri": "http://localhost:8888/bridge/token/viking_tankard_full.json",
+      "uri": "https://ipfs.io/ipfs/Qmd54eHdwm9wFiZbVBYBScXq3tsvnx5B6Mkfr2FbZbUQm6",
       "stackable": false,
       "members": true,
       "mint": "HNEvVhYyvHZCX7vYc548UQvhGM9jZUDAu5FYhL54RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmaKvvgufS3f2Hu1RLtXpCq8cjDpsK1HjoqDVeXDxv9rF1"
     },
     "viking_top_beige": {
       "objId": 3771,
@@ -24035,13 +24124,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGTOPB",
-      "uri": "http://localhost:8888/bridge/token/viking_top_beige.json",
+      "uri": "https://ipfs.io/ipfs/QmctwkRuohYPuqmo1Ekvn4CUeSEdEW53iBGBe8TvNLxsfy",
       "stackable": false,
       "members": true,
       "mint": "HNfijv81HryvYh6H9F95NixbJxpqUcrMgmUwKwXSRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmTvzE4DkqX6DhAfgv4Tar35FoV6hWJ8jTA2RyhwBeBiBR"
     },
     "viking_top_blue": {
       "objId": 3775,
@@ -24052,13 +24142,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGTOP2",
-      "uri": "http://localhost:8888/bridge/token/viking_top_blue.json",
+      "uri": "https://ipfs.io/ipfs/QmUdjiojb3WzRhE5rwQBEVF8gwM3QKpm8pKda87YhRqcsA",
       "stackable": false,
       "members": true,
       "mint": "HNuUpL1pS2QsN7V2J7DSf5Pe59VYdwTSk3r4avqLRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmfC9pJyx6L1AoNzJZqCiSsRkw3yKjn2WTyKFtbMzUaVX8"
     },
     "viking_top_darkbrown": {
       "objId": 3767,
@@ -24069,13 +24160,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGTOPD",
-      "uri": "http://localhost:8888/bridge/token/viking_top_darkbrown.json",
+      "uri": "https://ipfs.io/ipfs/Qme54Nn6cpKZWS4HsfU8LcBnonmjeFN8YfVJCa5wPPtYXW",
       "stackable": false,
       "members": true,
       "mint": "HPTEfTPtsRcJbYv6EwV1dCFnH7F8xGrwiEUsXt25RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmdUjHwMvJXd1nqbDEN7BmXPhshugKxRU5QrvjYHh5nPfk"
     },
     "viking_top_green": {
       "objId": 3769,
@@ -24086,13 +24178,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGTOPG",
-      "uri": "http://localhost:8888/bridge/token/viking_top_green.json",
+      "uri": "https://ipfs.io/ipfs/QmRRcGCiHx2JCKxHvHftqd4oEoBpZRnyJQ42CN2PxPzR2s",
       "stackable": false,
       "members": true,
       "mint": "HPeMVTjqyszhYv3BV6gpGFqzqvU2J11d4eD442gARSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qmaz6K57U1kjWqpzu7ioqgeW6RFWiU4WAM9LjCKTX2vArG"
     },
     "viking_top_red": {
       "objId": 3773,
@@ -24103,13 +24196,14 @@
       "lowalch": 100,
       "p0GpPerItem": 90,
       "symbol": "VIKINGTOPR",
-      "uri": "http://localhost:8888/bridge/token/viking_top_red.json",
+      "uri": "https://ipfs.io/ipfs/QmRo1hZmUAiY7zfUzVwf8RYWiSXMjo9SLkpCNk9ASqvZ9h",
       "stackable": false,
       "members": true,
       "mint": "HQ2kCZtp1NkysVWW5cs6PoWrQmJFRzoAonM1Nrb3RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQYTnuEBwajML69B1TFXAmRWyqRknX4UShTKvZhHkkLSg"
     },
     "viking_toyship": {
       "objId": 3667,
@@ -24120,7 +24214,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "VIKINGTOYS",
-      "uri": "http://localhost:8888/bridge/token/viking_toyship.json",
+      "uri": "https://ipfs.io/ipfs/QmRSdi8KngjEauPrXhzE91jMWLGhaFarrDgqVMa5vXLocM",
       "stackable": false,
       "members": false,
       "mint": "HQ5N6A7pRfttNqrBaRWbRDKvjnsisZaxooLwB5URRSGP",
@@ -24129,7 +24223,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/Qmat7x9dSjVaTwBhXCFCiV3urFT7t18CHR4Fu61H5Xr6KQ"
     },
     "vikingboots": {
       "objId": 3791,
@@ -24140,13 +24235,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "VIKINGBOOT",
-      "uri": "http://localhost:8888/bridge/token/vikingboots.json",
+      "uri": "https://ipfs.io/ipfs/QmWTgL5RR2Fdmxifnqt2PZk2g2btTFVE3faU9goQgxSw62",
       "stackable": false,
       "members": true,
       "mint": "HRMRYHdUBxuu6XkHB1KwC6jWXLkhAptUY3Yjwb8SRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQARjcNhcidButXkVzoVz1pdmXcoQNdFAKmC8wcrnEsaz"
     },
     "vikinggloves": {
       "objId": 3799,
@@ -24157,13 +24253,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "VIKINGGLOV",
-      "uri": "http://localhost:8888/bridge/token/vikinggloves.json",
+      "uri": "https://ipfs.io/ipfs/QmaPWtJsUBpKkymFpgCKcoMui7jaFzUchYqpLbkVdDHhMi",
       "stackable": false,
       "members": true,
       "mint": "HSB3udBEj5H88MSjcJWYCQCK5nq2J21LiuoUyPcpRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmPZy3jCUJWgmxDtmAoukumimX31AmwyVGXDLWeHDyspcn"
     },
     "vikinghat": {
       "objId": 3797,
@@ -24174,13 +24271,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "VIKINGHAT",
-      "uri": "http://localhost:8888/bridge/token/vikinghat.json",
+      "uri": "https://ipfs.io/ipfs/QmevkP1orzuAusduzR3EH3kWXkGKjweA7uBcLZGRz8Bas8",
       "stackable": false,
       "members": true,
       "mint": "HSEWrkSRtkzJUiD2km2L4vwec7bt9hT4ApNnkoA5RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmaiEow31vC2vGHy5iwXTgciViakWqKDdtk5XuxBUmHbpC"
     },
     "vikingrobebottom": {
       "objId": 3795,
@@ -24191,13 +24289,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "VIKINGROBE",
-      "uri": "http://localhost:8888/bridge/token/vikingrobebottom.json",
+      "uri": "https://ipfs.io/ipfs/QmUqaic9baY9M6af22nNyKuMSkAAvWvWiSYVnydaVRiBF3",
       "stackable": false,
       "members": true,
       "mint": "HSnQb6jqBpVnmMbaRVRZSoyDL5oTmTXTDLzDoBiERSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmWjJ8EoMmH1V9DVBz1CjRjepUzZSxFuLNrbE5f3aqCGf2"
     },
     "vikingrobetop": {
       "objId": 3793,
@@ -24208,13 +24307,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "VIKINGROB2",
-      "uri": "http://localhost:8888/bridge/token/vikingrobetop.json",
+      "uri": "https://ipfs.io/ipfs/QmTioJCkynaEYY1UhFtcYFz4YJT9Fbe4LAV8H8UUNZq3ja",
       "stackable": false,
       "members": true,
       "mint": "HTFG8AvgJ5sTsUizvnoW3ivQhU9vfUZTmk9rJPnfRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmTNmS5arncGwzd1Tsx1BrhK497NjNmiTxbAigL9zZpJSV"
     },
     "vodka": {
       "objId": 2015,
@@ -24225,13 +24325,14 @@
       "lowalch": 2,
       "p0GpPerItem": 1.8,
       "symbol": "VODKA",
-      "uri": "http://localhost:8888/bridge/token/vodka.json",
+      "uri": "https://ipfs.io/ipfs/QmYhMUemZCoky8QzPEqYSaGjH2jCEnwVM7P11kdurokCtR",
       "stackable": false,
       "members": true,
       "mint": "HVAdhgmao3cqXrpkvBMau2QXfBa3yJ1Q6Wq7aS2BRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmdMmmzRqrboTGQkabrGo4srJZ39SRN2PTTc8AgJFDaKnV"
     },
     "warhammer": {
       "objId": 1415,
@@ -24242,7 +24343,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WARHAMMER",
-      "uri": "http://localhost:8888/bridge/token/warhammer.json",
+      "uri": "https://ipfs.io/ipfs/QmSteWXaGjBD136EiDbGdvfVNVk2JnBv2eVU9sVhMFfyNv",
       "stackable": false,
       "members": false,
       "mint": "HW9xiup3y6wcjetrgWufE5VRt8gKeoL4ztqDWkDSRSGP",
@@ -24251,7 +24352,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmeAbZ4zyQWLpx8a8yN6Ww7yawaHGoUU7cpyzk8JcjiiMa"
     },
     "water_battlestaff": {
       "objId": 1395,
@@ -24262,13 +24364,14 @@
       "lowalch": 6200,
       "p0GpPerItem": 5580,
       "symbol": "WATERBATTL",
-      "uri": "http://localhost:8888/bridge/token/water_battlestaff.json",
+      "uri": "https://ipfs.io/ipfs/Qmf92ie7f4Fe3W8tpNEpTiSuTYmfFa4tgmyPvVSUA87iFD",
       "stackable": false,
       "members": true,
       "mint": "HWru1c7Rnc8SmnCq6o7e9BAkGzQorr5AXis7Rb4ZRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmdiJD822eU3ZPor3MQGov9z9HYEfKHFhAF9fPxuKugUka"
     },
     "water_orb": {
       "objId": 571,
@@ -24279,13 +24382,14 @@
       "lowalch": 120,
       "p0GpPerItem": 108,
       "symbol": "WATERORB",
-      "uri": "http://localhost:8888/bridge/token/water_orb.json",
+      "uri": "https://ipfs.io/ipfs/QmTP9NrEKePLtJdbQoRe4YAjLyEfThtHvibqqYZ1uB3y2N",
       "stackable": false,
       "members": true,
       "mint": "HXqj5g7esnASAiwSiTno5LK3bxCZ9Y9mz26wUZFqRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmeJQDQ43tyWRTtA25tupuya2fiXiNxBUWqDpCichPFPDj"
     },
     "water_skin0": {
       "objId": 1831,
@@ -24296,13 +24400,14 @@
       "lowalch": 6,
       "p0GpPerItem": 5.4,
       "symbol": "WATERSKIN0",
-      "uri": "http://localhost:8888/bridge/token/water_skin0.json",
+      "uri": "https://ipfs.io/ipfs/QmNzmaPdcS9QmHh87WxqVdR2rRRXB5WjJuL11Qnv6vp9qG",
       "stackable": false,
       "members": true,
       "mint": "HYH9dLfqTPQrU4cGqyqST1L3uXBrUAKDGXtQTy2eRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmfP8qpSLmUbLTxDgHLfyeBQV6PDMVpf82nGFLerZz9Pop"
     },
     "water_skin1": {
       "objId": 1829,
@@ -24313,13 +24418,14 @@
       "lowalch": 7,
       "p0GpPerItem": 6.3,
       "symbol": "WATERSKIN1",
-      "uri": "http://localhost:8888/bridge/token/water_skin1.json",
+      "uri": "https://ipfs.io/ipfs/QmZcZeUY2fFSmZ35dNs4H8g4k7C985M3MzRdcQANpzLeSP",
       "stackable": false,
       "members": true,
       "mint": "HYHk64wKdsbjK5TpqVxSS8kduLdWQuNweBg2UuH3RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmfP8qpSLmUbLTxDgHLfyeBQV6PDMVpf82nGFLerZz9Pop"
     },
     "water_skin2": {
       "objId": 1827,
@@ -24330,13 +24436,14 @@
       "lowalch": 9,
       "p0GpPerItem": 8.1,
       "symbol": "WATERSKIN2",
-      "uri": "http://localhost:8888/bridge/token/water_skin2.json",
+      "uri": "https://ipfs.io/ipfs/QmbwE3eAoMZorJazx3VNMa3a1Gbw4Z9rkUg4vTNhLhtvp9",
       "stackable": false,
       "members": true,
       "mint": "HYLaUGctHKDJwUtMHmWmMDzS6QozEwK9XQqxgK8gRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmfP8qpSLmUbLTxDgHLfyeBQV6PDMVpf82nGFLerZz9Pop"
     },
     "water_skin3": {
       "objId": 1825,
@@ -24347,13 +24454,14 @@
       "lowalch": 10,
       "p0GpPerItem": 9,
       "symbol": "WATERSKIN3",
-      "uri": "http://localhost:8888/bridge/token/water_skin3.json",
+      "uri": "https://ipfs.io/ipfs/QmRGn2iYrnExLP4dt2mKSjig93hZYGXGAgQHe9FaGhszpg",
       "stackable": false,
       "members": true,
       "mint": "HZL2Xhn5yavp13REqva7UJJgbT6sxFnVZHzaY344RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmfP8qpSLmUbLTxDgHLfyeBQV6PDMVpf82nGFLerZz9Pop"
     },
     "water_skin4": {
       "objId": 1823,
@@ -24364,13 +24472,14 @@
       "lowalch": 12,
       "p0GpPerItem": 10.8,
       "symbol": "WATERSKIN4",
-      "uri": "http://localhost:8888/bridge/token/water_skin4.json",
+      "uri": "https://ipfs.io/ipfs/QmenDhWNHHhBahYykpxTEHtc6PUvbfdkGSgR2hRa9CXg65",
       "stackable": false,
       "members": true,
       "mint": "HcHB1SvhKjg1pzFJJKjPP6KJdLjn4ksBv7WWFNejRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmfP8qpSLmUbLTxDgHLfyeBQV6PDMVpf82nGFLerZz9Pop"
     },
     "water_talisman": {
       "objId": 1444,
@@ -24381,7 +24490,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WATERTALIS",
-      "uri": "http://localhost:8888/bridge/token/water_talisman.json",
+      "uri": "https://ipfs.io/ipfs/QmbcGJELKuBrLE5Fi29HChC14wprwqzL3nsAkc68e2N7q9",
       "stackable": false,
       "members": false,
       "mint": "HcTZu7vAhhbVRSybJGYvk2EFNV6eTLzDCqZM7im4RSGP",
@@ -24389,7 +24498,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmcYPFn524Vf5ham26hGnPq3R9MdXUpwyxyLocoCbfJ4DK"
     },
     "waterrune": {
       "objId": 555,
@@ -24420,13 +24530,14 @@
       "lowalch": 57,
       "p0GpPerItem": 51.3,
       "symbol": "WEAPONPOIS",
-      "uri": "http://localhost:8888/bridge/token/weapon_poison.json",
+      "uri": "https://ipfs.io/ipfs/Qmdm7ZRMr8vcbSizDvNzMsurDJq7Je9Y9ZK9sjL5v54bjQ",
       "stackable": false,
       "members": true,
       "mint": "HdnQLonnnYRXxiDoCR1QPwCwsF2b9q8D2Ysa4EYWRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmPieMVrYmkEJvNEAoDKSTaRrvJiJG2QJd5YdANezufuJ2"
     },
     "wearable_stool_white": {
       "objId": 3893,
@@ -24437,13 +24548,14 @@
       "lowalch": 320,
       "p0GpPerItem": 288,
       "symbol": "WEARABLEST",
-      "uri": "http://localhost:8888/bridge/token/wearable_stool_white.json",
+      "uri": "https://ipfs.io/ipfs/QmUgQ5osMosrg9exYpAir5Wn8gzjSudpon2zKb9juLNWoG",
       "stackable": false,
       "members": true,
       "mint": "He6FjNaj57hmbsZE1RECkMVjvTvfXeXntcn4EC22RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qmbxf9mrLBuoXir8HAxuxs5wHr8K3XBxsJqSFnXsDXuqTP"
     },
     "whisky": {
       "objId": 2017,
@@ -24454,13 +24566,14 @@
       "lowalch": 2,
       "p0GpPerItem": 1.8,
       "symbol": "WHISKY",
-      "uri": "http://localhost:8888/bridge/token/whisky.json",
+      "uri": "https://ipfs.io/ipfs/Qmd3avBiJvhjRc8b8MVaZYDvDywHmF484xwVhS4TwCioLz",
       "stackable": false,
       "members": true,
       "mint": "HeHNkEmuoG3g4iTn953JL11NGKXdxtpxpfooydxBRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmR6y5U2mwi4vqLR3Qunv9eZ5U6xwBAokjizaJ4QSA7euY"
     },
     "white_apron": {
       "objId": 1005,
@@ -24471,7 +24584,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WHITEAPRON",
-      "uri": "http://localhost:8888/bridge/token/white_apron.json",
+      "uri": "https://ipfs.io/ipfs/QmXXid5L2fQSzHbZJUUEX55bEfkbQFWts9JHD4hVNrkgBK",
       "stackable": false,
       "members": false,
       "mint": "Hf6GD3onhk6FQn8SRuuqsXBYN7Cr3xgMDpb7Bz8dRSGP",
@@ -24479,7 +24592,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmSsbdN9YbkfxcyciK71DPFXMWPTvZu4WirDv7GT9Gmy1b"
     },
     "white_bead": {
       "objId": 1476,
@@ -24490,7 +24604,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WHITEBEAD",
-      "uri": "http://localhost:8888/bridge/token/white_bead.json",
+      "uri": "https://ipfs.io/ipfs/QmPUGgmvvnJcVsFKRkZo8Hsfs3g1mtL2izw7bCvQhbnhkR",
       "stackable": false,
       "members": false,
       "mint": "HfGjwvRFUkyRSDTMbfSgfSxS5dbA7UuUkYhiDHcNRSGP",
@@ -24498,7 +24612,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmUhqPRA8jYoYs63KjhG4Rh44oGM9PxgaXpcTWTc8tzG6v"
     },
     "white_berries": {
       "objId": 239,
@@ -24509,13 +24624,14 @@
       "lowalch": 4,
       "p0GpPerItem": 3.6,
       "symbol": "WHITEBERRI",
-      "uri": "http://localhost:8888/bridge/token/white_berries.json",
+      "uri": "https://ipfs.io/ipfs/QmcPnitervFyrE2EHy1Stopideyn3cbtAX5AJWZT2kzzRt",
       "stackable": false,
       "members": true,
       "mint": "HfKwX6qistJwvb4fz8fy9feZyj7XyNoSnjhu9kBxRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQF5gJUAvmSPge2rhQUwcHmw5kByP7ZLxpJPT4Np7amjQ"
     },
     "white_partyhat": {
       "objId": 1048,
@@ -24526,7 +24642,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WHITEPARTY",
-      "uri": "http://localhost:8888/bridge/token/white_partyhat.json",
+      "uri": "https://ipfs.io/ipfs/QmZ4ebjETMypxU1EjAWiwguww7CmjDLwoCxhtrhgZaXGdD",
       "stackable": false,
       "members": false,
       "mint": "HhDWSaeGH3m4hCvUXxDJhs3GLxPtEBKtES222HjSRSGP",
@@ -24535,7 +24651,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmfLg1nnvTK2K38qDfk2LhgvajEgnkLfFhz2LszF7Q772f"
     },
     "willow_logs": {
       "objId": 1519,
@@ -24564,13 +24681,14 @@
       "lowalch": 32,
       "p0GpPerItem": 28.8,
       "symbol": "WILLOWLOG2",
-      "uri": "http://localhost:8888/bridge/token/willow_logs_pyre.json",
+      "uri": "https://ipfs.io/ipfs/QmQRY9Cb1eNPM9FrMfqM1rWahu917iqvibuFYUxgiD6axU",
       "stackable": false,
       "members": true,
       "mint": "HhiftT35MxSTXC3A5ESPQ9g7d7vrV9JgvRWuDoXrRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmY8R2L5G57Amq3nsx8E5UZuLr91hBQWEYWix2bnRgq2aX"
     },
     "willow_longbow": {
       "objId": 847,
@@ -24581,13 +24699,14 @@
       "lowalch": 128,
       "p0GpPerItem": 115.2,
       "symbol": "WILLOWLONG",
-      "uri": "http://localhost:8888/bridge/token/willow_longbow.json",
+      "uri": "https://ipfs.io/ipfs/QmdbWgM8Ps2FkB7Agq3n3NtJ41GwmsrJA9EMdN4jQZGnJM",
       "stackable": false,
       "members": true,
       "mint": "HjA3Enbvc51tCCVah1S5uZSegdvi8mi9DJEjfo1jRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmTnEe1PfmKT4GAQ5NR1yBMKCvVLttDaDfNnv5dr7Jjr3J"
     },
     "willow_shortbow": {
       "objId": 849,
@@ -24598,13 +24717,14 @@
       "lowalch": 80,
       "p0GpPerItem": 72,
       "symbol": "WILLOWSHOR",
-      "uri": "http://localhost:8888/bridge/token/willow_shortbow.json",
+      "uri": "https://ipfs.io/ipfs/QmUwq3WvaFqcwQqeULpEoFotfGcwXZe4hW6Ti7UTckPz9r",
       "stackable": false,
       "members": true,
       "mint": "Hkyfdzwk8Ngna2KkpoXUndjfQZQt3uMAj2pTS7v9RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmZ98joGUBMZ9B6DYzvAcmBkFXzAs2yZM3PZjRZGLTd4Y8"
     },
     "wine_of_zamorak": {
       "objId": 245,
@@ -24615,7 +24735,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WINEOFZAMO",
-      "uri": "http://localhost:8888/bridge/token/wine_of_zamorak.json",
+      "uri": "https://ipfs.io/ipfs/QmW6k8Mshm775jUwWKNpqHT7MBtcfFcXeSxcL3WTqrKkur",
       "stackable": false,
       "members": false,
       "mint": "HoCPhGTdzvWu3QqawMfeH6jvZ5v6yWbdkiwCvw1sRSGP",
@@ -24624,7 +24744,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmQqtHarUgqwYvvA5Q6DwuSw4fSnxajXPMER9CBy2YAuFX"
     },
     "wizard_blizzard": {
       "objId": 2054,
@@ -24635,13 +24756,14 @@
       "lowalch": 12,
       "p0GpPerItem": 10.8,
       "symbol": "WIZARDBLIZ",
-      "uri": "http://localhost:8888/bridge/token/wizard_blizzard.json",
+      "uri": "https://ipfs.io/ipfs/QmTRYrJVrh58KsRknwrgaDWvRnebR7yKyWhV6gvouBTLoh",
       "stackable": false,
       "members": true,
       "mint": "Hp9Moq8S7ZFvHK4saSG5SdZFo3K4FdHDGdGRb9PARSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQEMkSjoKtr7DrbEgfMKTdnXVfcxVczqvzb7XkgVNsT8g"
     },
     "wizards_mind_bomb": {
       "objId": 1907,
@@ -24652,7 +24774,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WIZARDSMIN",
-      "uri": "http://localhost:8888/bridge/token/wizards_mind_bomb.json",
+      "uri": "https://ipfs.io/ipfs/QmY9uJ7LtFgnmLUyw4JPygXBHUSSWW6sELiBAjxy5qZF8B",
       "stackable": false,
       "members": false,
       "mint": "Hq5GgJRzPqnJCqQYMaKum9hpRrNv3xqdKWiHtNkoRSGP",
@@ -24660,7 +24782,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmQAW2yftak2cUiKxTTSkq5cT5JAovu66A9q4mMigrFLFb"
     },
     "wizards_robe": {
       "objId": 577,
@@ -24671,13 +24794,14 @@
       "lowalch": 6,
       "p0GpPerItem": 5.4,
       "symbol": "WIZARDSROB",
-      "uri": "http://localhost:8888/bridge/token/wizards_robe.json",
+      "uri": "https://ipfs.io/ipfs/Qmd4NeMoeK6PyQsqf2M2MEW9jrebrjnAd1mageNKJeixJN",
       "stackable": false,
       "members": false,
       "mint": "HqNrCCSsmdtEgod4AdH8eFsqkvBBWYWWJfh3959vRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qmd9GfWhFDBYzCjbVFqWWhbbASpCZ36NEzEcpqnQngyxfi"
     },
     "woadleaf": {
       "objId": 1793,
@@ -24688,7 +24812,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WOADLEAF",
-      "uri": "http://localhost:8888/bridge/token/woadleaf.json",
+      "uri": "https://ipfs.io/ipfs/QmZZB9gS5XqmW9hRMGrs3Jwi9h6D5oyPFfn57QYGjGJkj5",
       "stackable": true,
       "members": false,
       "mint": "HsWf3uzAdoACWBH1gfoaCPW6QniUCBHjdC5EciSjRSGP",
@@ -24696,7 +24820,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmQT6Gn4MXcv9Dj9Zc6gYfgxdKiU1HvSYnWqsHuVq6zhFm"
     },
     "wolf_bones": {
       "objId": 2859,
@@ -24707,7 +24832,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WOLFBONES",
-      "uri": "http://localhost:8888/bridge/token/wolf_bones.json",
+      "uri": "https://ipfs.io/ipfs/QmWgKyqCBCy2cf7TLXeH6KoZMvgcsrmYLG6TJ2RKNytTiw",
       "stackable": false,
       "members": true,
       "mint": "HtHDQxWDQQrNzRFRr8qfU84fjhSrbnNxrjmV6VfkRSGP",
@@ -24715,7 +24840,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmaEHMCq3EXN7NR8F9aAuFasTDDJPSPBCa2WrZZrbTEogo"
     },
     "wolfbone_arrowheads": {
       "objId": 2861,
@@ -24726,7 +24852,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WOLFBONEAR",
-      "uri": "http://localhost:8888/bridge/token/wolfbone_arrowheads.json",
+      "uri": "https://ipfs.io/ipfs/QmeYaYHbA7tipAnMiRZqkj1nE8HFpmdN83aGz6A8AizXHu",
       "stackable": true,
       "members": true,
       "mint": "HuHJfRcagjvzrzG6CHsvcQfjZn6K9Uc1WY4RujVVRSGP",
@@ -24734,7 +24860,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmPssTMrqkiMFTLM4GdkHcXmQY9ou54sp8q2ZexR6HkQ3h"
     },
     "wolfenboots_crimson": {
       "objId": 2904,
@@ -24745,13 +24872,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENBOOT",
-      "uri": "http://localhost:8888/bridge/token/wolfenboots_crimson.json",
+      "uri": "https://ipfs.io/ipfs/QmWMoQymDEnPkap7qDrTT4dqDMZC87uoSJrdzUiHvehAnc",
       "stackable": false,
       "members": true,
       "mint": "HvApjsQJxVJVRk8fokUDHCTsTM9XChycNGMvNMkFRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmaHNu6XDXRJ8sG88WJwqtwi6UwwyDpoW8EhGwQzy3Db3Y"
     },
     "wolfenboots_grey": {
       "objId": 2894,
@@ -24762,13 +24890,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENBOO2",
-      "uri": "http://localhost:8888/bridge/token/wolfenboots_grey.json",
+      "uri": "https://ipfs.io/ipfs/QmVJMC8jPvHVPuP7cjvJhMmkYugKrtEq1QGDApT3Gj5RRj",
       "stackable": false,
       "members": true,
       "mint": "HvwrkLSC1kgfu3qNH3Bj1R5p93sFdxiAAUT5ihbiRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmUV1D39GevXeb6Epn1gRdCa6TBoPjt3xubnLNZVAtcdy1"
     },
     "wolfenboots_ocean": {
       "objId": 2924,
@@ -24779,13 +24908,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENBOO3",
-      "uri": "http://localhost:8888/bridge/token/wolfenboots_ocean.json",
+      "uri": "https://ipfs.io/ipfs/QmYb1kWvmXqUBJVGNc6zm73MkzWuvisxXGRNVjXgzddjoV",
       "stackable": false,
       "members": true,
       "mint": "HwhFHFYNAkWzJctqD3Sa4Tg9dzTLnx6ADSawGLi4RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmZVABJQWce2qw1nhpQeVAVSSYri3Xi74TVR73U954xYfL"
     },
     "wolfenboots_purple": {
       "objId": 2934,
@@ -24796,13 +24926,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENBOO4",
-      "uri": "http://localhost:8888/bridge/token/wolfenboots_purple.json",
+      "uri": "https://ipfs.io/ipfs/QmYi9L6cqx5frsvJfZ3KFgWVjeEUYbbonfbqXM3tioChqD",
       "stackable": false,
       "members": true,
       "mint": "HxJgDwJ4Kz6m4QzfZEfAy8vgXbQjnJDZVyqGojeoRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmPHiVqQsmstqUDWWD4RmKW7Pg5PotSmvNZroCHccSgszS"
     },
     "wolfenboots_tangerine": {
       "objId": 2914,
@@ -24813,13 +24944,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENBOO5",
-      "uri": "http://localhost:8888/bridge/token/wolfenboots_tangerine.json",
+      "uri": "https://ipfs.io/ipfs/QmQoqUBAAC3tcshsiN3qCVrnhVxLhu7baR9b1FxqMqtwQ9",
       "stackable": false,
       "members": true,
       "mint": "HxzzNAvTyxBJrSSG6QdrhSPsy5spwKHYmeqvEdXNRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmTWNc9PSjArYguuJTw5L2dxfh7MFGQE1y6mLCieVF3wsL"
     },
     "wolfengloves_crimson": {
       "objId": 2912,
@@ -24830,13 +24962,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENGLOV",
-      "uri": "http://localhost:8888/bridge/token/wolfengloves_crimson.json",
+      "uri": "https://ipfs.io/ipfs/QmUxuVQQqjVxftH22TWGX59Hf3sEyLYrez7ba946H63n9R",
       "stackable": false,
       "members": false,
       "mint": "HyAKns7mwhrAGg8GfVuKvXvXRQ5pAvwnP8otPEK2RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmYHPnECcvkqTxpsz9kvHAGaLDkkfZxhcSDfaQvcaYzRZx"
     },
     "wolfengloves_grey": {
       "objId": 2902,
@@ -24847,13 +24980,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENGLO2",
-      "uri": "http://localhost:8888/bridge/token/wolfengloves_grey.json",
+      "uri": "https://ipfs.io/ipfs/QmVjGWSnV4cmhLUd1Db7kT9PGWtFGkGqcHT5acC9kdERwD",
       "stackable": false,
       "members": false,
       "mint": "HyizU6fvzsZKqRb5owP5eu8K5rvRVWRrKJ6p2iFeRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qmd3JhSTrvBAVXhJDyrAFnKjG9KKXHFyd3HvHwsjmW6xkP"
     },
     "wolfengloves_ocean": {
       "objId": 2932,
@@ -24864,13 +24998,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENGLO3",
-      "uri": "http://localhost:8888/bridge/token/wolfengloves_ocean.json",
+      "uri": "https://ipfs.io/ipfs/Qmas1hbbZqqhoj11U1nUU7ihGrTEe5jLkiCBXJbCLhMUZ9",
       "stackable": false,
       "members": false,
       "mint": "HzM5JEoeric2eU3cbCbx9tXrRdPZJWzV6GwKHui5RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmcGhZMzmMdSVVBNTDFPx979c77mkwurVwq25Qgv4AupjT"
     },
     "wolfengloves_purple": {
       "objId": 2942,
@@ -24881,13 +25016,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENGLO4",
-      "uri": "http://localhost:8888/bridge/token/wolfengloves_purple.json",
+      "uri": "https://ipfs.io/ipfs/QmcRFZyG9MK8Gip3y4z1L7kgMLUo4JAZ8ny6Bq97EocvKk",
       "stackable": false,
       "members": false,
       "mint": "HzsDF8vJLga87n53xwwnoxEFK8utwRmVnN3tpHS4RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmYBafCA3vCBvxZu3ndDUmRPMyf4mSevU2dCwYVLFgy9E3"
     },
     "wolfengloves_tangerine": {
       "objId": 2922,
@@ -24898,13 +25034,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENGLO5",
-      "uri": "http://localhost:8888/bridge/token/wolfengloves_tangerine.json",
+      "uri": "https://ipfs.io/ipfs/QmUoQ5kfmREJaQsNqYjk1KVW4zkBHWXVy7eyjXErsbS4LX",
       "stackable": false,
       "members": false,
       "mint": "Hzx2yK9R6Pi9i8Ufb2kLks6CEN5sPbxgmbpRRNNCRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmZneW4o3fs1i6HB13e4jGvTezuGK9qPEUvuZuc1oLCVxY"
     },
     "wolfenhat_crimson": {
       "objId": 2910,
@@ -24915,13 +25052,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENHATC",
-      "uri": "http://localhost:8888/bridge/token/wolfenhat_crimson.json",
+      "uri": "https://ipfs.io/ipfs/QmTn4EfeVXCPcRqUaYyQYwNDA2djBzyKCnVSnVhniAP659",
       "stackable": false,
       "members": true,
       "mint": "J19UdFY5Q3vhie4H5xczD3Vs8GE34XfQtHAwwMC8RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmXbAAgfmzLd1ozF9pCowARUWZEfUew79RhMD51vm9LKpi"
     },
     "wolfenhat_grey": {
       "objId": 2900,
@@ -24932,13 +25070,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENHATG",
-      "uri": "http://localhost:8888/bridge/token/wolfenhat_grey.json",
+      "uri": "https://ipfs.io/ipfs/QmPhUtBPa19G29geJ4C9rMMihr4LBk1VYS9kJqfXw3KCZQ",
       "stackable": false,
       "members": true,
       "mint": "J1JUppAZJYa2RXzi8owF6hCZHnqL8fVrntdeVHgQRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmV5B5dGKh8Dg6ZMYTv4c959hXjfutYcQQqwrf52iBAFuY"
     },
     "wolfenhat_ocean": {
       "objId": 2930,
@@ -24949,13 +25088,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENHATO",
-      "uri": "http://localhost:8888/bridge/token/wolfenhat_ocean.json",
+      "uri": "https://ipfs.io/ipfs/QmV4BGGvYxY4s1QtdKmi3F1xqcrsm3mDLgHusPW2oArxK7",
       "stackable": false,
       "members": true,
       "mint": "J2w8snLXzJHNHhL1PYwF9PY4vbvBNBrd5PdujJMWRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qmd5nRLbCZG6MBTJFpAJ58PahqfJYkmJ6q74VohDHKK2Xq"
     },
     "wolfenhat_purple": {
       "objId": 2940,
@@ -24966,13 +25106,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENHATP",
-      "uri": "http://localhost:8888/bridge/token/wolfenhat_purple.json",
+      "uri": "https://ipfs.io/ipfs/QmQPyaUT95Nj774nb7NudCAEYm14QS4o3BYXAuwN2VC66S",
       "stackable": false,
       "members": true,
       "mint": "J31dfFKHkKZ4X1ghkR8cWdSwBmwMPxsFfQxqhK4RRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmbxFcbEw5beZjuGfLvnNw74r7GeWB6Uq1dVTNiUfJhTMg"
     },
     "wolfenhat_tangerine": {
       "objId": 2920,
@@ -24983,13 +25124,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENHATT",
-      "uri": "http://localhost:8888/bridge/token/wolfenhat_tangerine.json",
+      "uri": "https://ipfs.io/ipfs/QmTMFiCCkcEC8ymQQhGgzEWhowdf34DzA9XHq3kFZGQLvT",
       "stackable": false,
       "members": true,
       "mint": "J4engLQRnAW1jMzDKFwY9mbKuqz6rf6Rh8qjaJibRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qme9qLHTmu2oYP4yNuw5v1AtktHG919gDk9wn7KxJPHqed"
     },
     "wolfenrobebottom_crimson": {
       "objId": 2908,
@@ -25000,13 +25142,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROBE",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobebottom_crimson.json",
+      "uri": "https://ipfs.io/ipfs/QmSz1tLpgUcM7w5zWkPtZmuF3CoKAqn4wQr2R6KwUk1kAz",
       "stackable": false,
       "members": true,
       "mint": "J6Bbra13kcEied3K2BMoz2E3Bd9j6b8D8XHvScWPRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmWv2xf4nFC7t8Xdn6TpaNKrVRrqauPMWCXwFoSQQuB75G"
     },
     "wolfenrobebottom_grey": {
       "objId": 2898,
@@ -25017,13 +25160,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROB2",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobebottom_grey.json",
+      "uri": "https://ipfs.io/ipfs/QmSE6LT5dU56upKBvmozZDRu5rYiY4qCS5ZUrzjxgLLGWE",
       "stackable": false,
       "members": true,
       "mint": "J7CkEJab6kDEbGGfKh1FVk5TB3WuJjCoPesFuYahRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qmai4c9pMQbzacufdZei7XgDUWTybrz2mF53NeaSAdFdPb"
     },
     "wolfenrobebottom_ocean": {
       "objId": 2928,
@@ -25034,13 +25178,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROB3",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobebottom_ocean.json",
+      "uri": "https://ipfs.io/ipfs/QmZNsntqGhhvfdGVeXJZb4r9JTwYXRC2do4jwkF1WUqU31",
       "stackable": false,
       "members": true,
       "mint": "J7fArdUNWfVQafexUotnMbtt3dBJZSxAJcZSBhhuRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmWb3ENRkSpCbfrMdC3BKLYpm9facCyEBBfyrS5EthxpeY"
     },
     "wolfenrobebottom_purple": {
       "objId": 2938,
@@ -25051,13 +25196,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROB4",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobebottom_purple.json",
+      "uri": "https://ipfs.io/ipfs/QmU4x6RB5pm6sUMSmWZz7kFapQutrnBfjjvmgSyAP9nJak",
       "stackable": false,
       "members": true,
       "mint": "J8dQdjkZdPPpomt2HEoAsoiVM4E4dTvvUQ1WuwrbRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQmoNGXDqctF34yT8Xmdbjr4WStMeQjNceFrSGnwAmmVx"
     },
     "wolfenrobebottom_tangerine": {
       "objId": 2918,
@@ -25068,13 +25214,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROB5",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobebottom_tangerine.json",
+      "uri": "https://ipfs.io/ipfs/QmbU3LAMv9TFaBWi68PLM9NRefPnxPHbmud4Pj8mmf1aZA",
       "stackable": false,
       "members": true,
       "mint": "J9QP9xSYc8oy8kAZwUCGz4A5kG8pjqCeauSWkqEYRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmXtoA3CZWKjr8fDAGpLbDa6iPXHYgHJNDZUQJ74H7R4Si"
     },
     "wolfenrobetop_crimson": {
       "objId": 2906,
@@ -25085,13 +25232,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROB6",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobetop_crimson.json",
+      "uri": "https://ipfs.io/ipfs/QmPwJVPtuzWWfgy1WthWfFd2xkFC8Csvv8FHgn5zXrWmN3",
       "stackable": false,
       "members": true,
       "mint": "JBafG42HEMQSthfM6Nz3o73p1yUc67SVLR1B8QxuRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmTz9pkEpoUH3JnVXSVn4wq2UJjU8LTsS9QTdG8GRG7Nde"
     },
     "wolfenrobetop_grey": {
       "objId": 2896,
@@ -25102,13 +25250,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROB7",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobetop_grey.json",
+      "uri": "https://ipfs.io/ipfs/QmaHcfZwT328GH1aTpDHGMBNRuy1pcVQXmY3wcs22ewZ7L",
       "stackable": false,
       "members": true,
       "mint": "JCWhnZviuvdpiYTuk5MHfgvKhuveGnk8B7B9XbkqRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmZiEXRi61eDHTqtFTvn4ZBn5xFhJf3nwGsznYGFL1hWY1"
     },
     "wolfenrobetop_ocean": {
       "objId": 2926,
@@ -25119,13 +25268,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROB8",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobetop_ocean.json",
+      "uri": "https://ipfs.io/ipfs/QmT1UNor3cBmH87fQSsBbvTpGGAc2F67cjo2cvG9G4jeUZ",
       "stackable": false,
       "members": true,
       "mint": "JCmYb8XepaNzmhzMojhgPtVym4sT9ZaNff3S6GTSRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmfYxnGv5s2poszC7r7Z5kW5QbQbfcKYoDkMytQLEiQWXP"
     },
     "wolfenrobetop_purple": {
       "objId": 2936,
@@ -25136,13 +25286,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENROB9",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobetop_purple.json",
+      "uri": "https://ipfs.io/ipfs/QmPo6VCrZZhug8pCRs1FTJzrbno5itGMkteSgMCi7VvGrg",
       "stackable": false,
       "members": true,
       "mint": "JDgPzsFQSdxws23j1Qy1BcyCMwBh2nmb6nkJdoqVRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmNXUZF9fb4npcmRKLnwMsutfotdHN5cGrpr6tnXCQKPvb"
     },
     "wolfenrobetop_tangerine": {
       "objId": 2916,
@@ -25153,13 +25304,14 @@
       "lowalch": 200,
       "p0GpPerItem": 180,
       "symbol": "WOLFENRO10",
-      "uri": "http://localhost:8888/bridge/token/wolfenrobetop_tangerine.json",
+      "uri": "https://ipfs.io/ipfs/QmZTZN1BVG9nkrF576NfjVyYjS1FNmoSzg1CL1od3WaNra",
       "stackable": false,
       "members": true,
       "mint": "JEAAdsHcoBTUXNuAMUQug2jUZBoafmhoFHdwwkHHRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmV5G3vVDnRAeBjPemcgjXq7PUxGmX8fWu75VdwvHsqaNe"
     },
     "wooden_shield": {
       "objId": 1171,
@@ -25170,13 +25322,14 @@
       "lowalch": 8,
       "p0GpPerItem": 7.2,
       "symbol": "WOODENSHIE",
-      "uri": "http://localhost:8888/bridge/token/wooden_shield.json",
+      "uri": "https://ipfs.io/ipfs/QmU7hiAroS5uYDcUj9Xw1bf8Zi8jd2CBNkb3CVLW1q9TJD",
       "stackable": false,
       "members": false,
       "mint": "JgQNX1Zex8XWR9GWxuTg699TUTN1GLu6FkRgdwpRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmU1xgre9He8uaUBtpRqUzGeVySF29Pz53dr2t8euJfvMZ"
     },
     "woodplank": {
       "objId": 960,
@@ -25187,7 +25340,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WOODPLANK",
-      "uri": "http://localhost:8888/bridge/token/woodplank.json",
+      "uri": "https://ipfs.io/ipfs/QmUiviX2rhU9ikJDf6xsxjYDhFAKe9QhFtJtssq9fYkVvW",
       "stackable": false,
       "members": false,
       "mint": "KJsgEratLRYfu2FRAu2DkVWoKBef8acNDMSjHhzRSGP",
@@ -25196,7 +25349,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmSwbhUAcg3rV38ZFryBF5H6FmFySXgxNtpzjoJZrXamiw"
     },
     "wool": {
       "objId": 1737,
@@ -25207,7 +25361,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WOOL",
-      "uri": "http://localhost:8888/bridge/token/wool.json",
+      "uri": "https://ipfs.io/ipfs/QmRZe1yBnzuXQG8A9euoxH4xq3jDbY42VFXPHCdUE9rdLQ",
       "stackable": false,
       "members": false,
       "mint": "M1p2wn2ZDN3K66z5YTCXKc3zZUNj6ictvKWxkxJRSGP",
@@ -25216,7 +25370,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmSXhmikMqLaJ4LyceZNtteLmXk1jYWPt6faq7wWD6xi9o"
     },
     "worm": {
       "objId": 943,
@@ -25227,7 +25382,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WORM",
-      "uri": "http://localhost:8888/bridge/token/worm.json",
+      "uri": "https://ipfs.io/ipfs/QmWpdQZ7DqdeQeXJXED1JG48Hd2QpYPCeBynUEZAHXqbiA",
       "stackable": false,
       "members": true,
       "mint": "NKVbgJFWLSK5AUHBaCDVGFHg1bPdyeG49qeHywfRSGP",
@@ -25235,7 +25390,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRuKHHq77yo4ZCR4LmaVRkdHb6z1gTNPdtYNsSDZnDFCq"
     },
     "worm_batta": {
       "objId": 2253,
@@ -25246,7 +25402,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WORMBATTA",
-      "uri": "http://localhost:8888/bridge/token/worm_batta.json",
+      "uri": "https://ipfs.io/ipfs/QmaqGDrJ2CBhxs8FP2Xx7jjHf7PVh8r4x4A65MtAQJbCE4",
       "stackable": false,
       "members": true,
       "mint": "NnpeqEybinvdTwzfiiDsSJFVYByHjY3fi7Ba972RSGP",
@@ -25255,7 +25411,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmPLXFR9u5aEvYCYHkYwXEopz1Mzd4Ar1tkper9Xwve2jr"
     },
     "worm_crunchies": {
       "objId": 2205,
@@ -25266,7 +25423,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WORMCRUNCH",
-      "uri": "http://localhost:8888/bridge/token/worm_crunchies.json",
+      "uri": "https://ipfs.io/ipfs/QmcVa7jDYCo25r4LGshUmFLvt5FEtGyVD1EVAqLhA8S89R",
       "stackable": false,
       "members": true,
       "mint": "P6RWZ8WczcMevYuC7Gfg5q7XFJnv5xJ6zzjLDX3RSGP",
@@ -25274,7 +25431,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmWRumQdRen3vCNnaU3MBEFY3AvhFNRLM7iYPNDYyYnxHd"
     },
     "worm_hole": {
       "objId": 2191,
@@ -25285,7 +25443,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "WORMHOLE",
-      "uri": "http://localhost:8888/bridge/token/worm_hole.json",
+      "uri": "https://ipfs.io/ipfs/Qmb8T31ESgVqyVrAoWNbt7Q6vjfv7nHPwVoKMLQ1NLMjre",
       "stackable": false,
       "members": true,
       "mint": "PVHLcjx47FbkA8m2ztQEFY33vzJDQ11Q8iXhzDDRSGP",
@@ -25293,7 +25451,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmRBnoFtf7sqhNyJR6R8MNGbjYpqZdABjBPTNmyEKj7Xry"
     },
     "wrapped_oomlie": {
       "objId": 2341,
@@ -25304,13 +25463,14 @@
       "lowalch": 6,
       "p0GpPerItem": 5.4,
       "symbol": "WRAPPEDOOM",
-      "uri": "http://localhost:8888/bridge/token/wrapped_oomlie.json",
+      "uri": "https://ipfs.io/ipfs/QmZieuad2qWcxS7N9MWkoNgbJpBkKSV6DaELmvBJQQnCvt",
       "stackable": false,
       "members": true,
       "mint": "PWSe5rPV1ucoZw3JZPP6cSoeKe57uQbV4o9vZvSRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmQ2HPrBb5rDPvzKbCC3dGPHuYXwsuyXZJgHsqphxbTNSa"
     },
     "yellow_bead": {
       "objId": 1472,
@@ -25321,7 +25481,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "YELLOWBEAD",
-      "uri": "http://localhost:8888/bridge/token/yellow_bead.json",
+      "uri": "https://ipfs.io/ipfs/QmYbWbVDuCNTjYgMVpsoV2RgGR65CR47dqdRehRWG5rNY1",
       "stackable": false,
       "members": false,
       "mint": "SfHbJCN7a3S1Mn5SNJMdVqjuhmrtrdBhEaWf9xpRSGP",
@@ -25329,7 +25489,8 @@
       "position": null,
       "flags": [
         "lowalch1"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmcnpJiJbGKs87y5iAQjopZsyvogJbBJ8phTPhiqTg3jcz"
     },
     "yellow_cape": {
       "objId": 1023,
@@ -25340,13 +25501,14 @@
       "lowalch": 12,
       "p0GpPerItem": 10.8,
       "symbol": "YELLOWCAPE",
-      "uri": "http://localhost:8888/bridge/token/yellow_cape.json",
+      "uri": "https://ipfs.io/ipfs/QmZEH8ZCu36P2PKDBLUQMozMbE1MK31Fe2y7c69XZYPj5H",
       "stackable": false,
       "members": false,
       "mint": "T74f2VftzQ8j3h26uVJTbwywVs7ytd9H9K3k2P3RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmeW7ub7qYEq8KcJEBkeDqHJwP3kgN4MUk6Zj4T8sDg5vH"
     },
     "yellow_partyhat": {
       "objId": 1040,
@@ -25357,7 +25519,7 @@
       "lowalch": 1,
       "p0GpPerItem": 0.9,
       "symbol": "YELLOWPART",
-      "uri": "http://localhost:8888/bridge/token/yellow_partyhat.json",
+      "uri": "https://ipfs.io/ipfs/QmQ4kvSYZeouWYpiobSh9Pm7NLStqZBr63aQ4UgjY4uXtV",
       "stackable": false,
       "members": false,
       "mint": "UZuSQBpyCASuPwHTPR86h8oBNJaehnFSyj8doZRRSGP",
@@ -25366,7 +25528,8 @@
       "flags": [
         "lowalch1",
         "defaultcost"
-      ]
+      ],
+      "imageUri": "https://ipfs.io/ipfs/QmQBzaKbedhuLEAZG2gKe6zWhS6ZEbsBcHqYYDDqB8WLLr"
     },
     "yellowdye": {
       "objId": 1765,
@@ -25377,13 +25540,14 @@
       "lowalch": 2,
       "p0GpPerItem": 1.8,
       "symbol": "YELLOWDYE",
-      "uri": "http://localhost:8888/bridge/token/yellowdye.json",
+      "uri": "https://ipfs.io/ipfs/QmSRLZdzKCHFBgpy2rgDb6pL4JoQpiDXPCCzuauGcignBG",
       "stackable": false,
       "members": false,
       "mint": "Uppmv3naU562sCzLSDsdyDzGgBJLXkr416bYm6JRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmNaRRT3KqTcEGaXMVoMJ7xHCN55Bupa4EL4XT9vNAvjku"
     },
     "yew_logs": {
       "objId": 1515,
@@ -25412,13 +25576,14 @@
       "lowalch": 128,
       "p0GpPerItem": 115.2,
       "symbol": "YEWLOGSPYR",
-      "uri": "http://localhost:8888/bridge/token/yew_logs_pyre.json",
+      "uri": "https://ipfs.io/ipfs/QmVkUD2MLXwYMAD85ej2KtD2ic5sT9kGyX9g1XFpAd3oYq",
       "stackable": false,
       "members": true,
       "mint": "VsMUc32s2A4VSSWSD7JF9ToQKFxGZ4ZzpnRSspSRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/Qmcji9m8RoKK4hS8Pie96iijP3u3ymzrrmJDtzUkBNcWcN"
     },
     "yew_longbow": {
       "objId": 855,
@@ -25429,13 +25594,14 @@
       "lowalch": 512,
       "p0GpPerItem": 460.8,
       "symbol": "YEWLONGBOW",
-      "uri": "http://localhost:8888/bridge/token/yew_longbow.json",
+      "uri": "https://ipfs.io/ipfs/QmfPU4ud3UJ216KPkZJ4zYWhngxb2DavJxQpi35xpkBfgQ",
       "stackable": false,
       "members": true,
       "mint": "WkJz8nqvQBxb91VwFy7XtKLPbSM1CHCDWbjC7n5RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmY6369nQnx3PoZMPj7uesPtTHGrSREBu9ftxbxQ9VxSg1"
     },
     "yew_shortbow": {
       "objId": 857,
@@ -25446,13 +25612,14 @@
       "lowalch": 320,
       "p0GpPerItem": 288,
       "symbol": "YEWSHORTBO",
-      "uri": "http://localhost:8888/bridge/token/yew_shortbow.json",
+      "uri": "https://ipfs.io/ipfs/QmYiNYBY7yTC3GLWvgL3pyAREhF5vRuPS4DgHVDbkB92n5",
       "stackable": false,
       "members": true,
       "mint": "WzZiNcVoPceEAxK4ciDnZ1PJx6fYcprcNPq7Nj4RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmcE4yZQq51pgQQVpGdFJHjFVy8cW3g9Td9k7MdK5uGe5b"
     },
     "zamrobebottom": {
       "objId": 1033,
@@ -25463,13 +25630,14 @@
       "lowalch": 12,
       "p0GpPerItem": 10.8,
       "symbol": "ZAMROBEBOT",
-      "uri": "http://localhost:8888/bridge/token/zamrobebottom.json",
+      "uri": "https://ipfs.io/ipfs/QmUdTMYgajn8FyFTyEiGngt3Dagn8872T7XzbHAZspN3CS",
       "stackable": false,
       "members": true,
       "mint": "XdBYLAS1gE64PPVLLCxwrusKvW3Hx1Ckb7JL2m8RSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmTcaQAELvqLmyqn1KAn3Vq2cKHcYDFyqrfUmMFQTsNynU"
     },
     "zamrobetop": {
       "objId": 1035,
@@ -25480,13 +25648,14 @@
       "lowalch": 16,
       "p0GpPerItem": 14.4,
       "symbol": "ZAMROBETOP",
-      "uri": "http://localhost:8888/bridge/token/zamrobetop.json",
+      "uri": "https://ipfs.io/ipfs/QmPkYVfsTaokXUMTA2rDfD2YK3EFVtqYWt8cDpzr94VU8c",
       "stackable": false,
       "members": true,
       "mint": "awjvirNA9Y648AR3WF6VKbsXdSZ9n5hQTPUDEoaRSGP",
       "pool": null,
       "position": null,
-      "flags": []
+      "flags": [],
+      "imageUri": "https://ipfs.io/ipfs/QmceiFbgmAQo8kfrTz56FwN8NekhiwbGEATtHA1STqYPQr"
     }
   },
   "bridge": {
