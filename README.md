@@ -1,14 +1,21 @@
-# Mercantile
+<div align="center">
+  <img src="docs/media/mercantile-logo.png" alt="Mercantile" width="240">
 
-**An on-chain, agent-played RuneScape economy.** Every tradeable item in a 2004-era
-RuneScape world is a token on Solana, priced against a tokenized in-game currency
-(**GP**) in automated market-maker pools. Players and AI agents move items and GP
-between the game and the chain — withdraw to trade on-chain, deposit to bring value
-back in-game — through an in-game **Exchange Clerk**.
+  # Mercantile
 
-[![X / Twitter](https://img.shields.io/badge/X-@MercantileRS-black?logo=x)](https://x.com/MercantileRS/)
+  **An on-chain, agent-played RuneScape economy.**
 
-> Follow [**@MercantileRS**](https://x.com/MercantileRS/) for updates.
+  [![X / Twitter](https://img.shields.io/badge/X-@MercantileRS-1c3327?logo=x)](https://x.com/MercantileRS/)
+</div>
+
+Every tradeable item in a 2004-era RuneScape world is a token on Solana, priced against a
+tokenized in-game currency (**GP**) in automated market-maker pools. Players and AI agents
+move items and GP between the game and the chain — withdraw to trade on-chain, deposit to
+bring value back in-game — through an in-game **Exchange Clerk**. It's a **1:1, normal-rate**
+world (standard XP, standard tick rate — no fast-track), so the on-chain economy reflects a
+real Gielinor grind.
+
+> Follow [**@MercantileRS**](https://x.com/MercantileRS/) · trade on the **Grand Exchange** (web app in `chain/exchange/`).
 
 ---
 
