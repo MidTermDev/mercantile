@@ -77,4 +77,22 @@ pub mod bridge {
     pub fn deposit_gp(ctx: &mut Context<DepositGp>, amount: u64) -> Result<()> {
         instructions::deposit::deposit_gp(ctx, amount)
     }
+
+    /// Keeper: open a user's per-(owner,mint) claimable balance PDA.
+    #[discrim = 10]
+    pub fn open_claim(ctx: &mut Context<OpenClaim>, owner: Address, gp: bool) -> Result<()> {
+        instructions::claim::open_claim(ctx, owner, gp)
+    }
+
+    /// Keeper: add to a user's claimable balance (game-side already debited).
+    #[discrim = 11]
+    pub fn credit_claim(ctx: &mut Context<CreditClaim>, owner: Address, amount: u64) -> Result<()> {
+        instructions::claim::credit_claim(ctx, owner, amount)
+    }
+
+    /// User: mint your claimable balance to your own account (you pay fee + rent).
+    #[discrim = 12]
+    pub fn redeem_claim(ctx: &mut Context<RedeemClaim>) -> Result<()> {
+        instructions::claim::redeem_claim(ctx)
+    }
 }

@@ -7,6 +7,7 @@
 
 [opnpc1,exchange_clerk]
 ~chatnpc("<p,happy>Welcome to the Gielinor Exchange. I can send your|goods to the blockchain, or hand over anything|you've deposited from it.");
+~chatnpc("<p,neutral>To send an item on-chain, just @dbl@use@bla@ it on me.|For coins or deposits, pick an option:");
 @bridge_menu;
 
 [opnpc3,exchange_clerk]

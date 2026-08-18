@@ -13,14 +13,10 @@
 
 import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
 import bs58 from 'bs58';
-import {
-    TOKEN_PROGRAM_ID,
-    getAssociatedTokenAddressSync,
-} from '@solana/spl-token';
 import { db, toDbDate } from './db';
 import { config, loadOperatorKeypair, makeConnection } from './config';
 import { loadRegistryMaps, type RegistryMaps } from './verifier';
-import { ixWithdrawItem, ixWithdrawGp } from '../program/client';
+import { ixOpenClaim, ixCreditClaim, claimPda } from '../program/client';
 
 const GP_DECIMALS = 6;
 const ITEM_DECIMALS = 1; // items are 1-decimal fungible tokens (1 in-game item = 10 base units)
@@ -42,10 +38,12 @@ interface WithdrawRow {
 
 export class WithdrawWorker {
     private conn: Connection;
-    // Hot key: signs program mints + pays ONLY the ~5000-lamport network fee. It must
-    // NEVER pay a user's token-account rent: the user owns that account and could close
-    // it to reclaim the rent, then re-withdraw — draining the operator ~0.002 SOL/cycle.
-    // So the user creates (and funds) their own token account; we only mint into it.
+    // Hot key: credits users' on-chain claim balances (open_claim/credit_claim). The
+    // USER redeems (mints to their own account) and pays their own fee + token-account
+    // rent — so the operator never mints to, or funds an account for, a user (that would
+    // be a drain: the user owns the account and could close it to reclaim the rent).
+    // The operator does pay a one-time claim-PDA rent per (user,mint); it's program-owned
+    // (not user-closable) so it can't be drained.
     private operator: Keypair;
     private registry: RegistryMaps;
     private running = false;
@@ -100,18 +98,19 @@ export class WithdrawWorker {
         }
     }
 
-    // Mint via the on-chain program (operator-signed). Items: 1 in-game item ->
-    // 10 base units (1 decimal). GP: 1 -> 10^6. deposit is the burn half.
-    // The user's token account MUST already exist — we never create/fund it (see the
-    // operator field comment). If it's missing we return {awaiting} and defer the row.
-    private async buildTx(row: WithdrawRow): Promise<{ tx: Transaction; lastValidBlockHeight: number } | { error: string } | { awaiting: string }> {
+    // Credit the user's on-chain claimable balance (operator-signed). The USER later
+    // redeems it themselves (redeem_claim), minting to their own account and paying
+    // their own fee + rent — so we never touch the user's token account here. Items:
+    // 1 in-game item -> 10 base units (1 decimal). GP: 1 -> 10^6.
+    private async buildTx(row: WithdrawRow): Promise<{ tx: Transaction; lastValidBlockHeight: number } | { error: string }> {
         const user = new PublicKey(row.wallet);
         const tx = new Transaction();
         const op = this.operator.publicKey;
 
         let mint: PublicKey;
         let baseAmount: bigint;
-        if (row.obj_debugname === 'gp') {
+        const gp = row.obj_debugname === 'gp';
+        if (gp) {
             mint = new PublicKey(this.registry.gpMint);
             baseAmount = BigInt(row.count) * 10n ** BigInt(GP_DECIMALS);
         } else {
@@ -121,15 +120,11 @@ export class WithdrawWorker {
             baseAmount = BigInt(row.count) * 10n ** BigInt(ITEM_DECIMALS);
         }
 
-        const userAta = getAssociatedTokenAddressSync(mint, user, false, TOKEN_PROGRAM_ID);
-        // Gate on the user having their own (self-funded) token account. 'confirmed' so
-        // a just-created account is visible; if absent, the user must create it first.
-        const info = await this.conn.getAccountInfo(userAta, 'confirmed');
-        if (!info) return { awaiting: userAta.toBase58() };
-
-        tx.add(row.obj_debugname === 'gp'
-            ? ixWithdrawGp(op, mint, userAta, baseAmount)
-            : ixWithdrawItem(op, mint, userAta, baseAmount));
+        // open the per-(owner,mint) claim PDA if it doesn't exist yet, then credit it
+        if (!(await this.conn.getAccountInfo(claimPda(user, mint), 'confirmed'))) {
+            tx.add(ixOpenClaim(op, user, mint, gp));
+        }
+        tx.add(ixCreditClaim(op, user, mint, baseAmount));
 
         const { blockhash, lastValidBlockHeight } = await this.conn.getLatestBlockhash('finalized');
         tx.recentBlockhash = blockhash;
@@ -143,10 +138,6 @@ export class WithdrawWorker {
             const built = await this.buildTx(row);
             if ('error' in built) {
                 await this.fail(row, built.error);
-                return;
-            }
-            if ('awaiting' in built) {
-                await this.awaitAccount(row, built.awaiting);
                 return;
             }
             const sig = built.tx.signatures[0].signature ? bs58.encode(built.tx.signatures[0].signature) : null;
@@ -181,7 +172,8 @@ export class WithdrawWorker {
         await this.fail(row, 'exhausted submission attempts');
     }
 
-    /** Waits for the recorded sig to finalize or provably die. */
+    /** Waits for the recorded sig to finalize or provably die. On success the row
+     *  becomes 'claimable' — the balance is credited on-chain, the user redeems it. */
     private async confirmOrResubmit(row: WithdrawRow): Promise<'confirmed' | 'resubmit' | 'failed'> {
         if (!row.sig || row.last_valid_height === null) return 'resubmit';
         for (;;) {
@@ -194,11 +186,11 @@ export class WithdrawWorker {
                 if (status.confirmationStatus === 'finalized') {
                     await db
                         .updateTable('bridge_tx')
-                        .set({ state: 'confirmed', updated_at: toDbDate(new Date()) })
+                        .set({ state: 'claimable', updated_at: toDbDate(new Date()) })
                         .where('id', '=', row.id)
                         .where('state', '=', 'submitted')
                         .execute();
-                    console.log(`[withdraw-worker] row ${row.id} confirmed: ${row.count} x ${row.obj_debugname} -> ${row.wallet.slice(0, 8)}…`);
+                    console.log(`[withdraw-worker] row ${row.id} claimable: ${row.count} x ${row.obj_debugname} -> ${row.wallet.slice(0, 8)}…`);
                     return 'confirmed';
                 }
                 // landed but not finalized yet — keep waiting
@@ -211,25 +203,6 @@ export class WithdrawWorker {
             }
             await new Promise(r => setTimeout(r, 2000));
         }
-    }
-
-    /**
-     * The user's token account doesn't exist yet. Park the row in 'awaiting_account'
-     * (idempotent — from 'debited' or a prior 'awaiting_account') and leave it for the
-     * next tick, which re-checks. The user creates + funds the account themselves (web
-     * wallet UI / CLI); we never spend operator SOL on their rent. No refund, no failure.
-     */
-    private async awaitAccount(row: WithdrawRow, ata: string): Promise<void> {
-        if (row.state !== 'awaiting_account') {
-            console.log(`[withdraw-worker] row ${row.id} awaiting user token account ${ata.slice(0, 8)}… (${row.count} x ${row.obj_debugname})`);
-        }
-        await db
-            .updateTable('bridge_tx')
-            .set({ state: 'awaiting_account', updated_at: toDbDate(new Date()) })
-            .where('id', '=', row.id)
-            .where('state', 'in', ['debited', 'awaiting_account'])
-            .execute();
-        row.state = 'awaiting_account';
     }
 
     /**

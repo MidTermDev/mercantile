@@ -12,3 +12,15 @@ pub struct BridgeConfig {
     pub paused: u8,
     pub bump: u8,
 }
+
+/// A user's claimable balance for one mint (running total). The keeper credits it;
+/// the owner redeems it themselves (mint to their own account, paying their own fee).
+#[account]
+pub struct Claim {
+    pub amount: u64,          // align 8 → keep first
+    pub owner: Address,
+    pub mint: Address,
+    pub gp: u8,
+    pub bump: u8,
+    pub _reserved: [u8; 6],   // pad to 80 (multiple of 8) — no implicit padding
+}

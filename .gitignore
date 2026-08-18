@@ -25,4 +25,4 @@ server/engine/package-lock.json
 
 # SDK is copied into Docker via Dockerfile; don't duplicate it under server/
 server/sdk/
-jobs/
+jobs/server/engine/data/agent-keys.jsonl

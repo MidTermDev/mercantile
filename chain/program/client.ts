@@ -18,7 +18,7 @@ export const METAPLEX_PROGRAM_ID = new PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybz
 const DISC = {
     initialize: 0, set_operator: 1, set_paused: 2, set_gp_mint: 3,
     create_mint: 4, mint_initial: 5, withdraw_item: 6, withdraw_gp: 7,
-    deposit_item: 8, deposit_gp: 9,
+    deposit_item: 8, deposit_gp: 9, open_claim: 10, credit_claim: 11, redeem_claim: 12,
 } as const;
 
 // ── borsh-ish arg encoders ────────────────────────────────────────────────
@@ -38,6 +38,9 @@ export function mintAuthorityPda(): PublicKey {
 }
 export function eventAuthorityPda(): PublicKey {
     return PublicKey.findProgramAddressSync([Buffer.from('__event_authority')], BRIDGE_PROGRAM_ID)[0];
+}
+export function claimPda(owner: PublicKey, mint: PublicKey): PublicKey {
+    return PublicKey.findProgramAddressSync([Buffer.from('claim'), owner.toBytes(), mint.toBytes()], BRIDGE_PROGRAM_ID)[0];
 }
 export function metadataPda(mint: PublicKey): PublicKey {
     return PublicKey.findProgramAddressSync(
@@ -170,6 +173,49 @@ export function ixDepositGp(owner: PublicKey, mint: PublicKey, ownerAta: PublicK
             meta(BRIDGE_PROGRAM_ID, false, false),
         ],
         data: data(DISC.deposit_gp, u64(amount)),
+    });
+}
+
+// ── claim model: keeper credits a balance, user redeems (mints) it themselves ──
+export function ixOpenClaim(operator: PublicKey, owner: PublicKey, mint: PublicKey, gp: boolean): TransactionInstruction {
+    return new TransactionInstruction({
+        programId: BRIDGE_PROGRAM_ID,
+        keys: [
+            meta(configPda(), false, false),
+            meta(operator, true, true),
+            meta(mint, false, false),
+            meta(claimPda(owner, mint), false, true),
+            meta(SystemProgram.programId, false, false),
+        ],
+        data: data(DISC.open_claim, pubkey(owner), boolByte(gp)),
+    });
+}
+export function ixCreditClaim(operator: PublicKey, owner: PublicKey, mint: PublicKey, amount: bigint): TransactionInstruction {
+    return new TransactionInstruction({
+        programId: BRIDGE_PROGRAM_ID,
+        keys: [
+            meta(configPda(), false, false),
+            meta(operator, true, false),
+            meta(mint, false, false),
+            meta(claimPda(owner, mint), false, true),
+        ],
+        data: data(DISC.credit_claim, pubkey(owner), u64(amount)),
+    });
+}
+export function ixRedeemClaim(owner: PublicKey, mint: PublicKey, recipientAta: PublicKey): TransactionInstruction {
+    return new TransactionInstruction({
+        programId: BRIDGE_PROGRAM_ID,
+        keys: [
+            meta(owner, true, false),
+            meta(mint, false, true),
+            meta(mintAuthorityPda(), false, false),
+            meta(claimPda(owner, mint), false, true),
+            meta(recipientAta, false, true),
+            meta(TOKEN_PROGRAM_ID, false, false),
+            meta(eventAuthorityPda(), false, false),
+            meta(BRIDGE_PROGRAM_ID, false, false),
+        ],
+        data: data(DISC.redeem_claim),
     });
 }
 

@@ -192,7 +192,7 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
             .selectFrom('bridge_tx')
             .where('wallet', '=', address)
             .where('direction', '=', 'withdraw')
-            .where('state', 'in', ['debited', 'submitted', 'awaiting_account'])
+            .where('state', 'in', ['debited', 'submitted', 'awaiting_account', 'claimable'])
             .select(['obj_debugname', 'count', 'state'])
             .orderBy('id', 'asc')
             .limit(100)

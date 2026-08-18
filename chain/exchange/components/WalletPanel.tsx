@@ -8,7 +8,7 @@ import { GP_DECIMALS, ITEM_DECIMALS, GP_MINT } from "@/lib/constants";
 import type { ItemsFile, ExchangeItem } from "@/lib/types";
 import {
   isLinked, pendingWithdrawals, type PendingRow,
-  buildCreateAccountTx, buildDepositTx, notifyDeposit, walletHoldings,
+  buildRedeemTx, claimBalanceBase, buildDepositTx, notifyDeposit, walletHoldings,
 } from "@/lib/bridge";
 import { LinkModal } from "@/components/LinkModal";
 import { buildSellTx } from "@/lib/swap";
@@ -39,6 +39,7 @@ export function WalletPanel() {
 
   const [linked, setLinked] = useState<boolean | null>(null);
   const [pending, setPending] = useState<PendingRow[]>([]);
+  const [claimBals, setClaimBals] = useState<Record<string, bigint>>({});
   const [holdings, setHoldings] = useState<{ mint: string; base: bigint }[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -62,7 +63,15 @@ export function WalletPanel() {
     setLinked(lk);
     setPending(pw);
     setHoldings(hs.map((h) => ({ mint: h.mint, base: h.amountBase })));
-  }, [publicKey, connection]);
+    // read on-chain claimable balances for the mints that have a claimable row
+    const names = [...new Set(pw.filter((p) => p.state === "claimable").map((p) => p.obj_debugname))];
+    const bals: Record<string, bigint> = {};
+    await Promise.all(names.map(async (dn) => {
+      const m = dn === "gp" ? GP_MINT : byName.get(dn)?.mint;
+      if (m) bals[dn] = await claimBalanceBase(connection, publicKey!, m).catch(() => 0n);
+    }));
+    setClaimBals(bals);
+  }, [publicKey, connection, byName]);
 
   useEffect(() => { if (connected && publicKey) refresh(); else { setLinked(null); setPending([]); setHoldings([]); } }, [connected, publicKey, refresh]);
 
@@ -73,20 +82,20 @@ export function WalletPanel() {
 
   const [showLink, setShowLink] = useState(false);
 
-  // ── create token account (user pays their own rent) ───────────────────────
+  // ── claim a withdrawal: the user mints their credited balance to themselves ──
   function mintFor(debugname: string): string | null {
     if (debugname === "gp") return GP_MINT;
     return byName.get(debugname)?.mint ?? null;
   }
-  function createAccount(debugname: string) {
-    return run(`create:${debugname}`, async () => {
+  function claim(debugname: string) {
+    return run(`claim:${debugname}`, async () => {
       if (!publicKey) return;
       const mint = mintFor(debugname);
       if (!mint) throw new Error(`unknown item ${debugname}`);
-      const tx = buildCreateAccountTx(publicKey, mint);
+      const tx = buildRedeemTx(publicKey, mint);   // creates your account (you pay rent) + mints
       const sig = await sendTransaction(tx, connection);
       await connection.confirmTransaction(sig, "confirmed");
-      setMsg(`Created your ${debugname === "gp" ? "GP" : debugname} account — the withdrawal will land shortly.`);
+      setMsg(`Claimed your ${debugname === "gp" ? "GP" : (byName.get(debugname)?.name ?? debugname)} — it's in your wallet.`);
       setTimeout(refresh, 3000);
     });
   }
@@ -98,6 +107,9 @@ export function WalletPanel() {
       if (!publicKey) return;
       const whole = Number(amts[mint] ?? "0");
       if (!whole || whole <= 0) throw new Error("enter an amount");
+      // The game can't hold fractions — only whole items/GP can be deposited (a burn
+      // of a fractional amount would be rejected in-game AFTER the tokens are gone).
+      if (!Number.isInteger(whole)) throw new Error(`whole ${isGp ? "GP" : "items"} only — no fractions`);
       if (whole > maxWhole) throw new Error(`you only hold ${maxWhole}`);
       const tx = buildDepositTx(publicKey, mint, whole, isGp);
       const sig = await sendTransaction(tx, connection);
@@ -139,8 +151,11 @@ export function WalletPanel() {
     );
   }
 
-  const awaiting = pending.filter((p) => p.state === "awaiting_account");
-  const processing = pending.filter((p) => p.state !== "awaiting_account");
+  // claimable = withdrawals credited on-chain; drive the UI off the real claim-PDA
+  // balance (source of truth) so already-claimed ones disappear.
+  const claimableNames = [...new Set(pending.filter((p) => p.state === "claimable").map((p) => p.obj_debugname))]
+    .filter((dn) => (claimBals[dn] ?? 0n) > 0n);
+  const processing = pending.filter((p) => p.state !== "claimable");
   const gpHolding = holdings.find((h) => h.mint === GP_MINT);
   const itemHoldings = holdings.filter((h) => h.mint !== GP_MINT && byMint.has(h.mint));
 
@@ -178,23 +193,24 @@ export function WalletPanel() {
       {/* Pending withdrawals */}
       <section className="card p-5">
         <h2 className="display text-lg font-bold gold-text">2 · Incoming withdrawals</h2>
-        {pending.length === 0 ? (
-          <p className="text-mute text-sm mt-2">No pending withdrawals. Withdraw items or GP at the in-game Exchange Clerk and they appear here.</p>
+        {claimableNames.length === 0 && processing.length === 0 ? (
+          <p className="text-mute text-sm mt-2">No pending withdrawals. Withdraw items or GP at the in-game Exchange Clerk and they appear here to claim.</p>
         ) : (
           <div className="mt-3 space-y-2">
-            {awaiting.map((p, i) => {
-              const it = byName.get(p.obj_debugname);
-              const label = p.obj_debugname === "gp" ? "GP" : it?.name ?? p.obj_debugname;
+            {claimableNames.map((dn) => {
+              const it = byName.get(dn);
+              const label = dn === "gp" ? "GP" : it?.name ?? dn;
+              const whole = Number(claimBals[dn]) / (dn === "gp" ? 1e6 : 10);
               return (
-                <div key={`a${i}`} className="flex items-center gap-3 rounded-lg border border-gold/40 bg-panel px-3 py-2">
-                  <ItemImage src={p.obj_debugname === "gp" ? gp?.imageUri ?? null : it?.imageUri ?? null} alt={label} size={32} />
+                <div key={`c${dn}`} className="flex items-center gap-3 rounded-lg border border-gold/40 bg-panel px-3 py-2">
+                  <ItemImage src={dn === "gp" ? gp?.imageUri ?? null : it?.imageUri ?? null} alt={label} size={32} />
                   <div className="text-sm">
-                    <div className="text-ink">{p.count} × {label}</div>
-                    <div className="text-mute text-xs">needs a token account (~0.002 SOL, refundable, you pay)</div>
+                    <div className="text-ink">{whole.toLocaleString()} × {label}</div>
+                    <div className="text-mute text-xs">ready to claim — you mint it & pay the fee (~0.002 SOL)</div>
                   </div>
-                  <button onClick={() => createAccount(p.obj_debugname)} disabled={busy === `create:${p.obj_debugname}`}
+                  <button onClick={() => claim(dn)} disabled={busy === `claim:${dn}`}
                     className="ml-auto px-3 py-1.5 rounded-lg bg-gold text-bg font-bold text-xs hover:bg-gold2 disabled:opacity-50">
-                    {busy === `create:${p.obj_debugname}` ? "creating…" : "Create account & receive"}
+                    {busy === `claim:${dn}` ? "claiming…" : "Claim"}
                   </button>
                 </div>
               );
@@ -206,7 +222,7 @@ export function WalletPanel() {
                 <div key={`p${i}`} className="flex items-center gap-3 rounded-lg border border-line bg-panel px-3 py-2 text-sm">
                   <ItemImage src={p.obj_debugname === "gp" ? gp?.imageUri ?? null : it?.imageUri ?? null} alt={label} size={32} />
                   <span className="text-ink">{p.count} × {label}</span>
-                  <span className="ml-auto text-mute text-xs">minting…</span>
+                  <span className="ml-auto text-mute text-xs">crediting… (~30s)</span>
                 </div>
               );
             })}

@@ -8,4 +8,8 @@ pub enum BridgeError {
     ZeroAmount,
     #[msg("Mint does not match the configured GP mint")]
     NotGpMint,
+    #[msg("Nothing to claim")]
+    NothingToClaim,
+    #[msg("Recipient account is not owned by the claimant")]
+    NotClaimOwner,
 }

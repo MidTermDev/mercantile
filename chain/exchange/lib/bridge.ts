@@ -91,13 +91,20 @@ export async function notifyDeposit(signature: string): Promise<{ ok: boolean; e
 // ── on-chain program: deposit (burn) instruction builders (ported from
 //    chain/program/client.ts — single-byte discriminators, v2-rc IDL order) ────
 const BRIDGE_PROGRAM_ID = new PublicKey(PROGRAM_ID);
-const DISC = { deposit_item: 8, deposit_gp: 9 } as const;
+const DISC = { deposit_item: 8, deposit_gp: 9, redeem_claim: 12 } as const;
+const seed = (s: string) => new TextEncoder().encode(s);
 
 function configPda(): PublicKey {
-  return PublicKey.findProgramAddressSync([new TextEncoder().encode("config")], BRIDGE_PROGRAM_ID)[0];
+  return PublicKey.findProgramAddressSync([seed("config")], BRIDGE_PROGRAM_ID)[0];
 }
 function eventAuthorityPda(): PublicKey {
-  return PublicKey.findProgramAddressSync([new TextEncoder().encode("__event_authority")], BRIDGE_PROGRAM_ID)[0];
+  return PublicKey.findProgramAddressSync([seed("__event_authority")], BRIDGE_PROGRAM_ID)[0];
+}
+function mintAuthorityPda(): PublicKey {
+  return PublicKey.findProgramAddressSync([seed("mint_authority")], BRIDGE_PROGRAM_ID)[0];
+}
+function claimPda(owner: PublicKey, mint: PublicKey): PublicKey {
+  return PublicKey.findProgramAddressSync([seed("claim"), owner.toBytes(), mint.toBytes()], BRIDGE_PROGRAM_ID)[0];
 }
 function ixData(disc: number, amount: bigint): Buffer {
   const buf = new Uint8Array(9);
@@ -138,6 +145,42 @@ function ixDepositGp(owner: PublicKey, mint: PublicKey, ownerAta: PublicKey, amo
 }
 
 // ── tx builders the wallet UI signs ──────────────────────────────────────────
+
+// ── claim (withdrawals): the user redeems their on-chain balance themselves ──
+function ixRedeemClaim(owner: PublicKey, mint: PublicKey, recipientAta: PublicKey): TransactionInstruction {
+  return new TransactionInstruction({
+    programId: BRIDGE_PROGRAM_ID,
+    keys: [
+      meta(owner, true, false),
+      meta(mint, false, true),
+      meta(mintAuthorityPda(), false, false),
+      meta(claimPda(owner, mint), false, true),
+      meta(recipientAta, false, true),
+      meta(TOKEN_PROGRAM_ID, false, false),
+      meta(eventAuthorityPda(), false, false),
+      meta(BRIDGE_PROGRAM_ID, false, false),
+    ],
+    data: Buffer.from([DISC.redeem_claim]),
+  });
+}
+
+/** On-chain claimable balance (base units) for (owner, mint). 0 if none. */
+export async function claimBalanceBase(conn: Connection, owner: PublicKey, mintStr: string): Promise<bigint> {
+  const info = await conn.getAccountInfo(claimPda(owner, new PublicKey(mintStr)));
+  if (!info || info.data.length < 16) return 0n;
+  return info.data.readBigUInt64LE(8); // [8-byte discriminator][amount u64]
+}
+
+/** Redeem a withdrawal: mint the claimable balance to the user's own account (they
+ *  create the account + pay the rent + fee). One tx per mint redeems its full balance. */
+export function buildRedeemTx(owner: PublicKey, mintStr: string): Transaction {
+  const mint = new PublicKey(mintStr);
+  const ata = getAssociatedTokenAddressSync(mint, owner, false, TOKEN_PROGRAM_ID);
+  return new Transaction().add(
+    createAssociatedTokenAccountIdempotentInstruction(owner, ata, owner, mint, TOKEN_PROGRAM_ID),
+    ixRedeemClaim(owner, mint, ata),
+  );
+}
 
 /** Create (and self-fund) the user's token account for `mint`. Owner pays the rent. */
 export function buildCreateAccountTx(owner: PublicKey, mintStr: string): Transaction {
