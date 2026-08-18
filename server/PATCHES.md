@@ -133,7 +133,10 @@ survival) is described in the project memory; this file is the human-readable ch
 - [ ] **`web/pages/bridge.ts`** (wholly added, wired in `web/index.ts`) — /bridge/link
       (page + ed25519-verified POST), /bridge/linked/:address, /bridge/token/:name.json,
       /bridge/deposit/notify (loopback proxy to the daemon), /bridge/status/:username
-      (Bearer BRIDGE_ADMIN_TOKEN). Deps added to engine package.json: `tweetnacl`, `bs58`.
+      (Bearer BRIDGE_ADMIN_TOKEN), /bridge/pending/:address (public, wallet-scoped:
+      non-terminal withdrawals so the web wallet can prompt account creation for
+      'awaiting_account' rows — no username returned). Deps added to engine
+      package.json: `tweetnacl`, `bs58`.
 - [ ] **Prisma `account_wallet` + `bridge_tx`** — both schemas + `migrations/20260817000000_bridge`
       (sqlite + mysql), kysely regen of `src/db/types.ts`. The daemon (chain/daemon) opens the
       same sqlite with its own connection and owns the chain-side transitions.

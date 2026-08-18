@@ -3,6 +3,7 @@
 //   GET  /bridge/link                  - wallet-link page (Phantom signMessage)
 //   POST /bridge/link                  - {username, code, address, signature} -> account_wallet upsert
 //   GET  /bridge/linked/:address       - {linked: boolean} (no username leak)
+//   GET  /bridge/pending/:address      - {pending:[{obj_debugname,count,state}]} for that wallet (no username)
 //   GET  /bridge/token/:debugname.json - Token-2022 offchain metadata from the registry
 //   POST /bridge/deposit/notify        - proxied to the bridge daemon on loopback
 //   GET  /bridge/status/:username      - pending/failed rows; requires BRIDGE_ADMIN_TOKEN
@@ -178,6 +179,25 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
         if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) return json(400, { error: 'bad address' });
         const row = await db.selectFrom('account_wallet').where('address', '=', address).select(['account_id']).executeTakeFirst();
         return json(200, { linked: !!row });
+    }
+
+    // GET /bridge/pending/:address — wallet-scoped, public. Non-terminal withdrawals
+    // for this wallet so the site can show status and, for 'awaiting_account' rows,
+    // prompt the user to create (and self-fund) the token account we mint into. No
+    // username is returned (privacy) — only the wallet's own item/count/state.
+    if (url.pathname.startsWith('/bridge/pending/') && req.method === 'GET') {
+        const address = url.pathname.slice('/bridge/pending/'.length);
+        if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) return json(400, { error: 'bad address' });
+        const rows = await db
+            .selectFrom('bridge_tx')
+            .where('wallet', '=', address)
+            .where('direction', '=', 'withdraw')
+            .where('state', 'in', ['debited', 'submitted', 'awaiting_account'])
+            .select(['obj_debugname', 'count', 'state'])
+            .orderBy('id', 'asc')
+            .limit(100)
+            .execute();
+        return json(200, { pending: rows });
     }
 
     // GET /bridge/token/:debugname.json
