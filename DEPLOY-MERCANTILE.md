@@ -68,11 +68,15 @@ fly deploy -a mercantile-game -c fly.mercantile.toml
 
 ### After deploy
 
-- Play: `https://mercantile-game.fly.dev/rs2.cgi`
-- Link wallet page: `https://mercantile-game.fly.dev/bridge/link`
+The real game host is intentionally NOT written down in this repo (don't leak it
+before launch — keep it in gitignored env/secrets only). With `<GAME_HOST>` as your
+deployed hostname:
+
+- Play: `https://<GAME_HOST>/rs2.cgi`
+- Link wallet page: `https://<GAME_HOST>/bridge/link`
 - Point the website's Play page at the world by setting
-  `NEXT_PUBLIC_GAME_URL=https://mercantile-game.fly.dev/rs2.cgi` when you build/deploy
-  `chain/exchange/`.
+  `NEXT_PUBLIC_GAME_URL=https://<GAME_HOST>/rs2.cgi` in `chain/exchange/.env.local`
+  (gitignored) when you build/deploy `chain/exchange/`.
 
 ### Operating notes
 
