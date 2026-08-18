@@ -1,158 +1,73 @@
-# RS-SDK
+# Mercantile
 
-Research-oriented starter kit for runescape-style bots, including a typescript sdk, agent documentation and bindings, and a server emulator. Works out of the box - tell it what to automate! 
+**An on-chain, agent-played RuneScape economy.** Every tradeable item in a 2004-era
+RuneScape world is a token on Solana, priced against a tokenized in-game currency
+(**GP**) in automated market-maker pools. Players and AI agents move items and GP
+between the game and the chain — withdraw to trade on-chain, deposit to bring value
+back in-game — through an in-game **Exchange Clerk**.
 
-<div align="center">
-    <img src="docs/media/promo.gif" alt="RS-SDK Demo" width="800">
-</div>
+[![X / Twitter](https://img.shields.io/badge/X-@MercantileRS-black?logo=x)](https://x.com/MercantileRS/)
 
-[![Discord](docs/media/discord.svg)](https://discord.gg/3DcuU5cMJN)
-[![Hiscores](docs/media/hiscores.svg)](https://rs-sdk-demo.fly.dev/hiscores)
+> Follow [**@MercantileRS**](https://x.com/MercantileRS/) for updates.
 
-Build and operate bots within a complex economic role-playing MMO. You can automate the game, level an account to all 99s, and experiment with agentic development techniques within a safe, bot-only setting.
+---
 
-The goals of this project are to provide a rich testing environment for goal-directed program synthesis techniques (Ralph loops, etc), and to facilitate research into collaboration and competition between agents.
+## How it works
 
-![Task Length Distribution](docs/media/task_length.svg)
-
-There is currently a [leaderboard](https://rs-sdk-demo.fly.dev/hiscores) for bots running on the demo server, with rankings based on highest total level per lowest account playtime.
-
-See the [benchmark comparing models](https://github.com/MaxBittker/rs-bench) for evaluation results across different LLMs.
-
-> [!NOTE]
-> RS-SDK is a fork of the LostCity engine/client, an amazing project without which rs-sdk would not be possible. 
-> Find their [code here](https://github.com/LostCityRS/Server) or read their [history and ethos](https://lostcity.rs/t/faq-what-is-lost-city/16)
-## Getting Started:
-```sh
-git clone https://github.com/MaxBittker/rs-sdk.git
+```
+   in-game world  ⇄  Exchange Clerk  ⇄  bridge daemon  ⇄  Solana program  ⇄  Meteora pools
+   (Lost City RS2)     (link wallet,       (operator,        (mint / burn,      (item ⇄ GP,
+                        withdraw/deposit)   exactly-once)      PDA authority)     price discovery)
 ```
 
-Out of the box, you can connect to the provided demo server, choose a name that is not already taken!
+- **Withdraw (game → chain):** the game debits your items/GP; the on-chain program
+  **mints** the matching tokens to your linked wallet.
+- **Deposit (chain → game):** you **burn** tokens through the program; the game credits
+  you the items/GP in-world.
+- The game server is the source of truth. An on-chain program (PDA mint/burn authority,
+  admin/operator split, pause switch) enforces *who* can mint and emits auditable events;
+  a colocated daemon bridges the two with an exactly-once protocol (debit persisted before
+  chain-side mint; unique-signature replay guards; per-player watermark).
 
-With claude code:
-```sh
-bun install
-claude "start a new bot with name: {username}"
-```
-Manually:
-```sh
-bun install
-bun bots/create-bot.ts {username}
-bun bots/{username}/script.ts 
-```
+Every token — items and GP — has a **vanity mint address ending in `RSGP`**, standard SPL
+with Metaplex metadata, and its **actual in-game sprite** as the token image (pinned to
+IPFS). Items are paired single-sided to GP in **Meteora DAMM v2** pools starting at
+**0.9 × the item's in-game low-alch value**, so the market discovers price from a permanent
+bid floor.
 
-## Agent API and knowledge
+## Live on Solana mainnet
 
-The exact generated API surface is documented in
-[`sdk/API.md`](sdk/API.md). High-level `bot.*` methods attempt to observe
-method-specific game effects; low-level `sdk.send*` methods confirm
-browser-client dispatch and do not prove the server applied the effect.
+| | Address |
+|---|---|
+| Bridge program | [`H5C6RKWQzUdfS8tVzZb3uVcRw3EHCzghv7kWdMBTD2bS`](https://solscan.io/account/H5C6RKWQzUdfS8tVzZb3uVcRw3EHCzghv7kWdMBTD2bS) |
+| GP token (10B supply) | [`123B7bdJzDYGkrAg7i3JUi5TaHYP47dqmSiR5qPRSGP`](https://solscan.io/token/123B7bdJzDYGkrAg7i3JUi5TaHYP47dqmSiR5qPRSGP) |
+| Config PDA | `35M99wCeVKefazYKw1oQ45rF4MjVULXxp9onLkpkE9RY` |
+| Mint-authority PDA | `7idpyqXCKEtwXhxXkRrF2aqtASSqtRFmxi2nGkKddyKd` |
 
-MCP `execute_code` snippets receive `bot` and `sdk` globals. Standalone files
-under `bots/<name>/` instead use `runScript(async ({ bot, sdk }) => { ... })`;
-see [`learnings/README.md`](learnings/README.md) for copyable examples.
-The current executor evaluates JavaScript-compatible async bodies directly, so
-use the TypeScript API reference for type information but omit type-only syntax
-from an `execute_code` body.
+Item tokens (each `…RSGP`, paired to GP) are rolling out — see `chain/registry/registry.json`.
 
-Chat is shown by default. Note that seeing other players' chat exposes the bot to scamming and prompt-injection attempts; opt out with `SHOW_CHAT=false` in the bot.env file (or `bun bots/create-bot.ts <name> --no-chat`).
+## Repo layout
 
-Warning: The demo server is offered as a convenience, and we do not guarantee uptime or data persistence. Hold your accounts lightly, and consider hosting your own server instance. Please do not manually play on the demo server. 
+| Path | What |
+|---|---|
+| `chain/bridge/` | The Solana program (Anchor v2, standard SPL + Metaplex) |
+| `chain/program/` | TypeScript client, genesis, and localnet validation |
+| `chain/runner/` | Mint + DAMM v2 pool creation runners |
+| `chain/images/` | Headless item-sprite renderer + Pinata/IPFS metadata pipeline |
+| `chain/daemon/` | Off-chain bridge daemon (withdraw/deposit) |
+| `chain/registry/` | `registry.json` — the item ↔ mint ↔ pool source of truth |
+| `chain/README.md` | On-chain system details |
+| `server/`, `sdk/`, `bots/` | The game engine, bot SDK, and agents (see below) |
 
+## The game underneath
 
-
-
-## Gameplay Modifications
-
-This server has a few modifications from the original game to make development and bot testing easier:
-
-- **Faster leveling** - The XP curve is accelerated and less steep.
-- **Infinite run energy** - Players never run out of energy 
-- **No random events** - Anti-botting random events are disabled 
-
-
-## Architecture:
-
-rs-sdk runs against an enhanced web-based client (`botclient`) which connects to the LostCity 2004scape server emulator.
-
-There is a gateway server which accepts connections from botclient and SDK instances, and forwards messages between them based on username.
-Once connected to the gateway, the botclient relays game state to the SDK and
-dispatches low-level actions such as `sendWalk(x, z)` from the SDK. Dispatch
-success is not confirmation that the game server applied the intended effect.
-
-This means that the SDK can't talk directly to the game server, but must go through the botclient. It will attempt to launch the botclient on startup if one is not already running. 
-
-You don't need to run the gateway/botclient in order to run automations against the demo server, but you may choose to if you are fixing bugs or adding features to the rs-sdk project
-
-
-## Running the server locally
-
-Running the server locally has many advantages, primary being the ability to set a high tickrate. 
-
-You can set tickrate in `server/engine/.env` via the `NODE_TICKRATE` variable (default is 400ms, try 200ms or 30ms for faster gameplay, especially useful for headless testing). You can also change it at runtime with the in-game `::speed <ms>` command (minimum 20ms, doesn't persist across restarts).
-
-The chat profanity filter can be disabled with `NODE_PROFANITY_FILTER=false` (default on). The server censors chat before broadcasting and injects the setting into the browser client; headless lite runners have no config channel from the server, so also set `PROFANITY_FILTER=false` in the bot's `bot.env` (or process env) to stop their local re-censoring.
-
-You want all three of these running: 
-
-```sh
-# Game engine
-cd server/engine && bun run start
-```
-```sh
-# Web client bundler
-cd server/webclient && bun run watch
-```
-```sh
-# Gateway (bridges SDK <-> bot client)
-cd server/gateway && bun run gateway
-```
-
-The gateway listens on `ws://localhost:7780` by default (configurable via `AGENT_PORT` env var).
-
-## Development checks
-
-Install the root and webclient dependencies, then run the same checks as CI:
-
-```sh
-bun install --frozen-lockfile
-(cd server/webclient && bun install --frozen-lockfile)
-bun run check
-```
-
-`bun run docs:api` regenerates the API reference. CI fails when that document
-does not match the public TypeScript class surface.
-
-
-### 2. Connect a bot to the local gateway
-
-The `SERVER` variable in `bot.env` controls where the bot connects. To use your local gateway, **leave `SERVER` blank**:
-
-```bots/<botname>/bot.env
-BOT_USERNAME=mybot
-PASSWORD=test
-SERVER=
-SHOW_CHAT=true
-```
-
-When `SERVER` is empty, all connection paths (scripts, CLI) default to `ws://localhost:7780`.
-
-When `SERVER` is set to a hostname (e.g. `rs-sdk-demo.fly.dev`), they connect to `wss://{SERVER}/gateway` instead.
-
-
-
-## Disclaimer
-
-This is a free, open-source, community-run project.
-
-The goal is strictly education and scientific research.
-
-LostCity Server was written from scratch after many hours of research and peer review. Everything you see is completely and transparently open source.
-
-We have not been endorsed by, authorized by, or officially communicated with Jagex Ltd. on our efforts here.
-
-You cannot play Old School RuneScape here, buy RuneScape gold, or access any of the official game's services! Bots developed here will not work on the official game servers.
-
+Mercantile is built on **[rs-sdk](https://github.com/MaxBittker/rs-sdk)** — a research kit
+pairing a reverse-engineered 2004-era RuneScape server ([Lost City](https://lostcity.rs))
+with a TypeScript bot SDK, so the world can be played by AI agents. Mercantile adds the
+on-chain economy on top. See the original project for the game engine, bot framework, and
+agent tooling; it's MIT-licensed and its documentation lives throughout `server/`, `sdk/`,
+and `learnings/`.
 
 ## License
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the [LICENSE](LICENSE) file for details.
+
+MIT (inherits the rs-sdk / Lost City license). See [LICENSE](LICENSE).
