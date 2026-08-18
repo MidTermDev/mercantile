@@ -28,7 +28,6 @@ pub struct CreateMint {
         payer = admin,
         mint::decimals = decimals,
         mint::authority = mint_authority,
-        mint::freeze_authority = mint_authority,
     )]
     pub mint: Account<Mint>,
 

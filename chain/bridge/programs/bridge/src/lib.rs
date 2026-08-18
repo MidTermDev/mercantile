@@ -95,4 +95,10 @@ pub mod bridge {
     pub fn redeem_claim(ctx: &mut Context<RedeemClaim>) -> Result<()> {
         instructions::claim::redeem_claim(ctx)
     }
+
+    /// Admin: permanently drop a mint's freeze authority (we never freeze holders).
+    #[discrim = 13]
+    pub fn revoke_freeze(ctx: &mut Context<RevokeFreeze>) -> Result<()> {
+        instructions::revoke::revoke_freeze(ctx)
+    }
 }

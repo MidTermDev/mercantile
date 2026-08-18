@@ -19,6 +19,7 @@ const DISC = {
     initialize: 0, set_operator: 1, set_paused: 2, set_gp_mint: 3,
     create_mint: 4, mint_initial: 5, withdraw_item: 6, withdraw_gp: 7,
     deposit_item: 8, deposit_gp: 9, open_claim: 10, credit_claim: 11, redeem_claim: 12,
+    revoke_freeze: 13,
 } as const;
 
 // ── borsh-ish arg encoders ────────────────────────────────────────────────
@@ -216,6 +217,21 @@ export function ixRedeemClaim(owner: PublicKey, mint: PublicKey, recipientAta: P
             meta(BRIDGE_PROGRAM_ID, false, false),
         ],
         data: data(DISC.redeem_claim),
+    });
+}
+
+// admin permanently drops a mint's freeze authority (mint authority is kept)
+export function ixRevokeFreeze(admin: PublicKey, mint: PublicKey): TransactionInstruction {
+    return new TransactionInstruction({
+        programId: BRIDGE_PROGRAM_ID,
+        keys: [
+            meta(configPda(), false, false),
+            meta(admin, true, false),
+            meta(mint, false, true),
+            meta(mintAuthorityPda(), false, false),
+            meta(TOKEN_PROGRAM_ID, false, false),
+        ],
+        data: data(DISC.revoke_freeze),
     });
 }
 
