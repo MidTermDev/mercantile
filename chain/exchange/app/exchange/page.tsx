@@ -17,7 +17,7 @@ export default function GrandExchange() {
 
   useEffect(() => {
     fetch("/data/items.json").then((r) => r.json()).then(setData).catch(() => {});
-    fetch("/data/prices.json").then((r) => r.ok ? r.json() : {}).then(setPrices).catch(() => {});
+    fetch(`/data/prices.json?t=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : {}).then(setPrices).catch(() => {});
   }, []);
 
   const rows = useMemo(() => {

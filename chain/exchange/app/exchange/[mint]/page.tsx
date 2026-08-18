@@ -19,7 +19,7 @@ export default function ItemDetail() {
     fetch("/data/items.json").then((r) => r.json()).then((d: ItemsFile) => {
       setItem(d.items.find((i) => i.mint === mint) ?? null);
     }).catch(() => setItem(null));
-    fetch("/data/prices.json").then((r) => (r.ok ? r.json() : {})).then((p: PricesFile) => {
+    fetch(`/data/prices.json?t=${Date.now()}`, { cache: "no-store" }).then((r) => (r.ok ? r.json() : {})).then((p: PricesFile) => {
       setPrice(p[mint]?.price ?? null);
     }).catch(() => {});
   }, [mint]);

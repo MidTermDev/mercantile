@@ -7,7 +7,7 @@ import { fmtGp } from "@/lib/format";
 export function PriceChart({ mint, p0 }: { mint: string; p0: number }) {
   const [pts, setPts] = useState<HistoryPoint[] | null>(null);
   useEffect(() => {
-    fetch(`/data/history/${mint}.json`).then((r) => (r.ok ? r.json() : [])).then(setPts).catch(() => setPts([]));
+    fetch(`/data/history/${mint}.json?t=${Date.now()}`, { cache: "no-store" }).then((r) => (r.ok ? r.json() : [])).then(setPts).catch(() => setPts([]));
   }, [mint]);
 
   if (pts === null) return <div className="h-64 grid place-items-center text-mute">Loading chart…</div>;

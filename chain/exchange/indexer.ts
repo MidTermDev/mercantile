@@ -39,5 +39,10 @@ async function cycle() {
   console.log(`[indexer] ${new Date().toISOString()} priced ${ok}/${items.length}`);
 }
 
-await cycle();
-if (!once) setInterval(cycle, INTERVAL);
+// Self-schedule (not setInterval): pricing 1374 pools can take longer than one
+// interval, and overlapping cycles would exhaust RPC connections.
+async function loop() {
+  try { await cycle(); } catch (e) { console.error("[indexer] cycle failed:", e); }
+  if (!once) setTimeout(loop, INTERVAL);
+}
+await loop();

@@ -2,7 +2,10 @@
 import { useEffect, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
-import { quoteBuy, buildBuyTx, gpBalance, type BuyQuote } from "@/lib/swap";
+import {
+  quoteBuy, buildBuyTx, gpBalance, type BuyQuote,
+  quoteSell, buildSellTx, tokenBalance, type SellQuote,
+} from "@/lib/swap";
 import { fmtGp } from "@/lib/format";
 import type { ExchangeItem } from "@/lib/types";
 const WalletMultiButton = dynamic(
@@ -10,46 +13,74 @@ const WalletMultiButton = dynamic(
   { ssr: false },
 );
 
+type Mode = "buy" | "sell";
+
 export function BuyWidget({ item }: { item: ExchangeItem }) {
   const { connection } = useConnection();
   const { publicKey, sendTransaction, connected } = useWallet();
+  const [mode, setMode] = useState<Mode>("buy");
   const [qty, setQty] = useState(1);
-  const [quote, setQuote] = useState<BuyQuote | null>(null);
+  const [buyQuote, setBuyQuote] = useState<BuyQuote | null>(null);
+  const [sellQuote, setSellQuote] = useState<SellQuote | null>(null);
   const [gp, setGp] = useState<number | null>(null);
+  const [held, setHeld] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
-  useEffect(() => { if (publicKey) gpBalance(connection, publicKey).then(setGp); else setGp(null); }, [publicKey, connection, msg]);
+  useEffect(() => {
+    if (!publicKey) { setGp(null); setHeld(null); return; }
+    gpBalance(connection, publicKey).then(setGp);
+    tokenBalance(connection, publicKey, item.mint).then(setHeld);
+  }, [publicKey, connection, item.mint, msg]);
 
   useEffect(() => {
     let live = true;
-    if (qty <= 0) { setQuote(null); return; }
     setErr(null);
-    quoteBuy(connection, item.pool, item.mint, qty, 1)
-      .then((q) => { if (live) setQuote(q); })
-      .catch(() => { if (live) setQuote(null); });
+    if (qty <= 0) { setBuyQuote(null); setSellQuote(null); return; }
+    if (mode === "buy") {
+      quoteBuy(connection, item.pool, item.mint, qty, 1)
+        .then((q) => { if (live) setBuyQuote(q); }).catch(() => { if (live) setBuyQuote(null); });
+    } else {
+      quoteSell(connection, item.pool, item.mint, qty, 1)
+        .then((q) => { if (live) setSellQuote(q); }).catch(() => { if (live) setSellQuote(null); });
+    }
     return () => { live = false; };
-  }, [qty, connection, item.pool, item.mint]);
+  }, [qty, mode, connection, item.pool, item.mint]);
 
-  async function buy() {
+  async function trade() {
     if (!publicKey) return;
     setBusy(true); setErr(null); setMsg(null);
     try {
-      const tx = await buildBuyTx(connection, item.pool, item.mint, publicKey, qty, 1);
+      const tx = mode === "buy"
+        ? await buildBuyTx(connection, item.pool, item.mint, publicKey, qty, 1)
+        : await buildSellTx(connection, item.pool, item.mint, publicKey, qty, 1);
       const sig = await sendTransaction(tx, connection);
       await connection.confirmTransaction(sig, "confirmed");
-      setMsg(`Bought ${qty} ${item.name} — ${sig.slice(0, 8)}…`);
+      setMsg(mode === "buy"
+        ? `Bought ${qty} ${item.name} — ${sig.slice(0, 8)}…`
+        : `Sold ${qty} ${item.name} for ~${fmtGp(sellQuote?.gpOut ?? 0)} GP — ${sig.slice(0, 8)}…`);
     } catch (e: any) {
       setErr(e?.message?.slice(0, 160) ?? "swap failed");
     } finally { setBusy(false); }
   }
 
-  const notEnough = quote && gp != null && gp < quote.gpIn;
+  const notEnoughGp = mode === "buy" && buyQuote && gp != null && gp < buyQuote.gpIn;
+  const notEnoughItems = mode === "sell" && held != null && held < qty;
+  const quote = mode === "buy" ? buyQuote : sellQuote;
 
   return (
     <div className="card p-5">
-      <h3 className="display font-bold text-lg gold-text mb-3">Buy with GP</h3>
+      <div className="flex rounded-lg bg-panel2 border border-line p-1 mb-4">
+        {(["buy", "sell"] as Mode[]).map((m) => (
+          <button key={m} onClick={() => { setMode(m); setMsg(null); setErr(null); }}
+            className={`flex-1 py-1.5 rounded-md text-sm font-bold capitalize transition ${
+              mode === m ? "bg-gold text-bg" : "text-mute hover:text-ink"}`}>
+            {m}
+          </button>
+        ))}
+      </div>
+
       <label className="text-xs text-mute">Quantity (items)</label>
       <div className="flex items-center gap-2 mt-1 mb-3">
         <button className="w-9 h-9 rounded bg-panel2 border border-line hover:border-gold" onClick={() => setQty(Math.max(1, qty - 1))}>–</button>
@@ -61,24 +92,39 @@ export function BuyWidget({ item }: { item: ExchangeItem }) {
 
       <div className="text-sm space-y-1.5 mb-4">
         <Row label="Spot price" value={quote ? `${fmtGp(quote.spotPrice)} GP` : "…"} />
-        <Row label="Est. cost (max)" value={quote ? `${fmtGp(quote.gpIn)} GP` : "…"} gold />
+        {mode === "buy" ? (
+          <Row label="Est. cost (max)" value={buyQuote ? `${fmtGp(buyQuote.gpIn)} GP` : "…"} gold />
+        ) : (
+          <Row label="Est. receive (min)" value={sellQuote ? `${fmtGp(sellQuote.gpOut)} GP` : "…"} gold />
+        )}
         {quote && quote.priceImpactPct > 0.01 && <Row label="Price impact" value={`${quote.priceImpactPct.toFixed(2)}%`} />}
-        {connected && <Row label="Your GP" value={gp == null ? "…" : fmtGp(gp)} />}
+        {connected && mode === "buy" && <Row label="Your GP" value={gp == null ? "…" : fmtGp(gp)} />}
+        {connected && mode === "sell" && <Row label={`Your ${item.name}`} value={held == null ? "…" : String(held)} />}
       </div>
 
       {!connected ? (
         <WalletMultiButton style={{ width: "100%", justifyContent: "center" }} />
       ) : (
-        <button disabled={busy || !quote || !!notEnough}
-          onClick={buy}
+        <button disabled={busy || !quote || !!notEnoughGp || !!notEnoughItems}
+          onClick={trade}
           className="w-full py-3 rounded-lg bg-gold text-bg font-bold hover:bg-gold2 transition disabled:opacity-50 disabled:cursor-not-allowed">
-          {busy ? "Swapping…" : notEnough ? "Not enough GP" : `Buy ${qty} for ~${quote ? fmtGp(quote.gpIn) : "…"} GP`}
+          {busy ? "Swapping…"
+            : notEnoughGp ? "Not enough GP"
+            : notEnoughItems ? `Not enough ${item.name}`
+            : mode === "buy"
+              ? `Buy ${qty} for ~${buyQuote ? fmtGp(buyQuote.gpIn) : "…"} GP`
+              : `Sell ${qty} for ~${sellQuote ? fmtGp(sellQuote.gpOut) : "…"} GP`}
         </button>
       )}
 
-      {notEnough && (
+      {notEnoughGp && (
         <p className="text-mute text-xs mt-3">
-          You need more GP. Get GP by withdrawing coins from the game at the in-game Exchange Clerk, or by selling items into their pools.
+          You need more GP. Withdraw coins at the in-game Exchange Clerk, or sell items into their pools.
+        </p>
+      )}
+      {notEnoughItems && (
+        <p className="text-mute text-xs mt-3">
+          You don&apos;t hold enough {item.name}. Withdraw some at the in-game Exchange Clerk, or buy them here first.
         </p>
       )}
       {msg && <p className="text-emerald text-xs mt-3 break-all">{msg}</p>}

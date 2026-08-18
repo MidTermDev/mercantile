@@ -120,3 +120,98 @@ export async function gpBalance(conn: Connection, owner: PublicKey): Promise<num
     return 0;
   }
 }
+
+export async function tokenBalance(conn: Connection, owner: PublicKey, mint: string): Promise<number> {
+  try {
+    const ata = getAssociatedTokenAddressSync(new PublicKey(mint), owner, false, TOKEN_PROGRAM_ID);
+    const bal = await conn.getTokenAccountBalance(ata);
+    return Number(bal.value.amount) / 10 ** ITEM_DECIMALS;
+  } catch {
+    return 0;
+  }
+}
+
+// ── SELL: items in -> GP out (ExactIn) ────────────────────────────────────────
+export interface SellQuote {
+  gpOut: number;      // UI GP (minimumAmountOut with slippage)
+  spotPrice: number;  // GP per item at current pool price
+  priceImpactPct: number;
+}
+
+export async function quoteSell(
+  conn: Connection,
+  poolAddr: string,
+  itemMint: string,
+  items: number,
+  slippagePct = 1,
+): Promise<SellQuote> {
+  const cpAmm = new CpAmm(conn);
+  const poolState = await cpAmm.fetchPoolState(new PublicKey(poolAddr));
+  const gp = new PublicKey(GP_MINT);
+  const item = new PublicKey(itemMint);
+  const [gpInfo, itemInfo] = await Promise.all([
+    getMint(conn, gp, "confirmed", TOKEN_PROGRAM_ID),
+    getMint(conn, item, "confirmed", TOKEN_PROGRAM_ID),
+  ]);
+  const epoch = (await conn.getEpochInfo()).epoch;
+  const slot = await conn.getSlot();
+  const blockTime = (await conn.getBlockTime(slot)) ?? Math.floor(Date.now() / 1000);
+  const amountIn = new BN(BigInt(Math.round(items) * 10 ** ITEM_DECIMALS).toString());
+  const q = cpAmm.getQuote2({
+    inputTokenMint: item, slippage: slippagePct, currentPoint: new BN(blockTime), poolState,
+    inputTokenInfo: { mint: itemInfo, currentEpoch: epoch },
+    outputTokenInfo: { mint: gpInfo, currentEpoch: epoch },
+    tokenADecimal: ITEM_DECIMALS, tokenBDecimal: GP_DECIMALS, hasReferral: false,
+    swapMode: SwapMode.ExactIn, amountIn,
+  });
+  const spot = Number(getPriceFromSqrtPrice(poolState.sqrtPrice, ITEM_DECIMALS, GP_DECIMALS));
+  return {
+    gpOut: Number(q.minimumAmountOut!.toString()) / 10 ** GP_DECIMALS,
+    spotPrice: spot,
+    priceImpactPct: Number(q.priceImpact ?? 0),
+  };
+}
+
+export async function buildSellTx(
+  conn: Connection,
+  poolAddr: string,
+  itemMint: string,
+  seller: PublicKey,
+  items: number,
+  slippagePct = 1,
+): Promise<Transaction> {
+  const cpAmm = new CpAmm(conn);
+  const pool = new PublicKey(poolAddr);
+  const poolState = await cpAmm.fetchPoolState(pool);
+  const gp = new PublicKey(GP_MINT);
+  const item = new PublicKey(itemMint);
+  const [gpInfo, itemInfo] = await Promise.all([
+    getMint(conn, gp, "confirmed", TOKEN_PROGRAM_ID),
+    getMint(conn, item, "confirmed", TOKEN_PROGRAM_ID),
+  ]);
+  const epoch = (await conn.getEpochInfo()).epoch;
+  const slot = await conn.getSlot();
+  const blockTime = (await conn.getBlockTime(slot)) ?? Math.floor(Date.now() / 1000);
+  const amountIn = new BN(BigInt(Math.round(items) * 10 ** ITEM_DECIMALS).toString());
+  const q = cpAmm.getQuote2({
+    inputTokenMint: item, slippage: slippagePct, currentPoint: new BN(blockTime), poolState,
+    inputTokenInfo: { mint: itemInfo, currentEpoch: epoch },
+    outputTokenInfo: { mint: gpInfo, currentEpoch: epoch },
+    tokenADecimal: ITEM_DECIMALS, tokenBDecimal: GP_DECIMALS, hasReferral: false,
+    swapMode: SwapMode.ExactIn, amountIn,
+  });
+  const swapTx = await cpAmm.swap2({
+    payer: seller, pool, inputTokenMint: item, outputTokenMint: gp,
+    tokenAMint: poolState.tokenAMint, tokenBMint: poolState.tokenBMint,
+    tokenAVault: poolState.tokenAVault, tokenBVault: poolState.tokenBVault,
+    tokenAProgram: TOKEN_PROGRAM_ID, tokenBProgram: TOKEN_PROGRAM_ID,
+    referralTokenAccount: null, poolState,
+    swapMode: SwapMode.ExactIn, amountIn, minimumAmountOut: q.minimumAmountOut!,
+  });
+  // ensure the seller's GP ATA exists (idempotent, seller pays)
+  const gpAta = getAssociatedTokenAddressSync(gp, seller, false, TOKEN_PROGRAM_ID);
+  const tx = new Transaction();
+  tx.add(createAssociatedTokenAccountIdempotentInstruction(seller, gpAta, seller, gp, TOKEN_PROGRAM_ID));
+  tx.add(...swapTx.instructions);
+  return tx;
+}
