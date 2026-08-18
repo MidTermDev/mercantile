@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body { background: #0f1c16; color: #e8e2d0; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-image: radial-gradient(1200px 600px at 50% -10%, #1b3327 0%, #0f1c16 55%);
+  min-height: 100vh;
+}
+a { color: inherit; }
+::selection { background: #e8b923; color: #0f1c16; }
+
+.wallet-adapter-button {
+  background: #e8b923 !important; color: #0f1c16 !important;
+  font-family: 'Inter', sans-serif !important; font-weight: 700 !important;
+  border-radius: 8px !important; height: 40px !important;
+}
+.wallet-adapter-button:hover { background: #d4a017 !important; }
+
+.card { background: #14241c; border: 1px solid #2c4a3a; border-radius: 12px; }
+.gold-text { color: #e8b923; }
+.display { font-family: 'Cinzel', serif; }
