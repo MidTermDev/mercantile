@@ -16,6 +16,7 @@ import bs58 from 'bs58';
 import { db, toDbDate } from './db';
 import { config, loadOperatorKeypair, makeConnection } from './config';
 import { loadRegistryMaps, gpAfterSink, type RegistryMaps } from './verifier';
+import { needsReview, alertReview } from './review';
 import { ixOpenClaim, ixCreditClaim, claimPda } from '../program/client';
 
 const GP_DECIMALS = 6;
@@ -88,12 +89,25 @@ export class WithdrawWorker {
         const rows = (await db
             .selectFrom('bridge_tx')
             .where('direction', '=', 'withdraw')
-            .where('state', 'in', ['debited', 'awaiting_account'])
+            .where('state', 'in', ['debited', 'awaiting_account', 'approved'])
             .selectAll()
             .orderBy('id', 'asc')
             .limit(10)
             .execute()) as unknown as WithdrawRow[];
         for (const row of rows) {
+            // Large fresh withdrawals wait for a manual approval before crediting on-chain.
+            // 'approved' rows have already cleared review and skip the gate.
+            if (row.state === 'debited' && needsReview(row.obj_debugname, row.count)) {
+                const held = await db.updateTable('bridge_tx')
+                    .set({ state: 'review', updated_at: toDbDate(new Date()) })
+                    .where('id', '=', row.id).where('state', '=', 'debited')
+                    .executeTakeFirst();
+                if (Number(held.numUpdatedRows) > 0) {
+                    console.log(`[withdraw-worker] row ${row.id} held for review (${row.count} ${row.obj_debugname}, ${row.username})`);
+                    await alertReview({ id: row.id, account_id: row.account_id, username: row.username, wallet: row.wallet, obj_debugname: row.obj_debugname, count: row.count });
+                }
+                continue;
+            }
             await this.fulfil(row);
         }
     }
@@ -154,7 +168,7 @@ export class WithdrawWorker {
                 .updateTable('bridge_tx')
                 .set({ state: 'submitted', sig, last_valid_height: built.lastValidBlockHeight, updated_at: toDbDate(new Date()) })
                 .where('id', '=', row.id)
-                .where('state', 'in', ['debited', 'submitted', 'awaiting_account'])
+                .where('state', 'in', ['debited', 'submitted', 'awaiting_account', 'approved'])
                 .execute();
             row.sig = sig;
             row.last_valid_height = built.lastValidBlockHeight;

@@ -71,7 +71,6 @@ export default function Changelog() {
     <main className="max-w-3xl mx-auto px-4">
       {/* Header */}
       <section className="pt-14 pb-8 text-center flex flex-col items-center">
-        <span className="chip">◆ Patch notes</span>
         <h1 className="display text-4xl md:text-5xl font-extrabold gold-text tracking-wide mt-5">Game Updates</h1>
         <p className="text-ink/85 mt-4 max-w-2xl leading-relaxed">
           Every change to the world and the economy, posted in the open — new features, balancing, and fixes.
@@ -81,7 +80,7 @@ export default function Changelog() {
       {/* Updates */}
       <div className="space-y-8 pb-20">
         {UPDATES.map((u) => (
-          <article key={u.slug} id={u.slug} className="card overflow-hidden scroll-mt-24">
+          <article key={u.slug} id={u.slug} className="parchment overflow-hidden scroll-mt-24">
             {/* Banner header — OSRS-style: thumbnail + title + meta */}
             <div className="flex items-center gap-4 p-5 border-b border-line/70 bg-panel/50">
               <div className="shrink-0 w-16 h-16 rounded-lg bg-black/30 border border-gold/30 flex items-center justify-center">

@@ -10,7 +10,6 @@ export default function Landing() {
       <section className="max-w-6xl mx-auto px-4 pt-16 pb-10">
         <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 items-center">
           <div>
-            <span className="chip">◆ Live on Solana mainnet</span>
             <h1 className="display text-5xl md:text-6xl font-extrabold gold-text mt-5 leading-[1.05]">
               A real economy,<br />on-chain.
             </h1>
@@ -33,7 +32,7 @@ export default function Landing() {
             </div>
           </div>
           <div className="relative hidden lg:flex justify-center">
-            <div className="absolute inset-0 blur-3xl opacity-30" style={{ background: "radial-gradient(circle at 50% 40%, #e8b923, transparent 60%)" }} />
+            <div className="absolute inset-0 blur-3xl opacity-30" style={{ background: "radial-gradient(circle at 50% 40%, #f2c33d, transparent 60%)" }} />
             <img src="/logo.png" alt="Mercantile" width={320} height={320} className="relative drop-shadow-[0_12px_40px_rgba(0,0,0,0.6)]" />
           </div>
         </div>
@@ -41,10 +40,37 @@ export default function Landing() {
 
       <PriceTicker />
 
+      {/* ── Latest update (OSRS-style news, on parchment) ── */}
+      <section className="max-w-6xl mx-auto px-4 pt-12">
+        <div className="flex items-center gap-4 mb-5">
+          <h2 className="banner display text-sm font-bold text-gold uppercase tracking-widest">Latest update</h2>
+          <hr className="rule flex-1" />
+          <Link href="/changelog" className="linkline text-mute hover:text-gold text-sm shrink-0">All updates →</Link>
+        </div>
+        <Link href="/changelog#gp-sinks" className="parchment block p-5 md:p-6 hover:brightness-[1.03] transition">
+          <div className="flex items-center gap-5">
+            <div className="shrink-0 w-16 h-16 rounded-md bg-[#00000018] border border-[#93724955] flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/coins.png" alt="" width={50} height={50} className="drop-shadow" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#7a4a12] border border-[#93724977] rounded px-1.5 py-0.5">Economy</span>
+                <span className="text-[#6b5636] text-xs">18 August 2026</span>
+              </div>
+              <h3 className="display text-xl md:text-2xl font-bold text-[#5a3d0e] leading-tight">GP Sinks: Fighting Inflation</h3>
+              <p className="text-[#4a3a22] text-sm mt-1 leading-snug">
+                A 1% sink now applies whenever GP crosses the bridge — keeping a real, on-chain currency healthy. Read the patch notes →
+              </p>
+            </div>
+          </div>
+        </Link>
+      </section>
+
       {/* ── The pitch: what makes it different ── */}
       <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="flex items-baseline gap-4 mb-8">
-          <h2 className="display text-2xl font-bold text-ink">Not another game token</h2>
+        <div className="flex items-center gap-4 mb-8">
+          <h2 className="banner display text-sm font-bold text-gold uppercase tracking-widest">Not another game token</h2>
           <hr className="rule flex-1" />
         </div>
         <div className="grid md:grid-cols-3 gap-5">
@@ -65,8 +91,8 @@ export default function Landing() {
       {/* ── The bridge ── */}
       <section className="max-w-6xl mx-auto px-4 py-6">
         <div className="card p-8 md:p-10">
-          <div className="flex items-baseline gap-4 mb-8">
-            <h2 className="display text-2xl font-bold gold-text">How the bridge works</h2>
+          <div className="flex items-center gap-4 mb-8">
+            <h2 className="banner display text-sm font-bold text-gold uppercase tracking-widest">How the bridge works</h2>
             <hr className="rule flex-1" />
           </div>
           <div className="grid md:grid-cols-2 gap-10">
@@ -96,8 +122,8 @@ export default function Landing() {
 
       {/* ── Live on mainnet ── */}
       <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="flex items-baseline gap-4 mb-6">
-          <h2 className="display text-2xl font-bold text-ink">Live on Solana mainnet</h2>
+        <div className="flex items-center gap-4 mb-6">
+          <h2 className="banner display text-sm font-bold text-gold uppercase tracking-widest">Live on Solana mainnet</h2>
           <hr className="rule flex-1" />
         </div>
         <div className="grid sm:grid-cols-2 gap-4">

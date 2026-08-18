@@ -21,22 +21,24 @@ const NAV = [
 export function Header() {
   const path = usePathname();
   return (
-    <header className="sticky top-0 z-30 backdrop-blur-md bg-bg/70 border-b border-line/70">
+    <header className="stone-tex sticky top-0 z-30 border-b border-[#74582c] shadow-[inset_0_1px_0_rgba(255,225,150,0.10),0_2px_0_rgba(238,185,46,0.16),0_12px_24px_-16px_rgba(0,0,0,0.9)]">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center gap-5">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <img src="/logo.png" alt="" width={34} height={34} className="rounded-md" />
+          <img src="/logo.png" alt="" width={36} height={36} className="rounded-md drop-shadow-[0_2px_6px_rgba(242,195,61,0.35)]" />
           <div className="leading-none">
-            <div className="display text-lg font-bold gold-text tracking-widest">MERCANTILE</div>
-            <div className="text-[10px] text-mute tracking-[0.25em] uppercase mt-0.5">Grand Exchange</div>
+            <div className="display text-lg font-black gold-text tracking-[0.18em]">MERCANTILE</div>
+            <div className="text-[10px] text-mute tracking-[0.3em] uppercase mt-0.5">Grand Exchange</div>
           </div>
         </Link>
 
-        <nav className="ml-4 hidden md:flex items-center gap-6 text-sm">
+        <nav className="ml-4 hidden md:flex items-center gap-1 text-sm">
           {NAV.map((n) => {
             const active = path === n.href || (n.href !== "/" && path.startsWith(n.href));
             return (
               <Link key={n.href} href={n.href}
-                className={`linkline transition ${active ? "text-gold" : "text-mute hover:text-ink"}`}>
+                className={`px-3 py-1.5 rounded transition ${active
+                  ? "text-gold bg-[rgba(242,195,61,0.10)] shadow-[inset_0_0_0_1px_rgba(242,195,61,0.3)]"
+                  : "text-mute hover:text-gold hover:bg-[rgba(242,195,61,0.06)]"}`}>
                 {n.label}
               </Link>
             );

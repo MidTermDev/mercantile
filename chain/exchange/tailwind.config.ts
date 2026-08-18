@@ -4,16 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "#0f1c16",
-        panel: "#14241c",
-        panel2: "#1b3327",
-        line: "#2c4a3a",
-        ink: "#e8e2d0",
-        mute: "#9db3a4",
-        gold: "#e8b923",
-        gold2: "#d4a017",
-        emerald: "#2ea56a",
-        err: "#e06a5a",
+        bg: "#140f08",
+        panel: "#241a0f",
+        panel2: "#30240f",
+        line: "#4f3d20",
+        ink: "#efe4cb",
+        mute: "#b39c74",
+        gold: "#eeb92e",
+        gold2: "#b8892a",
+        emerald: "#5aa869",
+        err: "#d9694a",
+        parch: "#e9dbb6",
+        "parch-ink": "#2c2013",
       },
       fontFamily: {
         sans: ['"Inter"', "ui-sans-serif", "system-ui", "sans-serif"],

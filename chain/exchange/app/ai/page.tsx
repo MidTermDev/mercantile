@@ -22,7 +22,6 @@ export default function PlayAi() {
     <main className="max-w-6xl mx-auto px-4">
       {/* Hero */}
       <section className="pt-14 pb-8 text-center flex flex-col items-center">
-        <span className="chip">◆ No install · your key stays in your browser</span>
         <h1 className="display text-4xl md:text-5xl font-extrabold gold-text tracking-wide mt-5">Play with AI</h1>
         <p className="text-ink/85 mt-4 max-w-2xl leading-relaxed">
           Let a language model play your character. Log in below, pick any model — <b className="text-ink">Anthropic,

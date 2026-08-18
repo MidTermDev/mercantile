@@ -6,8 +6,10 @@
 import { config } from './config';
 import { DepositListener } from './deposit-listener';
 import { WithdrawWorker } from './withdraw-worker';
+import { startApprovalListener } from './review';
 
-console.log(`[bridge-daemon] starting (rpc=${config.rpcUrl.split('?')[0]}, db=${config.dbPath}, paused=${config.paused})`);
+console.log(`[bridge-daemon] starting (rpc=${config.rpcUrl.split('?')[0]}, db=${config.dbPath}, paused=${config.paused}, reviewThreshold=${config.reviewThresholdGp.toLocaleString()} GP)`);
 
 new DepositListener().start();
+startApprovalListener();               // Telegram approve/reject for held large withdrawals
 await new WithdrawWorker().start();

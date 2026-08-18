@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WalletProviders>
           <Header />
           {children}
-          <footer className="border-t border-line/70 mt-24">
+          <footer className="stone-tex mt-24 border-t border-[#74582c] shadow-[inset_0_2px_0_rgba(238,185,46,0.16)]">
             <div className="max-w-6xl mx-auto px-4 py-12 grid gap-8 md:grid-cols-[1.5fr_1fr_1fr]">
               <div>
                 <div className="flex items-center gap-2.5">

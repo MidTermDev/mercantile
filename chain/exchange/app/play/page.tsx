@@ -15,7 +15,6 @@ export default function Play() {
     <main className="max-w-6xl mx-auto px-4">
       {/* Hero */}
       <section className="pt-14 pb-8 text-center flex flex-col items-center">
-        <span className="chip">◆ Free · in-browser · no download</span>
         <h1 className="display text-4xl md:text-5xl font-extrabold gold-text tracking-wide mt-5">Play Mercantile</h1>
         <p className="text-ink/85 mt-4 max-w-2xl leading-relaxed">
           A reverse-engineered 2004-era Gielinor at <b className="text-ink">authentic 1:1 XP and 0.6s ticks</b>. Play in

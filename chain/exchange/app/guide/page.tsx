@@ -27,7 +27,6 @@ export default function Guide() {
     <main className="max-w-4xl mx-auto px-4">
       {/* Hero */}
       <section className="pt-14 pb-6 text-center flex flex-col items-center">
-        <span className="chip">◆ The complete guide</span>
         <h1 className="display text-4xl md:text-5xl font-extrabold gold-text tracking-wide mt-5">How to play Mercantile</h1>
         <p className="text-ink/85 mt-4 max-w-2xl leading-relaxed">
           Mercantile is a faithful 2004-era RuneScape world where the economy is real and on-chain. Play it by hand or
@@ -36,6 +35,8 @@ export default function Guide() {
         </p>
       </section>
 
+      {/* Everything below is one long unfurled parchment scroll */}
+      <div className="parchment p-6 md:p-10 mb-14">
       {/* Table of contents */}
       <nav aria-label="Contents" className="card p-4 md:p-5 mb-14">
         <div className="text-xs uppercase tracking-[0.2em] text-mute mb-3">On this page</div>
@@ -247,6 +248,7 @@ export default function Guide() {
           </Faq>
         </div>
       </Section>
+      </div>{/* end parchment scroll */}
 
       <div className="flex flex-wrap gap-3 justify-center my-16">
         <Link href="/play" className="btn-gold px-6 py-3">Start playing →</Link>

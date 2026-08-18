@@ -28,7 +28,12 @@ export const config = {
     vaultKeypairPath: resolvePath(process.env.VAULT_KEYPAIR_PATH ?? '.keys/vault.json'),
     // Hot operator key: signs program withdraws (mints) + pays fees/ATA rent.
     operatorKeypairPath: resolvePath(process.env.OPERATOR ?? '.keys/mainnet-operator.json'),
-    paused: process.env.BRIDGE_PAUSED === '1'
+    paused: process.env.BRIDGE_PAUSED === '1',
+    // Large GP withdrawals (>= this many GP) are held for a manual Telegram approval
+    // before crediting on-chain. 0 disables the gate.
+    reviewThresholdGp: parseInt(process.env.REVIEW_THRESHOLD_GP ?? '10000000', 10),
+    tgBotToken: process.env.TG_BOT_TOKEN ?? '',
+    tgChatId: process.env.TG_CHAT_ID ?? ''
 };
 
 export function loadKeypair(path: string): Keypair {

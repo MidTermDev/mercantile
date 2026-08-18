@@ -27,16 +27,16 @@ export function PriceChart({ mint, p0 }: { mint: string; p0: number }) {
     <div className="h-64">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-          <CartesianGrid stroke="#2c4a3a" strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="t" tick={{ fill: "#9db3a4", fontSize: 11 }} stroke="#2c4a3a"
+          <CartesianGrid stroke="#4a3a22" strokeDasharray="3 3" vertical={false} />
+          <XAxis dataKey="t" tick={{ fill: "#ad9a78", fontSize: 11 }} stroke="#4a3a22"
             tickFormatter={(t) => new Date(t).toLocaleDateString(undefined, { month: "short", day: "numeric" })} />
-          <YAxis tick={{ fill: "#9db3a4", fontSize: 11 }} stroke="#2c4a3a" width={56}
+          <YAxis tick={{ fill: "#ad9a78", fontSize: 11 }} stroke="#4a3a22" width={56}
             tickFormatter={(v) => fmtGp(v)} domain={["auto", "auto"]} />
           <Tooltip
-            contentStyle={{ background: "#14241c", border: "1px solid #2c4a3a", borderRadius: 8, color: "#e8e2d0" }}
+            contentStyle={{ background: "#221a10", border: "1px solid #4a3a22", borderRadius: 8, color: "#ece1c9" }}
             labelFormatter={(t) => new Date(t as number).toLocaleString()}
             formatter={(v) => [`${fmtGp(v as number)} GP`, "Price"]} />
-          <Line type="monotone" dataKey="price" stroke="#e8b923" strokeWidth={2} dot={false} />
+          <Line type="monotone" dataKey="price" stroke="#f2c33d" strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>
