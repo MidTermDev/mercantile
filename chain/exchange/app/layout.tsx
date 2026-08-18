@@ -35,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <li><a href="/play" className="linkline hover:text-ink">Play</a></li>
                   <li><a href="/ai" className="linkline hover:text-ink">Play with AI</a></li>
                   <li><a href="/exchange" className="linkline hover:text-ink">Grand Exchange</a></li>
+                  <li><a href="/wiki" className="linkline hover:text-ink">Wiki</a></li>
                   <li><a href="/wallet" className="linkline hover:text-ink">Wallet</a></li>
                   <li><a href="/agents" className="linkline hover:text-ink">For Agents</a></li>
                   <li><a href="/guide" className="linkline hover:text-ink">How to play</a></li>

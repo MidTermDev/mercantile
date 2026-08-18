@@ -28,6 +28,10 @@ import Environment from '#/util/Environment.js';
 import { printError, printInfo } from '#/util/Logger.js';
 
 const STACK_LIMIT = 0x7fffffff;
+// GP withdrawals >= this are held by the daemon for a manual (Telegram) review before
+// crediting on-chain. Keep in sync with the daemon's REVIEW_THRESHOLD_GP; used here only
+// to tell the player their withdrawal is flagged.
+const REVIEW_THRESHOLD_GP = parseInt(process.env.REVIEW_THRESHOLD_GP ?? '10000000', 10);
 const LINK_CODE_TTL_MS = 10 * 60 * 1000;
 const FLUSH_INTERVAL_MS = 500;
 const RECOVERY_EVERY_N_FLUSHES = 20;
@@ -214,6 +218,10 @@ class BridgeServiceImpl {
 
         this.inFlightDebit.set(usernameLower, { id: -1, session: player.session, phase: 'queued', objId: base, count });
         this.commandQueue.push({ kind: 'withdraw', usernameLower, username: player.username, session: player.session, debugname: entry.debugname, objId: base, count });
+        // Large GP withdrawals are held for manual review by the daemon — tell the player up front.
+        if (base === this.coinsId && REVIEW_THRESHOLD_GP > 0 && count >= REVIEW_THRESHOLD_GP) {
+            player.messageGame(`This withdrawal of ${count.toLocaleString()} coins is large, so it has been flagged for a quick manual review before it's released on-chain. You'll be able to claim it once approved.`);
+        }
         return BridgeWithdrawResult.OK;
     }
 

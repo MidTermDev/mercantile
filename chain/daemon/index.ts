@@ -6,10 +6,11 @@
 import { config } from './config';
 import { DepositListener } from './deposit-listener';
 import { WithdrawWorker } from './withdraw-worker';
-import { startApprovalListener } from './review';
+import { startApprovalListener, reAlertPending } from './review';
 
 console.log(`[bridge-daemon] starting (rpc=${config.rpcUrl.split('?')[0]}, db=${config.dbPath}, paused=${config.paused}, reviewThreshold=${config.reviewThresholdGp.toLocaleString()} GP)`);
 
 new DepositListener().start();
 startApprovalListener();               // Telegram approve/reject for held large withdrawals
+void reAlertPending();                 // re-DM any withdrawals still awaiting review
 await new WithdrawWorker().start();

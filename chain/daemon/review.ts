@@ -31,20 +31,23 @@ export function needsReview(objDebugname: string, count: number): boolean {
     return config.reviewThresholdGp > 0 && objDebugname === 'gp' && count >= config.reviewThresholdGp;
 }
 
+// Plain text only — no parse_mode. MarkdownV2 is brittle (a stray '-' or '.' makes
+// Telegram silently reject the whole message), which is exactly what dropped the
+// first real alert. We log any non-ok response so a failure is never silent again.
 async function tg(method: string, body: unknown): Promise<any> {
     if (!config.tgBotToken) return null;
     try {
         const r = await fetch(`${api()}/${method}`, {
             method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body),
         });
-        return await r.json();
+        const j = await r.json();
+        if (j && j.ok === false) console.error(`[review] telegram ${method} failed: ${j.description}`);
+        return j;
     } catch (e) {
         console.error('[review] telegram error:', String(e));
         return null;
     }
 }
-
-function esc(s: string): string { return String(s).replace(/[_*`\[\]()~>#+\-=|{}.!]/g, '\\$&'); }
 
 async function recentDeposits(accountId: number): Promise<string> {
     try {
@@ -56,10 +59,10 @@ async function recentDeposits(accountId: number): Promise<string> {
             .orderBy('id', 'desc')
             .limit(6)
             .execute();
-        if (!rows.length) return '_none on record_';
-        return rows.map((r) => `• ${Number(r.count).toLocaleString()} ${esc(r.obj_debugname)} \\(${esc(r.state)}\\)`).join('\n');
+        if (!rows.length) return '(none on record)';
+        return rows.map((r) => `• ${Number(r.count).toLocaleString()} ${r.obj_debugname} (${r.state})`).join('\n');
     } catch {
-        return '_n/a_';
+        return '(n/a)';
     }
 }
 
@@ -71,22 +74,21 @@ export async function alertReview(row: ReviewRow): Promise<void> {
     }
     const deps = await recentDeposits(row.account_id);
     const text =
-        `🏦 *Withdrawal review* \\(\\#${row.id}\\)\n\n` +
-        `*Player:* ${esc(row.username)}\n` +
-        `*Amount:* ${row.count.toLocaleString()} ${esc(row.obj_debugname.toUpperCase())}\n` +
-        `*Wallet:* \`${row.wallet}\`\n\n` +
-        `*Recent deposits:*\n${deps}\n\n` +
-        `Approve to credit on-chain, or reject to hold.`;
-    await tg('sendMessage', {
+        `🏦 Withdrawal review  (#${row.id})\n\n` +
+        `Player:   ${row.username}\n` +
+        `Amount:   ${row.count.toLocaleString()} ${row.obj_debugname.toUpperCase()}\n` +
+        `Wallet:   ${row.wallet}\n\n` +
+        `Recent deposits:\n${deps}\n\n` +
+        `Approve to credit it on-chain, or reject to hold.`;
+    const res = await tg('sendMessage', {
         chat_id: config.tgChatId,
         text,
-        parse_mode: 'MarkdownV2',
         reply_markup: { inline_keyboard: [[
             { text: '✅ Approve', callback_data: `approve:${row.id}` },
             { text: '⛔ Reject', callback_data: `reject:${row.id}` },
         ]] },
     });
-    console.log(`[review] alerted operator for row ${row.id} (${row.count} ${row.obj_debugname}, ${row.username})`);
+    console.log(`[review] alert for row ${row.id} (${row.count} ${row.obj_debugname}, ${row.username}) → ${res?.ok ? 'sent' : 'FAILED'}`);
 }
 
 async function decide(id: number, action: 'approve' | 'reject'): Promise<boolean> {
@@ -97,6 +99,23 @@ async function decide(id: number, action: 'approve' | 'reject'): Promise<boolean
         .where('state', '=', 'review')   // only a row still awaiting review can be decided
         .executeTakeFirst();
     return Number(res.numUpdatedRows) > 0;
+}
+
+/** On boot, re-send an alert for every withdrawal still awaiting review (so a restart
+ *  — or a previously-failed send — never leaves a held withdrawal silently stuck). */
+export async function reAlertPending(): Promise<void> {
+    if (!config.tgBotToken || !config.tgChatId) return;
+    try {
+        const rows = await db
+            .selectFrom('bridge_tx')
+            .where('direction', '=', 'withdraw').where('state', '=', 'review')
+            .select(['id', 'account_id', 'username', 'wallet', 'obj_debugname', 'count'])
+            .orderBy('id', 'asc').execute();
+        for (const r of rows) await alertReview(r as ReviewRow);
+        if (rows.length) console.log(`[review] re-alerted ${rows.length} pending review(s) on boot`);
+    } catch (e) {
+        console.error('[review] reAlertPending failed:', String(e));
+    }
 }
 
 /** Long-poll Telegram for Approve/Reject button presses. Only the configured chat is honored. */

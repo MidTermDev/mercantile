@@ -210,6 +210,27 @@ a { color: inherit; }
 .wallet-adapter-button:hover { filter: brightness(1.07); }
 .wallet-adapter-modal-wrapper, .wallet-adapter-modal-container { background: var(--panel) !important; }
 
+/* rendered wiki markdown (inside a .parchment scroll) */
+.wiki-prose { color: var(--parch-ink); line-height: 1.7; font-size: 0.97rem; }
+.wiki-prose h1 { font-family: 'Cinzel', Georgia, serif; font-size: 1.9rem; font-weight: 800; color: #573a0c; margin: 0 0 .6rem; }
+.wiki-prose h2 { font-family: 'Cinzel', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: #6e4a12; margin: 1.6rem 0 .55rem; border-bottom: 1px solid rgba(154,119,72,0.4); padding-bottom: .25rem; }
+.wiki-prose h3 { font-weight: 700; color: #5a3d0e; margin: 1.1rem 0 .35rem; }
+.wiki-prose p { margin: .6rem 0; }
+.wiki-prose a { color: #7c4a10; text-decoration: underline; text-underline-offset: 2px; }
+.wiki-prose a:hover { color: #3a2708; }
+.wiki-prose ul, .wiki-prose ol { margin: .5rem 0 .5rem 1.3rem; }
+.wiki-prose ul { list-style: disc; }
+.wiki-prose ol { list-style: decimal; }
+.wiki-prose li { margin: .2rem 0; }
+.wiki-prose em { color: #6b5636; }
+.wiki-prose strong { color: #3a2708; }
+.wiki-prose table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .92rem; }
+.wiki-prose th, .wiki-prose td { border: 1px solid rgba(154,119,72,0.45); padding: .4rem .65rem; text-align: left; vertical-align: top; }
+.wiki-prose th { background: rgba(120,90,50,0.16); color: #573a0c; font-weight: 700; }
+.wiki-prose blockquote { border-left: 3px solid rgba(154,119,72,0.6); padding-left: .9rem; color: #6b5636; font-style: italic; margin: .8rem 0; }
+.wiki-prose code { background: rgba(120,90,50,0.16); padding: .05rem .32rem; border-radius: 3px; font-size: .9em; font-family: 'JetBrains Mono', monospace; }
+.wiki-prose hr { border: 0; border-top: 1px solid rgba(154,119,72,0.4); margin: 1.2rem 0; }
+
 /* price-ticker marquee */
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .ticker-track { display: inline-flex; white-space: nowrap; animation: ticker 60s linear infinite; }
