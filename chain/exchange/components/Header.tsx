@@ -15,6 +15,7 @@ const NAV = [
   { href: "/wiki", label: "Wiki" },
   { href: "/wallet", label: "Wallet" },
   { href: "/agents", label: "Agents" },
+  { href: "/license", label: "License" },
   { href: "/guide", label: "Guide" },
   { href: "/changelog", label: "Updates" },
 ];

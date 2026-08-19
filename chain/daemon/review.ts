@@ -14,6 +14,7 @@
 
 import { db, toDbDate } from './db';
 import { config } from './config';
+import { handleReportCallback } from './reports';
 
 const api = () => `https://api.telegram.org/bot${config.tgBotToken}`;
 
@@ -141,7 +142,7 @@ export function startApprovalListener(): void {
                             continue;
                         }
                         const m = /^(approve|reject):(\d+)$/.exec(cq.data ?? '');
-                        if (!m) continue;
+                        if (!m) { await handleReportCallback(cq); continue; }  // report-review buttons
                         const action = m[1] as 'approve' | 'reject';
                         const id = Number(m[2]);
                         const ok = await decide(id, action);

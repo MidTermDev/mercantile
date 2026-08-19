@@ -17,6 +17,7 @@ import {
   TOKEN_PROGRAM_ID,
   getAssociatedTokenAddressSync,
   createAssociatedTokenAccountIdempotentInstruction,
+  createBurnCheckedInstruction,
 } from "@solana/spl-token";
 import { GAME_URL, LOCAL_GAME_URL, GP_MINT, GP_DECIMALS, ITEM_DECIMALS, PROGRAM_ID } from "./constants";
 
@@ -87,6 +88,28 @@ export function unlinkMessage(address: string): string {
   return `rs-bridge-unlink|v1|${address}`;
 }
 
+// Canonical agent-link message — MUST match server/engine/src/web/pages/bridge.ts agentLinkMessage()
+export function agentLinkMessage(username: string, address: string): string {
+  return `rs-agent-link|v1|${username.toLowerCase()}|${address}`;
+}
+
+// Link a wallet to an agent (API-key) account — proves the account via its apiKey and the
+// wallet via a signature over agentLinkMessage. No in-game code needed.
+export async function agentLink(
+  username: string,
+  apiKey: string,
+  address: string,
+  signature: string,
+): Promise<{ ok: boolean; error?: string }> {
+  const r = await fetch(`${gameOrigin()}/bridge/agent-link`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, apiKey, address, signature }),
+  });
+  const body = await r.json().catch(() => ({}));
+  return r.ok ? { ok: true } : { ok: false, error: body.error ?? `HTTP ${r.status}` };
+}
+
 export async function unlinkWallet(address: string, signature: string): Promise<{ ok: boolean; error?: string }> {
   const r = await fetch(`${gameOrigin()}/bridge/unlink`, {
     method: "POST",
@@ -105,6 +128,32 @@ export async function notifyDeposit(signature: string): Promise<{ ok: boolean; e
   });
   const body = await r.json().catch(() => ({}));
   return r.ok ? { ok: true } : { ok: false, error: body.error ?? `HTTP ${r.status}` };
+}
+
+// ── bot license: quote (GP worth ~0.1 SOL), pay by burning that GP, then activate ──
+export interface LicenseQuote { gp: number; sol: number; }
+export async function quoteLicense(): Promise<LicenseQuote> {
+  const r = await fetch(`${gameOrigin()}/bridge/license/quote`);
+  if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error ?? `HTTP ${r.status}`);
+  return r.json();
+}
+export async function notifyLicense(signature: string, username: string): Promise<{ ok: boolean; error?: string; username?: string }> {
+  const r = await fetch(`${gameOrigin()}/bridge/license/notify`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ signature, username }),
+  });
+  const body = await r.json().catch(() => ({}));
+  return r.ok ? { ok: true, username: body.username } : { ok: false, error: body.error ?? `HTTP ${r.status}` };
+}
+// The license fee is paid by DIRECTLY burning GP (destroyed — a sink; no in-game credit,
+// unlike a bridge deposit). Signer must be the wallet linked to the game account.
+export function buildLicenseBurnTx(owner: PublicKey, gpWhole: number): Transaction {
+  const gpAta = getAssociatedTokenAddressSync(new PublicKey(GP_MINT), owner, false, TOKEN_PROGRAM_ID);
+  const amount = BigInt(Math.round(gpWhole)) * 10n ** BigInt(GP_DECIMALS);
+  return new Transaction().add(
+    createBurnCheckedInstruction(gpAta, new PublicKey(GP_MINT), owner, amount, GP_DECIMALS, [], TOKEN_PROGRAM_ID),
+  );
 }
 
 // ── on-chain program: deposit (burn) instruction builders (ported from

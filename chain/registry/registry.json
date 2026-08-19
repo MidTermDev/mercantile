@@ -15,6 +15,7 @@
   },
   "gp": {
     "mint": "123B7bdJzDYGkrAg7i3JUi5TaHYP47dqmSiR5qPRSGP",
+    "solPool": "H9sXQAqECHPC47TvCVWoV5SVXuRqSrdSPBb6UQt136sG",
     "decimals": 6,
     "symbol": "GP",
     "name": "Gielinor GP",

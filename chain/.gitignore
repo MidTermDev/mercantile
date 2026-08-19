@@ -4,3 +4,15 @@ node_modules/
 images/out/
 runner/seed-liquidity.jsonl
 runner/reprice-rares.jsonl
+
+# swarm: account passwords + live status (never commit)
+swarm/roster.json
+exchange/public/data/swarm.json
+
+swarm/trade-loop feed
+exchange/public/data/swarm-trades.json
+exchange/public/data/feeds/
+
+# operator restart logs
+*.restart.log
+exchange/*.restart.log

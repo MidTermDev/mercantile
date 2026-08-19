@@ -426,3 +426,76 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
       dev regen workflow, so left for upstream. #59 deeper items (unthrottled `sdk_auth`, NODE_PRODUCTION=false
       disabling login attempt-counters) — mitigated for us by AGENT_KEY_MODE (unknown accounts rejected) + 20-char
       keys; NODE_PRODUCTION=true recommended before wide launch (enables the game-login throttle).
+
+### Swarm bots — server-side tutorial skip (2026-08-19)
+- [ ] `engine/src/engine/entity/Player.ts` (`onLogin`) + `engine/src/util/Environment.ts`: opt-in
+      **server-side tutorial skip** for the bot swarm. When `SWARM_SKIP_PREFIX` is set (e.g. `swrm`) and a
+      logging-in account's username starts with it AND `%tutorial < 1000` (^tutorial_complete), onLogin sets
+      the tutorial varp complete (before the LOGIN trigger runs, so `login.rs2` falls through the tutorial
+      branch), then teleJumps to Lumbridge (3222,3222,0 — matches content's `p_telejump(0_50_50_22_22)`) and
+      grants the tutorial-complete starter kit (bronze axe/pickaxe/sword/dagger, net, tinderbox, wooden shield,
+      shrimp, bread) so each role has its tool. Runs once (saved %tutorial is then complete). Empty prefix =
+      disabled → real players are never affected. No content/pack change; pure engine + env. Used by the swarm
+      provisioner (`chain/swarm/provision.ts` → names accounts `swrm…`) and runner
+      (`server/webclient/src/lite/economy-swarm.ts`).
+
+### QoL: Lumbridge Castle top-floor bank (2026-08-19)
+- [ ] `content/maps/m50_50.jm2`: added the later-RS **Lumbridge Castle bank** on the keep's top
+      floor (plane 2), anchored on OSRS coords (booths at ~x3208/x3209, z3221, plane 2). Built as a
+      proper counter so it reads as a bank: **5 bank booths** `2 6..10 21: 2213 10 0` (loc 2213 =
+      bankbooth, angle 0 = south-facing toward the player; opens via existing `[oploc,bankbooth]`);
+      the **blue bank rug** `2 6..10 19: 942 22 0` + `2 6..10 20: 942 22 0` (loc 942 = bluerugmiddle);
+      and **2 bankers** in the NPC section `2 7 22: 494` + `2 9 22: 494` (banker1) behind the counter.
+      Cleared 3 conflicting decorations to make room: removed `2 7 20: 825`, `2 10 20: 869`,
+      `2 9 21: 1248`. Not in authentic 2004 — deliberate QoL add per request.
+      **IMPORTANT (map repack):** BUILD_STARTUP=true does NOT reliably rebuild the map cache (stale
+      `data/pack/.cache/maps.manifest.json`). To apply a map edit: `rm data/pack/.cache/maps-*.zip
+      data/pack/.cache/maps.manifest.json` then `bun run tools/pack/Build.ts`, then restart. Engine
+      loads maps from `data/pack/.cache/maps-server.zip` (binary), not the `.jm2` source.
+
+### Bot licensing — storage + bot-auth gating (2026-08-19, M1 layer)
+- [ ] `prisma/{singleworld,multiworld}/schema.prisma` + `src/db/types.ts` + migrations
+      `20260819000000_bot_license`: new `account.bot_license_until DATETIME?` (NULL = no license;
+      future date = licensed). Applied to live db.sqlite via ALTER.
+- [ ] `src/util/Environment.ts`: `BOT_LICENSE_REQUIRED` (default false).
+- [ ] `src/server/login/LoginServer.ts` `sdk_auth`: selects now include `bot_license_until`; after the
+      ban check, if `BOT_LICENSE_REQUIRED` and no active license → reject bot login with
+      "Activate one at play.mercantile.sh/license". Normal player_login unaffected. `player_ban`
+      (sets banned_until) is the programmatic ban path for M2 auto-ban.
+
+### Bot licensing M1.5 — agent-link + enforcement cutover (2026-08-19, ENFORCED LIVE)
+- [ ] `src/web/pages/bridge.ts`: new `POST /bridge/agent-link` {username, apiKey, address, signature}.
+      Links a wallet to an API-key (agent) account WITHOUT an in-game code — the apiKey (bcrypt-compared
+      vs account.password) proves the account, an ed25519 sig over `agentLinkMessage()` proves the wallet.
+      Same one-wallet-per-account upsert as `/bridge/link`. Fixes the chicken/egg: an unlicensed bot can't
+      reach the in-game Clerk to get a link code, so it couldn't otherwise be licensed. Added `bcrypt-ts`
+      import + exported `agentLinkMessage(username,address)` = `rs-agent-link|v1|<user>|<addr>`.
+- [ ] `src/util/Environment.ts`: `BOT_LICENSE_EXEMPT` (comma-sep usernames, case-insensitive) — dev/demo
+      bots skip the gate. `src/server/login/LoginServer.ts` gate now `if (BOT_LICENSE_REQUIRED && !EXEMPT.includes(username))`.
+- [ ] CUTOVER: engine relaunched with `BOT_LICENSE_REQUIRED=true` + `BOT_LICENSE_EXEMPT=bridgetest,tutbot01,tutbot02,mercbot01`.
+      Verified via ws://localhost:43500 sdk_auth: unlicensed rejected (license msg), licensed passes, exempt skips;
+      agent-link ok, wrong apiKey→401. Browser play (rs2.cgi/vanilla/bot, incl. /ai) is unaffected — it never
+      sends sdk_auth (only server/gateway/gateway.ts does), so it's the reports/ban bucket, not the hard gate.
+
+### M2 — abuse-report review → ban pipeline + unlicensed-attempt handling (2026-08-19)
+- [ ] `report` table: added `status` (default 'pending') + `reviewed_at` (prisma ×2 + `src/db/types.ts` +
+      migration `20260820000000_report_review` + ALTER live db.sqlite). Engine logger still writes reports
+      unchanged (status defaults to pending). In-game Report Abuse → `World.notifyPlayerReport` → logger → `report`.
+- [ ] `src/web/pages/admin.ts` (wired in `src/web/index.ts`): `POST /admin/ban` + `/admin/unban`
+      {username, minutes, token}. Gated by `BRIDGE_ADMIN_TOKEN` (fail-closed if unset); calls
+      `World.notifyPlayerBan` (kick + banned_until via loginThread). Loopback-only in practice (nginx doesn't
+      route /admin/, :8888 not public → public returns 404) + token = defence-in-depth.
+- [ ] `src/util/Environment.ts`: `BOT_AUTOBAN_UNLICENSED` (0=off default). `src/server/login/LoginServer.ts`
+      sdk_auth gate now logs every unlicensed bot attempt (per-account counter) and, if the env>0, auto-bans
+      the account (7d, direct banned_until write) after that many strikes.
+- [ ] daemon: `chain/daemon/reports.ts` sweeps `report` (status='pending') every REPORT_POLL_MS (20s),
+      groups by offender, DMs the operator via Telegram (reason breakdown, reporters, location) with
+      Ban 7d / Ban perm / Dismiss buttons; marks rows alerted→banned|dismissed. Buttons dispatched from the
+      SINGLE getUpdates poller in `review.ts` (added `handleReportCallback(cq)` after the withdrawal regex —
+      one TG consumer, no offset race). Ban → engine `/admin/ban` (config.engineWebUrl + config.adminToken),
+      fallback to direct banned_until write. `config.ts`: engineWebUrl/adminToken/reportPollMs. Shared token in
+      chain/.env (BRIDGE_ADMIN_TOKEN, gitignored) + engine env.
+- [ ] VERIFIED (TG disabled in test to avoid a real DM): pending report→alerted; "Ban 7d" callback→engine
+      ban→banned_until +7d + report→banned+reviewed_at; banned account rejected at sdk_auth; /admin/ban
+      401 without/with wrong token, 404 publicly. Reports are ADVISORY — a human presses the ban button
+      (no auto-ban from reports), so false-positive reports never mass-ban.

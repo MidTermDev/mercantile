@@ -65,6 +65,7 @@ import VarpLarge from '#/network/game/server/model/VarpLarge.js';
 import VarpSmall from '#/network/game/server/model/VarpSmall.js';
 import ServerGameMessage from '#/network/game/server/ServerGameMessage.js';
 import { LoggerEventType } from '#/server/logger/LoggerEventType.js';
+import { printError, printInfo } from '#/util/Logger.js';
 import { ChatModePrivate, ChatModePublic, ChatModeTradeDuel } from '#/engine/entity/ChatModes.js';
 import Environment from '#/util/Environment.js';
 import { toDisplayName } from '#/util/JString.js';
@@ -496,6 +497,20 @@ export default class Player extends PathingEntity {
     // ----
 
     onLogin() {
+        // Swarm bots skip the tutorial server-side so they spawn on the mainland with
+        // the starter kit their role needs. Opt-in + prefix-gated (SWARM_SKIP_PREFIX,
+        // e.g. "swrm") so real players are never affected. The varp is set here — before
+        // the LOGIN trigger runs the content — so login.rs2 falls through the tutorial
+        // branch; the teleport + kit happen at the end once the player is fully active.
+        // Runs once: the saved %tutorial is then complete, so re-logins fall through.
+        const swarmTutVar = VarPlayerType.getId('tutorial');
+        const swarmSkip = !!Environment.SWARM_SKIP_PREFIX && swarmTutVar >= 0
+            && this.username.toLowerCase().startsWith(Environment.SWARM_SKIP_PREFIX.toLowerCase())
+            && this.vars[swarmTutVar] < 1000;
+        if (swarmSkip) {
+            this.setVar(swarmTutVar, 1000); // ^tutorial_complete
+        }
+
         // confirmed order:
         // - rebuild_normal
         // - chat_filter_settings
@@ -535,6 +550,26 @@ export default class Player extends PathingEntity {
         const loginTrigger = ScriptProvider.getByTriggerSpecific(ServerTriggerType.LOGIN, -1, -1);
         if (loginTrigger) {
             this.executeScript(ScriptRunner.init(loginTrigger, this), true);
+        }
+
+        if (swarmSkip) {
+            // Lumbridge spawn, matching content's p_telejump(0_50_50_22_22), + the
+            // tutorial-complete starter kit so each role has the tool it needs.
+            this.teleJump(3222, 3222, 0);
+            try {
+                const kit: Array<[string, number]> = [
+                    ['bronze_axe', 1], ['bronze_pickaxe', 1], ['net', 1], ['tinderbox', 1],
+                    ['bronze_sword', 1], ['bronze_dagger', 1], ['wooden_shield', 1],
+                    ['shrimp', 5], ['bread', 3]
+                ];
+                for (const [name, count] of kit) {
+                    const obj = ObjType.getId(name);
+                    if (obj >= 0) this.invAdd(InvType.INV, obj, count);
+                }
+            } catch (err) {
+                printError(`[swarm] kit grant failed for ${this.username}: ${err}`);
+            }
+            printInfo(`[swarm] ${this.username} skipped tutorial -> Lumbridge with starter kit`);
         }
 
         this.lastStepX = this.x - 1;

@@ -16,6 +16,11 @@ import { startManagementWeb } from '#/web.js';
 import InvType from '#/cache/config/InvType.js';
 import ObjType from '#/cache/config/ObjType.js';
 
+// M2: count unlicensed bot-API (sdk_auth) attempts per account, for logging and the
+// optional BOT_AUTOBAN_UNLICENSED backstop. In-memory (per login-server worker); resets
+// on restart — fine, it only escalates within a live session of hammering.
+const unlicensedAttempts = new Map<string, number>();
+
 async function updateHiscores(account: { id: number; staffmodlevel: number; banned_until: string | Date | null } | undefined, player: Player, profile: string) {
     if (!account) return;
 
@@ -699,7 +704,7 @@ export default class LoginServer {
 
                         let account = await db.selectFrom('account')
                             .where('username', '=', username)
-                            .select(['id', 'password', 'banned_until'])
+                            .select(['id', 'password', 'banned_until', 'bot_license_until'])
                             .executeTakeFirst();
 
                         // Strict mode (gateway AGENT_KEY_MODE): reject unknown accounts
@@ -738,7 +743,7 @@ export default class LoginServer {
                                 if (typeof insertResult.insertId !== 'undefined') {
                                     account = await db.selectFrom('account')
                                         .where('username', '=', username)
-                                        .select(['id', 'password', 'banned_until'])
+                                        .select(['id', 'password', 'banned_until', 'bot_license_until'])
                                         .executeTakeFirst();
                                 } else {
                                     registrationFailed = true;
@@ -750,7 +755,7 @@ export default class LoginServer {
                                     // Username was taken between check and insert - re-fetch and try password
                                     account = await db.selectFrom('account')
                                         .where('username', '=', username)
-                                        .select(['id', 'password', 'banned_until'])
+                                        .select(['id', 'password', 'banned_until', 'bot_license_until'])
                                         .executeTakeFirst();
                                 } else {
                                     console.error('[SDK Auth] Registration error:', err);
@@ -786,6 +791,38 @@ export default class LoginServer {
                                 error: 'Account is banned'
                             }));
                             return;
+                        }
+
+                        // rs-sdk: bot licensing. The SDK/gateway path is bot control — require
+                        // an active, paid bot license. Off unless BOT_LICENSE_REQUIRED=true so
+                        // existing bots aren't disrupted during rollout.
+                        if (Environment.BOT_LICENSE_REQUIRED && !Environment.BOT_LICENSE_EXEMPT.includes(username)) {
+                            const licensed = account.bot_license_until !== null && new Date(account.bot_license_until) > new Date();
+                            if (!licensed) {
+                                const n = (unlicensedAttempts.get(username) ?? 0) + 1;
+                                unlicensedAttempts.set(username, n);
+                                console.warn(`[license] unlicensed bot attempt: ${username} (#${n})`);
+
+                                // opt-in backstop: after N attempts, ban the account (7 days)
+                                if (Environment.BOT_AUTOBAN_UNLICENSED > 0 && n >= Environment.BOT_AUTOBAN_UNLICENSED) {
+                                    const until = new Date(Date.now() + 7 * 24 * 3600 * 1000);
+                                    try {
+                                        await db.updateTable('account').set({ banned_until: toDbDate(until) }).where('id', '=', account.id).execute();
+                                    } catch (e) { console.error('[license] auto-ban write failed:', e); }
+                                    console.warn(`[license] AUTO-BANNED ${username} after ${n} unlicensed attempts`);
+                                    unlicensedAttempts.delete(username);
+                                    s.send(JSON.stringify({ replyTo, success: false, error: 'Account banned: repeated unlicensed bot connections' }));
+                                    return;
+                                }
+
+                                s.send(JSON.stringify({
+                                    replyTo,
+                                    success: false,
+                                    error: 'No bot license. Activate one at play.mercantile.sh/license'
+                                }));
+                                return;
+                            }
+                            unlicensedAttempts.delete(username); // licensed now — clear any prior strikes
                         }
 
                         s.send(JSON.stringify({

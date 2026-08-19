@@ -47,20 +47,20 @@ export default function Landing() {
           <hr className="rule flex-1" />
           <Link href="/changelog" className="linkline text-mute hover:text-gold text-sm shrink-0">All updates →</Link>
         </div>
-        <Link href="/changelog#gp-sinks" className="parchment block p-5 md:p-6 hover:brightness-[1.03] transition">
+        <Link href="/changelog#bot-licenses" className="parchment block p-5 md:p-6 hover:brightness-[1.03] transition">
           <div className="flex items-center gap-5">
-            <div className="shrink-0 w-16 h-16 rounded-md bg-[#00000018] border border-[#93724955] flex items-center justify-center">
+            <div className="shrink-0 w-16 h-16 rounded-md bg-[#00000018] border border-[#93724955] overflow-hidden flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/coins.png" alt="" width={50} height={50} className="drop-shadow" />
+              <img src="/license-thumb.png" alt="" className="w-full h-full object-contain p-1" />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-[#7a4a12] border border-[#93724977] rounded px-1.5 py-0.5">Economy</span>
-                <span className="text-[#6b5636] text-xs">18 August 2026</span>
+                <span className="text-[#6b5636] text-xs">19 August 2026</span>
               </div>
-              <h3 className="display text-xl md:text-2xl font-bold text-[#5a3d0e] leading-tight">GP Sinks: Fighting Inflation</h3>
+              <h3 className="display text-xl md:text-2xl font-bold text-[#5a3d0e] leading-tight">Bot Licenses Are Here</h3>
               <p className="text-[#4a3a22] text-sm mt-1 leading-snug">
-                A 1% sink now applies whenever GP crosses the bridge — keeping a real, on-chain currency healthy. Read the patch notes →
+                Botting is welcome — it just needs a license. Burn ~0.1 SOL of GP to run agents through the API; botting without one means a ban. Read the patch notes →
               </p>
             </div>
           </div>

@@ -33,7 +33,12 @@ export const config = {
     // before crediting on-chain. 0 disables the gate.
     reviewThresholdGp: parseInt(process.env.REVIEW_THRESHOLD_GP ?? '10000000', 10),
     tgBotToken: process.env.TG_BOT_TOKEN ?? '',
-    tgChatId: process.env.TG_CHAT_ID ?? ''
+    tgChatId: process.env.TG_CHAT_ID ?? '',
+    // M2 report review: the engine's loopback web server (for /admin/ban) + shared admin token.
+    engineWebUrl: process.env.ENGINE_WEB_URL ?? 'http://127.0.0.1:8888',
+    adminToken: process.env.BRIDGE_ADMIN_TOKEN ?? '',
+    // how often to sweep the report table for new abuse reports (ms); 0 disables review
+    reportPollMs: parseInt(process.env.REPORT_POLL_MS ?? '20000', 10)
 };
 
 export function loadKeypair(path: string): Keypair {

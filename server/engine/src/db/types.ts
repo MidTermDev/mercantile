@@ -12,6 +12,7 @@ export type account = {
     registration_date: Generated<string>;
     muted_until: string | null;
     banned_until: string | null;
+    bot_license_until: string | null;
     staffmodlevel: Generated<number>;
     members: Generated<number>;
 };
@@ -159,6 +160,8 @@ export type report = {
     coord: number;
     offender: string;
     reason: number;
+    status: Generated<string>;
+    reviewed_at: string | null;
 };
 export type session = {
     uuid: string;

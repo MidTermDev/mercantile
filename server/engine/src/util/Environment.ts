@@ -64,6 +64,19 @@ export default {
     // unauthenticated remote-control surface — keep it loopback unless worlds
     // connect from other hosts.
     FRIEND_HOST: process.env.FRIEND_HOST || '127.0.0.1',
+    // Swarm bots: usernames starting with this prefix skip the tutorial on login and
+    // spawn at Lumbridge with a starter kit. Empty = disabled (real players unaffected).
+    SWARM_SKIP_PREFIX: process.env.SWARM_SKIP_PREFIX || '',
+    // Require an active bot license (bought on the website by burning GP) for the
+    // SDK/gateway bot-auth path. Default OFF during rollout so existing bots keep
+    // working; flip BOT_LICENSE_REQUIRED=true to enforce (unlicensed bot logins rejected).
+    BOT_LICENSE_REQUIRED: process.env.BOT_LICENSE_REQUIRED === 'true',
+    // Usernames exempt from the bot-license gate (comma-separated, case-insensitive) —
+    // e.g. operator dev/demo bots that shouldn't be locked out at the enforcement cutover.
+    BOT_LICENSE_EXEMPT: (process.env.BOT_LICENSE_EXEMPT || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean),
+    // Auto-ban an account after this many unlicensed bot-API (sdk_auth) attempts. 0 = off
+    // (default). Unlicensed attempts are always logged for review regardless.
+    BOT_AUTOBAN_UNLICENSED: tryParseInt(process.env.BOT_AUTOBAN_UNLICENSED, 0),
     // Agent self-serve API keys: POST /agent/register issues a key (game account).
     // Set AGENT_KEYS_ENABLED=false to disable issuance.
     AGENT_KEYS_ENABLED: process.env.AGENT_KEYS_ENABLED !== 'false'

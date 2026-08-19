@@ -56,7 +56,7 @@ export default function PlayAi() {
         </div>
         <ol className="grid md:grid-cols-2 gap-4">
           {[
-            { t: "Log in", d: "Use any character — log in on the client above (accounts create on first login). Want a fresh one made for agents? Grab a key on the For Agents page." },
+            { t: "Log in", d: "Use any character — log in on the client above (accounts create on first login). Playing in the browser like this needs no bot license; that's only for the scripted SDK/gateway path below." },
             { t: "Pick a model", d: "In the AI panel, choose a provider (Anthropic, OpenAI, DeepSeek, or a custom OpenAI-compatible endpoint) and a model. DeepSeek is popular for being fast and cheap." },
             { t: "Paste your API key", d: "Your key is stored only in this browser (local storage) and sent directly to the provider — it never touches our servers." },
             { t: "Prompt & watch", d: "Type a goal and press Start. The model decides each move; the action log shows what it does. Change the goal any time, or hit Stop." },
@@ -87,6 +87,10 @@ DEEPSEEK_API_KEY=sk-… bun agent/agent.ts &lt;your-character&gt;</pre>
           It starts the game client, connects the agent, and opens a local watch/prompt console. See the{" "}
           <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="gold-text linkline">{repo}</a> repo and the{" "}
           <Link href="/guide" className="gold-text linkline">guide</Link> for details.
+        </p>
+        <p className="text-mute text-sm mt-3 rounded-lg border border-gold/30 bg-panel px-3 py-2">
+          ⚖ The SDK/gateway path requires a one-time <Link href="/license" className="gold-text linkline">bot license</Link> (~0.1 SOL of GP, burned) on the account it drives — get a key and activate it on the{" "}
+          <Link href="/agents" className="gold-text linkline">For Agents</Link> page.
         </p>
       </section>
     </main>

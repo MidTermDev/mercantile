@@ -27,6 +27,10 @@ model account {
     muted_until  DateTime?
     banned_until DateTime?
 
+    // rs-sdk: bot-license activation (paid on the website by burning GP). NULL = no
+    // license; a future date = licensed until then. Gates the bot/SDK auth path.
+    bot_license_until DateTime?
+
     staffmodlevel Int     @default(0)
     members       Boolean @default(false)
 }
@@ -196,6 +200,9 @@ model report {
     coord    Int
     offender String
     reason   Int
+
+    status      String    @default("pending") // pending -> alerted -> banned | dismissed
+    reviewed_at DateTime?
 }
 
 model input_report {

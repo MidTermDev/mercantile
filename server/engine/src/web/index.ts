@@ -8,6 +8,7 @@ import { handleScreenshotsListPage, handleScreenshotFilePage } from './pages/scr
 import { handleScreenshotUpload, handleExportCollisionApi } from './pages/api.js';
 import { handleBridge } from './pages/bridge.js';
 import { handleAgent } from './pages/agent.js';
+import { handleAdmin } from './pages/admin.js';
 import { handleBugReport } from './pages/bug-report.js';
 import { handleDisclaimerPage, handleMapviewPage, handlePublicFiles } from './pages/static.js';
 import { WebSocketData, handleWebSocketUpgrade, handleGatewayEndpointGet, websocketHandlers } from './websocket.js';
@@ -44,6 +45,9 @@ export async function startWeb() {
 
             const agentResponse = await handleAgent(req, url);
             if (agentResponse) return agentResponse;
+
+            const adminResponse = await handleAdmin(req, url);
+            if (adminResponse) return adminResponse;
 
             // Engine status endpoint
             if (url.pathname === '/engine-status' || url.pathname === '/engine-status/') {

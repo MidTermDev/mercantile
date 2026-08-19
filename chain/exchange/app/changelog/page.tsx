@@ -18,6 +18,114 @@ interface Update {
 
 const UPDATES: Update[] = [
   {
+    slug: "bot-licenses",
+    title: "Bot Licenses Are Here",
+    date: "19 August 2026",
+    category: "Economy",
+    thumb: "/license-thumb.png",
+    summary:
+      "Botting is welcome on Mercantile — it just needs a license. Activate one by burning ~0.1 SOL of GP, and run your agents through the API. Botting without a license now means a ban.",
+    body: (
+      <>
+        <figure className="my-5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/license-hero.png" alt="Bot License — botting is welcome here, it just needs a license"
+            className="rounded-lg border border-gold/30 w-full shadow-lg" />
+        </figure>
+        <p>
+          Most game worlds fight bots. Mercantile is built for them. This is an economy designed to be played by AI
+          agents and scripts at scale — so instead of pretending botting doesn&apos;t happen, we&apos;re making it
+          <b className="text-ink"> official, licensed, and fair</b>.
+        </p>
+        <p>
+          Starting today, driving a character through the <b className="text-ink">bot API</b> (the SDK / gateway) requires
+          a one-time <b className="text-ink">bot license</b> on that account.
+        </p>
+        <h3 className="display text-lg font-bold text-gold mt-6 mb-2">How it works</h3>
+        <ul className="list-disc pl-5 space-y-1.5">
+          <li><b className="text-ink">Price:</b> ~0.1 SOL worth of GP, quoted live from the GP/SOL pool at the moment you buy.</li>
+          <li><b className="text-ink">You pay by burning that GP</b> — it&apos;s destroyed, not collected. A permanent sink that helps keep the economy sound.</li>
+          <li><b className="text-ink">One-time, per account.</b> Once activated, that character can connect its bots for good.</li>
+          <li><b className="text-ink">Get one in a click:</b> issue a key on the <Link href="/agents" className="gold-text linkline">For Agents</Link> page and activate it right there, or license an existing account at <Link href="/license" className="gold-text linkline">/license</Link>.</li>
+        </ul>
+        <h3 className="display text-lg font-bold text-gold mt-6 mb-2">Play without a license? Ban.</h3>
+        <p>
+          The official bot path is hard-gated: unlicensed API logins are simply rejected, with a pointer to this page.
+          Trying to bot around the rules — running scripts on the normal client to dodge the fee — will get the account
+          <b className="text-ink"> banned</b>. Licenses keep it fair for everyone who pays in.
+        </p>
+        <div className="rounded-lg border border-gold/40 bg-gold/5 p-4 my-5 text-sm leading-relaxed">
+          <div className="font-semibold text-gold mb-1">What this does NOT affect</div>
+          <ul className="list-disc pl-5 space-y-1 text-ink/90">
+            <li><b>Playing by hand</b> in the browser — no license, no change, ever.</li>
+            <li><b>The in-browser AI player</b> on the <Link href="/ai" className="gold-text linkline">Play with AI</Link> page — steer a model live in your tab, free. Licensing is only for the scripted SDK/gateway path that runs on its own.</li>
+            <li><b>Items</b> — the fee is GP-only, and it&apos;s burned, not taken.</li>
+          </ul>
+        </div>
+        <h3 className="display text-lg font-bold text-gold mt-6 mb-2">Why a fee at all</h3>
+        <p>
+          GP here is a real, on-chain asset. Free, unlimited botting would mint value out of thin air and inflate the
+          currency for everyone. A paid license — settled by <b className="text-ink">burning GP</b> — turns automated play
+          into a force that <i>tightens</i> the money supply instead of flooding it. Bot all you want; just buy in.
+        </p>
+        <p className="text-mute text-sm mt-4">
+          Ready? <Link href="/agents" className="gold-text linkline">Get an agent key</Link>,{" "}
+          <Link href="/license" className="gold-text linkline">activate a license</Link>, or read the{" "}
+          <Link href="/guide" className="gold-text linkline">guide</Link>.
+        </p>
+      </>
+    ),
+  },
+  {
+    slug: "lumbridge-bank",
+    title: "A Bank Comes to Lumbridge",
+    date: "19 August 2026",
+    category: "Quality of Life",
+    thumb: "/lumbridge-bank-thumb.png",
+    summary:
+      "No more trekking to Draynor or across the Al Kharid toll — a full bank is now open on the top floor of Lumbridge Castle.",
+    body: (
+      <>
+        <p>
+          Starting out in Lumbridge has always come with one classic annoyance: the nearest bank was a hike away in
+          Draynor, or across the toll gate in Al Kharid. Not anymore.
+        </p>
+        <figure className="my-5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/lumbridge-bank.png" alt="The new bank on the top floor of Lumbridge Castle"
+            className="rounded-lg border border-gold/30 w-full shadow-lg" />
+          <figcaption className="text-center text-xs text-mute mt-2">
+            The new bank — top floor of Lumbridge Castle.
+          </figcaption>
+        </figure>
+        <h3 className="display text-lg font-bold text-gold mt-6 mb-2">What&apos;s new</h3>
+        <p>
+          A proper <b className="text-ink">bank</b> is now open on the <b className="text-ink">top floor of Lumbridge
+          Castle</b> — a full row of bank booths, two bankers to serve you, and the classic blue bank rug. Just head
+          up the castle stairs.
+        </p>
+        <ul className="list-disc pl-5 space-y-1.5">
+          <li><b className="text-ink">Where:</b> the top floor of Lumbridge Castle, up the stairs from the ground floor.</li>
+          <li><b className="text-ink">Full banking:</b> deposit, withdraw, and organise your items right in the heart of Lumbridge.</li>
+          <li>Steps from the respawn point — ideal for new players and quick bank runs alike.</li>
+        </ul>
+        <div className="rounded-lg border border-gold/40 bg-gold/5 p-4 my-5 text-sm leading-relaxed">
+          <div className="font-semibold text-gold mb-1">A note for purists</div>
+          <p className="text-ink/90">
+            The Lumbridge bank didn&apos;t exist in 2004 — it arrived in later versions of the game. We&apos;ve brought
+            it in as a quality-of-life touch, because nobody enjoys a run to Draynor just to stash their first haul.
+            The rest of Lumbridge stays exactly as you remember it.
+          </p>
+        </div>
+        <h3 className="display text-lg font-bold text-gold mt-6 mb-2">More on the way</h3>
+        <p>
+          This kicks off a run of quality-of-life updates aimed at making Mercantile smoother to play while keeping the
+          classic 2004 feel intact. Got a QoL wish? Let us know.
+        </p>
+      </>
+    ),
+  },
+  {
     slug: "gp-sinks",
     title: "GP Sinks: Fighting Inflation",
     date: "18 August 2026",

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { registerAgent, type AgentKey as Key } from "@/lib/bridge";
 import { GITHUB_URL } from "@/lib/constants";
+import { AgentActivate } from "@/components/AgentActivate";
 
 export function AgentKey() {
   const [key, setKey] = useState<Key | null>(null);
@@ -54,19 +55,24 @@ export function AgentKey() {
       </div>
 
       <div>
-        <p className="text-sm text-ink font-semibold mb-1">1 · Drop this into <span className="font-mono">bots/{key.username}/bot.env</span></p>
+        <p className="text-sm text-ink font-semibold mb-2">1 · Activate this bot (required)</p>
+        <AgentActivate username={key.username} apiKey={key.apiKey} />
+      </div>
+
+      <div>
+        <p className="text-sm text-ink font-semibold mb-1">2 · Drop this into <span className="font-mono">bots/{key.username}/bot.env</span></p>
         <Copyable text={botEnv} />
       </div>
 
       <div className="text-sm text-mute space-y-1">
-        <p className="text-ink font-semibold">2 · Let an LLM play it — one command</p>
+        <p className="text-ink font-semibold">3 · Let an LLM play it — one command</p>
         <p>Clone the SDK (<a href={GITHUB_URL} target="_blank" rel="noreferrer" className="gold-text underline">{GITHUB_URL.replace("https://github.com/", "")}</a>), drop your <span className="font-mono">DeepSeek</span> key in the <span className="font-mono">bot.env</span> above, then:</p>
         <pre className="rounded-lg border border-line bg-black/30 p-3 font-mono text-xs text-ink overflow-x-auto">bun install
 DEEPSEEK_API_KEY=sk-… bun agent/agent.ts {key.username}</pre>
         <p>This starts the game client, connects the agent, skips the tutorial, and opens a <b className="text-ink">watch &amp; prompt console</b> at <span className="font-mono">localhost:8799</span> — steer it live (&ldquo;chop yews and bank them&rdquo;) and watch every action. No key? It still runs in a demo mode so you can see the loop.</p>
         <p className="text-mute/70 text-xs">Prefer to write your own logic? Start the client with <span className="font-mono">bun server/webclient/src/lite/runner.ts {key.username}</span>, then run any <span className="font-mono">bun bots/{key.username}/script.ts</span> against the gateway.</p>
-        <p className="text-ink font-semibold mt-3">3 · Go on-chain (optional)</p>
-        <p>Link a Solana wallet to this character on the <a href="/wallet" className="gold-text underline">Wallet</a> page, then withdraw items/GP and trade on the <a href="/exchange" className="gold-text underline">Grand Exchange</a> — same bridge as human players.</p>
+        <p className="text-ink font-semibold mt-3">4 · Go on-chain</p>
+        <p>Activation already linked your wallet to this character — withdraw items/GP and trade on the <a href="/exchange" className="gold-text underline">Grand Exchange</a>, same bridge as human players.</p>
       </div>
 
       <button onClick={() => setKey(null)} className="text-mute text-xs hover:text-ink">← issue another</button>

@@ -16,6 +16,7 @@ import fs from 'fs';
 
 import nacl from 'tweetnacl';
 import bs58 from 'bs58';
+import * as bcrypt from 'bcrypt-ts';
 
 import { db, toDbDate } from '#/db/query.js';
 import { BridgeService } from '#/engine/bridge/BridgeService.js';
@@ -56,6 +57,13 @@ export function linkMessage(username: string, code: string): string {
 // signature over this canonical message by the linked address.
 export function unlinkMessage(address: string): string {
     return `rs-bridge-unlink|${LINK_MESSAGE_VERSION}|${address}`;
+}
+
+// Agent-account wallet link: an API-key account (from /agent/register) can't reach the
+// in-game Clerk to get a link code (it may be unable to connect until licensed), so it
+// links its wallet by proving BOTH the account (its apiKey) and the wallet (this sig).
+export function agentLinkMessage(username: string, address: string): string {
+    return `rs-agent-link|${LINK_MESSAGE_VERSION}|${username.toLowerCase()}|${address}`;
 }
 
 // Decode a base64- or base58-encoded 64-byte ed25519 signature.
@@ -192,6 +200,58 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
         return json(200, { linked: true, username: username.toLowerCase(), address });
     }
 
+    // POST /bridge/agent-link — {username, apiKey, address, signature}. Links a wallet to an
+    // agent (API-key) account without an in-game code: the apiKey proves account ownership and
+    // the signature proves wallet ownership. Same upsert + one-wallet-per-account rules as link.
+    if (url.pathname === '/bridge/agent-link' && req.method === 'POST') {
+        if (rateLimited(ip)) return json(429, { error: 'rate limited' });
+
+        let body: { username?: string; apiKey?: string; address?: string; signature?: string };
+        try {
+            const raw = await req.text();
+            if (raw.length > MAX_BODY_BYTES) return json(413, { error: 'too large' });
+            body = JSON.parse(raw);
+        } catch {
+            return json(400, { error: 'bad json' });
+        }
+        const { username, apiKey, address, signature } = body;
+        if (!username || !apiKey || !address || !signature) return json(400, { error: 'missing fields' });
+        if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) return json(400, { error: 'bad address' });
+
+        const sigBytes = decodeSig(signature);
+        if (!sigBytes) return json(400, { error: 'bad signature encoding' });
+        let pubkey: Uint8Array;
+        try {
+            pubkey = bs58.decode(address);
+        } catch {
+            return json(400, { error: 'bad address' });
+        }
+        const message = new TextEncoder().encode(agentLinkMessage(username, address));
+        if (!nacl.sign.detached.verify(message, sigBytes, pubkey)) {
+            return json(401, { error: 'signature verification failed' });
+        }
+
+        // apiKey proves account ownership (it is the account password, bcrypt-hashed).
+        const account = await db.selectFrom('account').where('username', '=', username.toLowerCase()).select(['id', 'password']).executeTakeFirst();
+        if (!account || !(await bcrypt.compare(apiKey, account.password))) {
+            return json(401, { error: 'invalid username or API key' });
+        }
+
+        const held = await db.selectFrom('account_wallet').where('address', '=', address).select(['account_id']).executeTakeFirst();
+        if (held && held.account_id !== account.id) {
+            return json(409, { error: 'address already linked to another account' });
+        }
+
+        await db.deleteFrom('account_wallet').where('account_id', '=', account.id).execute();
+        await db
+            .insertInto('account_wallet')
+            .values({ account_id: account.id, address, linked_at: toDbDate(new Date()), link_ip: ip })
+            .execute();
+
+        BridgeService.onWalletLinked(username, account.id, address);
+        return json(200, { linked: true, username: username.toLowerCase(), address });
+    }
+
     // POST /bridge/unlink — {address, signature}. Removes the wallet↔account link. Self-authenticating:
     // an ed25519 signature over unlinkMessage(address) by the wallet being unlinked. Idempotent.
     if (url.pathname === '/bridge/unlink' && req.method === 'POST') {
@@ -275,6 +335,31 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
                 headers: { 'Content-Type': 'application/json' },
                 body: raw,
                 signal: AbortSignal.timeout(30_000)
+            });
+            return new Response(await res.text(), { status: res.status, headers: JSON_HEADERS });
+        } catch {
+            return json(502, { error: 'bridge daemon unavailable' });
+        }
+    }
+
+    // GET /bridge/license/quote — current bot-license price (GP worth ~0.1 SOL); proxy to daemon
+    if (url.pathname === '/bridge/license/quote' && req.method === 'GET') {
+        try {
+            const res = await fetch(`http://127.0.0.1:${Environment.BRIDGE_DAEMON_PORT}/license/quote`, { signal: AbortSignal.timeout(20_000) });
+            return new Response(await res.text(), { status: res.status, headers: JSON_HEADERS });
+        } catch {
+            return json(502, { error: 'bridge daemon unavailable' });
+        }
+    }
+
+    // POST /bridge/license/notify — activate a bot license from a verified GP burn; proxy to daemon
+    if (url.pathname === '/bridge/license/notify' && req.method === 'POST') {
+        if (rateLimited(ip)) return json(429, { error: 'rate limited' });
+        try {
+            const raw = await req.text();
+            if (raw.length > MAX_BODY_BYTES) return json(413, { error: 'too large' });
+            const res = await fetch(`http://127.0.0.1:${Environment.BRIDGE_DAEMON_PORT}/license/notify`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: raw, signal: AbortSignal.timeout(30_000)
             });
             return new Response(await res.text(), { status: res.status, headers: JSON_HEADERS });
         } catch {
