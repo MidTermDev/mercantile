@@ -29,7 +29,7 @@ if (bridge_wallet_linked = true) {
     ~chatnpc("<p,neutral>You already have a wallet linked. Linking a new one|will replace it.");
 }
 def_string $code = bridge_link_code;
-~mesbox("Your one-time wallet link code is: @gre@<$code>@bla@|It expires in 10 minutes.| |Visit @dbl@/bridge/link@bla@ on the server website and sign|with your wallet - or from the repo:|@dbl@bun chain/cli/link-wallet.ts <$code>@bla@");
+~mesbox("Your one-time wallet link code is: @bla@<$code>@bla@|It expires in 10 minutes.| |Go to the @dbl@Wallet@bla@ page on the website, connect|your wallet, and enter this code to link - or from|the repo: @dbl@bun chain/cli/link-wallet.ts <$code>@bla@");
 
 [label,bridge_withdraw_gp]
 if (bridge_wallet_linked = false) {

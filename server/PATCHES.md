@@ -391,6 +391,16 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
       collision-resistant filename. NOTE: `/api/*` is NOT exposed through our nginx (routes to the site → 404)
       and 8888 isn't public, so this endpoint is not externally reachable on our deploy — this is hardening for
       if that ever changes; deploys on the next engine restart.
+### Safe restarts (2026-08-18)
+- [ ] `app.ts` `safeExit` (SIGINT/SIGTERM): now `World.rebootTimer(REBOOT_NOTICE_TICKS ?? 100)` —
+      a ~60s in-game "System update" countdown before shutdown (was `rebootTimer(0)` = instant, no
+      notice). The engine already only `process.exit(0)`s once every player is logged out AND their
+      save is confirmed on disk (`online===0 && logoutRequests.size===0`), so a graceful stop loses
+      nothing. OPS: NEVER `pkill -9` the engine (SIGKILL bypasses the save → up to 15m lost); use
+      SIGTERM + wait (host `/tmp/stop-engine.sh`; restart scripts patched to call it and abort rather
+      than force-kill). `content/scripts/bridge/scripts/exchange_clerk.rs2`: link-code mesbox text
+      `@gre@`→`@bla@` (green was unreadable on parchment) + updated to the Wallet-page link flow.
+
 ### Cheat/spawn lockdown (2026-08-18, value-bearing world)
 - [ ] `network/game/client/handler/ClientCheatHandler.ts`: item/GP/stat spawn commands
       (`give`, `giveother`, `givemany`, `givecrap`, `setstat`, `advancestat`, `setlevel`, `addxp`)

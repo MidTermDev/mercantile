@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
 import { linkWallet, linkMessage } from "@/lib/bridge";
@@ -24,6 +25,8 @@ export function LinkModal({ onClose, onLinked }: { onClose: () => void; onLinked
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   async function submit() {
     setBusy(true); setErr(null);
@@ -41,8 +44,9 @@ export function LinkModal({ onClose, onLinked }: { onClose: () => void; onLinked
     } finally { setBusy(false); }
   }
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
+  if (!mounted) return null;
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
       <div className="card w-full max-w-lg p-6 md:p-7 relative" onClick={(e) => e.stopPropagation()}>
         <button onClick={onClose} className="absolute top-4 right-4 text-mute hover:text-ink text-xl leading-none">×</button>
         <h2 className="display text-2xl font-bold gold-text mb-1">Link your wallet</h2>
@@ -91,7 +95,8 @@ export function LinkModal({ onClose, onLinked }: { onClose: () => void; onLinked
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

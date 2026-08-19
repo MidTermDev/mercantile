@@ -3848,7 +3848,8 @@ export class Client extends GameShell {
 
             y += 20;
             if (this.mouseClickButton === 1 && this.mouseClickX >= x - 75 && this.mouseClickX <= x + 75 && this.mouseClickY >= y - 20 && this.mouseClickY <= y + 20) {
-                this.loginscreen = 0;
+                // "Continue" -> straight to the login form (accounts auto-create on first login)
+                this.loginscreen = 2;
             }
         }
     }
@@ -3927,22 +3928,22 @@ export class Client extends GameShell {
             this.b12?.centreStringTag('Create a free account', x, y, Colour.YELLOW, true);
 
             y = ((h / 2) | 0) - 35;
-            this.b12?.centreStringTag('To create a new account you need to', x, y, Colour.WHITE, true);
+            this.b12?.centreStringTag('No signup needed - just pick any', x, y, Colour.WHITE, true);
             y += 15;
 
-            this.b12?.centreStringTag('go back to the main RuneScape webpage', x, y, Colour.WHITE, true);
+            this.b12?.centreStringTag('username and password, then log in.', x, y, Colour.WHITE, true);
             y += 15;
 
-            this.b12?.centreStringTag("and choose the red 'create account'", x, y, Colour.WHITE, true);
+            this.b12?.centreStringTag('Your account is created automatically', x, y, Colour.WHITE, true);
             y += 15;
 
-            this.b12?.centreStringTag('button at the top right of that page.', x, y, Colour.WHITE, true);
+            this.b12?.centreStringTag('the first time you log in.', x, y, Colour.WHITE, true);
             y += 15;
 
             x = (w / 2) | 0;
             y = ((h / 2) | 0) + 50;
             this.imageTitlebutton?.plotSprite(x - 73, y - 20);
-            this.b12?.centreStringTag('Cancel', x, y + 5, Colour.WHITE, true);
+            this.b12?.centreStringTag('Continue', x, y + 5, Colour.WHITE, true);
         }
 
         this.imageTitle4?.draw(202, 171);

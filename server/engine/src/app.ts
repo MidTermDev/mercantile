@@ -53,7 +53,11 @@ function safeExit() {
     }
 
     exiting = true;
-    World.rebootTimer(0);
+    // Give players an in-game "System update" countdown before shutting down, so nobody is
+    // caught mid-action. The engine only exits after every player is logged out AND saved to
+    // disk, so this window is purely notice. Default 100 ticks = 60s; tune with REBOOT_NOTICE_TICKS.
+    const notice = parseInt(process.env.REBOOT_NOTICE_TICKS ?? '100', 10);
+    World.rebootTimer(Number.isFinite(notice) && notice >= 0 ? notice : 100);
 }
 
 process.on('SIGINT', safeExit);
