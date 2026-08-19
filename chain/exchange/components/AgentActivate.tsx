@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
-import { tokenBalance } from "@/lib/swap";
+import { gpBalance } from "@/lib/swap";
 import { quoteLicense, notifyLicense, buildLicenseBurnTx, agentLink, agentLinkMessage, type LicenseQuote } from "@/lib/bridge";
-import { GP_MINT, solscanTx } from "@/lib/constants";
+import { solscanTx } from "@/lib/constants";
 const WalletMultiButton = dynamic(
   () => import("@solana/wallet-adapter-react-ui").then((m) => m.WalletMultiButton),
   { ssr: false },
@@ -32,7 +32,7 @@ export function AgentActivate({ username, apiKey }: { username: string; apiKey: 
   useEffect(() => { quoteLicense().then(setQuote).catch(() => setQuote(null)); }, []);
   useEffect(() => {
     if (!publicKey) { setGp(null); return; }
-    tokenBalance(connection, publicKey, GP_MINT).then(setGp).catch(() => setGp(null));
+    gpBalance(connection, publicKey).then(setGp).catch(() => setGp(null));
   }, [publicKey, connection, done]);
 
   async function activate() {

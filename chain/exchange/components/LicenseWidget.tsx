@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import dynamic from "next/dynamic";
-import { tokenBalance } from "@/lib/swap";
+import { gpBalance } from "@/lib/swap";
 import { quoteLicense, notifyLicense, buildLicenseBurnTx, isLinked, type LicenseQuote } from "@/lib/bridge";
-import { GP_MINT, solscanTx } from "@/lib/constants";
+import { solscanTx } from "@/lib/constants";
 const WalletMultiButton = dynamic(
   () => import("@solana/wallet-adapter-react-ui").then((m) => m.WalletMultiButton),
   { ssr: false },
@@ -27,7 +27,7 @@ export function LicenseWidget() {
   useEffect(() => { quoteLicense().then(setQuote).catch(() => setQuote(null)); }, []);
   useEffect(() => {
     if (!publicKey) { setGp(null); setLinked(null); return; }
-    tokenBalance(connection, publicKey, GP_MINT).then(setGp).catch(() => setGp(null));
+    gpBalance(connection, publicKey).then(setGp).catch(() => setGp(null));
     isLinked(publicKey.toBase58()).then(setLinked).catch(() => setLinked(null));
   }, [publicKey, connection, done]);
 
