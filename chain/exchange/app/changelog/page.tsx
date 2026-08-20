@@ -18,6 +18,40 @@ interface Update {
 
 const UPDATES: Update[] = [
   {
+    slug: "multi-account-wallet",
+    title: "One Wallet, Many Characters",
+    date: "20 August 2026",
+    category: "Wallet",
+    thumb: "/mw-thumb.png",
+    summary:
+      "Link as many characters as you like to a single Solana wallet — then pick which one to deposit to from a dropdown on the Wallet page.",
+    body: (
+      <>
+        <p>
+          Run a main and a few bots? A clan of characters? Until now each wallet could hold exactly one character.
+          Not anymore — <b className="text-ink">a single wallet can now link any number of characters</b>.
+        </p>
+        <h3 className="display text-lg font-bold text-gold mt-6 mb-2">What&apos;s new</h3>
+        <ul className="list-disc pl-5 space-y-1.5">
+          <li><b className="text-ink">Link multiple characters</b> to one wallet — just repeat the link step (get a code from the in-game Exchange Clerk, sign) for each character. They all show up under your wallet.</li>
+          <li><b className="text-ink">A &ldquo;Deposit to&rdquo; dropdown</b> on the <Link href="/wallet" className="gold-text linkline">Wallet</Link> page: choose which character receives the items or GP you deposit, then claim it on that character at the Exchange Clerk.</li>
+          <li><b className="text-ink">Per-character unlink</b> — remove one character from a wallet without touching the others.</li>
+        </ul>
+        <div className="rounded-lg border border-gold/40 bg-gold/5 p-4 my-5 text-sm leading-relaxed">
+          <div className="font-semibold text-gold mb-1">Good to know</div>
+          <ul className="list-disc pl-5 space-y-1 text-ink/90">
+            <li>Withdrawals and claims are <b>wallet-level</b> — everything your characters withdraw lands in the one wallet, ready to claim.</li>
+            <li>Each character still links to <b>one</b> wallet at a time.</li>
+            <li>A <Link href="/license" className="gold-text linkline">bot license</Link> is per character, so pick the right one from the dropdown when activating.</li>
+          </ul>
+        </div>
+        <p className="text-mute text-sm mt-4">
+          Manage it all on the <Link href="/wallet" className="gold-text linkline">Wallet</Link> page.
+        </p>
+      </>
+    ),
+  },
+  {
     slug: "bot-licenses",
     title: "Bot Licenses Are Here",
     date: "19 August 2026",

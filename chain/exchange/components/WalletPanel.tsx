@@ -7,7 +7,7 @@ import { fmtGp } from "@/lib/format";
 import { GP_DECIMALS, ITEM_DECIMALS, GP_MINT, solscanTx } from "@/lib/constants";
 import type { ItemsFile, ExchangeItem } from "@/lib/types";
 import {
-  isLinked, pendingWithdrawals, type PendingRow,
+  linkedAccounts, pendingWithdrawals, type PendingRow,
   buildRedeemTx, claimBalanceBase, buildDepositTx, notifyDeposit, walletHoldings,
   unlinkMessage, unlinkWallet,
 } from "@/lib/bridge";
@@ -38,7 +38,8 @@ export function WalletPanel() {
     return m;
   }, [items]);
 
-  const [linked, setLinked] = useState<boolean | null>(null);
+  const [accounts, setAccounts] = useState<string[]>([]);   // characters linked to this wallet
+  const [depositTo, setDepositTo] = useState<string>("");    // which one deposits credit
   const [pending, setPending] = useState<PendingRow[]>([]);
   const [claimBals, setClaimBals] = useState<Record<string, bigint>>({});
   const [holdings, setHoldings] = useState<{ mint: string; base: bigint }[]>([]);
@@ -57,12 +58,13 @@ export function WalletPanel() {
   const refresh = useCallback(async () => {
     if (!publicKey) return;
     const addr = publicKey.toBase58();
-    const [lk, pw, hs] = await Promise.all([
-      isLinked(addr).catch(() => false),
+    const [accts, pw, hs] = await Promise.all([
+      linkedAccounts(addr).catch(() => [] as string[]),
       pendingWithdrawals(addr).catch(() => []),
       walletHoldings(connection, publicKey).catch(() => []),
     ]);
-    setLinked(lk);
+    setAccounts(accts);
+    setDepositTo((cur) => (cur && accts.includes(cur) ? cur : accts[0] ?? ""));
     setPending(pw);
     setHoldings(hs.map((h) => ({ mint: h.mint, base: h.amountBase })));
     // read on-chain claimable balances for the mints that have a claimable row
@@ -75,7 +77,7 @@ export function WalletPanel() {
     setClaimBals(bals);
   }, [publicKey, connection, byName]);
 
-  useEffect(() => { if (connected && publicKey) refresh(); else { setLinked(null); setPending([]); setHoldings([]); } }, [connected, publicKey, refresh]);
+  useEffect(() => { if (connected && publicKey) refresh(); else { setAccounts([]); setDepositTo(""); setPending([]); setHoldings([]); } }, [connected, publicKey, refresh]);
 
   async function run(label: string, fn: () => Promise<void>) {
     setBusy(label); setErr(null); setMsg(null); setLastSig(null);
@@ -114,14 +116,15 @@ export function WalletPanel() {
       // of a fractional amount would be rejected in-game AFTER the tokens are gone).
       if (!Number.isInteger(whole)) throw new Error(`whole ${isGp ? "GP" : "items"} only — no fractions`);
       if (whole > maxWhole) throw new Error(`you only hold ${maxWhole}`);
+      if (!depositTo) throw new Error("link a character first (step 1)");
       const tx = buildDepositTx(publicKey, mint, whole, isGp);
       const sig = await sendTransaction(tx, connection);
       setMsg("Deposit sent — finalizing on-chain…");
       await connection.confirmTransaction(sig, "finalized");
       setLastSig(sig);
-      const n = await notifyDeposit(sig);
+      const n = await notifyDeposit(sig, depositTo);
       if (!n.ok) throw new Error(`burned, but notify failed: ${n.error} (retry from the CLI with the sig)`);
-      setMsg(`Deposited ${whole} ${isGp ? "GP" : byMint.get(mint)?.name ?? "item"} — claim it at the Exchange Clerk in-game.`);
+      setMsg(`Deposited ${whole} ${isGp ? "GP" : byMint.get(mint)?.name ?? "item"} to ${depositTo} — claim it at the Exchange Clerk in-game.`);
       setAmts((a) => ({ ...a, [mint]: "" }));
       setTimeout(refresh, 3000);
     });
@@ -144,16 +147,16 @@ export function WalletPanel() {
     });
   }
 
-  // ── unlink this wallet from its character (sign to prove wallet ownership) ──
-  function unlink() {
-    return run("unlink", async () => {
+  // ── unlink a character (or all) from this wallet (sign to prove wallet ownership) ──
+  function unlink(username?: string) {
+    return run(`unlink:${username ?? "all"}`, async () => {
       if (!publicKey || !signMessage) throw new Error("connect a wallet that can sign messages");
       const addr = publicKey.toBase58();
       const signed = await signMessage(new TextEncoder().encode(unlinkMessage(addr)));
       let s = ""; for (const b of signed) s += String.fromCharCode(b);
-      const res = await unlinkWallet(addr, btoa(s));
+      const res = await unlinkWallet(addr, btoa(s), username);
       if (!res.ok) throw new Error(res.error);
-      setMsg("Wallet unlinked from your character.");
+      setMsg(username ? `Unlinked ${username}.` : "Wallet unlinked.");
       refresh();
     });
   }
@@ -193,22 +196,36 @@ export function WalletPanel() {
       {/* Link status */}
       <section className="card p-5">
         <div className="flex items-center justify-between">
-          <h2 className="display text-lg font-bold gold-text">1 · Link your character</h2>
-          {linked === true && <span className="text-emerald text-sm">✓ linked</span>}
+          <h2 className="display text-lg font-bold gold-text">1 · Link your characters</h2>
+          {accounts.length > 0 && <span className="text-emerald text-sm">✓ {accounts.length} linked</span>}
         </div>
-        {linked === true ? (
-          <div className="mt-2">
-            <p className="text-mute text-sm">This wallet is linked to a game account. You can bridge below.</p>
-            <button onClick={unlink} disabled={busy === "unlink"}
-              className="mt-3 px-4 py-2 rounded-lg border border-line text-mute text-sm hover:text-ink hover:border-gold transition disabled:opacity-50 disabled:cursor-not-allowed">
-              {busy === "unlink" ? "Unlinking…" : "Unlink wallet"}
+        {accounts.length > 0 ? (
+          <div className="mt-2 space-y-3">
+            <p className="text-mute text-sm">
+              Linked to {accounts.length === 1 ? "one character" : `${accounts.length} characters`}. Deposits credit
+              the character you pick in step 3 — link as many as you like to the same wallet.
+            </p>
+            <div className="space-y-1.5">
+              {accounts.map((u) => (
+                <div key={u} className="flex items-center gap-2 rounded-lg border border-line bg-panel px-3 py-1.5 text-sm">
+                  <span className="text-ink font-mono">{u}</span>
+                  <button onClick={() => unlink(u)} disabled={busy === `unlink:${u}`}
+                    className="ml-auto text-mute text-xs hover:text-err transition disabled:opacity-50">
+                    {busy === `unlink:${u}` ? "unlinking…" : "unlink"}
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button onClick={() => setShowLink(true)}
+              className="px-4 py-2 rounded-lg border border-gold text-gold font-bold text-sm hover:bg-gold hover:text-bg transition">
+              + Link another character
             </button>
           </div>
         ) : (
           <>
             <p className="text-mute text-sm mt-2">
               Bind this wallet to your character in three quick steps — get a code from the in-game Exchange Clerk,
-              then sign here. No address typing in-game.
+              then sign here. You can link multiple characters to one wallet.
             </p>
             <button onClick={() => setShowLink(true)}
               className="mt-3 px-5 py-2.5 rounded-lg bg-gold text-bg font-bold text-sm hover:bg-gold2">
@@ -266,6 +283,16 @@ export function WalletPanel() {
           <button onClick={refresh} className="text-mute text-xs hover:text-ink">refresh</button>
         </div>
         <p className="text-mute text-sm mt-2"><b className="text-ink">Sell</b> swaps items into their GP pool. <b className="text-ink">Deposit</b> burns tokens and credits the items/GP back to your character (claim at the Exchange Clerk). You pay only the network fee (~0.000005 SOL).</p>
+        {accounts.length > 0 && (
+          <div className="mt-3 flex items-center gap-2 text-sm flex-wrap">
+            <span className="text-mute">Deposit to:</span>
+            <select value={depositTo} onChange={(e) => setDepositTo(e.target.value)}
+              className="bg-panel2 border border-line rounded-lg px-2.5 py-1.5 text-ink font-mono focus:outline-none focus:border-gold">
+              {accounts.map((u) => <option key={u} value={u}>{u}</option>)}
+            </select>
+            {accounts.length > 1 && <span className="text-mute/70 text-xs">← which character receives your deposits</span>}
+          </div>
+        )}
         <div className="mt-3 space-y-2">
           {gpHolding && (() => {
             const whole = Number(gpHolding.base) / 10 ** GP_DECIMALS;

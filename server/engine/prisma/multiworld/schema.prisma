@@ -216,9 +216,13 @@ model input_report {
 
 model account_wallet {
     account_id Int      @id
-    address    String   @unique
+    address    String
     linked_at  DateTime @default(now())
     link_ip    String?
+
+    // One wallet per account (account_id PK), but a wallet may link MANY accounts —
+    // deposits/licensing pick the target account explicitly. Non-unique lookup index.
+    @@index([address])
 }
 
 model bridge_tx {

@@ -524,3 +524,19 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
       Lumbridge (3222,3222) + grants the standard starter kit. Requires a content repack
       (`bun run tools/pack/Build.ts`) + engine restart. Verified: fresh account → skip →
       Lumbridge with kit, 6 men nearby. Drives scripts/tutorial.ts.
+
+### Multi-account-per-wallet (2026-08-20)
+- [ ] `prisma/{singleworld,multiworld}/schema.prisma` `account_wallet`: dropped `@unique` on
+      `address`, added `@@index([address])` (migration `20260820100000_wallet_multi_account`
+      DROPs `account_wallet_address_key`, CREATEs a non-unique index; applied to live db.sqlite).
+      One wallet per account still enforced by the `account_id` PK; a wallet may now link MANY
+      accounts.
+- [ ] `src/web/pages/bridge.ts`: `/bridge/link` + `/bridge/agent-link` no longer 409 when the
+      address is held by another account. `/bridge/unlink` takes optional `username` (unlink one
+      account vs all). NEW `GET /bridge/accounts/:address` → `{usernames}` (deposit dropdown).
+- [ ] `chain/daemon/deposit-listener.ts`: `handleNotify` + `handleLicense` resolve the target
+      account among ALL of the wallet's linked accounts — credit/license the one named in the
+      request `username`; if none named and exactly one is linked, use it; if multiple and none
+      named, 400 (ask which). Site: lib/bridge `notifyDeposit(sig, username?)` /
+      `linkedAccounts(addr)` / `unlinkWallet(addr, sig, username?)`; WalletPanel shows all linked
+      characters + a "Deposit to" dropdown + per-character unlink.

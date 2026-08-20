@@ -110,24 +110,34 @@ export async function agentLink(
   return r.ok ? { ok: true } : { ok: false, error: body.error ?? `HTTP ${r.status}` };
 }
 
-export async function unlinkWallet(address: string, signature: string): Promise<{ ok: boolean; error?: string }> {
+// Unlink a specific account (username) from the wallet, or all accounts if username omitted.
+export async function unlinkWallet(address: string, signature: string, username?: string): Promise<{ ok: boolean; error?: string }> {
   const r = await fetch(`${gameOrigin()}/bridge/unlink`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ address, signature }),
+    body: JSON.stringify(username ? { address, signature, username } : { address, signature }),
   });
   const body = await r.json().catch(() => ({}));
   return r.ok ? { ok: true } : { ok: false, error: body.error ?? `HTTP ${r.status}` };
 }
 
-export async function notifyDeposit(signature: string): Promise<{ ok: boolean; error?: string }> {
+// Credit a deposit to `username` (which must be one of the wallet's linked accounts).
+// Omit username only when the wallet links exactly one account.
+export async function notifyDeposit(signature: string, username?: string): Promise<{ ok: boolean; error?: string }> {
   const r = await fetch(`${gameOrigin()}/bridge/deposit/notify`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ signature }),
+    body: JSON.stringify(username ? { signature, username } : { signature }),
   });
   const body = await r.json().catch(() => ({}));
   return r.ok ? { ok: true } : { ok: false, error: body.error ?? `HTTP ${r.status}` };
+}
+
+// The game accounts linked to a wallet (for the deposit-target dropdown).
+export async function linkedAccounts(address: string): Promise<string[]> {
+  const r = await fetch(`${gameOrigin()}/bridge/accounts/${address}`);
+  if (!r.ok) return [];
+  return (await r.json()).usernames ?? [];
 }
 
 // ── bot license: quote (GP worth ~0.1 SOL), pay by burning that GP, then activate ──

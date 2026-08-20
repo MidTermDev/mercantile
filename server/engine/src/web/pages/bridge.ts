@@ -185,11 +185,8 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
         const account = await db.selectFrom('account').where('username', '=', username.toLowerCase()).select(['id']).executeTakeFirst();
         if (!account) return json(404, { error: 'unknown account' });
 
-        const held = await db.selectFrom('account_wallet').where('address', '=', address).select(['account_id']).executeTakeFirst();
-        if (held && held.account_id !== account.id) {
-            return json(409, { error: 'address already linked to another account' });
-        }
-
+        // Many accounts may share one wallet; only one wallet per account is enforced
+        // (account_id PK). Deposits/licensing pick the target account explicitly.
         await db.deleteFrom('account_wallet').where('account_id', '=', account.id).execute();
         await db
             .insertInto('account_wallet')
@@ -237,11 +234,8 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
             return json(401, { error: 'invalid username or API key' });
         }
 
-        const held = await db.selectFrom('account_wallet').where('address', '=', address).select(['account_id']).executeTakeFirst();
-        if (held && held.account_id !== account.id) {
-            return json(409, { error: 'address already linked to another account' });
-        }
-
+        // Many accounts may share one wallet; only one wallet per account is enforced
+        // (account_id PK). Deposits/licensing pick the target account explicitly.
         await db.deleteFrom('account_wallet').where('account_id', '=', account.id).execute();
         await db
             .insertInto('account_wallet')
@@ -252,11 +246,12 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
         return json(200, { linked: true, username: username.toLowerCase(), address });
     }
 
-    // POST /bridge/unlink — {address, signature}. Removes the wallet↔account link. Self-authenticating:
-    // an ed25519 signature over unlinkMessage(address) by the wallet being unlinked. Idempotent.
+    // POST /bridge/unlink — {address, signature, username?}. Removes wallet↔account link(s).
+    // Self-authenticating: an ed25519 signature over unlinkMessage(address) by the wallet.
+    // With `username`, unlinks just that account; without, unlinks ALL accounts on the wallet.
     if (url.pathname === '/bridge/unlink' && req.method === 'POST') {
         if (rateLimited(ip)) return json(429, { error: 'rate limited' });
-        let body: { address?: string; signature?: string };
+        let body: { address?: string; signature?: string; username?: string };
         try {
             const raw = await req.text();
             if (raw.length > MAX_BODY_BYTES) return json(413, { error: 'too large' });
@@ -264,7 +259,7 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
         } catch {
             return json(400, { error: 'bad json' });
         }
-        const { address, signature } = body;
+        const { address, signature, username } = body;
         if (!address || !signature) return json(400, { error: 'missing fields' });
         if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) return json(400, { error: 'bad address' });
         const sigBytes = decodeSig(signature);
@@ -275,21 +270,40 @@ export async function handleBridge(req: Request, url: URL): Promise<Response | u
         if (!nacl.sign.detached.verify(message, sigBytes, pubkey)) {
             return json(401, { error: 'signature verification failed' });
         }
-        const row = await db.selectFrom('account_wallet').where('address', '=', address).select(['account_id']).executeTakeFirst();
-        if (row) {
-            await db.deleteFrom('account_wallet').where('address', '=', address).execute();
-            const acct = await db.selectFrom('account').where('id', '=', row.account_id).select(['username']).executeTakeFirst();
-            if (acct) BridgeService.onWalletUnlinked(acct.username, address);
+        let rows = await db.selectFrom('account_wallet')
+            .innerJoin('account', 'account.id', 'account_wallet.account_id')
+            .where('account_wallet.address', '=', address)
+            .select(['account.id as id', 'account.username as username'])
+            .execute();
+        if (username) rows = rows.filter(r => r.username.toLowerCase() === username.toLowerCase());
+        for (const r of rows) {
+            await db.deleteFrom('account_wallet').where('address', '=', address).where('account_id', '=', r.id).execute();
+            BridgeService.onWalletUnlinked(r.username, address);
         }
-        return json(200, { unlinked: true, address });
+        return json(200, { unlinked: true, address, count: rows.length });
     }
 
-    // GET /bridge/linked/:address
+    // GET /bridge/linked/:address — {linked: bool} (back-compat; true if ANY account links it).
     if (url.pathname.startsWith('/bridge/linked/') && req.method === 'GET') {
         const address = url.pathname.slice('/bridge/linked/'.length);
         if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) return json(400, { error: 'bad address' });
         const row = await db.selectFrom('account_wallet').where('address', '=', address).select(['account_id']).executeTakeFirst();
         return json(200, { linked: !!row });
+    }
+
+    // GET /bridge/accounts/:address — the game accounts linked to this wallet, for the
+    // deposit-target dropdown. Wallet addresses are already public on-chain and usernames
+    // are public (hiscores), so this linkage is low-sensitivity on a bot-transparent server.
+    if (url.pathname.startsWith('/bridge/accounts/') && req.method === 'GET') {
+        const address = url.pathname.slice('/bridge/accounts/'.length);
+        if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) return json(400, { error: 'bad address' });
+        const rows = await db.selectFrom('account_wallet')
+            .innerJoin('account', 'account.id', 'account_wallet.account_id')
+            .where('account_wallet.address', '=', address)
+            .orderBy('account_wallet.linked_at', 'asc')
+            .select(['account.username as username'])
+            .execute();
+        return json(200, { usernames: rows.map(r => r.username) });
     }
 
     // GET /bridge/pending/:address — wallet-scoped, public. Non-terminal withdrawals

@@ -48,10 +48,11 @@ export class DepositListener {
     private async handleNotify(req: Request): Promise<Response> {
         if (config.paused) return Response.json({ error: 'bridge paused' }, { status: 503 });
 
-        let signature: string;
+        let signature: string; let wantUser: string;
         try {
             const body = await req.json();
             signature = String(body.signature ?? '');
+            wantUser = String(body.username ?? '').toLowerCase().trim();
         } catch {
             return Response.json({ error: 'bad json' }, { status: 400 });
         }
@@ -70,15 +71,25 @@ export class DepositListener {
         }
 
         const { deposit } = result;
-        const link = await db
+        // A wallet may link several accounts; the deposit picks which one to credit.
+        const links = await db
             .selectFrom('account_wallet')
             .innerJoin('account', 'account.id', 'account_wallet.account_id')
             .where('account_wallet.address', '=', deposit.wallet)
-            .select(['account.id', 'account.username'])
-            .executeTakeFirst();
-        if (!link) {
+            .select(['account.id as id', 'account.username as username'])
+            .execute();
+        if (!links.length) {
             console.warn(`[deposit-listener] deposit from unlinked wallet ${deposit.wallet} (${signature.slice(0, 12)}…)`);
             return Response.json({ error: 'wallet not linked to any account' }, { status: 404 });
+        }
+        let link: { id: number; username: string } | undefined;
+        if (wantUser) {
+            link = links.find(l => l.username.toLowerCase() === wantUser);
+            if (!link) return Response.json({ error: `this wallet isn't linked to '${wantUser}'` }, { status: 409 });
+        } else if (links.length === 1) {
+            link = links[0];
+        } else {
+            return Response.json({ error: 'multiple accounts linked to this wallet — specify which to credit (username)' }, { status: 400 });
         }
 
         try {
@@ -123,14 +134,20 @@ export class DepositListener {
         const result = await verifyLicenseTx(this.conn, signature);
         if (!result.ok) { console.warn(`[license] rejected ${signature.slice(0, 12)}…: ${result.reason}`); return Response.json({ error: result.reason }, { status: 422 }); }
 
-        // the burner wallet's linked account is the one we license (1 wallet ↔ 1 account)
-        const link = await db.selectFrom('account_wallet')
+        // a wallet may link several accounts; license the one named (or the sole one)
+        const links = await db.selectFrom('account_wallet')
             .innerJoin('account', 'account.id', 'account_wallet.account_id')
             .where('account_wallet.address', '=', result.wallet)
-            .select(['account.id', 'account.username']).executeTakeFirst();
-        if (!link) return Response.json({ error: 'wallet not linked to any account — link it at /wallet first' }, { status: 404 });
-        if (wantUser && link.username.toLowerCase() !== wantUser) {
-            return Response.json({ error: `that wallet is linked to a different account (not ${wantUser})` }, { status: 409 });
+            .select(['account.id as id', 'account.username as username']).execute();
+        if (!links.length) return Response.json({ error: 'wallet not linked to any account — link it at /wallet first' }, { status: 404 });
+        let link: { id: number; username: string } | undefined;
+        if (wantUser) {
+            link = links.find(l => l.username.toLowerCase() === wantUser);
+            if (!link) return Response.json({ error: `this wallet isn't linked to '${wantUser}'` }, { status: 409 });
+        } else if (links.length === 1) {
+            link = links[0];
+        } else {
+            return Response.json({ error: 'multiple accounts linked to this wallet — specify which to license (username)' }, { status: 400 });
         }
 
         // permanent one-time activation (far-future date; DateTime supports renewals later)
