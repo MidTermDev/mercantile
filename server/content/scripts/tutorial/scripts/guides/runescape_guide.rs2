@@ -1,4 +1,13 @@
 [opnpc1,newbie_basics_instructor]
+// rs-sdk: offer the tutorial skip on EVERY talk, at any stage (bot-friendly server).
+// Upstream only offered it at the welcome step and gated it on `map_live = false`, so it
+// never appeared on a production world. Now anyone can walk to the Guide and skip out.
+~chatnpc("<p,neutral>Do you want to skip the tutorial?");
+def_int $choice = ~p_choice2("Yes please.", 1, "No, thank you.", 2);
+if ($choice = 1) {
+    %tutorial = ^tutorial_complete;
+    @tutorial_complete;
+}
 
 switch_int(%tutorial) {
     case ^newbie_basics_instructor_designed_character : @newbie_basics_instructor_welcome;
@@ -8,15 +17,6 @@ switch_int(%tutorial) {
 }
 
 [label,newbie_basics_instructor_welcome]
-if (map_live = false) {
-    ~chatnpc("<p,neutral>Do you want to skip the tutorial?");
-    def_int $choice = ~p_choice2("Yes please.", 1, "No, thank you.", 2);
-    if ($choice = 1) {
-        %tutorial = ^tutorial_complete;
-        @tutorial_complete;
-    }
-}
-
 ~chatnpc("<p,neutral>Greetings! I see you are a new arrival to this land.|My job is to welcome all new visitors. So welcome!");
 ~chatnpc("<p,neutral>You have already learnt the first thing|needed to succeed in this world...|Talking to other people!");
 ~chatnpc("<p,neutral>You will find many inhabitants of this world|have useful things to say to you. By clicking|on them with your mouse you can talk to them.");

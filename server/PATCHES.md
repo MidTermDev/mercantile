@@ -514,3 +514,13 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
 - NOTE (accepted, not patchable): `isAgentProxy` is decided by URL path in `src/web/websocket.ts` — `/gateway`
       is license-gated, `/` and `/bot` are normal human login (never gated, or humans couldn't play). A bot
       speaking the raw client protocol on `/` bypasses the fee; that's the reports→ban bucket by design.
+
+### Tutorial Island skip enabled for everyone (2026-08-20)
+- [ ] `server/content/scripts/tutorial/scripts/guides/runescape_guide.rs2`: the RuneScape
+      Guide's "Do you want to skip the tutorial?" prompt was gated on `map_live = false`
+      (map_live = NODE_PRODUCTION), so it never appeared on the live server. Moved the skip
+      prompt to the top of `[opnpc1,newbie_basics_instructor]` so it's offered on EVERY talk
+      at ANY stage. Picking "Yes please." sets %tutorial=^tutorial_complete → teleports to
+      Lumbridge (3222,3222) + grants the standard starter kit. Requires a content repack
+      (`bun run tools/pack/Build.ts`) + engine restart. Verified: fresh account → skip →
+      Lumbridge with kit, 6 men nearby. Drives scripts/tutorial.ts.
