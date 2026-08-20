@@ -30,8 +30,23 @@ function reg() {
     return { gpMint: r.gp.mint as string, solPool: r.gp.solPool as string };
 }
 
-/** Whole GP worth LICENSE_SOL right now, clamped to [floor, cap]. */
-export async function quoteLicenseGp(conn: Connection): Promise<{ gp: number; sol: number; raw: number; clamped: boolean }> {
+type LicenseQuoteResult = { gp: number; sol: number; raw: number; clamped: boolean };
+
+// Short cache so /license/quote (hit on every page load) doesn't spam the RPC, and so the
+// price the user is shown == the price verifyLicenseTx checks against within the window
+// (no false "burned too little" from a tick between display and confirmation).
+const QUOTE_TTL_MS = 20_000;
+let quoteCache: { at: number; value: LicenseQuoteResult } | null = null;
+
+/** Whole GP worth LICENSE_SOL right now, clamped to [floor, cap]. Cached ~20s. */
+export async function quoteLicenseGp(conn: Connection): Promise<LicenseQuoteResult> {
+    if (quoteCache && Date.now() - quoteCache.at < QUOTE_TTL_MS) return quoteCache.value;
+    const value = await computeLicenseGp(conn);
+    quoteCache = { at: Date.now(), value };
+    return value;
+}
+
+async function computeLicenseGp(conn: Connection): Promise<LicenseQuoteResult> {
     const { gpMint, solPool } = reg();
     const cp = new CpAmm(conn);
     const pool = await cp.fetchPoolState(new PublicKey(solPool));

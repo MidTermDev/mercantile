@@ -362,8 +362,8 @@ function startTracesHttp() {
             res.end();
         }
     });
-    server.listen(TRACES_HTTP_PORT, '0.0.0.0', () => {
-        printInfo(`Telemetry traces listening on port ${TRACES_HTTP_PORT}`);
+    server.listen(TRACES_HTTP_PORT, Environment.logger.host, () => {
+        printInfo(`Telemetry traces listening on ${Environment.logger.host}:${TRACES_HTTP_PORT}`);
     });
 }
 
@@ -389,8 +389,10 @@ export default class LoggerServer {
         setTimeout(compactTelemetrySafe, TELEMETRY_COMPACT_STARTUP_DELAY_MS);
         setInterval(compactTelemetrySafe, TELEMETRY_COMPACT_INTERVAL_MS);
         startTracesHttp();
-        this.server = new WebSocketServer({ port: Environment.logger.port, host: '0.0.0.0' }, () => {
-            printInfo(`Logger server listening on port ${Environment.logger.port}`);
+        // rs-sdk: bind to the configured host (default loopback), not 0.0.0.0 — the
+        // logger ingests session/report events over an unauthenticated socket.
+        this.server = new WebSocketServer({ port: Environment.logger.port, host: Environment.logger.host }, () => {
+            printInfo(`Logger server listening on ${Environment.logger.host}:${Environment.logger.port}`);
         });
 
         this.server.on('connection', (socket: WebSocket) => {

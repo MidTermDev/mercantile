@@ -249,8 +249,13 @@ export default class LoginServer {
         InvType.load('data/pack');
         ObjType.load('data/pack');
 
-        this.server = new WebSocketServer({ port: Environment.login.port, host: '0.0.0.0' }, () => {
-            printInfo(`Login server listening on port ${Environment.login.port}`);
+        // rs-sdk: bind to the configured host (default 'localhost' = loopback), NOT a
+        // hardcoded 0.0.0.0. This server processes UNAUTHENTICATED control messages
+        // (sdk_auth, player_ban, player_mute, player_login) — exposing it lets anyone
+        // who can reach the port ban players or probe auth. The gateway connects over
+        // loopback. Expose (set login.host) only for a multi-host/multiworld deployment.
+        this.server = new WebSocketServer({ port: Environment.login.port, host: Environment.login.host }, () => {
+            printInfo(`Login server listening on ${Environment.login.host}:${Environment.login.port}`);
         });
 
         this.server.on('connection', (s: WebSocket) => {

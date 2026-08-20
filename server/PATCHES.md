@@ -499,3 +499,18 @@ If content map files changed: regenerate `sdk/collision-data.json` from the MEMB
       ban→banned_until +7d + report→banned+reviewed_at; banned account rejected at sdk_auth; /admin/ban
       401 without/with wrong token, 404 publicly. Reports are ADVISORY — a human presses the ban button
       (no auto-ban from reports), so false-positive reports never mass-ban.
+
+### Licensing hardening — loopback-bind login/logger + quote cache (2026-08-20)
+- [ ] `src/server/login/LoginServer.ts` + `src/server/logger/LoggerServer.ts`: the login server (43500),
+      logger server (43501) and telemetry-traces HTTP (43502) bound a HARDCODED `0.0.0.0`. The login server
+      processes UNAUTHENTICATED control messages (sdk_auth, player_ban, player_mute, player_login) — exposed,
+      anyone who can reach the port could ban players or probe auth. Now bind `Environment.login.host` /
+      `Environment.logger.host` (default 'localhost' = loopback; the gateway + logger client already connect
+      over loopback). Mirrors the existing FRIEND_HOST lockdown. Expose only via config for multiworld.
+      Verified: ports now 127.0.0.1; gateway re-established its login-server link; unlicensed sdk_auth still
+      rejected, licensed still passes.
+- [ ] `chain/daemon/license.ts`: 20s cache on quoteLicenseGp — blunts /license/quote RPC-spam and keeps the
+      displayed price == the price verifyLicenseTx checks within the window (no false "burned too little").
+- NOTE (accepted, not patchable): `isAgentProxy` is decided by URL path in `src/web/websocket.ts` — `/gateway`
+      is license-gated, `/` and `/bot` are normal human login (never gated, or humans couldn't play). A bot
+      speaking the raw client protocol on `/` bypasses the fee; that's the reports→ban bucket by design.
